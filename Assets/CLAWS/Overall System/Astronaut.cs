@@ -6,7 +6,13 @@ using UnityEngine;
 public class Astronaut: MonoBehaviour
 {
     [SerializeField]
-    Vitals vitals;
+    public Vitals vitals;
+    //This function is temporary and may be deleted when a proper vitals update is
+    //made. It's job is to give an idea of how the event system works.
+    public void Temporary_UpdateVitals() {
+       Simulation.User.vitals = this.vitals; 
+	vitals.setVitals();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +22,6 @@ public class Astronaut: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+	
     }
 }
