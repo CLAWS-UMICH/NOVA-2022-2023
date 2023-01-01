@@ -9,4 +9,7 @@ public class Vitals
     public double CO2;
     public double WaterPressure;
     public double SuitPressure;
+    public void setVitals() {
+	EventBus.Publish<VitalsUpdated>(new VitalsUpdated());
+    }
 }
