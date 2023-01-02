@@ -10,14 +10,18 @@ public class VitalsDisplay : MonoBehaviour
 
     void Start()
     {
-	EventBus.Subscribe<VitalsUpdated>(OnVitalUpdatedEvent);
+		EventBus.Subscribe<VitalsUpdatedEvent>(UpdateVitalsDisplay);
     }
-    void OnVitalUpdatedEvent(VitalsUpdated e) {
-	text.SetText(
-	    "O2: " + Simulation.User.vitals.O2 +
-	    "\nCO2: " + Simulation.User.vitals.CO2 +
-	    "\nWaterPressure: " + Simulation.User.vitals.WaterPressure +
-	    "\nSuitPressure:" + Simulation.User.vitals.SuitPressure
-	);
+
+    void UpdateVitalsDisplay(VitalsUpdatedEvent e) {
+
+		Debug.Log(e.ToString());
+
+		text.SetText(
+			"O2: " + Simulation.User.AstronautVitals.O2 +
+			"\nCO2: " + Simulation.User.AstronautVitals.CO2 +
+			"\nWaterPressure: " + Simulation.User.AstronautVitals.WaterPressure +
+			"\nSuitPressure:" + Simulation.User.AstronautVitals.SuitPressure
+		);
     }
 }

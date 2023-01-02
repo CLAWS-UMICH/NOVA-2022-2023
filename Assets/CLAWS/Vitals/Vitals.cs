@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+// Object to store astronaut vitals
 
 [System.Serializable]
 public class Vitals
@@ -9,7 +7,4 @@ public class Vitals
     public double CO2;
     public double WaterPressure;
     public double SuitPressure;
-    public void setVitals() {
-	EventBus.Publish<VitalsUpdated>(new VitalsUpdated());
-    }
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VitalsUpdated {
-    Vitals vitals;
+public class VitalsUpdatedEvent 
+{
     public override string ToString() {
-	return "Vitals Successfully Updated!";
+	    return "<VitalsUpdatedEvent>: vitals were updated";
     }
 }
