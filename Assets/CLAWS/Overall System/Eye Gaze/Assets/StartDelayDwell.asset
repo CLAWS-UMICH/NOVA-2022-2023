@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55135ad05bc8df24b95e28584db89751, type: 3}
-  m_Name: CLAWSMixedRealityMouseInputProfile
+  m_Script: {fileID: 11500000, guid: f3db035c6526baa42b9beae76c31a814, type: 3}
+  m_Name: StartDelayDwell
   m_EditorClassIdentifier: 
-  isCustomProfile: 1
-  cursorSpeed: 3
-  wheelSpeed: 1
+  dwellTriggerPointerType: 5
+  dwellIntentDelay: 0.2
+  dwellStartDelay: 0.5
+  timeToCompleteDwell: 2
+  timeToAllowDwellResume: 0
+  decayDwellOverTime: 1
