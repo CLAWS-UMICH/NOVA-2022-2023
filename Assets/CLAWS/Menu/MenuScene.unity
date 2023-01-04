@@ -1443,7 +1443,7 @@ GameObject:
   - component: {fileID: 823650631}
   - component: {fileID: 823650630}
   m_Layer: 0
-  m_Name: DropDownBar1
+  m_Name: TopBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1651,7 +1651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &870102105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3590,7 +3590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1395862314}
   m_Layer: 0
-  m_Name: MixedRealityPlayspace
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3970,7 +3970,7 @@ GameObject:
   - component: {fileID: 1841137022}
   - component: {fileID: 1841137021}
   m_Layer: 0
-  m_Name: DropDownBar2
+  m_Name: DropDownBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4215,7 +4215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1883977099
 Transform:
   m_ObjectHideFlags: 0
