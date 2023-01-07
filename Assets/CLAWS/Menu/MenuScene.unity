@@ -6454,6 +6454,10 @@ PrefabInstance:
       propertyPath: MinimapCam
       value: 
       objectReference: {fileID: 1314065171}
+    - target: {fileID: 7799370497399079258, guid: f688138cf1a2b2e4fbc7641c7c80892b, type: 3}
+      propertyPath: iconEdgeSize
+      value: 0.32
+      objectReference: {fileID: 0}
     - target: {fileID: 7799370497399079262, guid: f688138cf1a2b2e4fbc7641c7c80892b, type: 3}
       propertyPath: m_Name
       value: MiniMapIcon

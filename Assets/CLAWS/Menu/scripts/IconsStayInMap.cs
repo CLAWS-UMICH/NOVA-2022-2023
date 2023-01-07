@@ -7,6 +7,7 @@ public class IconsStayInMap : MonoBehaviour
     public Transform MinimapCam;
 	public float MinimapSize;
 	Vector3 TempV3;
+    [SerializeField] float iconEdgeSize;
 
 	void Update () {
 		TempV3 = transform.parent.transform.position;
@@ -36,6 +37,13 @@ public class IconsStayInMap : MonoBehaviour
 
 			// Minimap + above calculation
 			transform.position = centerPosition + fromOriginToObject;
-		}
+
+             // Shrink size
+            transform.localScale = new Vector3(iconEdgeSize, iconEdgeSize, iconEdgeSize);
+
+		} else {
+            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+        
 	}
 }
