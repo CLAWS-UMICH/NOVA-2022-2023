@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Subtask : MonoBehaviour
+public class Subtask
 {
     public TMP_Text SubtaskText;
 }
