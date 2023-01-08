@@ -6,5 +6,5 @@ using UnityEngine;
 public class Astronaut : MonoBehaviour
 {
     public Vitals AstronautVitals;
-
+    public TaskList AstronautTasks;
 }
