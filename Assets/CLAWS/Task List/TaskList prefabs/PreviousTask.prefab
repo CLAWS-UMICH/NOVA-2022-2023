@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 6908464784983143491}
   - component: {fileID: 6908464784983143488}
   m_Layer: 0
-  m_Name: UnclickedTask
+  m_Name: PreviousTask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
