@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-​
+
 public class MenuVital : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI vitalText1;
@@ -14,7 +14,7 @@ public class MenuVital : MonoBehaviour
     {
         
     }
-​
+
     // Update is called once per frame
     void Update()
     {
