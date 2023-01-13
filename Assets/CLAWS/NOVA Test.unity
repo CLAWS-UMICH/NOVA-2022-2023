@@ -667,8 +667,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354708707}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< HEAD
-=======
 --- !u!1 &380829575
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +933,6 @@ MonoBehaviour:
   text: {fileID: 380829576}
   address: 127.0.0.1
   port: 6969
->>>>>>> feature/taskList
 --- !u!1 &397249590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,7 +1882,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8575768681739864749, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
       propertyPath: m_Name
-      value: MixedRealityToolkit (Inactive)
+      value: MixedRealityToolkit
       objectReference: {fileID: 0}
     - target: {fileID: 8575768681739864751, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
       propertyPath: m_RootOrder
@@ -2257,60 +2254,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alignmentType: 2
   containerObject: {fileID: 0}
---- !u!1001 &8267535550414916142
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0032927366
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.027747458
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.7352749
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8267535550734177874, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
-      propertyPath: m_Name
-      value: Simulation Manager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
