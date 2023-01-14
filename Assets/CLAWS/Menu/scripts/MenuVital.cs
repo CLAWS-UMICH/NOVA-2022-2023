@@ -9,11 +9,17 @@ public class MenuVital : MonoBehaviour
     [SerializeField] TextMeshPro vitalText2;
     [SerializeField] TextMeshPro vitalText3;
 
-    // Update is called once per frame
-    void Update()
+
+    void Start() 
     {
-        // vitalText1.SetText((Simulation.User.AstronautVitals.O2).ToString());
-        vitalText2.SetText("84%");
-        vitalText3.SetText((Simulation.User.AstronautVitals.SuitPressure).ToString());
+        EventBus.Subscribe<VitalsUpdatedEvent>(UpdateVitals);
+    }
+
+    void UpdateVitals(VitalsUpdatedEvent e) {
+        Debug.Log(e.ToString());
+
+        vitalText1.SetText((Simulation.User.AstronautVitals.p_o2).ToString());
+        vitalText2.SetText((Simulation.User.AstronautVitals.batteryPercent).ToString());
+        vitalText3.SetText((Simulation.User.AstronautVitals.cap_water).ToString());
     }
 }

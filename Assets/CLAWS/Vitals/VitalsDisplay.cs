@@ -18,10 +18,10 @@ public class VitalsDisplay : MonoBehaviour
 		Debug.Log(e.ToString());
 
 		text.SetText(
-			"O2: " + Simulation.User.AstronautVitals.O2 +
-			"\nCO2: " + Simulation.User.AstronautVitals.CO2 +
-			"\nWaterPressure: " + Simulation.User.AstronautVitals.WaterPressure +
-			"\nSuitPressure:" + Simulation.User.AstronautVitals.SuitPressure
+			"O2: " + Simulation.User.AstronautVitals.p_o2 +
+			"\nCO2: " + Simulation.User.AstronautVitals.p_sub +
+			"\nWaterPressure: " + Simulation.User.AstronautVitals.cap_water +
+			"\nSuitPressure:" + Simulation.User.AstronautVitals.p_suit
 		);
     }
 }
