@@ -8,3 +8,10 @@ public class VitalsUpdatedEvent
 	    return "<VitalsUpdatedEvent>: vitals were updated";
     }
 }
+public class TasksUpdatedEvent 
+{
+    public override string ToString()
+    {
+        return "<TasksUpdatedEvent>: tasks were updated";
+    }
+}
