@@ -16,5 +16,7 @@ public class TaskList
         taskList = new List<TaskObj>();
         progress = 0;
     }
+    // This function will take the json data from a websocket and parse the data into the tasklist.
+    public void tasksUpdated() {}
 }
 

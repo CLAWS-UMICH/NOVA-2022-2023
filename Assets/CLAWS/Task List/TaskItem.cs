@@ -11,6 +11,7 @@ public class TaskItem : MonoBehaviour
     //Subtasks.Add(SubtaskData("task3"));
     //
     private bool active = false;
+    
     [SerializeField]
     GameObject SubtaskPrefab;
     GameObject subtaskObject;

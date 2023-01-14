@@ -54,22 +54,12 @@ public class AstronautRecieve : MonoBehaviour
         switch (messageType)
         {
             //Determine if the task is going to be appended or inserted
-            case "new_task":
+            case "task_list_updated":
                 //Simulation.User.AstronautTasks.taskList
-                Debug.Log("newtask");
-                //Update astronaut tasklist with new task
-                //Update visual window
-                text.SetText(
-                  "TaskID: " + (string)msgJson["task_id"] +
-                  "\nTitle: " + (string)msgJson["task_title"] +
-                  "\nDescription: " + (string)msgJson["task_descr"]
-                );
-                break;
-            case "remove_task":
-                Debug.Log("removetask");
-                break;
-            case "remove_subtask":
-                Debug.Log("removesubtask");
+                Debug.Log("updatedTaskList");
+                //TODO: Set values recieved from websocket to Simulation.User Astronaut class. 
+                Simulation.User.AstronautTasks.tasksUpdated();
+                EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent());
                 break;
         }
     }
