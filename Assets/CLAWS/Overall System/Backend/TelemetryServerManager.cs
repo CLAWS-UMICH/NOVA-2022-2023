@@ -17,10 +17,10 @@ public class TelemetryServerManager : MonoBehaviour
         {
             // fake new vitals information from the server
             Vitals TEMP_TSSVitalsDeleteThis = Simulation.User.AstronautVitals;
-            TEMP_TSSVitalsDeleteThis.O2++;
-            TEMP_TSSVitalsDeleteThis.CO2++;
-            TEMP_TSSVitalsDeleteThis.SuitPressure++;
-            TEMP_TSSVitalsDeleteThis.WaterPressure++;
+            TEMP_TSSVitalsDeleteThis.p_o2++;
+            TEMP_TSSVitalsDeleteThis.p_sub++;
+            TEMP_TSSVitalsDeleteThis.p_suit++;
+            TEMP_TSSVitalsDeleteThis.cap_water++;
 
             // update our simulation based on those vitals
             // we should try to only update this when it is changed, but for now use a loop
@@ -29,7 +29,6 @@ public class TelemetryServerManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
-
 
     private void SetVitals(Vitals vitals_in)
     {
