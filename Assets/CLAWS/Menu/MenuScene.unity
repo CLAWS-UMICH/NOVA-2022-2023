@@ -5160,7 +5160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0016, y: -0.0358}
+  m_AnchoredPosition: {x: 0.0069, y: -0.0358}
   m_SizeDelta: {x: 0.0618, y: 0.03849}
   m_Pivot: {x: 0.50068706, y: 0.49923703}
 --- !u!114 &1649522615
@@ -5183,7 +5183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bat
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5332,7 +5332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0008, y: 0.0064}
+  m_AnchoredPosition: {x: 0.0069, y: 0.0064}
   m_SizeDelta: {x: 0.0618, y: 0.03849}
   m_Pivot: {x: 0.50068706, y: 0.49923703}
 --- !u!114 &1685637891
@@ -5355,7 +5355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: O2
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5754,6 +5754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 1841137020}
+  time: 4
 --- !u!1 &1856816984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6382,7 +6383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0068, y: -0.0795}
+  m_AnchoredPosition: {x: 0.0069, y: -0.0795}
   m_SizeDelta: {x: 0.0618, y: 0.03849}
   m_Pivot: {x: 0.50068706, y: 0.49923703}
 --- !u!114 &2012801177
@@ -6405,7 +6406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7531,6 +7532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 1841137020}
+  time: 4
 --- !u!114 &2896614925959058856
 MonoBehaviour:
   m_ObjectHideFlags: 0
