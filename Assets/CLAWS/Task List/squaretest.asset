@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb41c8335e2ca96449f3991db5fa5702, type: 3}
-  m_Name: SquareIconSet
+  m_Name: squaretest
   m_EditorClassIdentifier: 
   quadIcons:
-  - {fileID: 2800000, guid: 8c7bfae7ed5a9c743bd240db32c5c971, type: 3}
-  - {fileID: 2800000, guid: d665d70c1385249d79f57831e3f96867, type: 3}
+  - {fileID: 2800000, guid: e0fc88fabe5fe4afe8b8bbe9e5b523f0, type: 3}
   spriteIcons: []
   charIconFont: {fileID: 0}
   charIcons:
