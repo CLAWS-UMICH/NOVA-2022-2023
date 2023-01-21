@@ -58,7 +58,7 @@ public class AstronautRecieve : MonoBehaviour
                 //Simulation.User.AstronautTasks.taskList
                 Debug.Log("updatedTaskList");
                 //TODO: Set values recieved from websocket to Simulation.User Astronaut class. 
-                Simulation.User.AstronautTasks.tasksUpdated();
+                Simulation.User.AstronautTasks.tasksUpdated(msgJson);
                 EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent());
                 break;
         }
