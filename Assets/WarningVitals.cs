@@ -14,7 +14,7 @@ public class WarningVitals : MonoBehaviour
     void VitalLevel(){
         Vitals TempVital = Simulation.User.AstronautVitals;
         //Debug.Log("hi1");
-        if(TempVital.O2 >= 11){
+        if(TempVital.p_o2 >= 11){
             // var colorTheme = this.GetComponent<Interactable>().ActiveThemes[0];
             // colorTheme.StateProperties[0].Values[0].Color = Color.green;
             //Debug.Log("hi");
