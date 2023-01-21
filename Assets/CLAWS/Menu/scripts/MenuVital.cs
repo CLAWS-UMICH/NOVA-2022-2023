@@ -12,13 +12,16 @@ public class MenuVital : MonoBehaviour
     void Start() 
     {
         EventBus.Subscribe<VitalsUpdatedEvent>(UpdateVitals);
+        vitalText1.SetText("0%");
+        vitalText2.SetText("0%");
+        vitalText3.SetText("0");
     }
 
     void UpdateVitals(VitalsUpdatedEvent e) {
         Debug.Log(e.ToString());
 
-        vitalText1.SetText((Simulation.User.AstronautVitals.p_o2).ToString());
-        vitalText2.SetText((Simulation.User.AstronautVitals.batteryPercent).ToString());
+        vitalText1.SetText((Simulation.User.AstronautVitals.p_o2).ToString() + "%");
+        vitalText2.SetText((Simulation.User.AstronautVitals.batteryPercent).ToString() + "%");
         vitalText3.SetText((Simulation.User.AstronautVitals.cap_water).ToString());
     }
 }
