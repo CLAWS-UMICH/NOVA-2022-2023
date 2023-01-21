@@ -8,6 +8,23 @@ public class IconsStayInMap : MonoBehaviour
 	public float MinimapSize;
 	Vector3 TempV3;
     [SerializeField] float iconEdgeSize;
+	[SerializeField] float regularIconSize;
+
+	void Awake() {
+		// Regular Icon Size
+		regularIconSize = transform.localScale.x * 1.25f;
+		iconEdgeSize = transform.localScale.x;
+
+		// Center of Minimap
+		Vector3 centerPosition = MinimapCam.transform.localPosition;
+
+		// Just to keep a distance between Minimap camera and this Object (So that camera don't clip it out)
+		centerPosition.y -= 0.5f;
+	}
+
+	void Start() {
+		transform.localScale = new Vector3(0f, 0f, 0f);
+	}
 
 	void Update () {
 		TempV3 = transform.parent.transform.position;
@@ -16,11 +33,13 @@ public class IconsStayInMap : MonoBehaviour
 	}
 
 	void LateUpdate () {
+		
+
 		// Center of Minimap
 		Vector3 centerPosition = MinimapCam.transform.localPosition;
 
 		// Just to keep a distance between Minimap camera and this Object (So that camera don't clip it out)
-		centerPosition.y -= 0.5f;
+		centerPosition.y -= 2.1f;
 
 		// Distance from the gameObject to Minimap
 		float Distance = Vector3.Distance(transform.position, centerPosition);
@@ -42,7 +61,7 @@ public class IconsStayInMap : MonoBehaviour
             transform.localScale = new Vector3(iconEdgeSize, iconEdgeSize, iconEdgeSize);
 
 		} else {
-            transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            transform.localScale = new Vector3(regularIconSize, regularIconSize, regularIconSize);
         }
         
 	}
