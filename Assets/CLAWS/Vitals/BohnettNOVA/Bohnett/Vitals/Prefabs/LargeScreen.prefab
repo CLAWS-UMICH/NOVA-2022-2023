@@ -864,6 +864,7 @@ GameObject:
   - component: {fileID: 2010336690780804850}
   - component: {fileID: 2010336690780804861}
   - component: {fileID: 2010336690780804842}
+  - component: {fileID: 2344937555405930117}
   m_Layer: 0
   m_Name: OxygenPrimary
   m_TagString: Untagged
@@ -1569,6 +1570,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2344937555405930117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010336690780804863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 0
+  updateFields:
+  - {fileID: 2116814995910049943}
+  - {fileID: 2116814994291699441}
+  - {fileID: 3391261223082132037}
+  - {fileID: 5295308664169511726}
+  meter: {fileID: 2116814994976654051}
+  meshRenderer: {fileID: 2010336691338295341}
 --- !u!1 &2010336690899731965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1958,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2116814994226137499}
-  - component: {fileID: 2116814994226137498}
   m_Layer: 0
   m_Name: ResourcePercentage
   m_TagString: Untagged
@@ -1961,21 +1981,6 @@ Transform:
   m_Father: {fileID: 205891306474046224}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2116814994226137498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116814994226137500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb40986c634f8411989896e34758dbd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meter: {fileID: 2116814994976653983}
-  percentageText: {fileID: 2116814995910049941}
-  percentageValue: 0
 --- !u!1 &2116814994282110283
 GameObject:
   m_ObjectHideFlags: 0
@@ -4389,6 +4394,7 @@ GameObject:
   - component: {fileID: 5295308664039417818}
   - component: {fileID: 5295308664039417817}
   - component: {fileID: 5295308664039417816}
+  - component: {fileID: 7360149251904910779}
   m_Layer: 0
   m_Name: WaterPressure
   m_TagString: Untagged
@@ -5094,6 +5100,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7360149251904910779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295308664039416870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 3
+  updateFields:
+  - {fileID: 5295308665607576898}
+  - {fileID: 5295308663978765602}
+  meter: {fileID: 0}
+  meshRenderer: {fileID: 5295308664405667235}
 --- !u!1 &5295308664053151411
 GameObject:
   m_ObjectHideFlags: 0
@@ -6137,7 +6161,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5295308664253442601}
-  - component: {fileID: 5295308664253442602}
   m_Layer: 0
   m_Name: ResourcePercentage
   m_TagString: Untagged
@@ -6161,21 +6184,6 @@ Transform:
   m_Father: {fileID: 5295308665415212279}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5295308664253442602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5295308664253442600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb40986c634f8411989896e34758dbd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meter: {fileID: 5295308664109587357}
-  percentageText: {fileID: 5295308664763881732}
-  percentageValue: 0
 --- !u!1 &5295308664260402006
 GameObject:
   m_ObjectHideFlags: 0
@@ -6540,6 +6548,7 @@ GameObject:
   - component: {fileID: 5295308664382184603}
   - component: {fileID: 5295308664382184602}
   - component: {fileID: 5295308664382184601}
+  - component: {fileID: 6733225367836312901}
   m_Layer: 0
   m_Name: FanSpeed
   m_TagString: Untagged
@@ -7245,6 +7254,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6733225367836312901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295308664382184679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 5
+  updateFields:
+  - {fileID: 5295308663760148359}
+  meter: {fileID: 0}
+  meshRenderer: {fileID: 5295308664301431601}
 --- !u!1 &5295308664393408886
 GameObject:
   m_ObjectHideFlags: 0
@@ -7696,7 +7722,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5295308664520098716}
-  - component: {fileID: 5295308664520098717}
   m_Layer: 0
   m_Name: ResourcePercentage
   m_TagString: Untagged
@@ -7720,21 +7745,6 @@ Transform:
   m_Father: {fileID: 5295308664832846410}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5295308664520098717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5295308664520098715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb40986c634f8411989896e34758dbd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meter: {fileID: 5295308664906758372}
-  percentageText: {fileID: 5295308664908163787}
-  percentageValue: 0
 --- !u!1 &5295308664546862741
 GameObject:
   m_ObjectHideFlags: 0
@@ -10412,7 +10422,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5295308664996649507}
-  - component: {fileID: 5295308664996649508}
   m_Layer: 0
   m_Name: ResourcePercentage
   m_TagString: Untagged
@@ -10436,21 +10445,6 @@ Transform:
   m_Father: {fileID: 5295308665148473426}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5295308664996649508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5295308664996649506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb40986c634f8411989896e34758dbd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meter: {fileID: 5295308665375671836}
-  percentageText: {fileID: 5295308664974672666}
-  percentageValue: 0
 --- !u!1 &5295308665000238625
 GameObject:
   m_ObjectHideFlags: 0
@@ -10972,6 +10966,7 @@ GameObject:
   - component: {fileID: 5295308665101639750}
   - component: {fileID: 5295308665101639749}
   - component: {fileID: 5295308665101639748}
+  - component: {fileID: 6335428004375100405}
   m_Layer: 0
   m_Name: SuitPressure
   m_TagString: Untagged
@@ -11677,6 +11672,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6335428004375100405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295308665101639746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 2
+  updateFields:
+  - {fileID: 5295308665705742134}
+  meter: {fileID: 0}
+  meshRenderer: {fileID: 5295308664053151413}
 --- !u!1 &5295308665116674994
 GameObject:
   m_ObjectHideFlags: 0
@@ -12029,6 +12041,7 @@ GameObject:
   - component: {fileID: 5295308665193023019}
   - component: {fileID: 5295308665193023018}
   - component: {fileID: 5295308665193023017}
+  - component: {fileID: 8825984281809897526}
   m_Layer: 0
   m_Name: WaterSupply
   m_TagString: Untagged
@@ -12734,6 +12747,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8825984281809897526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295308665193023031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 6
+  updateFields:
+  - {fileID: 5295308664974672664}
+  - {fileID: 5295308664840187652}
+  meter: {fileID: 5295308665375671835}
+  meshRenderer: {fileID: 5295308664393408872}
 --- !u!1 &5295308665232311721
 GameObject:
   m_ObjectHideFlags: 0
@@ -15259,6 +15290,7 @@ GameObject:
   - component: {fileID: 5295308665661756816}
   - component: {fileID: 5295308665661756831}
   - component: {fileID: 5295308665661756830}
+  - component: {fileID: 4547257577068779344}
   m_Layer: 0
   m_Name: OxygenBackup
   m_TagString: Untagged
@@ -15964,6 +15996,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4547257577068779344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295308665661756828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 1
+  updateFields:
+  - {fileID: 5295308664908163785}
+  - {fileID: 5295308665000238625}
+  meter: {fileID: 5295308664906758371}
+  meshRenderer: {fileID: 5295308664686911039}
 --- !u!1 &5295308665675666810
 GameObject:
   m_ObjectHideFlags: 0
@@ -17041,6 +17091,7 @@ GameObject:
   - component: {fileID: 5295308665767891594}
   - component: {fileID: 5295308665767891593}
   - component: {fileID: 5295308665767891592}
+  - component: {fileID: 3451810075319950794}
   m_Layer: 0
   m_Name: ElectricBackup
   m_TagString: Untagged
@@ -17746,6 +17797,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e48ceb83e0a2144a9bc929937423af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3451810075319950794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295308665767891606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780592899d7674b69b85f2d864e06f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelInformation: 4
+  updateFields:
+  - {fileID: 5295308664763881730}
+  - {fileID: 5295308663762796150}
+  meter: {fileID: 5295308664109587356}
+  meshRenderer: {fileID: 5295308664762354772}
 --- !u!1 &5295308665768418155
 GameObject:
   m_ObjectHideFlags: 0
