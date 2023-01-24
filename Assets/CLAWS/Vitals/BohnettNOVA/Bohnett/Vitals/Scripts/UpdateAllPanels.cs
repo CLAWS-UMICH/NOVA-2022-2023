@@ -169,7 +169,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                Debug.Log(((int)Mathf.Floor(vitals.cap_water)).ToString());
+                // Debug.Log(((int)Mathf.Floor(vitals.cap_water)).ToString());
                 return ((int)Mathf.Floor(vitals.cap_water)).ToString(); 
 
             case 1:
