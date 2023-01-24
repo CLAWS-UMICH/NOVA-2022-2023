@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// Changes the fill amount on the meter progress bar, change the threshold for different increments of movement
 public class MeterFill : MonoBehaviour
 {
     [SerializeField] int threshold = 10;
