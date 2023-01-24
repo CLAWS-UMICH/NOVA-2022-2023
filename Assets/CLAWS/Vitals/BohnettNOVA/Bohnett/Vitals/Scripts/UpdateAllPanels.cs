@@ -83,6 +83,9 @@ public class UpdateAllPanels : MonoBehaviour
             case PanelInformation.Body:
                 return GetBodyLabelAtIndex(i);
 
+            case PanelInformation.Main:
+                return GetMainLabelAtIndex(i);
+
             default:
                 return "Not a valid panel";
         }
@@ -229,6 +232,32 @@ public class UpdateAllPanels : MonoBehaviour
 
         }
 
+    }
+
+    private string GetMainLabelAtIndex(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                return ((int)Mathf.Floor(vitals.ox_primary)).ToString();
+
+            case 1:
+                return ((int)Mathf.Floor(vitals.cap_battery)).ToString();
+
+            case 2:
+                return vitals.t_oxygen;
+
+            case 3:
+                return vitals.t_battery;
+
+            case 4:
+                return vitals.p_suit + " psi";
+
+
+            default:
+                return "N/A";
+
+        }
     }
 
     public VitalPanel[] ReturnPanels()

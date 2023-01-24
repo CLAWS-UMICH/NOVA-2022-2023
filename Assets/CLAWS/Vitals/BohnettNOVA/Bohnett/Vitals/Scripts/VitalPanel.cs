@@ -10,7 +10,7 @@ public class VitalPanel : MonoBehaviour
 {
     [SerializeField] PanelInformation panelInformation;
     [SerializeField] GameObject[] updateFields;
-    [SerializeField] GameObject meter;
+    [SerializeField] GameObject[] meter;
     [SerializeField] MeshRenderer meshRenderer;
 
     
@@ -31,15 +31,22 @@ public class VitalPanel : MonoBehaviour
 
     public void SetMeterFill(VitalsUpdatedEvent e)
     {
-        if (meter != null && meter.GetComponent<MeterFill>() != null)
+        for (int i = 0; i < meter.Length; i++)
         {
-            Debug.Log(updateFields[0].GetComponent<TMP_Text>().text);
-            meter.GetComponent<MeterFill>().SetFillOnMeter(Int32.Parse(updateFields[0].GetComponent<TMP_Text>().text));
+            if (meter[i] != null && meter[i].GetComponent<MeterFill>() != null)
+            {
+                meter[i].GetComponent<MeterFill>().SetFillOnMeter(Int32.Parse(updateFields[i].GetComponent<TMP_Text>().text));
+            }
         }
+        
     }
 
     public void SetPanelError(Color color)
     {
+        if (meshRenderer == null)
+        {
+            return;
+        }
         meshRenderer.enabled = true;
         meshRenderer.material.color = color;
     }

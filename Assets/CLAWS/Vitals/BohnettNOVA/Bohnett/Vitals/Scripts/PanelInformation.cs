@@ -3,6 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum PanelInformation {OxygenPrimary, OxygenBackup, SuitPressure, WaterPressure,
-                                    BatteryBackup, Fan, Water, Body
-}
+                                    BatteryBackup, Fan, Water, Body, Main}
 
