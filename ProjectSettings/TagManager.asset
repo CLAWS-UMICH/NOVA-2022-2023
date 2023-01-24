@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: TaskListUI
+    uniqueID: 891541153
+    locked: 0
