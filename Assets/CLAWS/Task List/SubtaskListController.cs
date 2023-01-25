@@ -6,19 +6,23 @@ using UnityEngine;
 public class SubtaskListController : MonoBehaviour
 {
     [SerializeField]
-    Material CurrentTaskBackground;
+    Material CurrentSubTaskBackground;
+    [SerializeField]
+    Material FutureSubTaskBackground;
     [SerializeField]
     GameObject[] SubtaskObjects;
+    [SerializeField]
+    GameObject taskObject;
     void Start() {
-        SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
+        //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
     }
     Subtask[] holdingContainer = new Subtask[2];
     //taskIndex holds the index of taskList that has the task whose subtasks we show
-    int taskIndex = 0;
+    int taskIndex = Simulation.User.AstronautTasks.viewTask;
     int current_index = 0;
-    public void changeCurrentIndex(int index)
+    public void changeCurrentIndex(int incr)
     {
-        current_index = index;
+        current_index += incr;
         UpdateHoldingContainer();
         Render();
     }
