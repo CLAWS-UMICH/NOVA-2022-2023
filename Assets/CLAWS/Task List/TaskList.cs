@@ -5,12 +5,11 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 
 [System.Serializable]
-public class TaskList : MonoBehaviour
+public class TaskList
 {
-    
-    public double progress;
+    public float progress;
     //taskList holds all tasks including previously completed tasks and future tasks.
-    public List<TaskObj> taskList = new List<TaskObj>();
+    public List<TaskObj> taskList;
     public ConcurrentQueue<string> messageQueue;
 
 
@@ -21,8 +20,8 @@ public class TaskList : MonoBehaviour
         progress = 0;
     }
     // This function will take the json data from a websocket and parse the data into the tasklist.
-    public void tasksUpdated(JObject json) {
-        
-    }
+    //public void tasksUpdated(JObject json) {
+
+    //}
 }
 
