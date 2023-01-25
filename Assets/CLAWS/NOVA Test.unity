@@ -1788,7 +1788,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8575768681739864749, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
       propertyPath: m_Name
-      value: MixedRealityToolkit
+      value: MixedRealityToolkit (Inactive)
       objectReference: {fileID: 0}
     - target: {fileID: 8575768681739864751, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
       propertyPath: m_RootOrder
@@ -2214,6 +2214,78 @@ PrefabInstance:
     - target: {fileID: 8267535550734177874, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: m_Name
       value: Simulation Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.p_o2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.p_sop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.p_sub
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.t_sub
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.v_fan
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.p_suit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.p_h2o_g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.p_h2o_l
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.rate_o2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.rate_sop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.cap_water
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.ox_primary
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.battery_out
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.cap_battery
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.t_oxygenSec
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.ox_secondary
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.batteryPercent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267535550734177966, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: AstronautVitals.t_oxygenPrimary
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8426294124436348399, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: text

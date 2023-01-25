@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using UnityEngine;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 using WebSocketSharp.Server;
@@ -43,13 +44,19 @@ public class AstronautRecieve : MonoBehaviour
     {
         while (Simulation.User.AstronautTasks.messageQueue.TryDequeue(out string message))
         {
-            var msgJson = JObject.Parse(@message);
-            string messageType = (string)msgJson["message_type"];
-            HandleMessage(messageType, msgJson);
+            JsonMessage readIn = JsonConvert.DeserializeObject<JsonMessage>(message);
+            //var msgJson = JObject.Parse(@message);
+            //string messageType = (string)msgJson["message_type"];
+            HandleMessage(readIn.message_type, message);
+            //text.SetText(
+            //    "Task Id: " + readIn.task_list[0].taskId+
+            //    "\nTask Title: " + readIn.task_list[0].taskTitle +
+            //    "\nTask Desc: " + readIn.task_list[0].taskDesc
+            //);
         }
     }
 
-    private void HandleMessage(string messageType, JObject msgJson)
+    private void HandleMessage(string messageType, string message)
     {
         switch (messageType)
         {
@@ -57,9 +64,15 @@ public class AstronautRecieve : MonoBehaviour
             case "task_list_updated":
                 //Simulation.User.AstronautTasks.taskList
                 Debug.Log("updatedTaskList");
+                TaskListUpdated readIn = JsonConvert.DeserializeObject<TaskListUpdated>(message);
                 //TODO: Set values recieved from websocket to Simulation.User Astronaut class. 
-                Simulation.User.AstronautTasks.tasksUpdated(msgJson);
-                EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent());
+                //Simulation.User.AstronautTasks.tasksUpdated(msgJson);
+                //EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent());
+                text.SetText(
+                    "Task Id: " + readIn.task_list[0].taskId +
+                    "\nTask Title: " + readIn.task_list[0].taskTitle +
+                    "\nTask Desc: " + readIn.task_list[0].taskDesc
+                );
                 break;
         }
     }
