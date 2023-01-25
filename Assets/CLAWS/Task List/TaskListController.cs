@@ -20,9 +20,23 @@ public class TaskListController : MonoBehaviour
     GameObject[] taskObjects;
     TaskObj[] holdingContainer = new TaskObj[3];
     int current_index = 0;
-    public void changeCurrentIndex(int index)
+
+    void Start()
     {
-        current_index = index;
+        EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
+    }
+
+    void RecieveNewList(TasksUpdatedEvent e)
+    {
+        //Update current_index
+        current_index = e.index;
+        UpdateHoldingContainer();
+        Render();
+    }
+
+    public void changeCurrentIndex(int incr)
+    {
+        current_index += incr;
         UpdateHoldingContainer();
         Render();
     }
@@ -51,6 +65,7 @@ public class TaskListController : MonoBehaviour
             }
             else if (holdingContainer[i].taskType == 'p')
             {
+                taskObjects[i].SetActive(true);
                 taskObjects[i].transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer> ().material = FutureTaskBackground;
                 //Change Title text
                 taskObjects[i].transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro> ().text = holdingContainer[i].taskTitle;
@@ -65,6 +80,7 @@ public class TaskListController : MonoBehaviour
             }
             else if (holdingContainer[i].taskType == 'c')
             {
+                taskObjects[i].SetActive(true);
                 taskObjects[i].transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
                 //Change Title text
                 taskObjects[i].transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro> ().text = holdingContainer[i].taskTitle;
@@ -80,6 +96,7 @@ public class TaskListController : MonoBehaviour
             }
             else if (holdingContainer[i].taskType == 'f')
             {
+                taskObjects[i].SetActive(true);
                 taskObjects[i].transform.GetChild(2).gameObject.transform.GetChild(0).gameObject.GetComponent<MeshRenderer> ().material = FutureTaskBackground;
                 //Change Title text
                 taskObjects[i].transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro> ().text = holdingContainer[i].taskTitle;
