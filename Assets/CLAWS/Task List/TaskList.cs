@@ -19,9 +19,23 @@ public class TaskList
         taskList = new List<TaskObj>();
         progress = 0;
     }
-    // This function will take the json data from a websocket and parse the data into the tasklist.
-    //public void tasksUpdated(JObject json) {
+    // This function will eventually check for current subtask progress and save it if applicable
+    public void tasksUpdated(List<TaskObj> newList)
+    {
+        taskList = newList;
+        int index = -1;
+        for(int i = 0; i < taskList.Count; ++i)
+        {
+            //if (taskList[i].completed == false)
+            //{
 
-    //}
+            //}
+            if (taskList[i].taskType == 'c')
+            {
+                index = i;
+                break;
+            }
+        }
+        EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent(index));
+    }
 }
-

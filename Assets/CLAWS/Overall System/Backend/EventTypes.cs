@@ -10,6 +10,12 @@ public class VitalsUpdatedEvent
 }
 public class TasksUpdatedEvent 
 {
+    public int index;
+
+    public TasksUpdatedEvent(int updateIndex)
+    {
+        index = updateIndex;
+    }
     public override string ToString()
     {
         return "<TasksUpdatedEvent>: tasks were updated";
