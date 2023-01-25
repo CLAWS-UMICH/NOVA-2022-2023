@@ -13,6 +13,8 @@ public class SubtaskListController : MonoBehaviour
     GameObject[] SubtaskObjects;
     [SerializeField]
     GameObject taskObject;
+
+    public TaskTextController textController;
     void Start() {
         //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
     }
@@ -61,6 +63,26 @@ public class SubtaskListController : MonoBehaviour
             {
                 //TODO: Implement changing taskType
             }
+        }
+    }
+
+    public void activateEntireText(int index)
+    {
+        if (index < 0)
+        {
+            textController.setEntireText
+            (
+                Simulation.User.AstronautTasks.taskList[taskIndex].taskTitle,
+                Simulation.User.AstronautTasks.taskList[taskIndex].taskDesc
+            );
+        }
+        else
+        {
+            textController.setEntireText
+            (
+                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index].title,
+                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index].description
+            );
         }
     }
 }
