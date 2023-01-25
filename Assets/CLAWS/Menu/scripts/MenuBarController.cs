@@ -6,10 +6,12 @@ public class MenuBarController : MonoBehaviour
 {
 
     [SerializeField] GameObject bar;
+    [SerializeField] GameObject backplate;
     [SerializeField] float time = 4f;
 
     void Start() {
         Animator animator = bar.GetComponent<Animator>();
+        backplate.SetActive(true);
     }
 
     public void DropBar() {
@@ -30,7 +32,14 @@ public class MenuBarController : MonoBehaviour
 
     IEnumerator WaitTwo() {
         Animator animator = bar.GetComponent<Animator>();
-        yield return new WaitForSeconds(time);
+
+        // Wait 1 second and disable backplate
+        yield return new WaitForSeconds(1);
+        backplate.SetActive(false);
+
+        // Wait till bar goes back up
+        yield return new WaitForSeconds(1);
         animator.SetBool("MenuGaze", false);
+        backplate.SetActive(true);
     }
 }
