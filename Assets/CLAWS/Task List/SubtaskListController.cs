@@ -15,13 +15,15 @@ public class SubtaskListController : MonoBehaviour
     GameObject taskObject;
 
     public TaskTextController textController;
+    Subtask[] holdingContainer = new Subtask[2];
+
+    //taskIndex holds the index of taskList that has the task whose subtasks we show
+    private int taskIndex = Simulation.User.AstronautTasks.viewTask;
+    private int current_index = 0;
+
     void Start() {
         //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
     }
-    Subtask[] holdingContainer = new Subtask[2];
-    //taskIndex holds the index of taskList that has the task whose subtasks we show
-    int taskIndex = Simulation.User.AstronautTasks.viewTask;
-    int current_index = 0;
     public void changeCurrentIndex(int incr)
     {
         current_index += incr;
@@ -80,8 +82,8 @@ public class SubtaskListController : MonoBehaviour
         {
             textController.setEntireText
             (
-                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index].title,
-                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index].description
+                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + current_index].title,
+                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + current_index].description
             );
         }
     }
