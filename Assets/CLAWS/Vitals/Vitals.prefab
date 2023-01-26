@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7800060267098705126}
   - component: {fileID: 7800060267098705121}
   - component: {fileID: 7800060267098705120}
+  - component: {fileID: 6781535204932127279}
+  - component: {fileID: 6958042229121041480}
   m_Layer: 0
   m_Name: Vitals
   m_TagString: Untagged
@@ -87,6 +89,35 @@ MonoBehaviour:
   useFixedVerticalPosition: 0
   fixedVerticalPosition: -0.4
   orientToReferenceDirection: 0
+--- !u!114 &6781535204932127279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7800060267098705123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7923c4d5de6d84ef99989067843a872b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 7800060268956240193}
+  warningText: {fileID: 7800060268945331862}
+  largePanel: {fileID: 2548879650766343241}
+  red: {r: 1, g: 0, b: 0, a: 1}
+  normal: {r: 0.07058824, g: 0.13333334, b: 0.42745098, a: 1}
+--- !u!114 &6958042229121041480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7800060267098705123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88423c2937da14ebeb618281859f55fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7800060267359962901
 GameObject:
   m_ObjectHideFlags: 0
