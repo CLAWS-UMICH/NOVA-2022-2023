@@ -16,41 +16,60 @@ public class SubtaskListController : MonoBehaviour
     GameObject taskObject;
 
     public TaskTextController textController;
-    Subtask[] holdingContainer = new Subtask[2];
-
+    private Subtask[] holdingContainer = new Subtask[2];
+    private TaskObj currentTask;
     //taskIndex holds the index of taskList that has the task whose subtasks we show
     private int taskIndex;
-    private int current_index;
+    private int currentIndex;
 
     void Start() {
         //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
         taskIndex = Simulation.User.AstronautTasks.viewTask;
-        current_index = 0;
+        currentIndex = 0;
+        EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
     }
-    public void changeCurrentIndex(int incr)
+
+    private void RecieveNewList(TasksUpdatedEvent e)
     {
-        current_index += incr;
+        //Update current_index
+        currentIndex = e.index;
         UpdateHoldingContainer();
         Render();
     }
+
+    public void changeCurrentIndex(int incr)
+    {
+        if((incr < 0 && currentIndex > 0) || (incr > 0 && currentIndex < currentTask.subtaskList.Count - 1))
+        {
+            currentIndex += incr;
+            UpdateHoldingContainer();
+            Render();
+        }
+    }
     private void UpdateHoldingContainer()
     {
-        int size = Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList.Count;
-        for (int i = current_index; i < current_index + 2; i++)
+        currentTask = Simulation.User.AstronautTasks.taskList[taskIndex];
+        int size = currentTask.subtaskList.Count;
+        for (int i = currentIndex; i < currentIndex + 2; i++)
         {
             if (i < size)
             {
-                holdingContainer[i - current_index] = Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[i];
+                holdingContainer[i - currentIndex] = Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[i];
             }
             else
             {
-                holdingContainer[i - current_index] = new Subtask();
+                holdingContainer[i - currentIndex] = new Subtask();
             }
         }
     }
     private void Render()
     {
-        for (int i = 0; i < 3; i++)
+        taskObject.SetActive(true);
+        //Change Title text
+        taskObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().text = currentTask.taskTitle;
+        //Change Subtitle text
+        taskObject.transform.GetChild(3).gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().text = currentTask.taskDesc;
+        for (int i = 0; i < 2; i++)
         {
             if (holdingContainer[i].taskType == '\0')
             {
@@ -58,39 +77,27 @@ public class SubtaskListController : MonoBehaviour
             }
             else if (holdingContainer[i].taskType == 'p')
             {
-                //TODO: Implement changing taskType
                 SubtaskObjects[i].SetActive(true);
-                //Change Background
                 SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = FutureSubTaskBackground;
-                //Change title
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
-                //Change description 
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
                 //Change number TODO: make the number update
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
             }
             else if (holdingContainer[i].taskType == 'c')
             {
-                //TODO: Implement changing taskType
                 SubtaskObjects[i].SetActive(true);
-                //Change Background
                 SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = CurrentSubTaskBackground;
-                //Change title
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
-                //Change description 
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
                 //Change number TODO: make the number update
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
             }
             else if (holdingContainer[i].taskType == 'f')
             {
-                //TODO: Implement changing taskType
                 SubtaskObjects[i].SetActive(true);
-                //Change Background
                 SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = FutureSubTaskBackground;
-                //Change title
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
-                //Change description 
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
                 //Change number TODO: make the number update
                 SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
@@ -110,12 +117,10 @@ public class SubtaskListController : MonoBehaviour
         }
         else
         {
-            Debug.Log("LKJHGFDSDFGHJKLKJHGFDFGHJKL");
-            Debug.Log(Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + current_index].title);
             textController.setEntireText
             (
-                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + current_index].title,
-                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + current_index].description
+                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + currentIndex].title,
+                Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + currentIndex].description
             );
         }
     }

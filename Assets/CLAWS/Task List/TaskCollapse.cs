@@ -6,6 +6,8 @@ public class TaskCollapse : MonoBehaviour
 {
     public GameObject expanded;
     public GameObject taskView;
+    public TaskListProgress viewProgress;
+    public TaskListProgress expandProgress;
     private void Start()
     {
         taskView.SetActive(true);
@@ -16,5 +18,13 @@ public class TaskCollapse : MonoBehaviour
     {
         expanded.SetActive(!expanded.activeSelf);
         taskView.SetActive(!taskView.activeSelf);
+        if(expanded.activeSelf)
+        {
+            expandProgress.Refresh();
+        }
+        else
+        {
+            viewProgress.Refresh();
+        }
     }
 }

@@ -43,13 +43,13 @@ public class TaskList
 
     public float getProgress()
     {
-        int taskListSize = taskList.Count;
+        float taskListSize = taskList.Count;
         if (taskListSize == 0)
         {
             return 0;
         }
 
-        int completed_count = 0;
+        float completed_count = 0;
         for (int i = 0; i < taskListSize; ++i)
         {
             if (taskList[i].taskType == 'c')
@@ -57,7 +57,10 @@ public class TaskList
                 ++completed_count;
             }
         }
-        return completed_count / taskListSize;
+        Debug.Log(completed_count);
+        Debug.Log(taskListSize);
+        Debug.Log(completed_count / taskListSize);
+        return (completed_count / taskListSize) * 100f;
     }
 
     public string getProgressText()
