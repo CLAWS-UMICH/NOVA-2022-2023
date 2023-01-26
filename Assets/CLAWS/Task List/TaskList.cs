@@ -11,13 +11,14 @@ public class TaskList
     //taskList holds all tasks including previously completed tasks and future tasks.
     public List<TaskObj> taskList;
     public ConcurrentQueue<string> messageQueue;
-
+    public int viewTask;
 
     public TaskList()
     {
         messageQueue = new ConcurrentQueue<string>();
         taskList = new List<TaskObj>();
         progress = 0;
+        viewTask = 0;
     }
     // This function will eventually check for current subtask progress and save it if applicable
     public void tasksUpdated(List<TaskObj> newList)
@@ -33,6 +34,7 @@ public class TaskList
             if (taskList[i].taskType == 'c')
             {
                 index = i;
+                viewTask = i;
                 break;
             }
         }
