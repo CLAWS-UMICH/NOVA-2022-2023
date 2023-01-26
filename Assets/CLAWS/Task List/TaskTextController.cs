@@ -11,7 +11,10 @@ public class TaskTextController : MonoBehaviour
 
     public void setEntireText(string _title = "", string _subTitle = "")
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
         title.text = _title;
         subTitle.text = _subTitle;
     }

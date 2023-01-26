@@ -19,39 +19,42 @@ public class TaskListController : MonoBehaviour
     [SerializeField]
     GameObject[] taskObjects;
     TaskObj[] holdingContainer = new TaskObj[3];
-    int current_index = 0;
+    int currentIndex = 0;
 
     void Start()
     {
         EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
     }
 
-    void RecieveNewList(TasksUpdatedEvent e)
+    private void RecieveNewList(TasksUpdatedEvent e)
     {
         //Update current_index
-        current_index = e.index;
+        currentIndex = e.index;
         UpdateHoldingContainer();
         Render();
     }
 
     public void changeCurrentIndex(int incr)
     {
-        current_index += incr;
-        UpdateHoldingContainer();
-        Render();
+        if ((incr < 0 && currentIndex > 0) || (incr > 0 && currentIndex < Simulation.User.AstronautTasks.taskList.Count - 1))
+        {
+            currentIndex += incr;
+            UpdateHoldingContainer();
+            Render();
+        }
     }
     private void UpdateHoldingContainer()
     {
         int size = Simulation.User.AstronautTasks.taskList.Count;
-        for (int i = current_index; i < current_index + 3; i++)
+        for (int i = currentIndex; i < currentIndex + 3; i++)
         {
             if (i < size)
             {
-                holdingContainer[i - current_index] = Simulation.User.AstronautTasks.taskList[i];
+                holdingContainer[i - currentIndex] = Simulation.User.AstronautTasks.taskList[i];
             }
             else
             {
-                holdingContainer[i - current_index] = new TaskObj();
+                holdingContainer[i - currentIndex] = new TaskObj();
             }
         }
     }

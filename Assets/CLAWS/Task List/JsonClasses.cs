@@ -8,9 +8,9 @@ using Newtonsoft.Json.Linq;
 public class JsonMessage
 {
     public string message_type;
-    public int randodmshit;
 }
 
+[System.Serializable]
 public class TaskListUpdated : JsonMessage
 {
     public List<TaskObj> task_list;
