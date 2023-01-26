@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class SubtaskListController : MonoBehaviour
@@ -56,14 +57,41 @@ public class SubtaskListController : MonoBehaviour
             else if (holdingContainer[i].taskType == 'p')
             {
                 //TODO: Implement changing taskType
+                SubtaskObjects[i].SetActive(true);
+                //Change Background
+                SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = FutureSubTaskBackground;
+                //Change title
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
+                //Change description 
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
+                //Change number TODO: make the number update
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
             }
             else if (holdingContainer[i].taskType == 'c')
             {
                 //TODO: Implement changing taskType
+                SubtaskObjects[i].SetActive(true);
+                //Change Background
+                SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = CurrentSubTaskBackground;
+                //Change title
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
+                //Change description 
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
+                //Change number TODO: make the number update
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
             }
             else if (holdingContainer[i].taskType == 'f')
             {
                 //TODO: Implement changing taskType
+                SubtaskObjects[i].SetActive(true);
+                //Change Background
+                SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = FutureSubTaskBackground;
+                //Change title
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
+                //Change description 
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
+                //Change number TODO: make the number update
+                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
             }
         }
     }
