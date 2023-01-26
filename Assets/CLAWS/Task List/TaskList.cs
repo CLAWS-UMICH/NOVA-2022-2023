@@ -40,4 +40,42 @@ public class TaskList
         }
         EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent(index));
     }
+
+    public float getProgress()
+    {
+        int taskListSize = taskList.Count;
+        if (taskListSize == 0)
+        {
+            return 0;
+        }
+
+        int completed_count = 0;
+        for (int i = 0; i < taskListSize; ++i)
+        {
+            if (taskList[i].taskType == 'c')
+            {
+                ++completed_count;
+            }
+        }
+        return completed_count / taskListSize;
+    }
+
+    public string getProgressText()
+    {
+        int taskListSize = taskList.Count;
+        if (taskListSize == 0)
+        {
+            return "0/" + taskListSize + " subtasks completed";
+        }
+
+        int completed_count = 0;
+        for (int i = 0; i < taskListSize; ++i)
+        {
+            if (taskList[i].taskType == 'c')
+            {
+                ++completed_count;
+            }
+        }
+        return completed_count + "/" + taskListSize + " subtasks completed";
+    }
 }
