@@ -368,6 +368,7 @@ MonoBehaviour:
     t_water: 
   AstronautTasks:
     progress: 0
+    viewTask: 0
 --- !u!114 &593518632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,6 +602,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
+--- !u!1 &1640673129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640673131}
+  - component: {fileID: 1640673130}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1640673130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640673129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffebac2ba80141c997c92ebb9ad6957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 7800060268709059299}
+--- !u!4 &1640673131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640673129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.015527636, y: 0.22973064, z: 0.6516259}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1698852959
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +700,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 1640673130}
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: Closing
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: CloseButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903776304846818453, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7800060267098705123, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
       propertyPath: m_Name
       value: Vitals
@@ -704,3 +778,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+--- !u!1 &7800060268709059299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2548879650766343241, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
+  m_PrefabInstance: {fileID: 7800060268709059298}
+  m_PrefabAsset: {fileID: 0}
