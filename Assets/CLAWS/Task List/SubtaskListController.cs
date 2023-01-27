@@ -31,8 +31,6 @@ public class SubtaskListController : MonoBehaviour
 
     private void RecieveNewList(TasksUpdatedEvent e)
     {
-        //Update current_index
-        currentIndex = e.index;
         UpdateHoldingContainer();
         Render();
     }
