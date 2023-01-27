@@ -34,7 +34,6 @@ public class TaskListProgress : MonoBehaviour
     private void UpdateProgress(TasksUpdatedEvent e)
     {
         targetProgress = Mathf.Clamp(Simulation.User.AstronautTasks.getProgress(), 0 , 100);
-        Debug.Log(targetProgress);
         if(running == true)
         {
             StopCoroutine(moveProgress);
@@ -44,7 +43,6 @@ public class TaskListProgress : MonoBehaviour
 
     IEnumerator UpdateBar()
     {
-        Debug.Log("incoroutine");
         running = true;
         while(Math.Abs(targetProgress - slider.value) > 3f)
         {
@@ -63,23 +61,4 @@ public class TaskListProgress : MonoBehaviour
         }
         running = false;
     }
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    float progress = Simulation.User.AstronautTasks.getProgress();
-    //    updateProgressBar(progress);
-    //    //Smoothly updates slider percentage
-    //    if (slider.value < targetProgress)
-    //    {
-    //        //Limits number to [0,1]
-    //        slider.value += Mathf.Clamp(fillSpeed * Time.deltaTime, 0, 1);
-    //        totalCompletedText.text = Simulation.User.AstronautTasks.getProgressText();
-    //    }
-    //    else
-    //    {
-    //        slider.value -= Mathf.Clamp(fillSpeed * Time.deltaTime, 0, 1);
-    //        totalCompletedText.text = Simulation.User.AstronautTasks.getProgressText();
-    //    }
-    //}
 }

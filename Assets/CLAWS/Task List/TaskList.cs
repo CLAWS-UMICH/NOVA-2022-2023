@@ -24,21 +24,37 @@ public class TaskList
     public void tasksUpdated(List<TaskObj> newList)
     {
         taskList = newList;
-        int index = -1;
+        bool found = false;
         for(int i = 0; i < taskList.Count; ++i)
         {
-            //if (taskList[i].completed == false)
-            //{
-
-            //}
-            if (taskList[i].taskType == 'c')
+            if (taskList[i].completed == true)
             {
-                index = i;
+                taskList[i].taskType = 'p';
+            }
+            else if (taskList[i].completed == false && found == false)
+            {
+                found = true;
                 viewTask = i;
-                break;
+                taskList[i].taskType = 'c';
+            }
+            else
+            {
+                taskList[i].taskType = 'f';
+            }
+            // udpate subtask status
+            for (int j = 0; j < taskList[i].subtaskList.Count; ++j)
+            {
+                if (j == 0)
+                {
+                    taskList[i].subtaskList[j].taskType = 'c';
+                }
+                else
+                {
+                    taskList[i].subtaskList[j].taskType = 'f';
+                }
             }
         }
-        EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent(index));
+        EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent(viewTask));
     }
 
     public float getProgress()
@@ -57,9 +73,6 @@ public class TaskList
                 ++completed_count;
             }
         }
-        Debug.Log(completed_count);
-        Debug.Log(taskListSize);
-        Debug.Log(completed_count / taskListSize);
         return (completed_count / taskListSize) * 100f;
     }
 

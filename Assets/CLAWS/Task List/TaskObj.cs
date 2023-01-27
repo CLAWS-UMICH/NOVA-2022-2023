@@ -9,15 +9,17 @@ public class TaskObj
     public string taskTitle;
     public string taskDesc;
     public char taskType;
+    public bool completed;
     public List<Subtask> subtaskList;
     //p-past task, c-current task, f-future task
 
-    public TaskObj(int id, string title, string desc, List<Subtask> subList, char type)
+    public TaskObj(int id, string title, string desc, List<Subtask> subList, bool status, char type)
     {
         taskId = id;
         taskTitle = title;
         taskDesc = desc;
         subtaskList = subList;
+        completed = status;
         taskType = type;
     }
     public TaskObj()
@@ -26,6 +28,7 @@ public class TaskObj
         taskTitle = null;
         taskDesc = null;
         subtaskList = null;
+        completed = false;
         taskType = '\0';
     }
 }
