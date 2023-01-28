@@ -21,11 +21,13 @@ public class SubtaskListController : MonoBehaviour
     //taskIndex holds the index of taskList that has the task whose subtasks we show
     private int taskIndex;
     private int currentIndex;
+    private int selectedIndex;
 
     void Start() {
         //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
         taskIndex = Simulation.User.AstronautTasks.viewTask;
         currentIndex = 0;
+        selectedIndex = -1;
         EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
     }
 
@@ -105,6 +107,7 @@ public class SubtaskListController : MonoBehaviour
 
     public void activateEntireText(int index)
     {
+        selectedIndex = index;
         if (index < 0)
         {
             textController.setEntireText
@@ -120,6 +123,20 @@ public class SubtaskListController : MonoBehaviour
                 Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + currentIndex].title,
                 Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[index + currentIndex].description
             );
+        }
+    }
+
+    public void completeTask()
+    {
+        if (selectedIndex < 0)
+        {
+            Simulation.User.AstronautTasks.taskList[taskIndex].completed = true;
+            Simulation.User.AstronautTasks.taskList[taskIndex].taskType = 'p';
+        }
+        else
+        {
+            Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[selectedIndex + currentIndex].taskType = 'p';
+            changeCurrentIndex(1);
         }
     }
 }
