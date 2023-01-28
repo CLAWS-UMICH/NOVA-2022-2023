@@ -16,11 +16,12 @@ public class AstronautSend : MonoBehaviour
     public void Send()
     {
         //FIXME replace with MCC address
-        string url = "ws://127.0.0.1:6969";
+        string url = "ws://35.2.19.221:8999";
         using (var ws = new WebSocket(url))
         {
             string message = "{\"message_type\":\"task_completed\",\"task_id\":1}";
             ws.Connect();
+            Debug.Log("Connected");
             ws.Send(message);
         }
     }

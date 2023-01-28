@@ -16,7 +16,7 @@ public class SubtaskListController : MonoBehaviour
     [SerializeField]
     GameObject taskObject;
 
-    
+    public AstronautSend sendMCC;
     public TaskTextController textController;
     private TaskListController taskController;
     private Subtask[] holdingContainer = new Subtask[2];
@@ -136,6 +136,7 @@ public class SubtaskListController : MonoBehaviour
         if (selectedIndex < 0)
         {
             prepareNewTask();
+            sendMCC.Send();
         }
         else
         {

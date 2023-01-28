@@ -30,6 +30,8 @@ public class AstronautRecieve : MonoBehaviour
     {
         address = "127.0.0.1";
         port = 6969;
+        //string url = "ws://35.2.19.221:8999";
+        //var ws = new WebSocket(url);
         var listenServer = new WebSocketServer("ws://127.0.0.1:6969");
 
         listenServer.AddWebSocketService<RecieveMessage>("/RecieveMessage");
