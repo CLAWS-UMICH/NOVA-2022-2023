@@ -68,7 +68,7 @@ public class TaskList
         float completed_count = 0;
         for (int i = 0; i < taskListSize; ++i)
         {
-            if (taskList[i].taskType == 'c')
+            if (taskList[i].completed)
             {
                 ++completed_count;
             }
@@ -81,17 +81,17 @@ public class TaskList
         int taskListSize = taskList.Count;
         if (taskListSize == 0)
         {
-            return "0/" + taskListSize + " subtasks completed";
+            return "0/" + taskListSize + " tasks completed";
         }
 
         int completed_count = 0;
         for (int i = 0; i < taskListSize; ++i)
         {
-            if (taskList[i].taskType == 'c')
+            if (taskList[i].completed)
             {
                 ++completed_count;
             }
         }
-        return completed_count + "/" + taskListSize + " subtasks completed";
+        return completed_count + "/" + taskListSize + " tasks completed";
     }
 }
