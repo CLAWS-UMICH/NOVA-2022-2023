@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Microsoft.MixedReality.Toolkit.Input;
 
 [System.Serializable]
 public class SubtaskListController : MonoBehaviour
@@ -15,7 +16,9 @@ public class SubtaskListController : MonoBehaviour
     [SerializeField]
     GameObject taskObject;
 
+    
     public TaskTextController textController;
+    private TaskListController taskController;
     private Subtask[] holdingContainer = new Subtask[2];
     private TaskObj currentTask;
     //taskIndex holds the index of taskList that has the task whose subtasks we show
@@ -26,6 +29,7 @@ public class SubtaskListController : MonoBehaviour
     void Start() {
         //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
         taskIndex = Simulation.User.AstronautTasks.viewTask;
+        taskController = GetComponent<TaskListController>();
         currentIndex = 0;
         selectedIndex = -1;
         EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
@@ -128,15 +132,39 @@ public class SubtaskListController : MonoBehaviour
 
     public void completeTask()
     {
+        textController.gameObject.SetActive(false);
         if (selectedIndex < 0)
         {
-            Simulation.User.AstronautTasks.taskList[taskIndex].completed = true;
-            Simulation.User.AstronautTasks.taskList[taskIndex].taskType = 'p';
+            prepareNewTask();
         }
         else
         {
-            Simulation.User.AstronautTasks.taskList[taskIndex].subtaskList[selectedIndex + currentIndex].taskType = 'p';
-            changeCurrentIndex(1);
+            if (currentTask.subtaskList[selectedIndex + currentIndex].taskType != 'c')
+            {
+                return;
+            }
+            currentTask.subtaskList[selectedIndex + currentIndex].taskType = 'p';
+            if (selectedIndex + currentIndex + 1 < currentTask.subtaskList.Count)
+            {
+                currentTask.subtaskList[selectedIndex + currentIndex + 1].taskType = 'c';
+                changeCurrentIndex(1);
+            }
+            else
+            {
+                prepareNewTask();
+            }
         }
+    }
+
+    private void prepareNewTask()
+    {
+        currentTask.completed = true;
+        currentTask.taskType = 'p';
+        if (taskIndex + 1 < Simulation.User.AstronautTasks.taskList.Count)
+        {
+            Simulation.User.AstronautTasks.taskList[taskIndex + 1].taskType = 'c';
+        }
+        taskController.changeCurrentIndex(1);
+        GetComponent<TaskCollapse>().Toggle();
     }
 }
