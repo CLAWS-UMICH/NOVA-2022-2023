@@ -16,31 +16,32 @@ public class SubtaskListController : MonoBehaviour
     [SerializeField]
     GameObject taskObject;
 
-    public AstronautSend sendMCC;
     public TaskTextController textController;
     private TaskListController taskController;
+    //Subtasks that are visible to the astronaut
     private Subtask[] holdingContainer = new Subtask[2];
     private TaskObj currentTask;
     //taskIndex holds the index of taskList that has the task whose subtasks we show
     private int taskIndex;
+    //Current index of the subtask list
     private int currentIndex;
+    //Inputed index when the astronaut clicks on either task or subtask
     private int selectedIndex;
 
     void Start() {
-        //SubtaskObjects[1].GetComponent<MeshRenderer> ().material = CurrentTaskBackground;
-        taskIndex = Simulation.User.AstronautTasks.viewTask;
+        taskIndex = Simulation.User.AstronautTasks.activeTask;
         taskController = GetComponent<TaskListController>();
         currentIndex = 0;
         selectedIndex = -1;
         EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
     }
-
     private void RecieveNewList(TasksUpdatedEvent e)
     {
+        taskIndex = e.index;
         UpdateHoldingContainer();
         Render();
     }
-
+    // Increments or decrements the current subtask index as the astronaut scrolls
     public void changeCurrentIndex(int incr)
     {
         if((incr < 0 && currentIndex > 0) || (incr > 0 && currentIndex < currentTask.subtaskList.Count - 1))
@@ -50,6 +51,8 @@ public class SubtaskListController : MonoBehaviour
             Render();
         }
     }
+
+    // Updates the list of 2 subtasks that will be visible to the astronaut
     private void UpdateHoldingContainer()
     {
         currentTask = Simulation.User.AstronautTasks.taskList[taskIndex];
@@ -68,47 +71,45 @@ public class SubtaskListController : MonoBehaviour
     }
     private void Render()
     {
+        //Rerender task object
         taskObject.SetActive(true);
-        //Change Title text
+        if (currentTask.taskType == 'p')
+        {
+            taskObject.SetActive(false);
+        }
         taskObject.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().text = currentTask.taskTitle;
-        //Change Subtitle text
         taskObject.transform.GetChild(3).gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().text = currentTask.taskDesc;
+        //Rerender each subtask object
         for (int i = 0; i < 2; i++)
         {
-            if (holdingContainer[i].taskType == '\0')
+            switch (holdingContainer[i].taskType)
             {
-                SubtaskObjects[i].SetActive(false);
-            }
-            else if (holdingContainer[i].taskType == 'p')
-            {
-                SubtaskObjects[i].SetActive(true);
-                SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = FutureSubTaskBackground;
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
-                //Change number TODO: make the number update
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
-            }
-            else if (holdingContainer[i].taskType == 'c')
-            {
-                SubtaskObjects[i].SetActive(true);
-                SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = CurrentSubTaskBackground;
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
-                //Change number TODO: make the number update
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
-            }
-            else if (holdingContainer[i].taskType == 'f')
-            {
-                SubtaskObjects[i].SetActive(true);
-                SubtaskObjects[i].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer> ().material = FutureSubTaskBackground;
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro> ().text = holdingContainer[i].title;
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro> ().text = holdingContainer[i].description;
-                //Change number TODO: make the number update
-                SubtaskObjects[i].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro> ().text = "1";
+                case '\0':
+                    SubtaskObjects[i].SetActive(false);
+                    break;
+                case 'p':
+                    renderHelper(i, FutureSubTaskBackground, holdingContainer[i].subTaskId);
+                    break;
+                case 'c':
+                    renderHelper(i, CurrentSubTaskBackground, holdingContainer[i].subTaskId);
+                    break;
+                case 'f':
+                    renderHelper(i, FutureSubTaskBackground, holdingContainer[i].subTaskId);
+                    break;
             }
         }
     }
 
+    private void renderHelper(int index, Material background, int number)
+    {
+        SubtaskObjects[index].SetActive(true);
+        SubtaskObjects[index].transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer>().material = background;
+        SubtaskObjects[index].transform.GetChild(3).transform.GetChild(1).GetComponent<TextMeshPro>().text = holdingContainer[index].title;
+        SubtaskObjects[index].transform.GetChild(3).transform.GetChild(2).GetComponent<TextMeshPro>().text = holdingContainer[index].description;
+        //Change number TODO: make the number update
+        SubtaskObjects[index].transform.GetChild(3).transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshPro>().text = number.ToString();
+    }
+    //Updates the task detailed view window
     public void activateEntireText(int index)
     {
         selectedIndex = index;
@@ -133,21 +134,27 @@ public class SubtaskListController : MonoBehaviour
     public void completeTask()
     {
         textController.gameObject.SetActive(false);
+        //If the task object is completed
         if (selectedIndex < 0)
         {
             prepareNewTask();
-            sendMCC.Send();
+            EventBus.Publish<TaskCompletedEvent>(new TaskCompletedEvent(currentTask.taskId));
         }
+        //If the subtask object is completed
         else
         {
             if (currentTask.subtaskList[selectedIndex + currentIndex].taskType != 'c')
             {
                 return;
             }
+
+            //Updates subtask to be previous and then increments the current active subtask
             currentTask.subtaskList[selectedIndex + currentIndex].taskType = 'p';
-            if (selectedIndex + currentIndex + 1 < currentTask.subtaskList.Count)
+
+            if (currentIndex + 1 < currentTask.subtaskList.Count)
             {
-                currentTask.subtaskList[selectedIndex + currentIndex + 1].taskType = 'c';
+                currentIndex += 1;
+                currentTask.subtaskList[currentIndex + 1].taskType = 'c';
                 changeCurrentIndex(1);
             }
             else
@@ -156,16 +163,20 @@ public class SubtaskListController : MonoBehaviour
             }
         }
     }
-
+    //Prepares a new active task once the previous one has been completed
     private void prepareNewTask()
     {
         currentTask.completed = true;
         currentTask.taskType = 'p';
         if (taskIndex + 1 < Simulation.User.AstronautTasks.taskList.Count)
         {
-            Simulation.User.AstronautTasks.taskList[taskIndex + 1].taskType = 'c';
+            taskIndex += 1;
+            currentTask = Simulation.User.AstronautTasks.taskList[taskIndex];
+            Simulation.User.AstronautTasks.taskList[taskIndex].taskType = 'c';
         }
+        currentIndex = 0;
         taskController.changeCurrentIndex(1);
-        GetComponent<TaskCollapse>().Toggle();
+        UpdateHoldingContainer();
+        Render();
     }
 }

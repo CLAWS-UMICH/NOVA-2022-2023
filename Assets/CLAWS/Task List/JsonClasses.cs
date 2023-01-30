@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 
 [System.Serializable]
+// Classes for JSONParse to map JSON messages to
 public class JsonMessage
 {
     public string message_type;

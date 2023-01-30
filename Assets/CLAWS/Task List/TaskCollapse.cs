@@ -2,29 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Toggles between taskview and taskList expanded view
 public class TaskCollapse : MonoBehaviour
 {
     public GameObject expanded;
     public GameObject taskView;
-    public TaskListProgress viewProgress;
-    public TaskListProgress expandProgress;
+    public TaskListController controller;
+
     private void Start()
     {
         taskView.SetActive(true);
         expanded.SetActive(false);
     }
-    // Start is called before the first frame update
+
     public void Toggle()
     {
         expanded.SetActive(!expanded.activeSelf);
         taskView.SetActive(!taskView.activeSelf);
-        if(expanded.activeSelf)
-        {
-            expandProgress.Refresh();
-        }
-        else
-        {
-            viewProgress.Refresh();
-        }
+        controller.refresh();
     }
 }
