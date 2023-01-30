@@ -8,17 +8,18 @@ using Newtonsoft.Json.Linq;
 public class TaskList
 {
     public float progress;
-    //taskList holds all tasks including previously completed tasks and future tasks.
+    // TaskList holds all tasks including previously completed tasks and future tasks.
     public List<TaskObj> taskList;
     public ConcurrentQueue<string> messageQueue;
-    public int viewTask;
+    // Current task astronaut is working on
+    public int activeTask;
 
     public TaskList()
     {
         messageQueue = new ConcurrentQueue<string>();
         taskList = new List<TaskObj>();
         progress = 0;
-        viewTask = 0;
+        activeTask = 0;
     }
     // This function will eventually check for current subtask progress and save it if applicable
     public void tasksUpdated(List<TaskObj> newList)
@@ -34,14 +35,14 @@ public class TaskList
             else if (taskList[i].completed == false && found == false)
             {
                 found = true;
-                viewTask = i;
+                activeTask = i;
                 taskList[i].taskType = 'c';
             }
             else
             {
                 taskList[i].taskType = 'f';
             }
-            // udpate subtask status
+            // Udpate subtask status
             for (int j = 0; j < taskList[i].subtaskList.Count; ++j)
             {
                 if (j == 0)
@@ -54,7 +55,7 @@ public class TaskList
                 }
             }
         }
-        EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent(viewTask));
+        EventBus.Publish<TasksUpdatedEvent>(new TasksUpdatedEvent(activeTask));
     }
 
     public float getProgress()

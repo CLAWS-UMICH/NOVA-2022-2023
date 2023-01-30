@@ -12,6 +12,11 @@ public class TasksUpdatedEvent
 {
     public int index;
 
+    public TasksUpdatedEvent()
+    {
+        index = -1;
+    }
+
     public TasksUpdatedEvent(int updateIndex)
     {
         index = updateIndex;
@@ -19,5 +24,20 @@ public class TasksUpdatedEvent
     public override string ToString()
     {
         return "<TasksUpdatedEvent>: tasks were updated";
+    }
+}
+public class TaskCompletedEvent
+{
+    public int taskID;
+
+
+    public TaskCompletedEvent(int id)
+    {
+        taskID = id;
+    }
+
+    public override string ToString()
+    {
+        return "<TaskCompletedEvent>: tasks " + taskID + " was completed";
     }
 }
