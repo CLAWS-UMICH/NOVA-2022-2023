@@ -10,12 +10,12 @@ using WebSocketSharp.Server;
 // https://github.com/sta/websocket-sharp C# websocket library
 public class WSClient : MonoBehaviour
 {
+    // Thread safe queue to store messages
     public ConcurrentQueue<string> messageQueue;
     private WebSocket connection;
 
     private void Start()
     {
-        //string url = "ws://" + address + ":" + port;
         string url1 = "ws://127.0.0.1:6969";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
@@ -29,6 +29,7 @@ public class WSClient : MonoBehaviour
         SendMCC(message);
     }
 
+    // Update function (runs on main thread) continously checks queue for any new messages
     private void Update()
     {
         while (Simulation.User.AstronautTasks.messageQueue.TryDequeue(out string message))
@@ -37,7 +38,7 @@ public class WSClient : MonoBehaviour
             HandleMessage(readIn.message_type, message);
         }
     }
-
+    // Sends message to the server
     private void SendMCC(string message)
     {
         connection.Send(message);
