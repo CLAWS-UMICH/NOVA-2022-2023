@@ -729,8 +729,8 @@ MonoBehaviour:
   debounceThreshold: 0.01
   localForward: {x: 0, y: 0, z: -1}
   localUp: {x: 0, y: 1, z: 0}
-  localCenter: {x: 0, y: 0, z: -0.008}
-  bounds: {x: 0.032, y: 0.032}
+  localCenter: {x: 0.01101584, y: 0, z: -0.008}
+  bounds: {x: 0.054031707, y: 0.032}
   touchableCollider: {fileID: 2896614925803026046}
 --- !u!114 &2896614925803026040
 MonoBehaviour:
