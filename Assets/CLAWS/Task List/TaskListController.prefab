@@ -6615,6 +6615,8 @@ GameObject:
   - component: {fileID: 4215852931570241075}
   - component: {fileID: 4215852931570241100}
   - component: {fileID: 4215852931570241101}
+  - component: {fileID: 3207605915540105029}
+  - component: {fileID: 4811522921498491951}
   m_Layer: 0
   m_Name: ExpandButton
   m_TagString: Untagged
@@ -7123,6 +7125,103 @@ MonoBehaviour:
   defaultButtonQuadMaterial: {fileID: 2100000, guid: fa419ab56051229449e3b813df8f295f, type: 2}
   iconSet: {fileID: 11400000, guid: b01d1cf5c367a1f41b081041dfd2a2ec, type: 2}
   defaultIconSet: {fileID: 11400000, guid: 8b386ef895f7c924f8c4b03d1d3ed683, type: 2}
+--- !u!114 &3207605915540105029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852931570241103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54277e9e7b297324880fa818608ea979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellProfile: {fileID: 11400000, guid: 754bd35fe6da8754784d0705f24ab428, type: 2}
+  dwellIntended:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4811522921498491951}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellIntended
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4811522921498491951}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellStarted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4811522921498491951}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCompleted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCanceled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4811522921498491951}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCanceled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4811522921498491951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852931570241103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716f5dcd475219b4380b815105f8cf45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellVisualImage: {fileID: 4215852931370430897}
+  targetButton: {fileID: 4215852931570241074}
+  dwellStatus: {fileID: 0}
+  buttonBackground: {fileID: 4215852931370430897}
+  dwellOnColor: {r: 1, g: 1, b: 1, a: 1}
+  dwellOffColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellIntendedColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellVisualCancelDurationInFrames: 60
 --- !u!1 &4215852931577095826
 GameObject:
   m_ObjectHideFlags: 0
@@ -8416,6 +8515,8 @@ GameObject:
   - component: {fileID: 4215852931712312852}
   - component: {fileID: 4215852931712312853}
   - component: {fileID: 4215852931712312854}
+  - component: {fileID: 1560795437164627628}
+  - component: {fileID: 4610139583366562297}
   m_Layer: 0
   m_Name: PageDown
   m_TagString: Untagged
@@ -8431,7 +8532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4215852931712312848}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1177, y: -0.0717, z: 0}
+  m_LocalPosition: {x: 0.11509999, y: -0.061900005, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8924,6 +9025,103 @@ MonoBehaviour:
   defaultButtonQuadMaterial: {fileID: 2100000, guid: fa419ab56051229449e3b813df8f295f, type: 2}
   iconSet: {fileID: 11400000, guid: 8b386ef895f7c924f8c4b03d1d3ed683, type: 2}
   defaultIconSet: {fileID: 11400000, guid: 8b386ef895f7c924f8c4b03d1d3ed683, type: 2}
+--- !u!114 &1560795437164627628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852931712312848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54277e9e7b297324880fa818608ea979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellProfile: {fileID: 11400000, guid: 754bd35fe6da8754784d0705f24ab428, type: 2}
+  dwellIntended:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4610139583366562297}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellIntended
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4610139583366562297}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellStarted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4610139583366562297}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCompleted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCanceled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4610139583366562297}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCanceled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4610139583366562297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852931712312848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716f5dcd475219b4380b815105f8cf45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellVisualImage: {fileID: 4215852931176215095}
+  targetButton: {fileID: 4215852931712312859}
+  dwellStatus: {fileID: 0}
+  buttonBackground: {fileID: 4215852931176215095}
+  dwellOnColor: {r: 1, g: 1, b: 1, a: 1}
+  dwellOffColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellIntendedColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellVisualCancelDurationInFrames: 60
 --- !u!1 &4215852931712970726
 GameObject:
   m_ObjectHideFlags: 0
@@ -10511,6 +10709,8 @@ GameObject:
   - component: {fileID: 4215852932010372850}
   - component: {fileID: 4215852932010372851}
   - component: {fileID: 4215852932010372876}
+  - component: {fileID: 3785800283427580999}
+  - component: {fileID: 9029916422474155347}
   m_Layer: 0
   m_Name: PageUp
   m_TagString: Untagged
@@ -10526,7 +10726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4215852932010372878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1177, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1151, y: -0.006, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11019,6 +11219,103 @@ MonoBehaviour:
   defaultButtonQuadMaterial: {fileID: 2100000, guid: fa419ab56051229449e3b813df8f295f, type: 2}
   iconSet: {fileID: 11400000, guid: 8b386ef895f7c924f8c4b03d1d3ed683, type: 2}
   defaultIconSet: {fileID: 11400000, guid: 8b386ef895f7c924f8c4b03d1d3ed683, type: 2}
+--- !u!114 &3785800283427580999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852932010372878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54277e9e7b297324880fa818608ea979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellProfile: {fileID: 11400000, guid: 754bd35fe6da8754784d0705f24ab428, type: 2}
+  dwellIntended:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9029916422474155347}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellIntended
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9029916422474155347}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellStarted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9029916422474155347}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCompleted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCanceled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9029916422474155347}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCompleted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9029916422474155347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852932010372878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716f5dcd475219b4380b815105f8cf45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellVisualImage: {fileID: 4215852932810662699}
+  targetButton: {fileID: 4215852932010372849}
+  dwellStatus: {fileID: 0}
+  buttonBackground: {fileID: 4215852932810662699}
+  dwellOnColor: {r: 1, g: 1, b: 1, a: 1}
+  dwellOffColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellIntendedColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellVisualCancelDurationInFrames: 60
 --- !u!1 &4215852932011651845
 GameObject:
   m_ObjectHideFlags: 0
@@ -11067,6 +11364,8 @@ GameObject:
   - component: {fileID: 4215852932031137895}
   - component: {fileID: 4215852932031137888}
   - component: {fileID: 4215852932031137897}
+  - component: {fileID: 705418018}
+  - component: {fileID: 705418019}
   m_Layer: 0
   m_Name: Close
   m_TagString: Untagged
@@ -11082,8 +11381,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4215852932031137890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0359, y: 0.3463, z: -0.01618144}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.05, y: 0.3392, z: -0.01618144}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4215852931233009528}
@@ -11265,13 +11564,13 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4215852932031137897}
-        m_TargetAssemblyTypeName: CloseTasklist, Assembly-CSharp
-        m_MethodName: Toggle
-        m_Mode: 1
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ScreenManager, Assembly-CSharp
+        m_MethodName: CloseScreen
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 4215852931385181184}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11588,6 +11887,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskList: {fileID: 4215852931385181184}
+--- !u!114 &705418018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852932031137890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716f5dcd475219b4380b815105f8cf45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellVisualImage: {fileID: 4215852931128070155}
+  targetButton: {fileID: 4215852932031137893}
+  dwellStatus: {fileID: 0}
+  buttonBackground: {fileID: 4215852931128070155}
+  dwellOnColor: {r: 1, g: 1, b: 1, a: 1}
+  dwellOffColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellIntendedColor: {r: 0, g: 1, b: 1, a: 1}
+  dwellVisualCancelDurationInFrames: 60
+--- !u!114 &705418019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215852932031137890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54277e9e7b297324880fa818608ea979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dwellProfile: {fileID: 11400000, guid: 754bd35fe6da8754784d0705f24ab428, type: 2}
+  dwellIntended:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 705418018}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellIntended
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 705418018}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellStarted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 705418018}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCompleted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  dwellCanceled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 705418018}
+        m_TargetAssemblyTypeName: Microsoft.MixedReality.Toolkit.Dwell.ToggleDwellPressableButton,
+          Microsoft.MixedReality.Toolkit.SDK
+        m_MethodName: DwellCanceled
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4215852932038571249
 GameObject:
   m_ObjectHideFlags: 0

@@ -351,6 +351,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4215852932031137893, guid: 3a9ebc5ed1eaebe4ea24b8bc96c0db70, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 748725195}
     - target: {fileID: 4215852933225163755, guid: 3a9ebc5ed1eaebe4ea24b8bc96c0db70, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -814,7 +818,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8575768681739864749, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
       propertyPath: m_Name
-      value: MixedRealityToolkit (Inactive)
+      value: MixedRealityToolkit
       objectReference: {fileID: 0}
     - target: {fileID: 8575768681739864751, guid: 0cc3ec0f02eec7941813eac785d8ab20, type: 3}
       propertyPath: m_RootOrder
@@ -896,15 +900,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
