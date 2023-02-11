@@ -9,6 +9,7 @@ public class Pathfinding : MonoBehaviour {
     public Transform TargetPosition;//Starting position to pathfind to
     public GameObject prefabToInstantiate;
     public GameObject empty;
+    [SerializeField] float distance = 5f;
 
     private void Awake()//When the program starts
     {
@@ -94,7 +95,18 @@ public class Pathfinding : MonoBehaviour {
         for (int i = 0; i < FinalPath.Count; i++)
         {
             GameObject instantiatedObject = Instantiate(prefabToInstantiate, FinalPath[i].vPosition, Quaternion.identity);
+            instantiatedObject.SetActive(false);
+            isClose(instantiatedObject);
             instantiatedObject.transform.SetParent(empty.transform);
+        }
+    }
+
+    void isClose(GameObject objectIn)
+    {
+        float x = Vector3.Distance(StartPosition.position, objectIn.transform.position);
+        if (distance > x)
+        {
+            objectIn.SetActive(true);
         }
     }
 
