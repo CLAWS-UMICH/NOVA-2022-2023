@@ -7,6 +7,8 @@ public class Pathfinding : MonoBehaviour {
     Grid GridReference;//For referencing the grid class
     public Transform StartPosition;//Starting position to pathfind from
     public Transform TargetPosition;//Starting position to pathfind to
+    public GameObject prefabToInstantiate;
+    public GameObject empty;
 
     private void Awake()//When the program starts
     {
@@ -81,12 +83,19 @@ public class Pathfinding : MonoBehaviour {
         {
             FinalPath.Add(CurrentNode);//Add that node to the final path
             CurrentNode = CurrentNode.ParentNode;//Move onto its parent node
+
         }
 
         FinalPath.Reverse();//Reverse the path to get the correct order
 
         GridReference.FinalPath = FinalPath;//Set the final path
 
+        // Instantiate objects along the final path
+        for (int i = 0; i < FinalPath.Count; i++)
+        {
+            GameObject instantiatedObject = Instantiate(prefabToInstantiate, FinalPath[i].vPosition, Quaternion.identity);
+            instantiatedObject.transform.SetParent(empty.transform);
+        }
     }
 
     int GetManhattenDistance(Node a_nodeA, Node a_nodeB)
