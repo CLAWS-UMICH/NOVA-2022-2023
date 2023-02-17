@@ -49,20 +49,20 @@ public class MessageHandler: MonoBehaviour
         }
     }
 
-    private void SendMCC(int messageTemplate)
+    public void SendMCC(int messageTemplate)
     {
         string recipient = "joel";
         string testmsg = "shitsfucked";
         switch (messageTemplate)
         {
             case 0:
-                testmsg = "hello";
+                testmsg = "Hello";
                 break;
             case 1:
-                testmsg = "thankyou";
+                testmsg = "Bitch";
                 break;
             case 2:
-                testmsg = "bye";
+                testmsg = "pls";
                 break;
         }
         string message = "{\"message_type\":\"dm\",\"recipient\":" + recipient + ",\"task_id\":" + testmsg + "}";
@@ -86,6 +86,7 @@ public class MessageHandler: MonoBehaviour
                 //Simulation.User.AstronautTasks.taskList
                 Debug.Log("recieved message");
                 MessageJson readin = JsonConvert.DeserializeObject<MessageJson>(message);
+                window.text = readin.content;
                 //update text with message
                 break;
         }
