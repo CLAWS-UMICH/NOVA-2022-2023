@@ -1,20 +1,30 @@
 using UnityEngine;
+using System.Collections.Concurrent;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-class Message
+public class Messaging
+{
+    public ConcurrentQueue<string> messageQueue;
+
+    public Messaging()
+    {
+        messageQueue = new ConcurrentQueue<string>();
+    }
+}
+public class Message
 {
     string text;
     string sender;
 }
-class Chat
+public class Chat
 {
     List<string> members;
     List<string> messages;
 }
 
-class MessageJson
+public class MessageJson
 {
     public string message_type { get; set; }
     public string recipient { get; set; }

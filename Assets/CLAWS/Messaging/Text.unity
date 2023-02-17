@@ -14111,7 +14111,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Simulation Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8426294124436348399, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
 --- !u!1001 &712728290541611714
 PrefabInstance:

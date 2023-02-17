@@ -26,7 +26,7 @@ public class MessageHandler: MonoBehaviour
         address = "127.0.0.1";
         port = 6969;
         //string url = "ws://" + address + ":" + port;
-        string url1 = "ws://127.0.0.1:6969";
+        string url1 = "ws://127.0.0.1:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
@@ -35,7 +35,7 @@ public class MessageHandler: MonoBehaviour
             Debug.Log("MCC message: " + e.Data);
         };
         connection.Connect();
-        connection.Send("hellobitch");
+        connection.Send("{\"message_type\": \"registration\",\"username\": \"jason\"}");
         Debug.Log("Connected to server");
     }
 
@@ -51,8 +51,10 @@ public class MessageHandler: MonoBehaviour
 
     public void SendMCC(int messageTemplate)
     {
+        string sender = "jason";
         string recipient = "joel";
         string testmsg = "shitsfucked";
+        //string content = "The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater)"
         switch (messageTemplate)
         {
             case 0:
@@ -65,7 +67,7 @@ public class MessageHandler: MonoBehaviour
                 testmsg = "pls";
                 break;
         }
-        string message = "{\"message_type\":\"dm\",\"recipient\":" + recipient + ",\"task_id\":" + testmsg + "}";
+        string message = "{\"message_type\":\"dm\",\"sender\":\"" + sender + "\",\"recipient\":\"" + recipient + "\",\"content\":\"" + testmsg + "\"}";
         connection.Send(message);
         Debug.Log("Sent: " + message);
     }

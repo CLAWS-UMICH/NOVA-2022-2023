@@ -7,5 +7,5 @@ public class Astronaut : MonoBehaviour
 {
     public Vitals AstronautVitals;
     public TaskList AstronautTasks;
-    public MessageHandler AstronautMessaging;
+    public Messaging AstronautMessaging;
 }
