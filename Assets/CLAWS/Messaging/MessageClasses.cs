@@ -27,6 +27,11 @@ public class Chat
 public class MessageJson
 {
     public string message_type { get; set; }
-    public string recipient { get; set; }
+    public List<string> recipients { get; set; }
     public string content { get; set; }
+}
+
+public class MessageSend : MessageJson
+{
+    public string sender;
 }

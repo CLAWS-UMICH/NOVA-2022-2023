@@ -11,22 +11,26 @@ using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 using TMPro;
+using System.Linq;
+using System.Text.Json.Serialization;
 
 
 public class MessageHandler: MonoBehaviour
 {
     public TextMeshPro window;
+    public TextMeshPro recipientNames;
     public string address;
     public int port;
     private WebSocket connection;
     public ConcurrentQueue<string> messageQueue;
+    public HashSet<string> recipientList = new HashSet<string>();
 
     private void Start()
     {
         address = "127.0.0.1";
         port = 6969;
         //string url = "ws://" + address + ":" + port;
-        string url1 = "ws://127.0.0.1:4242";
+        string url1 = "ws://35.1.252.245:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
@@ -35,7 +39,7 @@ public class MessageHandler: MonoBehaviour
             Debug.Log("MCC message: " + e.Data);
         };
         connection.Connect();
-        connection.Send("{\"message_type\": \"registration\",\"username\": \"jason\"}");
+        connection.Send("{\"message_type\": \"registration\",\"username\": \"joel\"}");
         Debug.Log("Connected to server");
     }
 
@@ -49,10 +53,32 @@ public class MessageHandler: MonoBehaviour
         }
     }
 
+    public void RecipientHandler(string name)
+    {
+        if (!recipientList.Contains(name))
+        {
+            recipientList.Add(name);
+        }
+        else
+        {
+            recipientList.Remove(name);
+        }
+
+        string allNames = "";
+        foreach( string Name in recipientList)
+        {
+            allNames += Name + " ";
+        }
+
+        recipientNames.text = allNames;
+
+        return;
+    }
+
     public void SendMCC(int messageTemplate)
     {
-        string sender = "jason";
-        string recipient = "joel";
+        string sender = "joel";
+        List<string> recipients = recipientList.ToList();
         string testmsg = "shitsfucked";
         //string content = "The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater)"
         switch (messageTemplate)
@@ -67,8 +93,14 @@ public class MessageHandler: MonoBehaviour
                 testmsg = "pls";
                 break;
         }
-        string message = "{\"message_type\":\"dm\",\"sender\":\"" + sender + "\",\"recipient\":\"" + recipient + "\",\"content\":\"" + testmsg + "\"}";
-        connection.Send(message);
+        //string message = "{\"message_type\":\"dm\",\"sender\":\"" + sender + "\",\"recipient\":" + recipients + ",\"content\":\"" + testmsg + "\"}";
+        MessageSend message = new MessageSend();
+        message.message_type = "dm";
+        message.recipients = recipients;
+        message.content = testmsg;
+        message.sender = sender;
+        string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
+        connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
     }
 
@@ -87,8 +119,9 @@ public class MessageHandler: MonoBehaviour
             case "dm":
                 //Simulation.User.AstronautTasks.taskList
                 Debug.Log("recieved message");
-                MessageJson readin = JsonConvert.DeserializeObject<MessageJson>(message);
-                window.text = readin.content;
+                MessageSend readin = JsonConvert.DeserializeObject<MessageSend>(message);
+                string printOut = readin.sender + " " + readin.content;
+                window.text = printOut;
                 //update text with message
                 break;
         }
