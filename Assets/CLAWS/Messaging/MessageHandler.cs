@@ -77,7 +77,7 @@ public class MessageHandler: MonoBehaviour
 
     public void SendMCC(int messageTemplate)
     {
-        string sender = "joel";
+        string sender = "Joel";
         List<string> recipients = recipientList.ToList();
         string testmsg = "shitsfucked";
         //string content = "The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater)"
