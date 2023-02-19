@@ -22,7 +22,6 @@ public class MessageHandler: MonoBehaviour
     public string address;
     public int port;
     private WebSocket connection;
-    public ConcurrentQueue<string> messageQueue;
     public HashSet<string> recipientList = new HashSet<string>();
 
     private void Start()
@@ -39,7 +38,7 @@ public class MessageHandler: MonoBehaviour
             Debug.Log("MCC message: " + e.Data);
         };
         connection.Connect();
-        connection.Send("{\"message_type\": \"registration\",\"username\": \"joel\"}");
+        connection.Send("{\"message_type\": \"registration\",\"username\": \"Joel\"}");
         Debug.Log("Connected to server");
     }
 
@@ -53,6 +52,7 @@ public class MessageHandler: MonoBehaviour
         }
     }
 
+    // Function to display contents of the recipient list
     public void RecipientHandler(string name)
     {
         if (!recipientList.Contains(name))
@@ -93,8 +93,18 @@ public class MessageHandler: MonoBehaviour
                 testmsg = "pls";
                 break;
         }
-        //string message = "{\"message_type\":\"dm\",\"sender\":\"" + sender + "\",\"recipient\":" + recipients + ",\"content\":\"" + testmsg + "\"}";
-        MessageSend message = new MessageSend();
+        //FIXME Example message with timestamp included
+        //{
+        //    "message_type": "dm",
+        //    "recipients":
+        //     [
+        //        "Patrick", "Jason"
+        //     ]
+        //    "sender": "Joel"
+        //    "timeStamp": DateTime object
+        //    "content": "wtfwwtf"
+        //}
+        MessageJson message = new MessageJson();
         message.message_type = "dm";
         message.recipients = recipients;
         message.content = testmsg;
@@ -106,7 +116,6 @@ public class MessageHandler: MonoBehaviour
 
     private void OnMessage(MessageEventArgs e)
     {
-        Debug.Log("Inside WebsocektBehavior");
         Debug.Log(e.Data);
         Simulation.User.AstronautMessaging.messageQueue.Enqueue(e.Data);
     }
@@ -115,14 +124,12 @@ public class MessageHandler: MonoBehaviour
     {
         switch (messageType)
         {
-            //Determine if the task is going to be appended or inserted
             case "dm":
-                //Simulation.User.AstronautTasks.taskList
+                
                 Debug.Log("recieved message");
-                MessageSend readin = JsonConvert.DeserializeObject<MessageSend>(message);
-                string printOut = readin.sender + " " + readin.content;
+                MessageJson readin = JsonConvert.DeserializeObject<MessageJson>(message);
+                string printOut = "Sender: " + readin.sender + "\n" + "Message: " + readin.content;
                 window.text = printOut;
-                //update text with message
                 break;
         }
     }
