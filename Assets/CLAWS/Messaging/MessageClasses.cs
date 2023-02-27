@@ -37,6 +37,7 @@ public class MessageJson
 {
     public string message_type;
     public List<string> recipients;
+    public string currentTime;
     public string sender;
     public string content;
 }

@@ -29,7 +29,7 @@ public class MessageHandler: MonoBehaviour
         address = "127.0.0.1";
         port = 6969;
         //string url = "ws://" + address + ":" + port;
-        string url1 = "ws://35.1.252.245:4242";
+        string url1 = "ws://127.0.0.1:6969";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
@@ -107,6 +107,7 @@ public class MessageHandler: MonoBehaviour
         MessageJson message = new MessageJson();
         message.message_type = "dm";
         message.recipients = recipients;
+        message.currentTime = DateTime.Now.ToString("HH:mm");
         message.content = testmsg;
         message.sender = sender;
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
@@ -128,7 +129,7 @@ public class MessageHandler: MonoBehaviour
                 
                 Debug.Log("recieved message");
                 MessageJson readin = JsonConvert.DeserializeObject<MessageJson>(message);
-                string printOut = "Sender: " + readin.sender + "\n" + "Message: " + readin.content;
+                string printOut = "Sender: " + readin.sender + "\n" + "Message: " + readin.content + "\n" + "Time: " + readin.currentTime;
                 window.text = printOut;
                 break;
         }
