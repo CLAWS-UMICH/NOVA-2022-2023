@@ -39,7 +39,7 @@ public class MessageHandler: MonoBehaviour
             Debug.Log("MCC message: " + e.Data);
         };
         connection.Connect();
-        connection.Send("{\"message_type\": \"registration\",\"username\": \"joel\"}");
+        connection.Send("{\"message_type\": \"registration\",\"username\": \"Joel\"}");
         Debug.Log("Connected to server");
     }
 
