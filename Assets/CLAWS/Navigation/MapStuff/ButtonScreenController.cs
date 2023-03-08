@@ -13,7 +13,10 @@ public class ButtonScreenController : MonoBehaviour
     [SerializeField] GameObject startNav2; // Lander
     [SerializeField] GameObject startNav3; // Crew
     [SerializeField] GameObject startNav4; // Mission
-    [SerializeField] Camera cam; 
+    [SerializeField] Camera cam;
+    [SerializeField] GameObject navObject;
+
+    [SerializeField] GameObject roverObject;
 
 
     // Start is called before the first frame update
@@ -161,7 +164,9 @@ public class ButtonScreenController : MonoBehaviour
     // Functions that start the said navigation
     public void StartRoverNavigation()
     {
+        Transform end = roverObject.transform;
 
+        StartNav(end);
     }
 
     public void StartLanderNavigation()
@@ -177,5 +182,12 @@ public class ButtonScreenController : MonoBehaviour
     public void StartMissionNavigation()
     {
 
+    }
+
+    void StartNav(Transform endPosition)
+    {
+        Transform playerPosition = cam.transform;
+
+        navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
     }
 }
