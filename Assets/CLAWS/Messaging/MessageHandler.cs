@@ -29,7 +29,7 @@ public class MessageHandler: MonoBehaviour
         address = "127.0.0.1";
         port = 6969;
         //string url = "ws://" + address + ":" + port;
-        string url1 = "ws://127.0.0.1:6969";
+        string url1 = "ws://127.0.0.1:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
