@@ -16,6 +16,14 @@ public class Pathfinding : MonoBehaviour {
         GridReference = GetComponent<Grid>();//Get a reference to the game manager
     }
 
+    public void startPathFinding(Transform start, Transform end)
+    {
+        StartPosition = start;
+        TargetPosition = end;
+
+        FindNewPath();
+    }
+
     // Button on screen will find the path everytime when pressed to not have it run every frame
     // Could maybe be changed to have it clicked once and always running, but for now, this will suffice
     public void FindNewPath()
