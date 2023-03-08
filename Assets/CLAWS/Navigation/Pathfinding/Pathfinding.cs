@@ -11,6 +11,7 @@ public class Pathfinding : MonoBehaviour {
     public GameObject empty;
     [SerializeField] float distance = 5f;
 
+
     private void Awake()//When the program starts
     {
         GridReference = GetComponent<Grid>();//Get a reference to the game manager
@@ -111,7 +112,21 @@ public class Pathfinding : MonoBehaviour {
         // Instantiate objects along the final path
         for (int i = 0; i < FinalPath.Count; i++)
         {
+
+
+            FinalPath[i].vPosition.y -= .1f;
             GameObject instantiatedObject = Instantiate(prefabToInstantiate, FinalPath[i].vPosition, Quaternion.identity);
+
+            if (i != FinalPath.Count - 1)
+            {
+                instantiatedObject.transform.LookAt(FinalPath[i + 1].vPosition);
+                instantiatedObject.transform.rotation = Quaternion.Euler(new Vector3(90f, instantiatedObject.transform.rotation.y, instantiatedObject.transform.rotation.z));
+            }
+            else
+            {
+                instantiatedObject.transform.LookAt(FinalPath[i].vPosition);
+            }
+
             instantiatedObject.SetActive(false);
             isClose(instantiatedObject);
             instantiatedObject.transform.SetParent(empty.transform);
