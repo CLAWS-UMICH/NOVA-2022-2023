@@ -17,18 +17,25 @@ using System.Text.Json.Serialization;
 
 public class MessageHandler: MonoBehaviour
 {
-    public TextMeshPro window;
+    // Messaging Window related objects
+    public GameObject MessagingWindow;
+    //FIXME add scrolling parent
+    // Add message prefab
+
+    // Inbox Window related objects
+    public GameObject InboxWindow;
+    //FIXME add scrolling parent
+    // Add chat prefab
+
+    // Contact List Objects
+    public GameObject ContactWindow;
     public TextMeshPro recipientNames;
-    public string address;
-    public int port;
+
     private WebSocket connection;
-    public HashSet<string> recipientList = new HashSet<string>();
+    public HashSet<string> recipientSet = new HashSet<string>();
 
     private void Start()
     {
-        address = "127.0.0.1";
-        port = 6969;
-        //string url = "ws://" + address + ":" + port;
         string url1 = "ws://127.0.0.1:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
@@ -52,33 +59,86 @@ public class MessageHandler: MonoBehaviour
         }
     }
 
+    //FIXME
+    //Chat priority function
+    //Constantly order chats based on highest priority when event is hit
+    public void UpdateChatPriorities()
+    {
+
+    }
+
+    //FIXME
+    //Chat to inbox button
+    public void ChatInboxButton()
+    {
+
+    }
+
+    //FIXME
+    //Close current chat
+    //Active inbox object
+    //Rerender for most recent chats
+    public void RenderIndoxWindoww()
+    {
+
+    }
+
+    //Create new Chat
+    public void CreateNewChat()
+    {
+        List<string> recipients = recipientSet.ToList();
+        recipients.Sort();
+        string chatID = string.Join("", recipients);
+        if(Simulation.User.AstronautMessaging.chatLookup.ContainsKey(chatID))
+        {
+            // Pull up window with the existing chat rendered
+            RenderChatWindow(chatID);
+        }
+        Chat newChat = new Chat(chatID, recipientSet);
+
+        //Add to astronaut class
+        Simulation.User.AstronautMessaging.chatList.Add(newChat);
+        int index = Simulation.User.AstronautMessaging.chatList.Count() - 1;
+        Simulation.User.AstronautMessaging.chatLookup[chatID] = index;
+        //Close contact list window
+        RenderChatWindow(chatID);
+    }
+
+    //FIXME
+    public void RenderChatWindow(string chatID)
+    {
+       // Set Chat window active
+       // Clear scrolling parent and create number of prefabs based on chat messages
+       // Somehow start scrolling from the bottom of the list
+    }
+
+    //FIXME
+    public void EditChatName(string customName)
+    {
+
+    }
+
     // Function to display contents of the recipient list
     public void RecipientHandler(string name)
     {
-        if (!recipientList.Contains(name))
+        if (!recipientSet.Contains(name))
         {
-            recipientList.Add(name);
+            recipientSet.Add(name);
         }
         else
         {
-            recipientList.Remove(name);
+            recipientSet.Remove(name);
         }
 
-        string allNames = "";
-        foreach( string Name in recipientList)
-        {
-            allNames += Name + " ";
-        }
-
-        recipientNames.text = allNames;
-
+        recipientNames.text = string.Join(", ", recipientSet.ToList());
         return;
     }
 
-    public void SendMCC(int messageTemplate)
+    public void SendDM(int messageTemplate)
     {
         string sender = "Joel";
-        List<string> recipients = recipientList.ToList();
+        List<string> recipients = recipientSet.ToList();
+        recipients.Sort();
         string testmsg = "shitsfucked";
         //string content = "The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater)"
         switch (messageTemplate)
@@ -93,17 +153,6 @@ public class MessageHandler: MonoBehaviour
                 testmsg = "pls";
                 break;
         }
-        //FIXME Example message with timestamp included
-        //{
-        //    "message_type": "dm",
-        //    "recipients":
-        //     [
-        //        "Patrick", "Jason"
-        //     ]
-        //    "sender": "Joel"
-        //    "timeStamp": DateTime object
-        //    "content": "wtfwwtf"
-        //}
         MessageJson message = new MessageJson();
         message.message_type = "dm";
         message.recipients = recipients;
@@ -130,7 +179,6 @@ public class MessageHandler: MonoBehaviour
                 Debug.Log("recieved message");
                 MessageJson readin = JsonConvert.DeserializeObject<MessageJson>(message);
                 string printOut = "Sender: " + readin.sender + "\n" + "Message: " + readin.content + "\n" + "Time: " + readin.currentTime;
-                window.text = printOut;
                 break;
         }
     }
