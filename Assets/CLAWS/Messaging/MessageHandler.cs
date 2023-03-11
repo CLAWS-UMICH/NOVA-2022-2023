@@ -1,8 +1,4 @@
 using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using UnityEngine;
@@ -13,15 +9,12 @@ using WebSocketSharp.Server;
 using TMPro;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Microsoft.MixedReality.Toolkit.UI;
+using Microsoft.MixedReality.Toolkit.Utilities;
 
 
 public class MessageHandler: MonoBehaviour
 {
-    // Messaging Window related objects
-    public GameObject MessagingWindow;
-    //FIXME add scrolling parent
-    // Add message prefab
-
     // Inbox Window related objects
     public GameObject InboxWindow;
     //FIXME add scrolling parent
@@ -29,10 +22,8 @@ public class MessageHandler: MonoBehaviour
 
     // Contact List Objects
     public GameObject ContactWindow;
-    public TextMeshPro recipientNames;
 
     private WebSocket connection;
-    public HashSet<string> recipientSet = new HashSet<string>();
 
     private void Start()
     {
@@ -83,58 +74,7 @@ public class MessageHandler: MonoBehaviour
 
     }
 
-    //Create new Chat
-    public void CreateNewChat()
-    {
-        List<string> recipients = recipientSet.ToList();
-        recipients.Sort();
-        string chatID = string.Join("", recipients);
-        if(Simulation.User.AstronautMessaging.chatLookup.ContainsKey(chatID))
-        {
-            // Pull up window with the existing chat rendered
-            RenderChatWindow(chatID);
-        }
-        Chat newChat = new Chat(chatID, recipientSet);
-
-        //Add to astronaut class
-        Simulation.User.AstronautMessaging.chatList.Add(newChat);
-        int index = Simulation.User.AstronautMessaging.chatList.Count() - 1;
-        Simulation.User.AstronautMessaging.chatLookup[chatID] = index;
-        //Close contact list window
-        RenderChatWindow(chatID);
-    }
-
-    //FIXME
-    public void RenderChatWindow(string chatID)
-    {
-       // Set Chat window active
-       // Clear scrolling parent and create number of prefabs based on chat messages
-       // Somehow start scrolling from the bottom of the list
-    }
-
-    //FIXME
-    public void EditChatName(string customName)
-    {
-
-    }
-
-    // Function to display contents of the recipient list
-    public void RecipientHandler(string name)
-    {
-        if (!recipientSet.Contains(name))
-        {
-            recipientSet.Add(name);
-        }
-        else
-        {
-            recipientSet.Remove(name);
-        }
-
-        recipientNames.text = string.Join(", ", recipientSet.ToList());
-        return;
-    }
-
-    public void SendDM(int messageTemplate)
+    public void SendDM(int messageTemplate, HashSet<string> recipientSet)
     {
         string sender = "Joel";
         List<string> recipients = recipientSet.ToList();
