@@ -14,6 +14,8 @@ TagManager:
   - UI
   - map
   - mapborder
+  - Wall
+  - mainMap
   - 
   - 
   - 
@@ -21,12 +23,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - CrewLayer
+  - MissionLayer
+  - RoverLayer
+  - LanderLayer
   - 
   - 
   - 

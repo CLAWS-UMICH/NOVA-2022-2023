@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8267535550734177875}
   - component: {fileID: 8267535550734177966}
   - component: {fileID: 8267535550734177873}
-  - component: {fileID: 8426294124436348399}
   m_Layer: 0
   m_Name: Simulation Manager
   m_TagString: Untagged
@@ -48,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _user: {fileID: 8267535550734177966}
+  _mcc_Astronauts: []
+  user_index: -1
 --- !u!114 &8267535550734177966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +91,12 @@ MonoBehaviour:
     t_oxygen: 
     cap_water: 0
     t_water: 
-  AstronautTasks: {fileID: 0}
+  AstronautTasks:
+    progress: 0
+    taskList: []
+    activeTask: 0
+  AstronautMessaging:
+    priority: 
 --- !u!114 &8267535550734177873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,18 +109,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d97fb5a4b3733438fb6564e5189624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8426294124436348399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8267535550734177874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dcb7040c24b048bd9278992641c3de9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  address: 127.0.0.1
-  port: 6969

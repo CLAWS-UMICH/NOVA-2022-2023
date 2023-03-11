@@ -17,6 +17,12 @@ public class TaskCollapse : MonoBehaviour
 
     public void Toggle()
     {
+        StartCoroutine(ToggleCoroutine());
+    }
+
+    IEnumerator ToggleCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
         expanded.SetActive(!expanded.activeSelf);
         taskView.SetActive(!taskView.activeSelf);
         controller.refresh();

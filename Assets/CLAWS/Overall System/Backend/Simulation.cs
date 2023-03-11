@@ -14,6 +14,9 @@ public class Simulation: MonoBehaviour
 
     // INSTANCE
     [SerializeField] private Astronaut _user;
+    [SerializeField] private List<Astronaut> _mcc_Astronauts;
+
+    public int user_index = -1;
 
     // STATIC INTERFACE
     public static Astronaut User
@@ -25,6 +28,23 @@ public class Simulation: MonoBehaviour
         set
         {
             instance._user = value;
+        }
+    }
+
+    public static List<Astronaut> MCC_Astronauts
+    {
+        get
+        {
+            return instance._mcc_Astronauts;
+        }
+        set
+        {
+            instance._mcc_Astronauts = value;
+            // update User
+            if (instance.user_index != -1)
+            {
+                User = instance._mcc_Astronauts[instance.user_index];
+            }
         }
     }
 
