@@ -73,12 +73,12 @@ public class Pathfinding : MonoBehaviour {
                 {
                     continue;//Skip it
                 }
-                int MoveCost = CurrentNode.igCost + GetManhattenDistance(CurrentNode, NeighborNode);//Get the F cost of that neighbor
+                int MoveCost = CurrentNode.igCost + GetEuclideanDistance(CurrentNode, NeighborNode);//Get the F cost of that neighbor
 
                 if (MoveCost < NeighborNode.igCost || !OpenList.Contains(NeighborNode))//If the f cost is greater than the g cost or it is not in the open list
                 {
                     NeighborNode.igCost = MoveCost;//Set the g cost to the f cost
-                    NeighborNode.ihCost = GetManhattenDistance(NeighborNode, TargetNode);//Set the h cost
+                    NeighborNode.ihCost = GetEuclideanDistance(NeighborNode, TargetNode);//Set the h cost
                     NeighborNode.ParentNode = CurrentNode;//Set the parent of the node for retracing steps
 
                     if(!OpenList.Contains(NeighborNode))//If the neighbor is not in the openlist
@@ -112,21 +112,24 @@ public class Pathfinding : MonoBehaviour {
         // Instantiate objects along the final path
         for (int i = 0; i < FinalPath.Count; i++)
         {
-
-
             FinalPath[i].vPosition.y -= .1f;
             GameObject instantiatedObject = Instantiate(prefabToInstantiate, FinalPath[i].vPosition, Quaternion.identity);
-
             if (i != FinalPath.Count - 1)
             {
-                instantiatedObject.transform.LookAt(FinalPath[i + 1].vPosition);
-                instantiatedObject.transform.rotation = Quaternion.Euler(new Vector3(90f, instantiatedObject.transform.rotation.y, instantiatedObject.transform.rotation.z));
+                Vector3 direction = FinalPath[i + 1].vPosition - FinalPath[i].vPosition;
+                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+                instantiatedObject.transform.rotation = rotation;
+            }
+            else if (i == FinalPath.Count - 1)
+            {
+                Vector3 direction = TargetPosition.position - FinalPath[i].vPosition;
+                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+                instantiatedObject.transform.rotation = rotation;
             }
             else
             {
                 instantiatedObject.transform.LookAt(FinalPath[i].vPosition);
             }
-
             instantiatedObject.SetActive(false);
             isClose(instantiatedObject);
             instantiatedObject.transform.SetParent(empty.transform);
@@ -148,5 +151,12 @@ public class Pathfinding : MonoBehaviour {
         int iy = Mathf.Abs(a_nodeA.iGridY - a_nodeB.iGridY);//y1-y2
 
         return ix + iy;//Return the sum
+    }
+
+    int GetEuclideanDistance(Node nodeA, Node nodeB)
+    {
+        int dstX = Mathf.Abs(nodeA.iGridX - nodeB.iGridX);
+        int dstY = Mathf.Abs(nodeA.iGridY - nodeB.iGridY);
+        return Mathf.RoundToInt(Mathf.Sqrt(dstX * dstX + dstY * dstY));
     }
 }
