@@ -653,6 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 29743001}
+  panel: {fileID: 1823508830}
 --- !u!4 &800157792
 Transform:
   m_ObjectHideFlags: 0
