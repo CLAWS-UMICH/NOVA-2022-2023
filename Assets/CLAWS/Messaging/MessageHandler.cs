@@ -15,13 +15,7 @@ using Microsoft.MixedReality.Toolkit.Utilities;
 
 public class MessageHandler: MonoBehaviour
 {
-    // Inbox Window related objects
-    public GameObject InboxWindow;
-    //FIXME add scrolling parent
-    // Add chat prefab
-
-    // Contact List Objects
-    public GameObject ContactWindow;
+    public ChatWindowInteractions chatWindow;
 
     private WebSocket connection;
 
@@ -36,7 +30,7 @@ public class MessageHandler: MonoBehaviour
             Debug.Log("MCC message: " + e.Data);
         };
         connection.Connect();
-        connection.Send("{\"message_type\": \"registration\",\"username\": \"Joel\"}");
+        connection.Send("{\"message_type\": \"registration\",\"username\": \"Jason\"}");
         Debug.Log("Connected to server");
     }
 
@@ -45,7 +39,7 @@ public class MessageHandler: MonoBehaviour
     {
         while (Simulation.User.AstronautMessaging.messageQueue.TryDequeue(out string message))
         {
-            MessageJson readIn = JsonConvert.DeserializeObject<MessageJson>(message);
+            JsonMessage readIn = JsonConvert.DeserializeObject<JsonMessage>(message);
             HandleMessage(readIn.message_type, message);
         }
     }
@@ -74,9 +68,9 @@ public class MessageHandler: MonoBehaviour
 
     }
 
-    public void SendDM(int messageTemplate, HashSet<string> recipientSet)
+    public void SendDM(int messageTemplate, string chatID, HashSet<string> recipientSet)
     {
-        string sender = "Joel";
+        string sender = "Jason";
         List<string> recipients = recipientSet.ToList();
         recipients.Sort();
         string testmsg = "shitsfucked";
@@ -96,9 +90,10 @@ public class MessageHandler: MonoBehaviour
         MessageJson message = new MessageJson();
         message.message_type = "dm";
         message.recipients = recipients;
-        message.currentTime = DateTime.Now.ToString("HH:mm");
+        message.timeStamp = DateTime.Now.ToString("HH:mm");
         message.content = testmsg;
         message.sender = sender;
+        message.chatID = chatID;
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
@@ -117,8 +112,10 @@ public class MessageHandler: MonoBehaviour
             case "dm":
                 
                 Debug.Log("recieved message");
-                MessageJson readin = JsonConvert.DeserializeObject<MessageJson>(message);
-                string printOut = "Sender: " + readin.sender + "\n" + "Message: " + readin.content + "\n" + "Time: " + readin.currentTime;
+                Message readin = JsonConvert.DeserializeObject<Message>(message);
+                //create chatID
+                //FIXME error HERE
+                this.chatWindow.OnMessageRecieved(readin.chatID, readin);
                 break;
         }
     }
