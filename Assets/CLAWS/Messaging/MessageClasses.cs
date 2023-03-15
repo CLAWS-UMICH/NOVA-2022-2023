@@ -25,13 +25,14 @@ public class Messaging
 // Class presentation of a sent message within a chat
 public class Message
 {
-    public string text;
+    public string chatID;
+    public string content;
     public string sender;
     public string timeStamp;
 
     public Message(string text, string sender, string timeStamp)
     {
-        this.text = text;
+        this.content = text;
         this.sender = sender;
         this.timeStamp = timeStamp;
     }
@@ -49,14 +50,16 @@ public class Chat
         this.members = members;
         this.messages = new List<Message>();
         this.title = string.Join(", ", members.ToList());
+        Debug.Log("HELOO");
+        Debug.Log(this.title);
     }
 }
 
-public class MessageJson
+public class MessageJson : JsonMessage
 {
-    public string message_type;
     public List<string> recipients;
-    public string currentTime;
+    public string timeStamp;
     public string sender;
     public string content;
+    public string chatID;
 }
