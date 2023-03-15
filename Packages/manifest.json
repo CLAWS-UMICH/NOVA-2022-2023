@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.endel.nativewebsocket": "https://github.com/endel/NativeWebSocket.git#upm",
     "com.microsoft.mixedreality.openxr": "file:MixedReality/com.microsoft.mixedreality.openxr-1.5.1.tgz",
     "com.microsoft.mixedreality.toolkit.examples": "file:MixedReality/com.microsoft.mixedreality.toolkit.examples-2.8.3.tgz",
     "com.microsoft.mixedreality.toolkit.extensions": "file:MixedReality/com.microsoft.mixedreality.toolkit.extensions-2.8.3.tgz",
@@ -22,7 +23,7 @@
     "com.unity.vectorgraphics": "2.0.0-preview.20",
     "com.unity.visualscripting": "1.7.8",
     "com.unity.xr.openxr": "1.5.1",
-    "suits.tss": "file:C:/Users/patri/Downloads/SUITS-TSS-Unity",
+    "suits.tss": "https://github.com/SUITS-Techteam/SUITS-TSS-Unity.git",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

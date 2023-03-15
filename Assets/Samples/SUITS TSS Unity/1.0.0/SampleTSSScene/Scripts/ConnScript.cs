@@ -8,8 +8,6 @@ public class ConnScript : MonoBehaviour
     TSSConnection tss;
     string tssUri;
 
-    public TSS.Msgs.TSSMsg curr_TSS_msg;
-
     int msgCount = 0;
 
     TMPro.TMP_Text gpsMsgBox;
@@ -48,8 +46,6 @@ public class ConnScript : MonoBehaviour
         // Then just subscribe to the OnTSSTelemetryMsg
         tss.OnTSSTelemetryMsg += (telemMsg) =>
         {
-            curr_TSS_msg = telemMsg;
-
             msgCount++;
             Debug.Log("Message #" + msgCount + "\nMessage:\n " + JsonUtility.ToJson(telemMsg, prettyPrint: true));
 
