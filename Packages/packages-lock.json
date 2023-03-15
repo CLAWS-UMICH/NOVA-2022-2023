@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.endel.nativewebsocket": {
+      "version": "https://github.com/endel/NativeWebSocket.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c5101c07762251edc82caad9e8a39d51b1229c31"
+    },
     "com.microsoft.mixedreality.openxr": {
       "version": "file:MixedReality/com.microsoft.mixedreality.openxr-1.5.1.tgz",
       "depth": 0,
@@ -321,6 +328,15 @@
         "com.unity.inputsystem": "1.4.1"
       },
       "url": "https://packages.unity.com"
+    },
+    "suits.tss": {
+      "version": "https://github.com/SUITS-Techteam/SUITS-TSS-Unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.endel.nativewebsocket": "1.1.4"
+      },
+      "hash": "3f9b35b7c278e4b086a73d84308bdd37ea526258"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

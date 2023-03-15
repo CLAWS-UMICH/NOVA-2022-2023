@@ -56832,13 +56832,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MessagingWindow: {fileID: 5913657855929419684}
-  GridParent: {fileID: 974607349674358062}
-  GridCollection: {fileID: 974607349674358060}
-  ScrollCollection: {fileID: 0}
-  Clipper: {fileID: 0}
-  OtherMessagePrefab: {fileID: 3362216415064632210, guid: e5443ca9fcb564811bb0d8f060bf73c4, type: 3}
-  SelfMessagePrefab: {fileID: 2279635729284189487, guid: ea5cccf07ec8842a99364ee798945dac, type: 3}
   recipientNames: {fileID: 516086537900111007}
+  taskObjects:
+  - {fileID: 489362267}
+  - {fileID: 649537335}
+  - {fileID: 1903638336}
 --- !u!1001 &6175336453231665182
 PrefabInstance:
   m_ObjectHideFlags: 0
