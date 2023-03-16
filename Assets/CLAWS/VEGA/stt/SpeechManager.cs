@@ -21,6 +21,9 @@ public class SpeechManager : MonoBehaviour
     public SpeechConfig config;
     private object threadLocker = new object();
     private string message;
+    GameObject _speech;
+    GameObject _animation;
+    
     UnityEngine.Windows.Speech.KeywordRecognizer keywordRecognizer;
     Dictionary<string, System.Action> keyWords = new Dictionary<string, System.Action>();
 
@@ -32,8 +35,32 @@ public class SpeechManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
+    // void Start()
+    // {
+    //     _speech = GameObject.Find("Speech to Text Manager");
+    //     _animation = GameObject.Find("GlowingRing");
+    //     //_speech = GameObject.Find("Speech to Text Manager").GetComponent<GameObject>();
+    //     config = SpeechConfig.FromSubscription("88b980bf22dc44d7949347d3d784be94", "eastus");
+    //     config.SpeechRecognitionLanguage = "en-US";
+    //     config.SpeechSynthesisVoiceName = "en-US-JennyNeural";
+        
+    //     recognizer = new SpeechRecognizer(config);
+    //     synthesizer = new SpeechSynthesizer(config);
+    //     recognizer.Recognizing += RecognizingHandler;
+
+    //     recognizer.StartContinuousRecognitionAsync().ConfigureAwait(false);
+
+    //     //playbackBtn.onClick.AddListener(onClick);
+
+    //     //keywordRecognizer = new UnityEngine.Windows.Speech.KeywordRecognizer(keyWords.Keys.ToArray());
+    //     coroutine = NoSpeech();
+    //     StartCoroutine(coroutine);
+    // }
+
+    void OnEnable(){
+        _speech = GameObject.Find("Speech to Text Manager");
+        _animation = GameObject.Find("GlowingRing");
+        //_speech = GameObject.Find("Speech to Text Manager").GetComponent<GameObject>();
         config = SpeechConfig.FromSubscription("88b980bf22dc44d7949347d3d784be94", "eastus");
         config.SpeechRecognitionLanguage = "en-US";
         config.SpeechSynthesisVoiceName = "en-US-JennyNeural";
@@ -93,8 +120,16 @@ public class SpeechManager : MonoBehaviour
                 Debug.Log(message);
                 Debug.Log("speech did not happen");
                 panel.SetActive(false);
+
                 i = 0;
                 speech = false;
+                
+                _speech.SetActive(false);
+                _animation.SetActive(false); //Object reference not set to an instance of an object
+//SpeechManager+<NoSpeech>d__17.MoveNext () (at Assets/CLAWS/VEGA/stt/SpeechManager.cs:126)
+//UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) 
+                
+                //_animation.SetActive(false);
             }
             prevMessage = message;
         }
