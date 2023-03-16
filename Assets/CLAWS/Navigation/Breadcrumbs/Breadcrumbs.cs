@@ -15,7 +15,7 @@ public class Breadcrumbs : MonoBehaviour
 
     void Start()
     {
-        prevCrumbPosition = transform.position;
+        prevCrumbPosition = camera.transform.position;
     }
 
     void Update()
@@ -30,19 +30,28 @@ public class Breadcrumbs : MonoBehaviour
         currentPosition = camera.transform.position;
         float distanceMoved = Vector3.Distance(currentPosition, prevCrumbPosition);
 
-        if (distanceMoved >= crumbDistance)
+        while (distanceMoved >= crumbDistance)
         {
             PlaceBreadcrumb();
             prevCrumbPosition = currentPosition;
+            distanceMoved = Vector3.Distance(currentPosition, prevCrumbPosition);
         }
     }
-
-    void PlaceBreadcrumb()
+    private void PlaceBreadcrumb()
     {
-        Quaternion rotation = Quaternion.Euler(new Vector3(90f, 0f, currentPosition.z));
-        Vector3 position = new Vector3(prevCrumbPosition.x, -1.25f, prevCrumbPosition.z);
-        GameObject instantiated = Instantiate(breadcrumb, position, rotation);
-        crumbPositions.Add(position); //List of positions for whenever needed
+        Vector3 direction = currentPosition - prevCrumbPosition;
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
+        GameObject instantiated = Instantiate(breadcrumb, prevCrumbPosition, rotation);
+        crumbPositions.Add(prevCrumbPosition); //List of positions for whenever needed
         instantiated.transform.SetParent(allBread.transform);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("crumb"))
+        {
+            crumbPositions.Remove(other.gameObject.transform.position);
+            Destroy(other.gameObject);
+        }
+    }
 }
+
