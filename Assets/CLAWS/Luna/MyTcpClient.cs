@@ -36,7 +36,7 @@ public class MyTcpClient : MonoBehaviour
     public void Start()
     {
         //Server ip address and port
-        Connect("10.0.0.21", "9000");
+        Connect("192.168.191.251", "8000");
     }
 
     public void Connect(string host, string port)

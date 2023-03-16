@@ -20,6 +20,9 @@ public class YawOffset : MonoBehaviour
     void Update()
     {
         gameObject.transform.position = playerCam.transform.position;
-        gameObject.transform.rotation = Quaternion.Euler(0, offset, 0);
+        while (Simulation.User.AstronautTasks.messageQueue2.TryDequeue(out string msg))
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0, float.Parse(msg), 0);
+        }
     }
 }
