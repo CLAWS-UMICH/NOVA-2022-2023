@@ -33,7 +33,8 @@ public class InboxScroll : MonoBehaviour
 
     public void UpdateDisplayList()
     {
-        int size = Simulation.User.AstronautMessaging.chatList.Count;
+        Debug.Log("CurrentINDEX");
+        Debug.Log(currentIndex);
         for (int i = currentIndex; i > currentIndex - 3; --i)
         {
             if (i >= 0)
@@ -50,6 +51,8 @@ public class InboxScroll : MonoBehaviour
 
     public void RenderInbox()//Assume valid currentIndex -Less than 3 messages, handle here
     {
+        Debug.Log("PrINTINGINGINGdiSNGID");
+        Debug.Log(displayedChats.Count);
         for (int i = 0; i < displayedChats.Count; ++i)
         {
             int last = displayedChats[i].messages.Count - 1;

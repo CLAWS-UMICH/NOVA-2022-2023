@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using System;
-using System.Text.Json.Serialization;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities;
 

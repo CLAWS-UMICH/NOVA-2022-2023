@@ -8,7 +8,6 @@ using WebSocketSharp;
 using WebSocketSharp.Server;
 using TMPro;
 using System.Linq;
-using System.Text.Json.Serialization;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities;
 
@@ -21,7 +20,7 @@ public class MessageHandler: MonoBehaviour
 
     private void Start()
     {
-        string url1 = "ws://127.0.0.1:4242";
+        string url1 = "ws://35.3.115.75:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
