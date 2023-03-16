@@ -16,34 +16,47 @@ public class ScaleAnimationController : MonoBehaviour
     private Vector3 initialScale;
     private float currentScale;
     private bool scaleUp = true;
-
+    //private IEnumerator coroutine;
+    SpeechManager _speech;
+    
     private void Start()
     {
         initialScale = transform.localScale;
         currentScale = initialScale.x;
+
+        _speech = GameObject.Find("Speech to Text Manager").GetComponent<SpeechManager>();
+
+        //coroutine = Animate();
+        //StartCoroutine(coroutine);
+        Debug.Log(_speech.speech);
+
     }
 
     private void Update()
     {
-        if (scaleUp)
+        
+        if (_speech.speech)
         {
-            currentScale += Time.deltaTime * animationSpeed;
-            if (currentScale >= maxScale)
+            if (scaleUp)
             {
-                currentScale = maxScale;
-                scaleUp = false;
+                currentScale += Time.deltaTime * animationSpeed;
+                if (currentScale >= maxScale)
+                {
+                    currentScale = maxScale;
+                    scaleUp = false;
+                }
             }
-        }
-        else
-        {
-            currentScale -= Time.deltaTime * animationSpeed;
-            if (currentScale <= minScale)
+            else
             {
-                currentScale = minScale;
-                scaleUp = true;
+                currentScale -= Time.deltaTime * animationSpeed;
+                if (currentScale <= minScale)
+                {
+                    currentScale = minScale;
+                    scaleUp = true;
+                }
             }
-        }
 
-        transform.localScale = initialScale * currentScale;
+            transform.localScale = initialScale * currentScale;
+        }
     }
 }

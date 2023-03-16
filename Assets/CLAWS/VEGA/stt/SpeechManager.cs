@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using TMPro;
 public class SpeechManager : MonoBehaviour
 {
+    public bool speech = false;
     public TextMeshPro text;
     //public Button playbackBtn;
     private IEnumerator coroutine;
@@ -65,7 +66,6 @@ public class SpeechManager : MonoBehaviour
 
     IEnumerator NoSpeech(){
         int i = 0;
-        bool speech = false;
         string prevMessage = message;
         
         while(true){
