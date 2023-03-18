@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 1021727061}
   - component: {fileID: 1021727060}
   m_Layer: 0
-  m_Name: VEGAManager
+  m_Name: VEGA Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

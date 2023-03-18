@@ -17,8 +17,8 @@ MonoBehaviour:
   recognitionConfidenceLevel: 1
   speechCommands:
   - localizationKey: 
-    keyword: Hey VEGA
-    keyCode: 0
+    keyword: Hey Vega
+    keyCode: 9
     action:
       id: 0
       description: 
