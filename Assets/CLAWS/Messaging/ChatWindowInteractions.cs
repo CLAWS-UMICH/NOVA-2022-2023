@@ -10,13 +10,14 @@ using Microsoft.MixedReality.Toolkit.Utilities;
 public class ChatWindowInteractions : MonoBehaviour
 {
     public MessageHandler Sender;
+    public InboxScroll inbox;
     public GameObject MessagingWindow;
     public TextMeshPro recipientNames;
     public TextMeshPro testpreview;
     public TextMeshPro chatTitle;
     public HashSet<string> recipientSet = new HashSet<string>();
     public GameObject[] messageObjects;
-    public GameObject chatWindow;
+    public GameObject inboxWindow;
     int currentMessage = 3;
     int currentIndex;
     string chatID = null;
@@ -31,13 +32,18 @@ public class ChatWindowInteractions : MonoBehaviour
         recipients.Add(self);
         recipients.Sort();
         string chatID = string.Join("", recipients);
+        // Send created groupchat message
+        if (recipients.Count > 2)
+        {
+            Sender.CreateGroupChat(chatID, recipientSet);
+        }
         Debug.Log(chatID);
         Chat newChat = new Chat(chatID, recipientSet);
         //Reset the contact window screen and reset selection
         this.recipientSet = new HashSet<string>();
         this.recipientNames.text = "";
 
-        if (Simulation.User.AstronautMessaging.chatLookup.ContainsKey(chatID))
+        if (Simulation.User.AstronautMessaging.chatLookup.Contains(chatID))
         {
             // Pull up window with the existing chat rendered
             RenderChatWindow(chatID);
@@ -46,8 +52,7 @@ public class ChatWindowInteractions : MonoBehaviour
 
         //Add to astronaut class
         Simulation.User.AstronautMessaging.chatList.Add(newChat);
-        int index = Simulation.User.AstronautMessaging.chatList.Count() - 1;
-        Simulation.User.AstronautMessaging.chatLookup[chatID] = index;
+        Simulation.User.AstronautMessaging.chatLookup.Add(chatID);
         //FiXME send chat creation message
         //Close contact list window (dont need for now)
         RenderChatWindow(chatID);
@@ -55,7 +60,7 @@ public class ChatWindowInteractions : MonoBehaviour
 
     public void IncrementIndex(int incr) //incr is a 1 or -1
     {
-        int indexIntoDictionary = Simulation.User.AstronautMessaging.chatLookup[chatID];
+        int indexIntoDictionary = GetChatIndex(chatID);
         List<Message> messagesList = Simulation.User.AstronautMessaging.chatList[indexIntoDictionary].messages;
         if ((incr < 0 && currentIndex > 2) || (incr > 0 && currentIndex < messagesList.Count - 1))
         {
@@ -69,8 +74,8 @@ public class ChatWindowInteractions : MonoBehaviour
     {
         this.chatID = chatID;
         MessagingWindow.SetActive(true);
-        int indexIntoDictionary = Simulation.User.AstronautMessaging.chatLookup[chatID];
-        this.currentChat = Simulation.User.AstronautMessaging.chatList[indexIntoDictionary];
+        int index = GetChatIndex(chatID);
+        this.currentChat = Simulation.User.AstronautMessaging.chatList[index];
         chatTitle.text = this.currentChat.title;
         Debug.Log(this.currentChat.title);
         currentIndex = Math.Max(this.currentChat.messages.Count - 1, -1);
@@ -80,22 +85,19 @@ public class ChatWindowInteractions : MonoBehaviour
 
     public void updateCurrentIndex()
     {
-        int indexIntoDictionary = Simulation.User.AstronautMessaging.chatLookup[chatID];
-        this.currentChat = Simulation.User.AstronautMessaging.chatList[indexIntoDictionary];
+        int index = GetChatIndex(this.chatID);
+        this.currentChat = Simulation.User.AstronautMessaging.chatList[index];
         Debug.Log(this.currentChat.messages.Count);
         this.currentIndex = Math.Max(this.currentChat.messages.Count - 1, -1);
     }
 
     public void updateText() //Assume valid currentIndex -Less than 3 messages, handle here
     {
-        if (currentChat.messages.Count == 0)
+        for (int i = 0; i < 3; i++)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                messageObjects[i].SetActive(false);
-            }
+            messageObjects[i].SetActive(false);
         }
-        else if (currentChat.messages.Count == 1) //Edge case where only 1 message
+        if (currentChat.messages.Count == 1) //Edge case where only 1 message
         {
             Debug.Log("InSIDE");
             Message mostRecentMessage = currentChat.messages[currentIndex];
@@ -114,7 +116,7 @@ public class ChatWindowInteractions : MonoBehaviour
             messageObjects[1].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.sender;
             messageObjects[1].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.content;
         }
-        else
+        else if (currentChat.messages.Count == 3)
         {
             Message mostRecentMessage = currentChat.messages[currentIndex];
             Message secondMostRecentMessage = currentChat.messages[currentIndex - 1];
@@ -135,9 +137,9 @@ public class ChatWindowInteractions : MonoBehaviour
     {
         if(this.chatID != null)
         {
-            int indexIntoDictionary = Simulation.User.AstronautMessaging.chatLookup[chatID];
-            Simulation.User.AstronautMessaging.chatList[indexIntoDictionary].title = customName;
-            this.currentChat = Simulation.User.AstronautMessaging.chatList[indexIntoDictionary];
+            int index = GetChatIndex(chatID);
+            Simulation.User.AstronautMessaging.chatList[index].title = customName;
+            this.currentChat = Simulation.User.AstronautMessaging.chatList[index];
         }
     }
 
@@ -165,16 +167,16 @@ public class ChatWindowInteractions : MonoBehaviour
 
     public void SendButton()
     {
-        Sender.SendDM(this.currentMessage, chatID, currentChat.members);
+        Sender.SendDM(this.currentMessage, this.chatID, currentChat.members);
         Debug.Log("Exits from sendDM");
-        string testmsg = "shitsfucked";
+        string testmsg = "youmessedup";
         switch (this.currentMessage)
         {
             case 0:
                 testmsg = "Hello";
                 break;
             case 1:
-                testmsg = "Bitch";
+                testmsg = "Goodbye";
                 break;
             case 2:
                 testmsg = "pls";
@@ -182,8 +184,8 @@ public class ChatWindowInteractions : MonoBehaviour
         }
         Message newMsg = new Message(testmsg, this.self, DateTime.Now.ToString("HH:mm"));
         newMsg.chatID = this.chatID;
-        int indexIntoDictionary = Simulation.User.AstronautMessaging.chatLookup[chatID];
-        Simulation.User.AstronautMessaging.chatList[indexIntoDictionary].messages.Add(newMsg);
+        int index = GetChatIndex(this.chatID);
+        Simulation.User.AstronautMessaging.chatList[index].messages.Add(newMsg);
         updateCurrentIndex();
         Debug.Log("Exits from updatecurrent index");
         updateText();
@@ -191,19 +193,53 @@ public class ChatWindowInteractions : MonoBehaviour
 
     public void OnMessageRecieved(string chatID, Message msg)
     {
-        //FIXME implement chat priorities
-        int indexIntoDictionary = Simulation.User.AstronautMessaging.chatLookup[chatID];
-        Simulation.User.AstronautMessaging.chatList[indexIntoDictionary].messages.Add(msg);
-        if (chatID == this.chatID)
+        if (!Simulation.User.AstronautMessaging.chatLookup.Contains(chatID))
+        {
+            //Make chat
+            HashSet<string> members = new HashSet<string>() { msg.sender, self };
+            Chat newChat = new Chat(chatID, members);
+            newChat.messages.Add(msg);
+            Simulation.User.AstronautMessaging.chatList.Add(newChat);
+            Simulation.User.AstronautMessaging.chatLookup.Add(chatID);
+        }
+        else
+        {
+            int index = GetChatIndex(chatID);
+            Chat targetChat = Simulation.User.AstronautMessaging.chatList[index];
+            Simulation.User.AstronautMessaging.chatList[index].messages.Add(msg);
+            Simulation.User.AstronautMessaging.chatList.Remove(targetChat);
+            Simulation.User.AstronautMessaging.chatList.Add(targetChat);
+        }
+        if (inboxWindow.activeSelf)
+        {
+            //refresh inbox window if active
+            inbox.ResetCurrentIndex();
+            inbox.UpdateDisplayList();
+            inbox.RenderInbox();
+        }
+        else if ((chatID == this.chatID) && !inboxWindow.activeSelf)
         {
             updateCurrentIndex();
             updateText();
         }
     }
 
-    public void closeChatWindow()
+    public void CreateGroup(GroupClass group)
     {
-        this.chatWindow.SetActive(false);
+        Chat groupChat = new Chat(group.chatID, group.recipients);
+        Simulation.User.AstronautMessaging.chatList.Add(groupChat);
+        Simulation.User.AstronautMessaging.chatLookup.Add(group.chatID);
+    }
 
+    public int GetChatIndex(string chatID)
+    {
+        for (int i = 0; i < Simulation.User.AstronautMessaging.chatList.Count; ++i)
+        {
+            if (Simulation.User.AstronautMessaging.chatList[i].chatID == chatID)
+            {
+                return i;
+            }   
+        }
+        return -1;
     }
 }

@@ -20,7 +20,7 @@ public class MessageHandler: MonoBehaviour
 
     private void Start()
     {
-        string url1 = "ws://35.3.115.75:4242";
+        string url1 = "ws://127.0.0.1:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
@@ -41,30 +41,6 @@ public class MessageHandler: MonoBehaviour
             JsonMessage readIn = JsonConvert.DeserializeObject<JsonMessage>(message);
             HandleMessage(readIn.message_type, message);
         }
-    }
-
-    //FIXME
-    //Chat priority function
-    //Constantly order chats based on highest priority when event is hit
-    public void UpdateChatPriorities()
-    {
-
-    }
-
-    //FIXME
-    //Chat to inbox button
-    public void ChatInboxButton()
-    {
-
-    }
-
-    //FIXME
-    //Close current chat
-    //Active inbox object
-    //Rerender for most recent chats
-    public void RenderIndoxWindoww()
-    {
-
     }
 
     public void SendDM(int messageTemplate, string chatID, HashSet<string> recipientSet)
@@ -93,6 +69,17 @@ public class MessageHandler: MonoBehaviour
         message.content = testmsg;
         message.sender = sender;
         message.chatID = chatID;
+        string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
+        connection.Send(jsonMessage);
+        Debug.Log("Sent: " + message);
+    }
+
+    public void CreateGroupChat(string chatID, HashSet<string> recipientSet)
+    {
+        GroupClass message = new GroupClass();
+        List<string> recipients = recipientSet.ToList();
+        message.chatID = chatID;
+        message.recipients = recipients;
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);

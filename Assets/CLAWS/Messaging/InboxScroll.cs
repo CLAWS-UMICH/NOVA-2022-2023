@@ -35,6 +35,7 @@ public class InboxScroll : MonoBehaviour
     {
         Debug.Log("CurrentINDEX");
         Debug.Log(currentIndex);
+        displayedChats = new List<Chat>();
         for (int i = currentIndex; i > currentIndex - 3; --i)
         {
             if (i >= 0)
@@ -58,7 +59,10 @@ public class InboxScroll : MonoBehaviour
             int last = displayedChats[i].messages.Count - 1;
             chatObjects[i].SetActive(true);
             chatObjects[i].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = displayedChats[i].title;
-            chatObjects[i].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = displayedChats[i].messages[last].content;
+            if (last > 0)
+            {
+                chatObjects[i].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = displayedChats[i].messages[last].content;
+            }
         }
         for (int i = displayedChats.Count; i < 3; i++)
         {
