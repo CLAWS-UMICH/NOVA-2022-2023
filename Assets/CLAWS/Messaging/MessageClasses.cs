@@ -11,7 +11,6 @@ public class Messaging
     public ConcurrentQueue<string> messageQueue;
     public List<Chat> chatList;
     public List<int> priority; //FIXME find better datastructure for this
-    //Key: chatID, Value: Index of the chat object in chatList
     public HashSet<string> chatLookup;
 
     public Messaging()
@@ -53,15 +52,6 @@ public class Chat
         Debug.Log("HELOO");
         Debug.Log(this.title);
     }
-
-
-    public static bool operator ==(Chat obj1, Chat obj2)
-    {
-        if (obj1.chatID == obj2.chatID)
-            return true;
-        return false;
-    }
-    public static bool operator !=(Chat obj1, Chat obj2) => !(obj1 == obj2);
 }
 
 public class MessageJson : JsonMessage
@@ -70,5 +60,11 @@ public class MessageJson : JsonMessage
     public string timeStamp;
     public string sender;
     public string content;
+    public string chatID;
+}
+
+public class GroupClass : JsonMessage
+{
+    public HashSet<string> recipients;
     public string chatID;
 }

@@ -77,9 +77,9 @@ public class MessageHandler: MonoBehaviour
     public void CreateGroupChat(string chatID, HashSet<string> recipientSet)
     {
         GroupClass message = new GroupClass();
-        List<string> recipients = recipientSet.ToList();
+        message.message_type = "create_group";
         message.chatID = chatID;
-        message.recipients = recipients;
+        message.recipients = recipientSet;
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
@@ -102,6 +102,10 @@ public class MessageHandler: MonoBehaviour
                 //create chatID
                 //FIXME error HERE
                 this.chatWindow.OnMessageRecieved(readin.chatID, readin);
+                break;
+            case "create_group":
+                GroupClass group = JsonConvert.DeserializeObject<GroupClass>(message);
+                this.chatWindow.CreateGroup(group);
                 break;
         }
     }
