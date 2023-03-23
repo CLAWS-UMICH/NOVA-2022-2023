@@ -28,9 +28,10 @@ public class OrientationData : MonoBehaviour
 
     public void udpFunction()
     {
-        UdpClient listener = new UdpClient(6001);
-        IPEndPoint groupEP = new IPEndPoint(IPAddress.Parse("192.168.191.226"), 6001);
-        Debug.Log(IPAddress.Parse("192.168.191.226"));
+        UdpClient listener = new UdpClient(6002);
+        string ipv4 = IPManager.GetIP(ADDRESSFAM.IPv4);
+        IPEndPoint groupEP = new IPEndPoint(IPAddress.Parse(ipv4), 6002);
+        Debug.Log(IPAddress.Parse(ipv4));
         try
         {
             while (true)
@@ -49,3 +50,4 @@ public class OrientationData : MonoBehaviour
         }
     }
 }
+
