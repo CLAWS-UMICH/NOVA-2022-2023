@@ -18,7 +18,13 @@ public class Grid : MonoBehaviour
     float fNodeDiameter;//Twice the amount of the radius (Set in the start function)
     int iGridSizeX, iGridSizeY;//Size of the Grid in Array units.
 
-
+    public int MaxSize
+    {
+        get
+        {
+            return iGridSizeX * iGridSizeY;
+        }
+    }
     private void Start()//Ran once the program starts
     {
         fNodeDiameter = fNodeRadius * 2;//Double the radius to get diameter
@@ -58,6 +64,37 @@ public class Grid : MonoBehaviour
         int icheckX;//Variable to check if the XPosition is within range of the node array to avoid out of range errors.
         int icheckY;//Variable to check if the YPosition is within range of the node array to avoid out of range errors.
 
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                {
+                    continue;
+                }
+
+                icheckX = a_NeighborNode.iGridX + x;
+                icheckY = a_NeighborNode.iGridY + y;
+
+                if (icheckX >= 0 && icheckX < iGridSizeX)
+                {
+                    if (icheckY >= 0 && icheckY < iGridSizeY)
+                    {
+                        NeighborList.Add(NodeArray[icheckX, icheckY]);
+                    }
+                }
+            }
+        }
+
+        return NeighborList;
+
+
+
+
+
+
+
+        /*
         //Check the right side of the current node.
         icheckX = a_NeighborNode.iGridX + 1;
         icheckY = a_NeighborNode.iGridY;
@@ -100,6 +137,7 @@ public class Grid : MonoBehaviour
         }
 
         return NeighborList;//Return the neighbors list.
+        */
     }
 
     //Gets the closest node to the given world position.

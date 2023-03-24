@@ -44,14 +44,15 @@ public class Pathfinding : MonoBehaviour {
         Node StartNode = GridReference.NodeFromWorldPoint(a_StartPos);//Gets the node closest to the starting position
         Node TargetNode = GridReference.NodeFromWorldPoint(a_TargetPos);//Gets the node closest to the target position
 
-        List<Node> OpenList = new List<Node>();//List of nodes for the open list
+        Heap<Node> OpenList = new Heap<Node>(GridReference.MaxSize);//List of nodes for the open list
         HashSet<Node> ClosedList = new HashSet<Node>();//Hashset of nodes for the closed list
 
         OpenList.Add(StartNode);//Add the starting node to the open list to begin the program
 
         while(OpenList.Count > 0)//Whilst there is something in the open list
         {
-            Node CurrentNode = OpenList[0];//Create a node and set it to the first item in the open list
+            Node CurrentNode = OpenList.RemoveFirst();//Create a node and set it to the first item in the open list
+            /*
             for(int i = 1; i < OpenList.Count; i++)//Loop through the open list starting from the second object
             {
                 if (OpenList[i].FCost < CurrentNode.FCost || OpenList[i].FCost == CurrentNode.FCost && OpenList[i].ihCost < CurrentNode.ihCost)//If the f cost of that object is less than or equal to the f cost of the current node
@@ -60,6 +61,7 @@ public class Pathfinding : MonoBehaviour {
                 }
             }
             OpenList.Remove(CurrentNode);//Remove that from the open list
+            */
             ClosedList.Add(CurrentNode);//And add it to the closed list
 
             if (CurrentNode == TargetNode)//If the current node is the same as the target node

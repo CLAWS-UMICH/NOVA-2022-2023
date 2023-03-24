@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node {
+public class Node : IHeapItem<Node> {
 
     public int iGridX;//X Position in the Node Array
     public int iGridY;//Y Position in the Node Array
@@ -17,6 +17,10 @@ public class Node {
 
     public int FCost { get { return igCost + ihCost; } }//Quick get function to add G cost and H Cost, and since we'll never need to edit FCost, we dont need a set function.
 
+    int heapI; // Index within the heap structure
+
+    public int heapIndex { get => heapI; set => heapI = value; } // variable that allows setting and getting of the heapIndex
+
     public Node(bool a_bIsWall, Vector3 a_vPos, int a_igridX, int a_igridY)//Constructor
     {
         bIsWall = a_bIsWall;//Tells the program if this node is being obstructed.
@@ -25,4 +29,15 @@ public class Node {
         iGridY = a_igridY;//Y Position in the Node Array
     }
 
+    public int CompareTo(Node other)
+    {
+        int compare = FCost.CompareTo(other.FCost);
+
+        if (compare == 0)
+        {
+            compare = ihCost.CompareTo(other.ihCost);
+        }
+
+        return -compare;
+    }
 }
