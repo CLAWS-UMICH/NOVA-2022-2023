@@ -40,15 +40,24 @@ public class Chat
 {
     public string title;
     public string chatID;
-    public HashSet<string> members;
+    public List<string> members;
     public List<Message> messages;
 
     public Chat(string ID, HashSet<string> members)
     {
         this.chatID = ID;
-        this.members = members;
+        this.members = members.ToList();
         this.messages = new List<Message>();
         this.title = string.Join(", ", members.ToList());
+        Debug.Log("HELOO");
+        Debug.Log(this.title);
+    }
+    public Chat(string ID, List<string> members)
+    {
+        this.chatID = ID;
+        this.members = members;
+        this.messages = new List<Message>();
+        this.title = string.Join(", ", members);
         Debug.Log("HELOO");
         Debug.Log(this.title);
     }
@@ -65,6 +74,6 @@ public class MessageJson : JsonMessage
 
 public class GroupClass : JsonMessage
 {
-    public HashSet<string> recipients;
+    public List<string> recipients;
     public string chatID;
 }

@@ -35,6 +35,7 @@ public class ChatWindowInteractions : MonoBehaviour
         // Send created groupchat message
         if (recipients.Count > 2)
         {
+
             Sender.CreateGroupChat(chatID, recipientSet);
         }
         Debug.Log(chatID);
@@ -116,7 +117,7 @@ public class ChatWindowInteractions : MonoBehaviour
             messageObjects[1].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.sender;
             messageObjects[1].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.content;
         }
-        else if (currentChat.messages.Count == 3)
+        else if (currentChat.messages.Count >= 3)
         {
             Message mostRecentMessage = currentChat.messages[currentIndex];
             Message secondMostRecentMessage = currentChat.messages[currentIndex - 1];
@@ -167,7 +168,9 @@ public class ChatWindowInteractions : MonoBehaviour
 
     public void SendButton()
     {
-        Sender.SendDM(this.currentMessage, this.chatID, currentChat.members);
+        List<string> memberCopy = currentChat.members;
+        memberCopy.Remove(self);
+        Sender.SendDM(this.currentMessage, this.chatID, memberCopy);
         Debug.Log("Exits from sendDM");
         string testmsg = "youmessedup";
         switch (this.currentMessage)
@@ -196,7 +199,7 @@ public class ChatWindowInteractions : MonoBehaviour
         if (!Simulation.User.AstronautMessaging.chatLookup.Contains(chatID))
         {
             //Make chat
-            HashSet<string> members = new HashSet<string>() { msg.sender, self };
+            HashSet<string> members = new HashSet<string>() { msg.sender };
             Chat newChat = new Chat(chatID, members);
             newChat.messages.Add(msg);
             Simulation.User.AstronautMessaging.chatList.Add(newChat);

@@ -18,9 +18,11 @@ public class MessageHandler: MonoBehaviour
 
     private WebSocket connection;
 
+    private string self = "Jason";
+
     private void Start()
     {
-        string url1 = "ws://127.0.0.1:4242";
+        string url1 = "ws://35.2.32.122:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
         connection.OnMessage += (sender, e) =>
@@ -29,7 +31,7 @@ public class MessageHandler: MonoBehaviour
             Debug.Log("MCC message: " + e.Data);
         };
         connection.Connect();
-        connection.Send("{\"message_type\": \"registration\",\"username\": \"Jason\"}");
+        connection.Send("{\"message_type\": \"registration\",\"username\": \"" + self + "\"}");
         Debug.Log("Connected to server");
     }
 
@@ -43,11 +45,9 @@ public class MessageHandler: MonoBehaviour
         }
     }
 
-    public void SendDM(int messageTemplate, string chatID, HashSet<string> recipientSet)
+    public void SendDM(int messageTemplate, string chatID, List<string> recipientSet)
     {
-        string sender = "Jason";
-        List<string> recipients = recipientSet.ToList();
-        recipients.Sort();
+        recipientSet.Sort();
         string testmsg = "shitsfucked";
         //string content = "The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater)"
         switch (messageTemplate)
@@ -64,10 +64,10 @@ public class MessageHandler: MonoBehaviour
         }
         MessageJson message = new MessageJson();
         message.message_type = "dm";
-        message.recipients = recipients;
+        message.recipients = recipientSet;
         message.timeStamp = DateTime.Now.ToString("HH:mm");
         message.content = testmsg;
-        message.sender = sender;
+        message.sender = self;
         message.chatID = chatID;
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
@@ -79,7 +79,7 @@ public class MessageHandler: MonoBehaviour
         GroupClass message = new GroupClass();
         message.message_type = "create_group";
         message.chatID = chatID;
-        message.recipients = recipientSet;
+        message.recipients = recipientSet.ToList();
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
@@ -105,6 +105,7 @@ public class MessageHandler: MonoBehaviour
                 break;
             case "create_group":
                 GroupClass group = JsonConvert.DeserializeObject<GroupClass>(message);
+                Debug.Log(group.recipients);
                 this.chatWindow.CreateGroup(group);
                 break;
         }

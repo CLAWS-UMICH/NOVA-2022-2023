@@ -27585,31 +27585,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 748725195}
+      objectReference: {fileID: 1795724584147980648}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseScreen
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ScreenManager, Assembly-CSharp
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 7459650802228410814}
+      objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026046, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: m_Size.x
@@ -53638,7 +53638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1795724584147980651
 Transform:
   m_ObjectHideFlags: 0
@@ -55415,7 +55415,7 @@ MonoBehaviour:
   - {fileID: 489362267}
   - {fileID: 649537335}
   - {fileID: 1903638336}
-  inobxWindow: {fileID: 244074988}
+  inboxWindow: {fileID: 244074988}
 --- !u!1001 &6175336453231665182
 PrefabInstance:
   m_ObjectHideFlags: 0
