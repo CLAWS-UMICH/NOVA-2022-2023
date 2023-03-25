@@ -20187,7 +20187,7 @@ GameObject:
   - component: {fileID: 938255352}
   - component: {fileID: 938255353}
   m_Layer: 0
-  m_Name: MessagingWindow
+  m_Name: Messaging
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20225,6 +20225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatWindow: {fileID: 5913657855929419688}
+  self: Jason
 --- !u!21 &939645195
 Material:
   serializedVersion: 8
@@ -34922,6 +34923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chatWindow: {fileID: 0}
+  self: Jason
 --- !u!1 &1533990943
 GameObject:
   m_ObjectHideFlags: 0
@@ -53638,7 +53640,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1795724584147980651
 Transform:
   m_ObjectHideFlags: 0
@@ -55416,6 +55418,7 @@ MonoBehaviour:
   - {fileID: 649537335}
   - {fileID: 1903638336}
   inboxWindow: {fileID: 244074988}
+  self: Jason
 --- !u!1001 &6175336453231665182
 PrefabInstance:
   m_ObjectHideFlags: 0

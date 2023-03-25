@@ -18,7 +18,7 @@ public class MessageHandler: MonoBehaviour
 
     private WebSocket connection;
 
-    private string self = "Jason";
+    public string self = "Patrick";
 
     private void Start()
     {

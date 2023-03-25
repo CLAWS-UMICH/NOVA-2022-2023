@@ -22,8 +22,13 @@ public class ChatWindowInteractions : MonoBehaviour
     int currentIndex;
     string chatID = null;
     Chat currentChat;
-    string self = "Jason";
+    public string self = "Jason";
     //FIxME add sorting of chat messages based on timestamp
+
+    private void Start()
+    {
+        self = Sender.self;
+    }
 
     //Create new Chat
     public void CreateNewChat()
