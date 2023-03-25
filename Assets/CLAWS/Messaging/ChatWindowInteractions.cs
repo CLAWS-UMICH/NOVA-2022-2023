@@ -33,8 +33,8 @@ public class ChatWindowInteractions : MonoBehaviour
     //Create new Chat
     public void CreateNewChat()
     {
+        recipientSet.Add(self);
         List<string> recipients = recipientSet.ToList();
-        recipients.Add(self);
         recipients.Sort();
         string chatID = string.Join("", recipients);
         // Send created groupchat message
@@ -234,9 +234,12 @@ public class ChatWindowInteractions : MonoBehaviour
 
     public void CreateGroup(GroupClass group)
     {
-        Chat groupChat = new Chat(group.chatID, group.recipients);
-        Simulation.User.AstronautMessaging.chatList.Add(groupChat);
-        Simulation.User.AstronautMessaging.chatLookup.Add(group.chatID);
+        if (!Simulation.User.AstronautMessaging.chatLookup.Contains(chatID))
+        {
+            Chat groupChat = new Chat(group.chatID, group.recipients);
+            Simulation.User.AstronautMessaging.chatList.Add(groupChat);
+            Simulation.User.AstronautMessaging.chatLookup.Add(group.chatID);
+        }
     }
 
     public int GetChatIndex(string chatID)

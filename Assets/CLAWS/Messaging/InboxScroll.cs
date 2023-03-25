@@ -59,7 +59,7 @@ public class InboxScroll : MonoBehaviour
             int last = displayedChats[i].messages.Count - 1;
             chatObjects[i].SetActive(true);
             chatObjects[i].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = displayedChats[i].title;
-            if (last > 0)
+            if (last >= 0)
             {
                 chatObjects[i].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = displayedChats[i].messages[last].content;
             }
