@@ -80,6 +80,7 @@ public class MessageHandler: MonoBehaviour
         message.message_type = "create_group";
         message.chatID = chatID;
         message.recipients = recipientSet.ToList();
+        message.recipients.Add(self);
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
