@@ -9,6 +9,7 @@ public class ButtonScreenController : MonoBehaviour
     [SerializeField] GameObject crewScreen;
     [SerializeField] GameObject missionScreen;
     [SerializeField] GameObject openMapButton;
+    [SerializeField] GameObject confirmCreationScreen;
     [SerializeField] GameObject startNav1; // Rover
     [SerializeField] GameObject startNav2; // Lander
     [SerializeField] GameObject startNav3; // Crew
@@ -17,6 +18,7 @@ public class ButtonScreenController : MonoBehaviour
     [SerializeField] GameObject navObject;
 
     [SerializeField] GameObject roverObject;
+
 
 
     // Start is called before the first frame update
@@ -37,6 +39,7 @@ public class ButtonScreenController : MonoBehaviour
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
+        confirmCreationScreen.SetActive(false);
         CloseNavButtons();
         SetAllCullingToCamera();
         openMapButton.SetActive(true);
@@ -189,5 +192,41 @@ public class ButtonScreenController : MonoBehaviour
         Transform playerPosition = cam.transform;
 
         navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
+    }
+
+
+    // WAYPOINTS
+    public void OpenConfirmation()
+    {
+        confirmCreationScreen.SetActive(true);
+    }
+
+    public void ConfirmCreation()
+    {
+        // Create waypoint based on tag text.
+
+
+        CloseConfirmation();
+    }
+
+    public void CloseConfirmation()
+    {
+        confirmCreationScreen.SetActive(false);
+    }
+
+    // Create certain types of waypoints
+    public void CreateWaypoint()
+    {
+        //way.GetComponent<Pathfinding>()
+    }
+
+    public void CreateGeo()
+    {
+
+    }
+
+    public void CreateDanger()
+    {
+
     }
 }

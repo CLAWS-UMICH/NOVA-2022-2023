@@ -16,6 +16,8 @@ public class WaypointController : MonoBehaviour
     GameObject childObject2;
     GameObject player;
 
+    
+
     void Awake()
     {
         player = GameObject.Find("Main Camera");
