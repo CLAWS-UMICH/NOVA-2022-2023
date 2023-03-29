@@ -75,7 +75,7 @@ public class Pathfinding : MonoBehaviour {
                 {
                     continue;//Skip it
                 }
-                int MoveCost = CurrentNode.igCost + GetEuclideanDistance(CurrentNode, NeighborNode);//Get the F cost of that neighbor
+                int MoveCost = CurrentNode.igCost + GetEuclideanDistance(CurrentNode, NeighborNode) + NeighborNode.movementPenalty;//Get the F cost of that neighbor
 
                 if (MoveCost < NeighborNode.igCost || !OpenList.Contains(NeighborNode))//If the f cost is greater than the g cost or it is not in the open list
                 {
@@ -86,6 +86,9 @@ public class Pathfinding : MonoBehaviour {
                     if(!OpenList.Contains(NeighborNode))//If the neighbor is not in the openlist
                     {
                         OpenList.Add(NeighborNode);//Add it to the list
+                    } else
+                    {
+                        OpenList.UpdateItem(NeighborNode);
                     }
                 }
             }
