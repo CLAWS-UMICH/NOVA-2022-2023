@@ -1035,8 +1035,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateLinkedTransform: 0
-  moveLerpTime: 0
-  rotateLerpTime: 0
+  moveLerpTime: 0.1
+  rotateLerpTime: 0.1
   scaleLerpTime: 0
   maintainScaleOnInitialization: 1
   smoothing: 1
@@ -1506,6 +1506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94254c286e69e4930b51dd2e3cdba3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DebugText: {fileID: 380829576}
 --- !u!4 &1220408214
 Transform:
   m_ObjectHideFlags: 0
@@ -1767,8 +1768,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateLinkedTransform: 0
-  moveLerpTime: 0
-  rotateLerpTime: 0
+  moveLerpTime: 0.1
+  rotateLerpTime: 0.1
   scaleLerpTime: 0
   maintainScaleOnInitialization: 1
   smoothing: 1
