@@ -6,13 +6,23 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using TMPro;
 
+[System.Serializable]
 public class OrientationData : MonoBehaviour
 {
+    static int port = 7000;
+    static string ipv4 = IPManager.GetIP(ADDRESSFAM.IPv4);
+    string debugTestString = "UDP Host: " + ipv4 + "\n" + "Port: " + port;
+    [SerializeField]
+    TextMeshPro DebugText;
+
+    
     // Start is called before the first frame update
     Thread listenThread;
     void Start()
     {
+        DebugText.text = debugTestString;
         listenThread = new Thread(udpFunction);
         listenThread.Start();
     }
@@ -28,14 +38,17 @@ public class OrientationData : MonoBehaviour
 
     public void udpFunction()
     {
-        UdpClient listener = new UdpClient(6002);
-        string ipv4 = IPManager.GetIP(ADDRESSFAM.IPv4);
-        IPEndPoint groupEP = new IPEndPoint(IPAddress.Parse(ipv4), 6002);
+        
+        UdpClient listener = new UdpClient(port);
+        
+        IPEndPoint groupEP = new IPEndPoint(IPAddress.Parse(ipv4), port);
         Debug.Log(IPAddress.Parse(ipv4));
+        
         try
         {
             while (true)
             {
+                Debug.Log("Looking for broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
 
                 Debug.Log($"Received broadcast from {groupEP} :");
@@ -46,7 +59,7 @@ public class OrientationData : MonoBehaviour
         }
         catch (SocketException e)
         {
-            Console.WriteLine(e);
+            Debug.Log(e);
         }
     }
 }
