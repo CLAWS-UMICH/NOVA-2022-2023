@@ -947,8 +947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sign: {fileID: 8866232871474349572}
   minScale: 1
-  distanceAway: 20
-  coneAngle: 45
+  distanceAway: 5
+  coneAngle: 20
 --- !u!1 &8866232871412408214
 GameObject:
   m_ObjectHideFlags: 0

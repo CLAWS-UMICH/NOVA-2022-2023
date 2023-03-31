@@ -217,7 +217,8 @@ public class ButtonScreenController : MonoBehaviour
     // Create certain types of waypoints
     public void CreateWaypoint()
     {
-        //way.GetComponent<Pathfinding>()
+        CreateWaypoints way = GetComponent<CreateWaypoints>();
+        way.CreateWaypoint();
     }
 
     public void CreateGeo()

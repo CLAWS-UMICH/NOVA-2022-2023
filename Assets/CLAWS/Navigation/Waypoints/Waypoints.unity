@@ -816,6 +816,7 @@ GameObject:
   - component: {fileID: 227710129}
   - component: {fileID: 227710128}
   - component: {fileID: 227710131}
+  - component: {fileID: 227710132}
   m_Layer: 0
   m_Name: Home
   m_TagString: Untagged
@@ -917,6 +918,21 @@ MonoBehaviour:
   cam: {fileID: 8937764829177718856}
   navObject: {fileID: 1358442374}
   roverObject: {fileID: 2051755246}
+--- !u!114 &227710132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227710126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5214192e6b4598043bd744cae2f0c212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8937764829177718854}
+  waypointPrefab: {fileID: 8866232871362378552, guid: 2bef6d0b9842d0a4c801df401cdf1ccb, type: 3}
+  offset: -0.2
 --- !u!1 &251022582
 GameObject:
   m_ObjectHideFlags: 0
@@ -5395,9 +5411,9 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
-        m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
-        m_MethodName: ConfirmCreation
+      - m_Target: {fileID: 227710132}
+        m_TargetAssemblyTypeName: CreateWaypoints, Assembly-CSharp
+        m_MethodName: CreateWaypoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
