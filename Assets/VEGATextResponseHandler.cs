@@ -5,6 +5,9 @@ using UnityEngine;
 public class VEGATextResponseHandler : MonoBehaviour
 {
     // SELINA
+    [SerializeField]
+    GameObject textBox;
+
     Astronaut _astronaut;
     string VEGAVariable;
 
@@ -106,10 +109,45 @@ public class VEGATextResponseHandler : MonoBehaviour
                 {
                     VEGAVariable = _astronaut.AstronautVitals.rate_sop.ToString();
                 }
+                if (words[2] == "t_battery")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.t_battery.ToString();
+                }
+                if (words[2] == "t_oxygenPrimary")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.t_oxygenPrimary.ToString();
+                }
+                if (words[2] == "ox_primary")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.ox_primary.ToString();
+                }
+                if (words[2] == "ox_secondary")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.ox_secondary.ToString();
+                }
+                if (words[2] == "t_oxygen")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.t_oxygen.ToString();
+                }
+                if (words[2] == "cap_water")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.cap_water.ToString();
+                }
+                if (words[2] == "t_water")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.t_water.ToString();
+                }
             }
             if (words[1] == "menu")
             {
-
+                if (words[2] == "current_task")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.t_water.ToString();
+                }
+                if (words[2] == "next_task")
+                {
+                    VEGAVariable = _astronaut.AstronautVitals.t_water.ToString();
+                }
             }
             if (words[1] == "task_list")
             {
@@ -149,6 +187,7 @@ public class VEGATextResponseHandler : MonoBehaviour
 
     void VEGAResponseTextBox()
     {
-        Debug.Log("Text Box" + VEGAVariable);
+        //change textmeshpro
+        textBox.SetActive(true);
     }
 }
