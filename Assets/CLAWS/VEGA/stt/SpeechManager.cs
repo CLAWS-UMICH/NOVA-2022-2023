@@ -96,7 +96,7 @@ public class SpeechManager : MonoBehaviour
         string prevMessage = message;
         
         while(true){
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.8f);
             
             i++;
             if(message!=prevMessage){
@@ -123,7 +123,8 @@ public class SpeechManager : MonoBehaviour
 
                 i = 0;
                 speech = false;
-                
+
+                EventBus.Publish<VEGA_InputEvent>(new VEGA_InputEvent(prevMessage));
                 _speech.SetActive(false);
                 // _animation.SetActive(false); //Object reference not set to an instance of an object
 //SpeechManager+<NoSpeech>d__17.MoveNext () (at Assets/CLAWS/VEGA/stt/SpeechManager.cs:126)

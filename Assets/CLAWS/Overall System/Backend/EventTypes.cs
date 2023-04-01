@@ -41,3 +41,34 @@ public class TaskCompletedEvent
         return "<TaskCompletedEvent>: tasks " + taskID + " was completed";
     }
 }
+
+public class VEGA_InputEvent
+{
+    public string input;
+
+    public VEGA_InputEvent(string _input)
+    {
+        input = _input;
+    }
+
+    public override string ToString()
+    {
+        return "<VEGA_InputEvent>: " +  input;
+    }
+}
+
+
+public class VEGA_OutputEvent
+{
+    public string output;
+
+    public VEGA_OutputEvent(string _output)
+    {
+        output = _output;
+    }
+
+    public override string ToString()
+    {
+        return "<VEGA_OutputEvent>: " + output;
+    }
+}

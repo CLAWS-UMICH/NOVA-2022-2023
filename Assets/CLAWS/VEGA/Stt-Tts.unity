@@ -1616,8 +1616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d5ea4f509a48c438efb09899236225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botUI: {fileID: 0}
-  text: {fileID: 0}
+  text: {fileID: 29743001}
 --- !u!1 &1064891334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2896614925803026036, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
