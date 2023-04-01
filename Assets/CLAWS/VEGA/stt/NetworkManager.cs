@@ -4,6 +4,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using TMPro;
 
 /// <summary>
 /// This class handles all the network requests and serialization/deserialization of data
@@ -12,6 +13,8 @@ public class NetworkManager : MonoBehaviour {
 
     // reference to BotUI class
     public BotUI botUI;
+    public TextMeshPro text;
+    // text.text = message;
     
     // the url at which bot's custom connector is hosted
     private const string rasa_url = "http://localhost:5005/webhooks/rest/webhook";
@@ -26,8 +29,11 @@ public class NetworkManager : MonoBehaviour {
         // from user message and then clear input field
 
 
-        string message = botUI.input.text;
-        botUI.input.text = "";
+        //string message = botUI.input.text;
+        string message = text.text;
+
+        //botUI.input.text = "";
+        text.text = "";
 
         PostMessage postMessage = new PostMessage {
             sender = "user",
@@ -36,7 +42,8 @@ public class NetworkManager : MonoBehaviour {
         string jsonBody = JsonUtility.ToJson(postMessage);
 
         // update UI object with user message
-        botUI.UpdateDisplay("user", message, "text");
+        //botUI.UpdateDisplay("user", message, "text");
+        text.text = message;
 
         // Create a post request with the data to send to Rasa server
         //StartCoroutine(PostRequest(rasa_url, jsonBody)); DELETE LATER WHEN ACTUALLY WANTING TO SEND
@@ -87,7 +94,8 @@ public class NetworkManager : MonoBehaviour {
 
                 // print data
                 if (data != null && field.Name != "recipient_id") {
-                    botUI.UpdateDisplay("bot", data, field.Name);
+                    //botUI.UpdateDisplay("bot", data, field.Name);
+                    text.text = data;
                 }
             }
         }
@@ -141,7 +149,7 @@ public class NetworkManager : MonoBehaviour {
                 new Vector2(0.5f, 0.5f), 100.0f);
 
             // Resize and reposition all chat bubbles
-            StartCoroutine(botUI.RefreshChatBubblePosition());
+            //StartCoroutine(botUI.RefreshChatBubblePosition());
         }
     }
 }
