@@ -530,7 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFocusRequired: 0
   keywords:
-  - keyword: Hey VEGA
+  - keyword: Hey Vega
     response:
       m_PersistentCalls:
         m_Calls:
@@ -570,6 +570,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+  - keyword: Luna On
+    response:
+      m_PersistentCalls:
+        m_Calls: []
+  - keyword: Luna Off
+    response:
+      m_PersistentCalls:
+        m_Calls: []
   persistentKeywords: 0
   speechConfirmationTooltipPrefab: {fileID: 8046114618238072051, guid: 271778f6c957b524981067a81d238394, type: 3}
 --- !u!4 &125641243
@@ -4861,6 +4869,7 @@ GameObject:
   - component: {fileID: 748725194}
   - component: {fileID: 748725193}
   - component: {fileID: 748725192}
+  - component: {fileID: 748725196}
   - component: {fileID: 748725195}
   m_Layer: 0
   m_Name: LUNA FOV
@@ -4949,6 +4958,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7341dc870e972c24e89c0855d581c932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &748725196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748725191}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4684083f6dff4a1d8a790bccc354fcf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateLinkedTransform: 0
+  moveLerpTime: 1
+  rotateLerpTime: 1
+  scaleLerpTime: 0
+  maintainScaleOnInitialization: 1
+  smoothing: 1
+  lifetime: 0
+  referenceDirection: 1
+  minDistance: 0.5
+  maxDistance: 0.5
+  minViewDegrees: 0
+  maxViewDegrees: 0
+  aspectV: 1
+  ignoreAngleClamp: 0
+  ignoreDistanceClamp: 0
+  useFixedVerticalPosition: 0
+  fixedVerticalPosition: -0.4
+  orientToReferenceDirection: 0
 --- !u!21 &752346189
 Material:
   serializedVersion: 8
