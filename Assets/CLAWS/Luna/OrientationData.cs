@@ -12,7 +12,8 @@ using TMPro;
 public class OrientationData : MonoBehaviour
 {
     static int port = 7000;
-    static string ipv4 = IPManager.GetIP(ADDRESSFAM.IPv4);
+    // static string ipv4 = IPManager.GetIP(ADDRESSFAM.IPv4);
+    static string ipv4 = "192.168.6.226";
     string debugTestString = "UDP Host: " + ipv4 + "\n" + "Port: " + port;
     [SerializeField]
     TextMeshPro DebugText;
