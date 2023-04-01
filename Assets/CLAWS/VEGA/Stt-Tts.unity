@@ -1526,6 +1526,8 @@ GameObject:
   - component: {fileID: 1021727061}
   - component: {fileID: 1021727060}
   - component: {fileID: 1021727062}
+  - component: {fileID: 1021727064}
+  - component: {fileID: 1021727063}
   m_Layer: 0
   m_Name: VEGA Manager
   m_TagString: Untagged
@@ -1616,8 +1618,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d5ea4f509a48c438efb09899236225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botUI: {fileID: 0}
-  text: {fileID: 0}
+  text: {fileID: 29743001}
+--- !u!114 &1021727063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021727059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f031857c1fd1a4b88831a8d838d26b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1021727064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021727059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0678e6ef4249743a9050f6855c1381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1064891334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2896614925803026036, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
