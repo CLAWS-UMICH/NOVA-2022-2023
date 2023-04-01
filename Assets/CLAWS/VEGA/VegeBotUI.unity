@@ -1319,7 +1319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d5ea4f509a48c438efb09899236225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botUI: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &1064891334 stripped
 GameObject:
