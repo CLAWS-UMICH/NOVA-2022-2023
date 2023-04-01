@@ -4,6 +4,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using TMPro;
 
 /// <summary>
 /// This class handles all the network requests and serialization/deserialization of data
@@ -11,35 +12,37 @@ using UnityEngine.Networking;
 public class NetworkManager : MonoBehaviour {
 
     // reference to BotUI class
-    public BotUI botUI;
-    
+    // public BotUI botUI;
+    public TextMeshPro text;
+    // text.text = message;
+
     // the url at which bot's custom connector is hosted
-    private const string rasa_url = "http://localhost:5005/webhooks/rest/webhook";
+    private const string rasa_url = "http://3.145.151.89:8000/webhooks/rest/webhook"; // "http://localhost:5005/webhooks/rest/webhook";
+
+    private void Start()
+    {
+        EventBus.Subscribe<VEGA_InputEvent>(SendMessageToRasa);
+    }
 
     /// <summary>
     /// This method is called when user has entered their message and hits the send button.
     /// It calls the <see cref="NetworkManager.PostRequest(string, string)"> coroutine to send
     /// the user message to the bot and also updates the UI with user message.
     /// </summary>
-    public void SendMessageToRasa () {
+    public void SendMessageToRasa (VEGA_InputEvent e) {
         // get user messasge from input field, create a json object 
         // from user message and then clear input field
 
-
-        string message = botUI.input.text;
-        botUI.input.text = "";
+        string message = e.input;
 
         PostMessage postMessage = new PostMessage {
             sender = "user",
             message = message
         };
-        string jsonBody = JsonUtility.ToJson(postMessage);
-
-        // update UI object with user message
-        botUI.UpdateDisplay("user", message, "text");
+        string jsonBody = JsonUtility.ToJson(postMessage);  
 
         // Create a post request with the data to send to Rasa server
-        //StartCoroutine(PostRequest(rasa_url, jsonBody)); DELETE LATER WHEN ACTUALLY WANTING TO SEND
+        StartCoroutine(PostRequest(rasa_url, jsonBody)); 
     }
 
     /// <summary>
@@ -87,7 +90,10 @@ public class NetworkManager : MonoBehaviour {
 
                 // print data
                 if (data != null && field.Name != "recipient_id") {
-                    botUI.UpdateDisplay("bot", data, field.Name);
+                    //botUI.UpdateDisplay("bot", data, field.Name);
+                    //text.text = data;
+                    Debug.Log(data);
+                    EventBus.Publish<VEGA_OutputEvent>(new VEGA_OutputEvent(data));
                 }
             }
         }
@@ -141,7 +147,7 @@ public class NetworkManager : MonoBehaviour {
                 new Vector2(0.5f, 0.5f), 100.0f);
 
             // Resize and reposition all chat bubbles
-            StartCoroutine(botUI.RefreshChatBubblePosition());
+            //StartCoroutine(botUI.RefreshChatBubblePosition());
         }
     }
 }
