@@ -11,11 +11,14 @@ public class TaskList
     // TaskList holds all tasks including previously completed tasks and future tasks.
     public List<TaskObj> taskList;
     public ConcurrentQueue<string> messageQueue;
+    public ConcurrentQueue<string> messageQueue2;
+    
     // Current task astronaut is working on
     public int activeTask;
 
     public TaskList()
     {
+        messageQueue2 = new ConcurrentQueue<string>();
         messageQueue = new ConcurrentQueue<string>();
         taskList = new List<TaskObj>();
         progress = 0;

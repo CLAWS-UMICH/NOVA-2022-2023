@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 477285892020302529}
   m_Layer: 0
   m_Name: crumb
-  m_TagString: Untagged
+  m_TagString: crumb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &645340369232040091
 Transform:
   m_ObjectHideFlags: 0

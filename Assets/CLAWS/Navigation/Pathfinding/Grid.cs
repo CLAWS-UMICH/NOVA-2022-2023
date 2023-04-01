@@ -10,6 +10,9 @@ public class Grid : MonoBehaviour
     public Vector2 vGridWorldSize;//A vector2 to store the width and height of the graph in world units.
     public float fNodeRadius;//This stores how big each square on the graph will be
     public float fDistanceBetweenNodes;//The distance that the squares will spawn from eachother.
+    public TerrainType[] walkableRegions; // Areas to walk accompanied with their penalty
+    LayerMask walkableMask;
+    Dictionary<int, int> walkableRegionsDict = new Dictionary<int, int>();
 
     Node[,] NodeArray;//The array of nodes that the A Star algorithm uses.
     public List<Node> FinalPath;//The completed path that the red line will be drawn along
@@ -18,12 +21,28 @@ public class Grid : MonoBehaviour
     float fNodeDiameter;//Twice the amount of the radius (Set in the start function)
     int iGridSizeX, iGridSizeY;//Size of the Grid in Array units.
 
+    public int MaxSize
+    {
+        get
+        {
+            return iGridSizeX * iGridSizeY;
+        }
+    }
+
+    public int blurSize = 3;
+
+
 
     private void Start()//Ran once the program starts
     {
         fNodeDiameter = fNodeRadius * 2;//Double the radius to get diameter
         iGridSizeX = Mathf.RoundToInt(vGridWorldSize.x / fNodeDiameter);//Divide the grids world co-ordinates by the diameter to get the size of the graph in array units.
         iGridSizeY = Mathf.RoundToInt(vGridWorldSize.y / fNodeDiameter);//Divide the grids world co-ordinates by the diameter to get the size of the graph in array units.
+        foreach(TerrainType region in walkableRegions)
+        {
+            walkableMask.value = walkableMask | region.terrainMask.value;
+            walkableRegionsDict.Add((int)Mathf.Log(region.terrainMask.value, 2), region.terrainPenalty);
+        }
         CreateGrid();//Draw the grid
     }
 
@@ -46,7 +65,67 @@ public class Grid : MonoBehaviour
                     Wall = false;//Object is not a wall
                 }
 
-                NodeArray[x, y] = new Node(Wall, worldPoint, x, y);//Create a new node in the array.
+                int movementPenalty = 0;
+
+                if (Wall)
+                {
+                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 100, walkableMask))
+                    {
+                        walkableRegionsDict.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
+                    }
+                }
+                NodeArray[x, y] = new Node(Wall, worldPoint, x, y, movementPenalty);//Create a new node in the array.
+            }
+        }
+        BlurPenaltyMap(blurSize);
+    }
+
+    void BlurPenaltyMap(int blurSize)
+    {
+        int kernelSize = blurSize * 2 + 1;
+        int kernelExtents = (kernelSize - 1) / 2;
+
+        int[,] penaltiesHorizantalPass = new int[iGridSizeX, iGridSizeY];
+        int[,] penaltiesVerticalPass = new int[iGridSizeX, iGridSizeY];
+
+        for (int y = 0; y < iGridSizeY; y++)
+        {
+            for (int x = -kernelExtents; x <= kernelExtents; x++)
+            {
+                int sampleX = Mathf.Clamp(x, 0, kernelExtents);
+                penaltiesHorizantalPass[0, y] += NodeArray[sampleX, y].movementPenalty;
+            }
+
+            for (int x = 1; x < iGridSizeX; x++)
+            {
+                int removeIndex = Mathf.Clamp(x - kernelExtents - 1, 0, iGridSizeX);
+                int addIndex = Mathf.Clamp(x + kernelExtents, 0, iGridSizeX - 1);
+
+                penaltiesHorizantalPass[x, y] = penaltiesHorizantalPass[x - 1, y] - NodeArray[removeIndex, y].movementPenalty + NodeArray[addIndex, y].movementPenalty;
+            }
+        }
+
+        for (int x = 0; x < iGridSizeX; x++)
+        {
+            for (int y = -kernelExtents; y <= kernelExtents; y++)
+            {
+                int sampleY = Mathf.Clamp(y, 0, kernelExtents);
+                penaltiesVerticalPass[x, 0] += NodeArray[x, sampleY].movementPenalty;
+            }
+            int blurredPenalty = Mathf.RoundToInt((float)penaltiesVerticalPass[x, 0] / (kernelSize * kernelSize));
+            NodeArray[x, 0].movementPenalty = blurredPenalty;
+
+            for (int y = 1; y < iGridSizeY; y++)
+            {
+                int removeIndex = Mathf.Clamp(y - kernelExtents - 1, 0, iGridSizeY);
+                int addIndex = Mathf.Clamp(y + kernelExtents, 0, iGridSizeY - 1);
+
+                penaltiesVerticalPass[x, y] = penaltiesVerticalPass[x, y - 1] - NodeArray[x, removeIndex].movementPenalty + NodeArray[x, addIndex].movementPenalty;
+                blurredPenalty = Mathf.RoundToInt((float)penaltiesVerticalPass[x, y] / (kernelSize * kernelSize));
+                NodeArray[x, y].movementPenalty = blurredPenalty;
+
             }
         }
     }
@@ -58,6 +137,37 @@ public class Grid : MonoBehaviour
         int icheckX;//Variable to check if the XPosition is within range of the node array to avoid out of range errors.
         int icheckY;//Variable to check if the YPosition is within range of the node array to avoid out of range errors.
 
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                {
+                    continue;
+                }
+
+                icheckX = a_NeighborNode.iGridX + x;
+                icheckY = a_NeighborNode.iGridY + y;
+
+                if (icheckX >= 0 && icheckX < iGridSizeX)
+                {
+                    if (icheckY >= 0 && icheckY < iGridSizeY)
+                    {
+                        NeighborList.Add(NodeArray[icheckX, icheckY]);
+                    }
+                }
+            }
+        }
+
+        return NeighborList;
+
+
+
+
+
+
+
+        /*
         //Check the right side of the current node.
         icheckX = a_NeighborNode.iGridX + 1;
         icheckY = a_NeighborNode.iGridY;
@@ -100,6 +210,7 @@ public class Grid : MonoBehaviour
         }
 
         return NeighborList;//Return the neighbors list.
+        */
     }
 
     //Gets the closest node to the given world position.
@@ -151,5 +262,13 @@ public class Grid : MonoBehaviour
                 Gizmos.DrawCube(n.vPosition, Vector3.one * (fNodeDiameter - fDistanceBetweenNodes));//Draw the node at the position of the node.
             }
         }
+    }
+
+    [System.Serializable]
+    public class TerrainType
+    {
+        public LayerMask terrainMask;
+        public int terrainPenalty;
+
     }
 }

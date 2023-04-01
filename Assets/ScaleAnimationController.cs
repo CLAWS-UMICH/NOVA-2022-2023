@@ -28,7 +28,7 @@ public class ScaleAnimationController : MonoBehaviour
 
         //coroutine = Animate();
         //StartCoroutine(coroutine);
-        Debug.Log(_speech.speech);
+        //Debug.Log(_speech.speech);
 
     }
 
