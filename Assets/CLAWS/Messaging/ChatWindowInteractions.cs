@@ -21,6 +21,7 @@ public class ChatWindowInteractions : MonoBehaviour
     int currentMessage = 3;
     int currentIndex;
     string chatID = null;
+    List<Message> displayedMessages = new List<Message>();
     Chat currentChat;
     public string self = "Jason";
     //FIxME add sorting of chat messages based on timestamp
@@ -40,7 +41,6 @@ public class ChatWindowInteractions : MonoBehaviour
         // Send created groupchat message
         if (recipients.Count > 2)
         {
-
             Sender.CreateGroupChat(chatID, recipientSet);
         }
         Debug.Log(chatID);
@@ -75,6 +75,14 @@ public class ChatWindowInteractions : MonoBehaviour
         }
     }
 
+    public void updateCurrentIndex()
+    {
+        int index = GetChatIndex(this.chatID);
+        this.currentChat = Simulation.User.AstronautMessaging.chatList[index];
+        Debug.Log(this.currentChat.messages.Count);
+        this.currentIndex = Math.Max(this.currentChat.messages.Count - 1, -1);
+    }
+
     //FIXME
     public void RenderChatWindow(string chatID)
     {
@@ -89,56 +97,38 @@ public class ChatWindowInteractions : MonoBehaviour
         updateText();
     }
 
-    public void updateCurrentIndex()
+    public void UpdateDisplayList()
     {
-        int index = GetChatIndex(this.chatID);
-        this.currentChat = Simulation.User.AstronautMessaging.chatList[index];
-        Debug.Log(this.currentChat.messages.Count);
-        this.currentIndex = Math.Max(this.currentChat.messages.Count - 1, -1);
+        displayedMessages = new List<Message>();
+        for (int i = currentIndex; i > currentIndex - 3; --i)
+        {
+            if (i >= 0)
+            {
+                displayedMessages.Add(currentChat.messages[i]);
+            }
+        }
     }
 
     public void updateText() //Assume valid currentIndex -Less than 3 messages, handle here
     {
+        UpdateDisplayList();
         for (int i = 0; i < 3; i++)
         {
             messageObjects[i].SetActive(false);
         }
-        if (currentChat.messages.Count == 1) //Edge case where only 1 message
+        for (int i = 0; i < displayedMessages.Count; ++i)
         {
-            Debug.Log("InSIDE");
-            Message mostRecentMessage = currentChat.messages[currentIndex];
-            messageObjects[0].SetActive(true);
-            messageObjects[0].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.sender;
-            messageObjects[0].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.content;
+            messageObjects[i].SetActive(true);
+            messageObjects[i].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = displayedMessages[i].sender;
+            messageObjects[i].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = displayedMessages[i].content + "\n" + displayedMessages[i].timeStamp;
+
         }
-        else if (currentChat.messages.Count == 2) //Edge case where only 2 messages
+        for (int i = displayedMessages.Count; i < 3; i++)
         {
-            Message mostRecentMessage = currentChat.messages[currentIndex];
-            Message secondMostRecentMessage = currentChat.messages[currentIndex - 1];
-            messageObjects[0].SetActive(true);
-            messageObjects[1].SetActive(true);
-            messageObjects[0].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = secondMostRecentMessage.sender;
-            messageObjects[0].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = secondMostRecentMessage.content;
-            messageObjects[1].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.sender;
-            messageObjects[1].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.content;
-        }
-        else if (currentChat.messages.Count >= 3)
-        {
-            Message mostRecentMessage = currentChat.messages[currentIndex];
-            Message secondMostRecentMessage = currentChat.messages[currentIndex - 1];
-            Message thirdMostRecentMessage = currentChat.messages[currentIndex - 2];
-            messageObjects[0].SetActive(true);
-            messageObjects[1].SetActive(true);
-            messageObjects[2].SetActive(true);
-            messageObjects[0].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = thirdMostRecentMessage.sender;
-            messageObjects[0].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = thirdMostRecentMessage.content;
-            messageObjects[1].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = secondMostRecentMessage.sender;
-            messageObjects[1].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = secondMostRecentMessage.content;
-            messageObjects[2].transform.GetChild(3).GetChild(0).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.sender;
-            messageObjects[2].transform.GetChild(3).GetChild(1).gameObject.GetComponent<TextMeshPro>().text = mostRecentMessage.content;
+            messageObjects[i].SetActive(false);
         }
     }
-    //FIXME
+
     public void EditChatName(string customName)
     {
         if(this.chatID != null)
@@ -146,6 +136,7 @@ public class ChatWindowInteractions : MonoBehaviour
             int index = GetChatIndex(chatID);
             Simulation.User.AstronautMessaging.chatList[index].title = customName;
             this.currentChat = Simulation.User.AstronautMessaging.chatList[index];
+            chatTitle.text = this.currentChat.title;
         }
     }
 
