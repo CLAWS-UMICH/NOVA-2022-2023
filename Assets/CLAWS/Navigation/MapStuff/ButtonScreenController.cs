@@ -23,8 +23,23 @@ public class ButtonScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CloseAll();
+        mainScreen.SetActive(false);
+        crewScreen.SetActive(false);
+        missionScreen.SetActive(false);
+        CloseNavButtons();
+        SetAllCullingToCamera();
+        openMapButton.SetActive(true);
 
+    }
+
+    public void CloseScreen(GameObject Screen)
+    {
+        StartCoroutine(_CloseScreen(Screen));
+    }
+    IEnumerator _CloseScreen(GameObject Screen)
+    {
+        yield return new WaitForSeconds(1f);
+        Screen.SetActive(false);
     }
 
     public void OpenMainScreen()
@@ -35,6 +50,12 @@ public class ButtonScreenController : MonoBehaviour
 
     public void CloseAll()
     {
+        StartCoroutine(_CloseAllScreens());
+    }
+
+    IEnumerator _CloseAllScreens()
+    {
+        yield return new WaitForSeconds(1f);
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
@@ -53,6 +74,12 @@ public class ButtonScreenController : MonoBehaviour
 
     public void OpenCrewScreen()
     {
+        StartCoroutine(_OpenCrewScreen());
+    }
+
+    IEnumerator _OpenCrewScreen()
+    {
+        yield return new WaitForSeconds(1f);
         CloseNavButtons();
         mainScreen.SetActive(false);
         missionScreen.SetActive(false);
@@ -63,6 +90,12 @@ public class ButtonScreenController : MonoBehaviour
 
     public void OpenMissionScreen()
     {
+        StartCoroutine(_OpenMissionScreen());
+    }
+
+    IEnumerator _OpenMissionScreen()
+    {
+        yield return new WaitForSeconds(1f);
         CloseNavButtons();
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
@@ -73,6 +106,12 @@ public class ButtonScreenController : MonoBehaviour
 
     public void HoverOnRover()
     {
+        StartCoroutine(_HoverOnRover());
+    }
+
+    IEnumerator _HoverOnRover()
+    {
+        yield return new WaitForSeconds(1f);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         CloseNavButtons();
@@ -89,6 +128,12 @@ public class ButtonScreenController : MonoBehaviour
 
     public void HoverOnLander()
     {
+        StartCoroutine(_HoverOnLander());
+    }
+
+    IEnumerator _HoverOnLander()
+    {
+        yield return new WaitForSeconds(1f);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         CloseNavButtons();
@@ -174,17 +219,17 @@ public class ButtonScreenController : MonoBehaviour
 
     public void StartLanderNavigation()
     {
-
+        CloseAll();
     }
 
     public void StartCrewNavigation()
     {
-
+        CloseAll();
     }
 
     public void StartMissionNavigation()
     {
-
+        CloseAll();
     }
 
     void StartNav(Transform endPosition)
