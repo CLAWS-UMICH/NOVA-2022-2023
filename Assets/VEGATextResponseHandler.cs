@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class VEGATextResponseHandler : MonoBehaviour
 {
     // SELINA
     [SerializeField]
     GameObject textBox;
+    [SerializeField]
+    TextMeshPro text;
 
     Astronaut _astronaut;
     string VEGAVariable;
@@ -140,18 +143,18 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
             if (words[1] == "menu")
             {
-                if (words[2] == "current_task")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_water.ToString();
-                }
-                if (words[2] == "next_task")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_water.ToString();
-                }
+
             }
             if (words[1] == "task_list")
             {
-
+                if (words[2] == "current_task")
+                {
+                    VEGAVariable = _astronaut.AstronautTasks.messageQueue.ToString();
+                }
+                if (words[2] == "next_task")
+                {
+                    VEGAVariable = _astronaut.AstronautTasks.messageQueue2.ToString();
+                }
             }
             if (words[1] == "luna")
             {
@@ -159,7 +162,10 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
             if (words[1] == "messaging")
             {
-
+                if (words[2] == "current_message")
+                {
+                    VEGAVariable = _astronaut.AstronautMessaging.messageQueue.ToString();
+                }
             }
             if (words[1] == "navigation")
             {
@@ -187,7 +193,14 @@ public class VEGATextResponseHandler : MonoBehaviour
 
     void VEGAResponseTextBox()
     {
-        //change textmeshpro
-        textBox.SetActive(true);
+        text.text = VEGAVariable;
+        if (VEGAVariable == "")
+        {
+            textBox.SetActive(false);
+        }
+        else
+        {
+            textBox.SetActive(true);
+        }
     }
 }
