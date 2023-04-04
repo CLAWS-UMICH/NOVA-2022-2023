@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d85a9a81e05e49a4a41954abf4d9b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
+  timeDelay: 2
   playerCam: {fileID: 8937764829177718854}
 --- !u!1 &81828745
 GameObject:
@@ -4928,8 +4928,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateLinkedTransform: 0
-  moveLerpTime: 0.1
-  rotateLerpTime: 0.1
+  moveLerpTime: 0.5
+  rotateLerpTime: 0.5
   scaleLerpTime: 0
   maintainScaleOnInitialization: 1
   smoothing: 1
@@ -4957,10 +4957,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55691ad5b034fe6966763a6e23818d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackedTargetType: 0
+  trackedTargetType: 7
   trackedHandedness: 3
   trackedHandJoint: 2
-  transformOverride: {fileID: 0}
+  transformOverride: {fileID: 65312247}
   additionalOffset: {x: 0, y: -0.34, z: 0}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
