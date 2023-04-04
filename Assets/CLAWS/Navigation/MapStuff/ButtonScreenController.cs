@@ -13,7 +13,8 @@ public class ButtonScreenController : MonoBehaviour
     [SerializeField] GameObject startNav2; // Lander
     [SerializeField] GameObject startNav3; // Crew
     [SerializeField] GameObject startNav4; // Mission
-    [SerializeField] Camera cam;
+    [SerializeField] Camera mapCam;
+    [SerializeField] Camera mainCam;
     [SerializeField] GameObject navObject;
 
     [SerializeField] GameObject roverObject;
@@ -124,41 +125,41 @@ public class ButtonScreenController : MonoBehaviour
 
     void SetAllCullingToCamera()
     {
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
     }
 
     void RemoveAllCullingToCamera()
     {
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
     }
     void ShowOnlyCrewIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
     }
 
     void ShowOnlyMissionIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
     }
 
     void ShowOnlyRoverIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
     }
 
     void ShowOnlyLanderIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
     }
 
     // Functions that start the said navigation
@@ -167,6 +168,8 @@ public class ButtonScreenController : MonoBehaviour
         Transform end = roverObject.transform;
 
         StartNav(end);
+
+        CloseAll();
     }
 
     public void StartLanderNavigation()
@@ -186,7 +189,7 @@ public class ButtonScreenController : MonoBehaviour
 
     void StartNav(Transform endPosition)
     {
-        Transform playerPosition = cam.transform;
+        Transform playerPosition = mainCam.transform;
 
         navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
     }
