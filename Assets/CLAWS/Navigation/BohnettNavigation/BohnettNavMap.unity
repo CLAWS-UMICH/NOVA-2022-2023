@@ -128,6 +128,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7800060267098705126, guid: 0a12084d1a8e0434f95054a981776bb0, type: 3}
   m_PrefabInstance: {fileID: 1486142690}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &390849640 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5509976188832509829, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+  m_PrefabInstance: {fileID: 5509976189135757755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &573107503
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,8 +414,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872732860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26, y: -0.15, z: 7.48}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.26, y: -0.1, z: 7.48}
+  m_LocalScale: {x: 0.25, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -698,6 +703,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5509976188913822923, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976188913822923, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976189363467528, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: mapCam
+      value: 
+      objectReference: {fileID: 390849640}
+    - target: {fileID: 5509976189363467528, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 8937764829177718860}
     - target: {fileID: 5509976189363467540, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.381
@@ -762,17 +783,45 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 8937764829177718854}
+    - target: {fileID: 5509976190484745777, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: crumbDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: blurSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: fNodeRadius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: vGridWorldSize.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: vGridWorldSize.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: fDistanceBetweenNodes
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
       propertyPath: walkableRegions.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
       propertyPath: walkableRegions.Array.data[0].terrainPenalty
-      value: 4
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5509976190484745779, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
       propertyPath: walkableRegions.Array.data[0].terrainMask.m_Bits
       value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5509976190484745788, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+      propertyPath: distance
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5509976190484745788, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
       propertyPath: StartPosition
@@ -914,5 +963,10 @@ GameObject:
 --- !u!4 &8937764829177718855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2361127247016397058, guid: 26427f41ab2de17499af8c0dbbcf81cd, type: 3}
+  m_PrefabInstance: {fileID: 8937764829177718853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &8937764829177718860 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9032135831950101319, guid: 26427f41ab2de17499af8c0dbbcf81cd, type: 3}
   m_PrefabInstance: {fileID: 8937764829177718853}
   m_PrefabAsset: {fileID: 0}
