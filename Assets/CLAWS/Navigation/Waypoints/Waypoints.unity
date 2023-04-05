@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 128253574}
   - component: {fileID: 128253573}
   m_Layer: 0
-  m_Name: Point TItle
+  m_Name: Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -579,7 +579,7 @@ Transform:
   - {fileID: 2896614927535005914}
   - {fileID: 1491634528}
   m_Father: {fileID: 227710127}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &204684555
 MonoBehaviour:
@@ -837,10 +837,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2896614926166686542}
-  - {fileID: 1504684842}
   - {fileID: 551894652}
   - {fileID: 204684554}
   - {fileID: 1888653504}
+  - {fileID: 1504684842}
   - {fileID: 1304452598}
   m_Father: {fileID: 1199031486}
   m_RootOrder: 0
@@ -915,7 +915,8 @@ MonoBehaviour:
   startNav2: {fileID: 2896614926544631857}
   startNav3: {fileID: 2896614927535005913}
   startNav4: {fileID: 2896614926317519470}
-  cam: {fileID: 8937764829177718856}
+  mapCam: {fileID: 846515774}
+  mainCam: {fileID: 8937764829177718856}
   navObject: {fileID: 1358442374}
   roverObject: {fileID: 2051755246}
 --- !u!114 &227710132
@@ -1415,7 +1416,7 @@ Transform:
   - {fileID: 2896614926544631858}
   - {fileID: 2896614925736653731}
   m_Father: {fileID: 227710127}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &551894653
 MonoBehaviour:
@@ -4900,7 +4901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenConfirmation
+      value: OpenCreateDanger
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5051,6 +5052,8 @@ MonoBehaviour:
   vGridWorldSize: {x: 200, y: 200}
   fNodeRadius: 0.5
   fDistanceBetweenNodes: 0
+  walkableRegions: []
+  blurSize: 3
 --- !u!4 &1358442377
 Transform:
   m_ObjectHideFlags: 0
@@ -5411,9 +5414,9 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710132}
-        m_TargetAssemblyTypeName: CreateWaypoints, Assembly-CSharp
-        m_MethodName: CreateWaypoint
+      - m_Target: {fileID: 227710131}
+        m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
+        m_MethodName: CreateAPoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7174,7 +7177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenConfirmation
+      value: OpenCreateGeo
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -7261,7 +7264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1504684835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7501,7 +7504,7 @@ Transform:
   - {fileID: 1283578646}
   - {fileID: 2086208430}
   m_Father: {fileID: 227710127}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519657353
 GameObject:
@@ -8205,7 +8208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenConfirmation
+      value: OpenRegWaypoint
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -8582,7 +8585,7 @@ Transform:
   - {fileID: 963578836}
   - {fileID: 666816841}
   m_Father: {fileID: 227710127}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1888653505
 MonoBehaviour:

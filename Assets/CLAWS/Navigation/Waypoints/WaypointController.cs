@@ -51,7 +51,7 @@ public class WaypointController : MonoBehaviour
             {
                 isVisible = true;
                 sign.SetActive(true);
-                if (distance / 10f < minScale)
+                if (distance / 5f < minScale)
                 {
                     childObject2.SetActive(true);
                 } else
