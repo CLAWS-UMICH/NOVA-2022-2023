@@ -14,7 +14,6 @@ public class InboxScroll : MonoBehaviour
     void Start()
     {
         ResetCurrentIndex();
-        UpdateDisplayList();
         RenderInbox();
     }
 
@@ -26,7 +25,6 @@ public class InboxScroll : MonoBehaviour
         {
             currentIndex += incr;
             ResetCurrentIndex();
-            UpdateDisplayList();
             RenderInbox();
         }
     }
@@ -48,6 +46,7 @@ public class InboxScroll : MonoBehaviour
     public void ResetCurrentIndex()
     {
         currentIndex = Math.Max(Simulation.User.AstronautMessaging.chatList.Count - 1, -1);
+        UpdateDisplayList();
     }
 
     public void RenderInbox()//Assume valid currentIndex -Less than 3 messages, handle here
