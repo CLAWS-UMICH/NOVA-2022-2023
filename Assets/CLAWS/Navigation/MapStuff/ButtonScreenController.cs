@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ButtonScreenController : MonoBehaviour
 {
@@ -29,8 +30,8 @@ public class ButtonScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         CloseNavButtons();
-        SetAllCullingToCamera();
         openMapButton.SetActive(true);
+        SetAllCullingToCamera();
 
     }
 
@@ -58,13 +59,14 @@ public class ButtonScreenController : MonoBehaviour
     IEnumerator _CloseAllScreens()
     {
         yield return new WaitForSeconds(1f);
+
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         confirmCreationScreen.SetActive(false);
         CloseNavButtons();
-        SetAllCullingToCamera();
         openMapButton.SetActive(true);
+        SetAllCullingToCamera();
     }
 
     public void CloseNavButtons()
@@ -86,9 +88,8 @@ public class ButtonScreenController : MonoBehaviour
         CloseNavButtons();
         mainScreen.SetActive(false);
         missionScreen.SetActive(false);
-
-        ShowOnlyCrewIcons();
         crewScreen.SetActive(true);
+        ShowOnlyCrewIcons();
     }
 
     public void OpenMissionScreen()
@@ -102,9 +103,8 @@ public class ButtonScreenController : MonoBehaviour
         CloseNavButtons();
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
-
-        ShowOnlyMissionIcons();
         missionScreen.SetActive(true);
+        ShowOnlyMissionIcons();
     }
 
     public void HoverOnRover()
@@ -124,9 +124,8 @@ public class ButtonScreenController : MonoBehaviour
         startNav2.SetActive(false);
         startNav3.SetActive(false);
         startNav4.SetActive(false);
-
-        ShowOnlyRoverIcons();
         startNav1.SetActive(true);
+        ShowOnlyRoverIcons();
     }
 
     public void HoverOnLander()
@@ -145,9 +144,8 @@ public class ButtonScreenController : MonoBehaviour
         startNav1.SetActive(false);
         startNav3.SetActive(false);
         startNav4.SetActive(false);
-
-        ShowOnlyLanderIcons();
         startNav2.SetActive(true);
+        ShowOnlyLanderIcons();
     }
 
     public void HoverOnCrew()
@@ -185,6 +183,7 @@ public class ButtonScreenController : MonoBehaviour
         mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
         mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
         mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+
     }
     void ShowOnlyCrewIcons()
     {
@@ -222,16 +221,28 @@ public class ButtonScreenController : MonoBehaviour
 
     public void StartLanderNavigation()
     {
+        Transform end = roverObject.transform;
+
+        StartNav(end);
+
         CloseAll();
     }
 
     public void StartCrewNavigation()
     {
+        Transform end = roverObject.transform;
+
+        StartNav(end);
+
         CloseAll();
     }
 
     public void StartMissionNavigation()
     {
+        Transform end = roverObject.transform;
+
+        StartNav(end);
+
         CloseAll();
     }
 
@@ -244,17 +255,37 @@ public class ButtonScreenController : MonoBehaviour
 
 
     // WAYPOINTS
-    public void OpenConfirmation()
+    void OpenConfirmationScreen(string s)
     {
+        Transform textTransform = confirmCreationScreen.transform.Find("Text");
+        if (textTransform != null)
+        {
+            Transform typeTransform = textTransform.Find("Type");
+            if (typeTransform != null)
+            {
+                TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
+                if (typeText != null)
+                {
+                    typeText.text = s;
+                }
+            }
+        }
         confirmCreationScreen.SetActive(true);
     }
 
-    public void ConfirmCreation()
+    public void OpenRegWaypoint()
     {
-        // Create waypoint based on tag text.
+        OpenConfirmationScreen("Regular Waypoint");
+    }
 
+    public void OpenCreateGeo()
+    {
+        OpenConfirmationScreen("Geo Sample Waypoint");
+    }
 
-        CloseConfirmation();
+    public void OpenCreateDanger()
+    {
+        OpenConfirmationScreen("Danger Waypoint");
     }
 
     public void CloseConfirmation()
@@ -262,20 +293,27 @@ public class ButtonScreenController : MonoBehaviour
         confirmCreationScreen.SetActive(false);
     }
 
-    // Create certain types of waypoints
-    public void CreateWaypoint()
+    public void CreateAPoint()
     {
+        string type = "";
+        Transform textTransform = confirmCreationScreen.transform.Find("Text");
+        if (textTransform != null)
+        {
+            Transform typeTransform = textTransform.Find("Type");
+            if (typeTransform != null)
+            {
+                TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
+                if (typeText != null)
+                {
+                    type = typeText.text;
+                }
+            }
+        }
+
         CreateWaypoints way = GetComponent<CreateWaypoints>();
-        way.CreateWaypoint();
+        way.CreateWaypoint(type);
+        CloseConfirmation();
     }
 
-    public void CreateGeo()
-    {
-
-    }
-
-    public void CreateDanger()
-    {
-
-    }
+ 
 }
