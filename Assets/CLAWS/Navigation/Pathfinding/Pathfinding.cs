@@ -162,6 +162,13 @@ public class Pathfinding : MonoBehaviour {
     {
         int dstX = Mathf.Abs(nodeA.iGridX - nodeB.iGridX);
         int dstY = Mathf.Abs(nodeA.iGridY - nodeB.iGridY);
-        return Mathf.RoundToInt(Mathf.Sqrt(dstX * dstX + dstY * dstY));
+
+        if (dstX > dstY)
+        {
+            return 14 * dstY + 10 * (dstX - dstY);
+        }
+
+        return 14 * dstX + 10 * (dstY - dstX);
+        //return Mathf.RoundToInt(Mathf.Sqrt(dstX * dstX + dstY * dstY));
     }
 }

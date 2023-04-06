@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/CLAWS/TextMessaging.unity
-    guid: 72de878c6280a4d659815ac38fcaa102
+    path: Assets/CLAWS/NOVA Main with LUNA.unity
+    guid: 69b7ae7e015446b4c975fbf2ad052604
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 234a5619fe89cfd4790a8ae9a379e44e, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ee8b604c09565a644be416067e8f7150, type: 2}

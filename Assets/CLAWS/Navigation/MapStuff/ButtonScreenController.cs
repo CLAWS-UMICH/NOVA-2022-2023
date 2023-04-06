@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ButtonScreenController : MonoBehaviour
 {
@@ -9,21 +10,39 @@ public class ButtonScreenController : MonoBehaviour
     [SerializeField] GameObject crewScreen;
     [SerializeField] GameObject missionScreen;
     [SerializeField] GameObject openMapButton;
+    [SerializeField] GameObject confirmCreationScreen;
     [SerializeField] GameObject startNav1; // Rover
     [SerializeField] GameObject startNav2; // Lander
     [SerializeField] GameObject startNav3; // Crew
     [SerializeField] GameObject startNav4; // Mission
-    [SerializeField] Camera cam;
+    [SerializeField] Camera mapCam;
+    [SerializeField] Camera mainCam;
     [SerializeField] GameObject navObject;
 
     [SerializeField] GameObject roverObject;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
-        CloseAll();
+        mainScreen.SetActive(false);
+        crewScreen.SetActive(false);
+        missionScreen.SetActive(false);
+        CloseNavButtons();
+        openMapButton.SetActive(true);
+        SetAllCullingToCamera();
 
+    }
+
+    public void CloseScreen(GameObject Screen)
+    {
+        StartCoroutine(_CloseScreen(Screen));
+    }
+    IEnumerator _CloseScreen(GameObject Screen)
+    {
+        yield return new WaitForSeconds(1f);
+        Screen.SetActive(false);
     }
 
     public void OpenMainScreen()
@@ -34,12 +53,20 @@ public class ButtonScreenController : MonoBehaviour
 
     public void CloseAll()
     {
+        StartCoroutine(_CloseAllScreens());
+    }
+
+    IEnumerator _CloseAllScreens()
+    {
+        yield return new WaitForSeconds(1f);
+
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
+        confirmCreationScreen.SetActive(false);
         CloseNavButtons();
-        SetAllCullingToCamera();
         openMapButton.SetActive(true);
+        SetAllCullingToCamera();
     }
 
     public void CloseNavButtons()
@@ -52,26 +79,42 @@ public class ButtonScreenController : MonoBehaviour
 
     public void OpenCrewScreen()
     {
+        StartCoroutine(_OpenCrewScreen());
+    }
+
+    IEnumerator _OpenCrewScreen()
+    {
+        yield return new WaitForSeconds(1f);
         CloseNavButtons();
         mainScreen.SetActive(false);
         missionScreen.SetActive(false);
-
-        ShowOnlyCrewIcons();
         crewScreen.SetActive(true);
+        ShowOnlyCrewIcons();
     }
 
     public void OpenMissionScreen()
     {
+        StartCoroutine(_OpenMissionScreen());
+    }
+
+    IEnumerator _OpenMissionScreen()
+    {
+        yield return new WaitForSeconds(1f);
         CloseNavButtons();
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
-
-        ShowOnlyMissionIcons();
         missionScreen.SetActive(true);
+        ShowOnlyMissionIcons();
     }
 
     public void HoverOnRover()
     {
+        StartCoroutine(_HoverOnRover());
+    }
+
+    IEnumerator _HoverOnRover()
+    {
+        yield return new WaitForSeconds(1f);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         CloseNavButtons();
@@ -81,13 +124,18 @@ public class ButtonScreenController : MonoBehaviour
         startNav2.SetActive(false);
         startNav3.SetActive(false);
         startNav4.SetActive(false);
-
-        ShowOnlyRoverIcons();
         startNav1.SetActive(true);
+        ShowOnlyRoverIcons();
     }
 
     public void HoverOnLander()
     {
+        StartCoroutine(_HoverOnLander());
+    }
+
+    IEnumerator _HoverOnLander()
+    {
+        yield return new WaitForSeconds(1f);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         CloseNavButtons();
@@ -96,9 +144,8 @@ public class ButtonScreenController : MonoBehaviour
         startNav1.SetActive(false);
         startNav3.SetActive(false);
         startNav4.SetActive(false);
-
-        ShowOnlyLanderIcons();
         startNav2.SetActive(true);
+        ShowOnlyLanderIcons();
     }
 
     public void HoverOnCrew()
@@ -124,41 +171,42 @@ public class ButtonScreenController : MonoBehaviour
 
     void SetAllCullingToCamera()
     {
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
     }
 
     void RemoveAllCullingToCamera()
     {
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
-        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+
     }
     void ShowOnlyCrewIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
     }
 
     void ShowOnlyMissionIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
     }
 
     void ShowOnlyRoverIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
     }
 
     void ShowOnlyLanderIcons()
     {
         RemoveAllCullingToCamera();
-        cam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
     }
 
     // Functions that start the said navigation
@@ -167,27 +215,105 @@ public class ButtonScreenController : MonoBehaviour
         Transform end = roverObject.transform;
 
         StartNav(end);
+
+        CloseAll();
     }
 
     public void StartLanderNavigation()
     {
+        Transform end = roverObject.transform;
 
+        StartNav(end);
+
+        CloseAll();
     }
 
     public void StartCrewNavigation()
     {
+        Transform end = roverObject.transform;
 
+        StartNav(end);
+
+        CloseAll();
     }
 
     public void StartMissionNavigation()
     {
+        Transform end = roverObject.transform;
 
+        StartNav(end);
+
+        CloseAll();
     }
 
     void StartNav(Transform endPosition)
     {
-        Transform playerPosition = cam.transform;
+        Transform playerPosition = mainCam.transform;
 
         navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
     }
+
+
+    // WAYPOINTS
+    void OpenConfirmationScreen(string s)
+    {
+        Transform textTransform = confirmCreationScreen.transform.Find("Text");
+        if (textTransform != null)
+        {
+            Transform typeTransform = textTransform.Find("Type");
+            if (typeTransform != null)
+            {
+                TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
+                if (typeText != null)
+                {
+                    typeText.text = s;
+                }
+            }
+        }
+        confirmCreationScreen.SetActive(true);
+    }
+
+    public void OpenRegWaypoint()
+    {
+        OpenConfirmationScreen("Regular Waypoint");
+    }
+
+    public void OpenCreateGeo()
+    {
+        OpenConfirmationScreen("Geo Sample Waypoint");
+    }
+
+    public void OpenCreateDanger()
+    {
+        OpenConfirmationScreen("Danger Waypoint");
+    }
+
+    public void CloseConfirmation()
+    {
+        confirmCreationScreen.SetActive(false);
+    }
+
+    public void CreateAPoint()
+    {
+        string type = "";
+        Transform textTransform = confirmCreationScreen.transform.Find("Text");
+        if (textTransform != null)
+        {
+            Transform typeTransform = textTransform.Find("Type");
+            if (typeTransform != null)
+            {
+                TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
+                if (typeText != null)
+                {
+                    type = typeText.text;
+                }
+            }
+        }
+
+        CreateWaypoints way = GetComponent<CreateWaypoints>();
+        way.CreateWaypoint(type);
+        CloseConfirmation();
+    }
+
+ 
 }
