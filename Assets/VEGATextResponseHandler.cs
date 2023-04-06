@@ -13,6 +13,7 @@ public class VEGATextResponseHandler : MonoBehaviour
 
     Astronaut _astronaut;
     string VEGAVariable;
+    string ResponseString;
 
 
     void Start()
@@ -23,6 +24,8 @@ public class VEGATextResponseHandler : MonoBehaviour
     void ProcessVEGATextResponse(VEGA_OutputEvent e)
     {
         VEGAVariable = "";
+        string[] VEGAStrings = e.output.Split('"');
+        ResponseString = VEGAStrings[1];
 
         string[] words = e.output.Split(' ');
         if (words[0] == "[text]") {
@@ -36,89 +39,21 @@ public class VEGATextResponseHandler : MonoBehaviour
                 {
                     VEGAVariable = _astronaut.AstronautVitals.room.ToString();
                 }
-                else if (words[2] == "isRunning")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.isRunning.ToString();
-                }
-                else if (words[2] == "isPaused")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.isPaused.ToString();
-                }
                 else if (words[2] == "time")
                 {
                     VEGAVariable = _astronaut.AstronautVitals.time.ToString();
-                }
-                else if (words[2] == "timer")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.timer.ToString();
-                }
-                else if (words[2] == "started_at")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.started_at.ToString();
                 }
                 else if (words[2] == "heart_bpm")
                 {
                     VEGAVariable = _astronaut.AstronautVitals.heart_bpm.ToString();
                 }
-                else if (words[2] == "p_sub")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.p_sub.ToString();
-                }
-                else if (words[2] == "p_suit")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.p_suit.ToString();
-                }
-                else if (words[2] == "t_sub")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_sub.ToString();
-                }
-                else if (words[2] == "v_fan")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.v_fan.ToString();
-                }
                 else if (words[2] == "p_o2")
                 {
                     VEGAVariable = _astronaut.AstronautVitals.p_o2.ToString();
                 }
-                else if (words[2] == "rate_o2")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.rate_o2.ToString();
-                }
                 else if (words[2] == "batteryPercent")
                 {
                     VEGAVariable = _astronaut.AstronautVitals.batteryPercent.ToString();
-                }
-                else if (words[2] == "cap_battery")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.cap_battery.ToString();
-                }
-                else if (words[2] == "battery_out")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.battery_out.ToString();
-                }
-                else if (words[2] == "p_h2o_g")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.p_h2o_g.ToString();
-                }
-                else if (words[2] == "p_h2o_l")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.p_h2o_l.ToString();
-                }
-                else if (words[2] == "p_sop")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.p_sop.ToString();
-                }
-                else if (words[2] == "rate_sop")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.rate_sop.ToString();
-                }
-                else if (words[2] == "t_battery")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_battery.ToString();
-                }
-                else if(words[2] == "t_oxygenPrimary")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_oxygenPrimary.ToString();
                 }
                 else if (words[2] == "ox_primary")
                 {
@@ -127,18 +62,6 @@ public class VEGATextResponseHandler : MonoBehaviour
                 else if (words[2] == "ox_secondary")
                 {
                     VEGAVariable = _astronaut.AstronautVitals.ox_secondary.ToString();
-                }
-                else if (words[2] == "t_oxygen")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_oxygen.ToString();
-                }
-                else if (words[2] == "cap_water")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.cap_water.ToString();
-                }
-                else if (words[2] == "t_water")
-                {
-                    VEGAVariable = _astronaut.AstronautVitals.t_water.ToString();
                 }
             }
             else if (words[1] == "menu")
@@ -186,6 +109,9 @@ public class VEGATextResponseHandler : MonoBehaviour
 
             }
         }
+
+        ResponseString.Replace("{}", VEGAVariable);
+
         if (VEGAVariable != "") {
             VEGAResponseTextBox();
         }
