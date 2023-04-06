@@ -6,6 +6,7 @@ public class Breadcrumbs : MonoBehaviour
 {
     [SerializeField] private GameObject breadcrumb;
     [SerializeField] private GameObject allBread;
+    [SerializeField] private GameObject placedAllBread;
     [SerializeField] private GameObject camera;
     private Vector3 currentPosition;
     private Vector3 prevCrumbPosition;
@@ -16,6 +17,8 @@ public class Breadcrumbs : MonoBehaviour
     void Start()
     {
         prevCrumbPosition = camera.transform.position;
+        EventBus.Subscribe<BreadCrumbCollisionEvent>(BreadCrumbRemove);
+        
     }
 
     void Update()
@@ -42,16 +45,33 @@ public class Breadcrumbs : MonoBehaviour
         Vector3 direction = currentPosition - prevCrumbPosition;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
         GameObject instantiated = Instantiate(breadcrumb, prevCrumbPosition, rotation);
-        crumbPositions.Add(prevCrumbPosition); //List of positions for whenever needed
-        instantiated.transform.SetParent(allBread.transform);
+        crumbPositions.Insert(0, prevCrumbPosition); //List of positions for whenever needed
+        instantiated.transform.SetParent(placedAllBread.transform);
+        instantiated.transform.SetAsFirstSibling();
     }
-    private void OnTriggerEnter(Collider other)
+    
+    private void BreadCrumbRemove(BreadCrumbCollisionEvent e)
     {
-        if (other.gameObject.CompareTag("crumb"))
+        bool willBreak = false;
+        for (int i = 0; i < e.breadCrumb.transform.parent.childCount; i++)
         {
-            crumbPositions.Remove(other.gameObject.transform.position);
-            Destroy(other.gameObject);
+            GameObject crumbChild = e.breadCrumb.transform.parent.GetChild(i).gameObject;
+
+            willBreak = e.breadCrumb == crumbChild;
+
+            if (e.breadCrumb.transform.parent.gameObject == placedAllBread.gameObject)
+            {
+                crumbPositions.Remove(crumbPositions[i]);
+            }
+
+            Destroy(crumbChild.gameObject);
+
+            
+
+            if (willBreak) break;
+
         }
+        
     }
 }
 
