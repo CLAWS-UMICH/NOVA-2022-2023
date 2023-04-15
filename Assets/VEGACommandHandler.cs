@@ -10,7 +10,7 @@ public class VEGACommandHandler : MonoBehaviour
     public GameObject vitals;
     public GameObject navigation;
     public GameObject task_list;
-    public GameObject luna;
+    //public GameObject luna;
     void Start()
     {
         EventBus.Subscribe<VEGA_OutputEvent>(ProcessVEGACommand);
@@ -69,16 +69,16 @@ public class VEGACommandHandler : MonoBehaviour
                     //close menu
                 }
             }
-            else if(String.Equals(words[1],"luna")){
-                if(String.Equals(words[2],"open")){
-                    luna.SetActive(true);
-                }
-            }
-            else if(String.Equals(words[1],"luna")){
-                if(String.Equals(words[2],"close")){
-                    luna.SetActive(false);
-                }
-            }
+            // else if(String.Equals(words[1],"luna")){
+            //     if(String.Equals(words[2],"open")){
+            //         luna.SetActive(true);
+            //     }
+            // }
+            // else if(String.Equals(words[1],"luna")){
+            //     if(String.Equals(words[2],"close")){
+            //         luna.SetActive(false);
+            //     }
+            // }
             else if(String.Equals(words[1],"messaging")){
                 if(String.Equals(words[2],"open")){
                 }
