@@ -238,6 +238,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9ebc5ed1eaebe4ea24b8bc96c0db70, type: 3}
+--- !u!1 &725944681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5509976190587764786, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+  m_PrefabInstance: {fileID: 5509976189135757755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &725944686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725944681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c6dca1a1abd4c41afe66dbdba6b10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allBreadCrumbs: {fileID: 1813835417}
+  allPlacedBreadCrumbs: {fileID: 1402522377}
 --- !u!1 &748725191
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +342,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &973532747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5509976190037224789, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+  m_PrefabInstance: {fileID: 5509976189135757755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &973532752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973532747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c6dca1a1abd4c41afe66dbdba6b10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allBreadCrumbs: {fileID: 1813835417}
+  allPlacedBreadCrumbs: {fileID: 1402522377}
+--- !u!1 &977345321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5509976188913822932, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+  m_PrefabInstance: {fileID: 5509976189135757755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &977345326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977345321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c6dca1a1abd4c41afe66dbdba6b10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allBreadCrumbs: {fileID: 1813835417}
+  allPlacedBreadCrumbs: {fileID: 1402522377}
 --- !u!1 &1085309933 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4215852931385181184, guid: 3a9ebc5ed1eaebe4ea24b8bc96c0db70, type: 3}
@@ -349,6 +406,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1410eac1ae94b4d4492a09cc368e152c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1333325408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5509976189260321799, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+  m_PrefabInstance: {fileID: 5509976189135757755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1333325413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333325408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c6dca1a1abd4c41afe66dbdba6b10c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allBreadCrumbs: {fileID: 1813835417}
+  allPlacedBreadCrumbs: {fileID: 1402522377}
 --- !u!1 &1395862313
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +596,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alignmentType: 2
   containerObject: {fileID: 0}
+--- !u!1 &1813835417 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5509976189367373007, guid: 889da944a684ccb4ba32720e791f1a49, type: 3}
+  m_PrefabInstance: {fileID: 5509976189135757755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1979877918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -872,7 +953,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937764829177718854}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
