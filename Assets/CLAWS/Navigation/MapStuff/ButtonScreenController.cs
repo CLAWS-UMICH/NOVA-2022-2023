@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ButtonScreenController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class ButtonScreenController : MonoBehaviour
 
     [SerializeField] GameObject roverObject;
 
+    Transform previousEndGoal = null;
 
 
     // Start is called before the first frame update
@@ -250,7 +252,54 @@ public class ButtonScreenController : MonoBehaviour
     {
         Transform playerPosition = mainCam.transform;
 
-        navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
+
+        if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
+        {
+            navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
+
+            previousEndGoal = endPosition;
+        }
+
+        
+    }
+
+    private bool ToggleFinalDestinationForCorrectEndTarget(Transform endPosition)
+    {
+        NavigatableObject endNavigation = endPosition.gameObject.GetComponent<NavigatableObject>();
+
+        if (endNavigation == null)
+        {
+            Debug.LogError("Object must contain the 'Navigatable Object' script in order to be considered a valid end position");
+            return false;
+        } else
+        {
+            if (previousEndGoal != null)
+            {
+                NavigatableObject prevNav = previousEndGoal.GetComponent<NavigatableObject>();
+                if (prevNav == null)
+                {
+                    return false;
+                } else
+                {
+                    prevNav.ToggleFinalDestination();
+                }
+
+            }
+
+            RemoveOldPath(endNavigation);
+
+            endNavigation.ToggleFinalDestination();
+        }
+
+        return true;
+    }
+
+    private void RemoveOldPath(NavigatableObject endNav)
+    {
+        if (previousEndGoal != null)
+        {
+            endNav.DestroyAllBreadCrumbs();
+        }
     }
 
 
