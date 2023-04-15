@@ -94,6 +94,7 @@ public class NetworkManager : MonoBehaviour {
                     //text.text = data;
                     Debug.Log(data);
                     EventBus.Publish<VEGA_OutputEvent>(new VEGA_OutputEvent(data));
+                    
                 }
             }
         }
