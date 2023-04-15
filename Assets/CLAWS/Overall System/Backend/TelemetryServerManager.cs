@@ -1,83 +1,105 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TSS;
+
 
 public class TelemetryServerManager : MonoBehaviour
 {
+    TSSConnection tss;
+    string tssUri;
 
-    private void Start()
+    int msgCount = 0;
+
+    async void Start()
     {
-        StartCoroutine(GetTSS());
-        Vitals TEMP_TSSVitalsDeleteThis = Simulation.User.AstronautVitals;
-        TEMP_TSSVitalsDeleteThis.p_o2 = 100;
-        TEMP_TSSVitalsDeleteThis.p_sub = 100;
-        TEMP_TSSVitalsDeleteThis.p_suit = 100;
-        TEMP_TSSVitalsDeleteThis.cap_water = 100;
-        TEMP_TSSVitalsDeleteThis.p_sub = 100;
-        TEMP_TSSVitalsDeleteThis.p_suit = 100;
-        TEMP_TSSVitalsDeleteThis.t_sub = 100;
-        TEMP_TSSVitalsDeleteThis.v_fan = 100;
-        TEMP_TSSVitalsDeleteThis.p_o2 = 100;
-        TEMP_TSSVitalsDeleteThis.rate_o2 = 100;
-        TEMP_TSSVitalsDeleteThis.batteryPercent = 100;
-        TEMP_TSSVitalsDeleteThis.cap_battery = 100;
-        TEMP_TSSVitalsDeleteThis.battery_out = 100;
-        TEMP_TSSVitalsDeleteThis.p_h2o_g = 100;
-        TEMP_TSSVitalsDeleteThis.p_h2o_l = 100;
-        TEMP_TSSVitalsDeleteThis.p_sop = 100;
-        TEMP_TSSVitalsDeleteThis.rate_sop = 100;
-        TEMP_TSSVitalsDeleteThis.t_oxygenPrimary = 100;
-        TEMP_TSSVitalsDeleteThis.t_oxygenSec = 100;
-        TEMP_TSSVitalsDeleteThis.ox_primary = 100;
-        TEMP_TSSVitalsDeleteThis.ox_secondary = 100;
-        TEMP_TSSVitalsDeleteThis.cap_water = 100;
+        tss = new TSSConnection();
 
-        SetVitals(TEMP_TSSVitalsDeleteThis);
+        // TODO tie this to an input field and button
+        Connect();
     }
 
-    IEnumerator GetTSS()
+    void Update()
     {
-        // simulating getting information from the TSS
-        while (true)
+        tss.Update();
+    }
+
+    public async void Connect()
+    {
+        tssUri = "ws://localhost:3001"; // TODO fix
+        var connecting = tss.ConnectToURI(tssUri);
+        Debug.Log("Connecting to " + tssUri);
+        
+        tss.OnTSSTelemetryMsg += (telemMsg) =>
         {
-            // fake new vitals information from the server
-            Vitals TEMP_TSSVitalsDeleteThis = Simulation.User.AstronautVitals;
-            TEMP_TSSVitalsDeleteThis.p_o2--;
-            TEMP_TSSVitalsDeleteThis.p_sub--;
-            TEMP_TSSVitalsDeleteThis.p_suit--;
-            TEMP_TSSVitalsDeleteThis.cap_water--;
-            TEMP_TSSVitalsDeleteThis.p_sub--;
-            TEMP_TSSVitalsDeleteThis.p_suit--;
-            TEMP_TSSVitalsDeleteThis.t_sub--;
-            TEMP_TSSVitalsDeleteThis.v_fan--;
-            TEMP_TSSVitalsDeleteThis.p_o2--;
-            TEMP_TSSVitalsDeleteThis.rate_o2--;
-            TEMP_TSSVitalsDeleteThis.batteryPercent--;
-            TEMP_TSSVitalsDeleteThis.cap_battery--;
-            TEMP_TSSVitalsDeleteThis.battery_out--;
-            TEMP_TSSVitalsDeleteThis.p_h2o_g--;
-            TEMP_TSSVitalsDeleteThis.p_h2o_l--;
-            TEMP_TSSVitalsDeleteThis.p_sop--;
-            TEMP_TSSVitalsDeleteThis.rate_sop--;
-            TEMP_TSSVitalsDeleteThis.t_oxygenPrimary--;
-            TEMP_TSSVitalsDeleteThis.t_oxygenSec--;
-            TEMP_TSSVitalsDeleteThis.ox_primary--;
-            TEMP_TSSVitalsDeleteThis.ox_secondary--;
-            TEMP_TSSVitalsDeleteThis.cap_water--;
+            msgCount++;
 
-            // update our simulation based on those vitals
-            // we should try to only update this when it is changed, but for now use a loop
-            SetVitals(TEMP_TSSVitalsDeleteThis);
+            if (telemMsg.GPS.Count > 0)
+            {
+                Simulation.User.GPS = telemMsg.GPS[0];
+            }
+            else
+            {
+                Debug.LogError("No GPS Msg received");
+            }
 
-            yield return new WaitForSeconds(3);
-        }
+            if (telemMsg.IMU.Count > 0)
+            {
+                Simulation.User.IMU = telemMsg.IMU[0];
+            }
+            else
+            {
+                Debug.LogError("No IMU Msg received");
+            }
+
+            if (telemMsg.EVA.Count > 0)
+            {
+                Simulation.User.EVA = telemMsg.EVA[0];
+                EventBus.Publish<VitalsUpdatedEvent>(new VitalsUpdatedEvent());
+            }
+            else
+            {
+                Debug.LogError("No EVA Msg received");
+            }
+
+            if (telemMsg.UIA.Count > 0)
+            {
+                Simulation.User.UIA = telemMsg.UIA[0];
+            }
+            else
+            {
+                Debug.LogError("No UIA Msg received");
+            }
+
+            if (telemMsg.UIA_CONTROLS.Count > 0)
+            {
+                Simulation.User.UIA_CONTROLS = telemMsg.UIA_CONTROLS[0];
+            }
+            else
+            {
+                Debug.LogError("No UIA_CONTROLS Msg received");
+            }
+        };
+
+        // tss.OnOpen, OnError, and OnClose events just re-raise events from websockets.
+        // Similar to OnTSSTelemetryMsg, create functions with the appropriate return type and parameters, and subscribe to them
+        tss.OnOpen += () =>
+        {
+            Debug.Log("Websocket connection opened");
+        };
+
+        tss.OnError += (string e) =>
+        {
+            Debug.Log("Websocket error occured: " + e);
+        };
+
+        tss.OnClose += (e) =>
+        {
+            Debug.Log("Websocket closed with code: " + e);
+        };
+
+        await connecting;
+
     }
 
-    private void SetVitals(Vitals vitals_in)
-    {
-        Simulation.User.AstronautVitals = vitals_in;
-
-        // publish event that vitals were set
-        EventBus.Publish<VitalsUpdatedEvent>(new VitalsUpdatedEvent());
-    }
 }

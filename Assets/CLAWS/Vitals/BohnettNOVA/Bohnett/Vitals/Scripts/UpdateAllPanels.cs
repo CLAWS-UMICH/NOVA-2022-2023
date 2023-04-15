@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using TSS.Msgs;
+using System;
 
 // None of the updatePanel function have any sort of rounding, truncation, or anything similar of long decimal points
 // with the exception of Mathf.Floor()
@@ -17,7 +19,7 @@ using TMPro;
 public class UpdateAllPanels : MonoBehaviour
 {
     private VitalPanel[] vitalPanels;
-    private Vitals vitals;
+    private EVAMsg vitals;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,7 +29,7 @@ public class UpdateAllPanels : MonoBehaviour
 
     public void UpdatePanels(VitalsUpdatedEvent e)
     {
-        vitals = Simulation.User.AstronautVitals;
+        vitals = Simulation.User.EVA;
         
         for (int i = 0; i < vitalPanels.Length; i++)
         {
@@ -96,7 +98,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Mathf.Floor(vitals.ox_primary)).ToString();
+                return ((int)Math.Floor(vitals.ox_primary)).ToString();
 
             case 1:
                 return vitals.t_oxygen;
@@ -122,7 +124,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Mathf.Floor(vitals.ox_secondary)).ToString();
+                return ((int)Math.Floor(vitals.ox_secondary)).ToString();
 
             case 1:
                 return vitals.t_oxygen;
@@ -170,7 +172,7 @@ public class UpdateAllPanels : MonoBehaviour
         {
             case 0:
                 // Debug.Log(((int)Mathf.Floor(vitals.cap_water)).ToString());
-                return ((int)Mathf.Floor(vitals.cap_water)).ToString(); 
+                return ((int)Math.Floor(vitals.cap_water)).ToString(); 
 
             case 1:
                 return vitals.t_water;
@@ -199,7 +201,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Mathf.Floor(vitals.cap_battery)).ToString();
+                return ((int)Math.Floor(vitals.cap_battery)).ToString();
 
             case 1:
                 return vitals.t_battery;
@@ -239,10 +241,10 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Mathf.Floor(vitals.ox_primary)).ToString();
+                return ((int)Math.Floor(vitals.ox_primary)).ToString();
 
             case 1:
-                return ((int)Mathf.Floor(vitals.cap_battery)).ToString();
+                return ((int)Math.Floor(vitals.cap_battery)).ToString();
 
             case 2:
                 return vitals.t_oxygen;
