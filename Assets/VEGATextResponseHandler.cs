@@ -24,7 +24,7 @@ public class VEGATextResponseHandler : MonoBehaviour
     void ProcessVEGATextResponse(VEGA_OutputEvent e)
     {
         VEGAVariable = "";
-        string[] VEGAStrings = e.output.Split('"');
+        string[] VEGAStrings = e.output.Split("'");
         ResponseString = VEGAStrings[1];
 
         string[] words = e.output.Split(' ');
@@ -110,7 +110,7 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
         }
 
-        ResponseString.Replace("{}", VEGAVariable);
+        ResponseString.Replace("*", VEGAVariable);
 
         if (VEGAVariable != "") {
             VEGAResponseTextBox();
