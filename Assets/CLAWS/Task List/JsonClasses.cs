@@ -16,3 +16,8 @@ public class TaskListUpdated : JsonMessage
 {
     public List<TaskObj> task_list;
 }
+
+public class VitalsUpdated : JsonMessage
+{
+    //public List<Stats> vitals_list;
+}

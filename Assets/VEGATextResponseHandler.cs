@@ -19,6 +19,7 @@ public class VEGATextResponseHandler : MonoBehaviour
     void Start()
     {
         EventBus.Subscribe<VEGA_OutputEvent>(ProcessVEGATextResponse);
+        _astronaut = Simulation.User;
     }
 
     void ProcessVEGATextResponse(VEGA_OutputEvent e)
