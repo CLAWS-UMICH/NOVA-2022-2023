@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GeoSample 
 {
-    int sampleID;
-    string rockType;
-    string lunarTime;
+    public int sampleID;
+    public string rockType;
+    public string lunarTime;
     // Coordinates
-    string location;
-    string RFID;
+    public string location;
+    public string RFID;
+    public char taskType;
 }

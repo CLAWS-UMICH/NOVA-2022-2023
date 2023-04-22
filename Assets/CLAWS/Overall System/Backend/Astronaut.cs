@@ -10,6 +10,7 @@ public class Astronaut : MonoBehaviour
     public TaskList AstronautTasks;
     public Messaging AstronautMessaging;
     public QueueClass UdpQueue;
+    public GeoSampleList AstronautGeoSamples;
 
     // TSS objects
     public EVAMsg EVA; // vitals

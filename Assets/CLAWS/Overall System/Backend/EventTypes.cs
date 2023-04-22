@@ -72,3 +72,22 @@ public class VEGA_OutputEvent
         return "<VEGA_OutputEvent>: " + output;
     }
 }
+
+public class GeoSampleUpdatedEvent
+{
+    public int index;
+
+    public GeoSampleUpdatedEvent()
+    {
+        index = -1;
+    }
+
+    public GeoSampleUpdatedEvent(int updateIndex)
+    {
+        index = updateIndex;
+    }
+    public override string ToString()
+    {
+        return "<GeoSampleUpdatedEvent>: samples were updated";
+    }
+}
