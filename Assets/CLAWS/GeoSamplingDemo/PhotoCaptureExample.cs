@@ -1,63 +1,101 @@
-// using UnityEngine;
-// using System.Collections;
-// using System.Linq;
-// using UnityEngine.__XR__.WSA.WebCam;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Windows.WebCam;
 
-// [System.Serializable]
-// public class PhotoCaptureExample : MonoBehaviour {
-    
-//     [SerializeField]
-//     GameObject screen;
-//     UnityEngine.Windows.WebCam.PhotoCapture photoCaptureObject = null;
-//     Texture2D targetTexture = null;
+[System.Serializable]
+public class PhotoCaptureExample : MonoBehaviour
+{
 
-//     // Use this for initialization
-//     void Start() {
-//         Resolution cameraResolution = UnityEngine.Windows.WebCam.PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
-//         targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
+    [SerializeField]
+    GameObject screen;
+    PhotoCapture photoCaptureObject = null;
+    Texture2D targetTexture = null;
 
-//         // Create a PhotoCapture object
-//         UnityEngine.Windows.WebCam.PhotoCapture.CreateAsync(false, delegate (UnityEngine.Windows.WebCam.PhotoCapture captureObject) {
-//             photoCaptureObject = captureObject;
-//             UnityEngine.Windows.WebCam.CameraParameters cameraParameters = new UnityEngine.Windows.WebCam.CameraParameters();
-//             cameraParameters.hologramOpacity = 0.0f;
-//             cameraParameters.cameraResolutionWidth = cameraResolution.width;
-//             cameraParameters.cameraResolutionHeight = cameraResolution.height;
-//             cameraParameters.pixelFormat = UnityEngine.Windows.WebCam.CapturePixelFormat.BGRA32;
+    bool isTakingPhoto = false;
+    List<GameObject> outputQuads;
 
-//         });
-//     }
+    public void TakePhoto()
+    {
+        //if (isTakingPhoto)
+        //{
+        //    return;
+        //}
+        //isTakingPhoto = true;
 
-//     void takePicture() {
-//         // Activate the camera
-//         photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (UnityEngine.Windows.WebCam.PhotoCapture.PhotoCaptureResult result) {
-//             // Take a picture
-//             photoCaptureObject.TakePhotoAsync(OnCapturedPhotoToMemory);
-//         });
-//         OnStoppedPhotoMode();
-//     }
+        //GameObject activeNote = GetComponent<NoteController>().getCurrActiveNote();
+        //GameObject recentSample = activeNote.GetComponent<SampleController>().getRecentSample();
+        //if (recentSample)
+        //{
+        //    outputQuads = recentSample.GetComponent<VoiceController>().getAvalibleQuads();
+        //    StopAllCoroutines();
+            StartCoroutine(ReadyCamera());
 
-//     void OnCapturedPhotoToMemory(UnityEngine.Windows.WebCam.PhotoCapture.PhotoCaptureResult result, UnityEngine.Windows.WebCam.PhotoCaptureFrame photoCaptureFrame) {
-//         // Copy the raw image data into the target texture
-//         photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+        //}
+        //else
+        //{
+        //    isTakingPhoto = false;
+        //}
+    }
 
-//         // Create a GameObject to which the texture can be applied
-//         GameObject __quad__ = GameObject.CreatePrimitive(PrimitiveType.Quad);
-//         Renderer quadRenderer = quad.GetComponent<Renderer>() as Renderer;
-//         quadRenderer.material = new Material(Shader.Find("Custom/Unlit/UnlitTexture"));
+    IEnumerator ReadyCamera()
+    {
+        yield return new WaitForSeconds(2f);
+        StartPhoto();
+    }
 
-//         quad.transform.parent = this.transform;
-//         quad.transform.localPosition = new Vector3(0.0f, 0.0f, 3.0f);
+    void StartPhoto()
+    {
+        Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
+        targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
-//         quadRenderer.material.SetTexture("_MainTex", targetTexture);
+        // Create a PhotoCapture object
+        PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
+        {
+            photoCaptureObject = captureObject;
+            CameraParameters cameraParameters = new CameraParameters();
+            cameraParameters.hologramOpacity = 0.0f;
+            cameraParameters.cameraResolutionWidth = cameraResolution.width;
+            cameraParameters.cameraResolutionHeight = cameraResolution.height;
+            cameraParameters.pixelFormat = CapturePixelFormat.BGRA32;
 
-//         // Deactivate the camera
-//         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
-//     }
+            // Activate the camera
+            photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result)
+            {
+                // Take a picture
+                photoCaptureObject.TakePhotoAsync(OnCapturedPhotoToMemory);
+            });
+        });
+    }
 
-//     void OnStoppedPhotoMode(UnityEngine.Windows.WebCam.PhotoCapture.PhotoCaptureResult result) {
-//         // Shutdown the photo capture resource
-//         photoCaptureObject.Dispose();
-//         photoCaptureObject = null;
-//     }
-// }
+    void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
+    {
+        // Copy the raw image data into the target texture
+        photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+
+        // Create a GameObject to which the texture can be applied
+        //GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        foreach(GameObject quad in outputQuads)
+        {
+            Renderer quadRenderer = quad.GetComponent<Renderer>() as Renderer;
+            quadRenderer.material = new Material(Shader.Find("Mixed Reality Toolkit/NoteBackplate"));
+
+            //quad.transform.parent = this.transform;
+            //quad.transform.localPosition = new Vector3(0.0f, 0.0f, 3.0f);
+
+            quadRenderer.material.SetTexture("_MainTex", targetTexture);
+        }
+
+        // Deactivate the camera
+        photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
+    }
+
+    void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result)
+    {
+        // Shutdown the photo capture resource
+        photoCaptureObject.Dispose();
+        photoCaptureObject = null;
+        isTakingPhoto = false;
+    }
+}
