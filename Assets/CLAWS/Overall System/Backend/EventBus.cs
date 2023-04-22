@@ -11,12 +11,12 @@ public class EventBus
     /* Change this to "true" and all events will be logged to console automatically */
     public const bool DEBUG_MODE = false;
 
-    static Dictionary<Type, IList> _topics = new Dictionary<Type, IList>();
+    static Dictionary<System.Type, IList> _topics = new Dictionary<System.Type, IList>();
 
     public static void Publish<T>(T published_event)
     {
         /* Use type T to identify correct subscriber list (correct "topic") */
-        Type t = typeof(T);
+        System.Type t = typeof(T);
 
         if (DEBUG_MODE)
             Debug.Log("[Publish] event of type " + t + " with contents (" + published_event.ToString() + ")");
@@ -64,7 +64,7 @@ public class EventBus
     public static Subscription<T> Subscribe<T>(Action<T> callback)
     {
         /* Determine event type so we can find the correct subscriber list */
-        Type t = typeof(T);
+        System.Type t = typeof(T);
         Subscription<T> new_subscription = new Subscription<T>(callback);
 
         /* If a subscriber list doesn't exist for this event type, create one */
@@ -81,7 +81,7 @@ public class EventBus
 
     public static void Unsubscribe<T>(Subscription<T> subscription)
     {
-        Type t = typeof(T);
+        System.Type t = typeof(T);
 
         if (DEBUG_MODE)
             Debug.Log("[Unsubscribe] attempting to remove subscription to type " + t);
