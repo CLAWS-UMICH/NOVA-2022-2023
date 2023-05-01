@@ -16,8 +16,13 @@ public class PhotoCaptureExample : MonoBehaviour
     private int currentPage = 0;
 
     [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material defaultConfirmMaterial;
     [SerializeField] private GameObject existingProfileView;
     [SerializeField] private GameObject newProfileView;
+    [SerializeField] private GameObject confirmationQuad;
+    [SerializeField] private GameObject cameraView;
+
+    public string sampleName = "GeoSample";
 
     void Awake()
     {
@@ -36,9 +41,9 @@ public class PhotoCaptureExample : MonoBehaviour
 
     void LoadPhotos()
     {
-        if (Directory.Exists(Application.persistentDataPath + "/GeoSample"))
+        if (Directory.Exists(Application.persistentDataPath + "/" + sampleName))
         {
-            string folder = Application.persistentDataPath + "/GeoSample";
+            string folder = Application.persistentDataPath + "/" + sampleName;
             DirectoryInfo d = new DirectoryInfo(folder);
             photoCount = d.GetFiles().Length;
             for (int i = 0; i < outputQuads.Count; ++i)
@@ -59,16 +64,8 @@ public class PhotoCaptureExample : MonoBehaviour
             }
         }
     }
-
     public void TakePhoto()
     {
-        StartCoroutine(ReadyCamera());
-        //StartPhoto();
-    }
-
-    IEnumerator ReadyCamera()
-    {
-        yield return new WaitForSeconds(2f);
         StartPhoto();
     }
 
@@ -76,6 +73,9 @@ public class PhotoCaptureExample : MonoBehaviour
     {
         Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
         targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
+
+        Renderer r = confirmationQuad.GetComponent<Renderer>();
+        r.material = defaultConfirmMaterial;
 
         // Create a PhotoCapture object
         PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
@@ -95,35 +95,48 @@ public class PhotoCaptureExample : MonoBehaviour
         });
     }
 
+    void Snap()
+    {
+        cameraView.SetActive(false);
+        confirmationQuad.SetActive(true);
+    }
+
     void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
     {
         if (result.success)
         {
+            //StartCoroutine(Snap());
+            Snap();
+
             // Copy the raw image data into the target texture
             photoCaptureFrame.UploadImageDataToTexture(targetTexture);
 
-            if (photoCount < outputQuads.Count * (currentPage + 1))
-            {
-                Renderer quadRenderer = outputQuads[photoCount % outputQuads.Count].GetComponent<Renderer>();
-                quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
-                quadRenderer.material.SetTexture("_MainTex", targetTexture);
-            }
-            photoCount++;
-            existingProfileView.SetActive(true);
-            newProfileView.SetActive(false);
-            if (!Directory.Exists(Application.persistentDataPath + "/GeoSample"))
-            {
-                Directory.CreateDirectory(Application.persistentDataPath + "/GeoSample");
-            }
-
-            string filename = string.Format(@"GeoSample/CapturedImage{0}_n.jpg", photoCount);
-            string filePath = Path.Combine(Application.persistentDataPath, filename);
-            File.WriteAllBytes(filePath, targetTexture.EncodeToJPG());
+            Renderer c_quadRenderer = confirmationQuad.GetComponent<Renderer>();
+            c_quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+            c_quadRenderer.material.SetTexture("_MainTex", targetTexture);
         }
-
-
         // Deactivate the camera
         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
+    }
+
+    public void ConfirmPhoto()
+    {
+        if (photoCount < outputQuads.Count * (currentPage + 1))
+        {
+            Renderer quadRenderer = outputQuads[photoCount % outputQuads.Count].GetComponent<Renderer>();
+            quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+            quadRenderer.material.SetTexture("_MainTex", targetTexture);
+        }
+
+        photoCount++;
+        if (!Directory.Exists(Application.persistentDataPath + "/" + sampleName))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/" + sampleName);
+        }
+
+        string filename = string.Format(@"{0}/CapturedImage{1}_n.jpg", sampleName, photoCount);
+        string filePath = Path.Combine(Application.persistentDataPath, filename);
+        File.WriteAllBytes(filePath, targetTexture.EncodeToJPG());
     }
 
     void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result)
@@ -156,5 +169,21 @@ public class PhotoCaptureExample : MonoBehaviour
     public void ClosePanel(GameObject panel)
     {
         panel.SetActive(false);
+    }
+    public void OpenPanel(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
+    public void CloseOpenView(GameObject panel)
+    {
+        panel.SetActive(false);
+        if(photoCount == 0)
+        {
+            newProfileView.SetActive(true);
+        }
+        else
+        {
+            existingProfileView.SetActive(true);
+        }
     }
 }
