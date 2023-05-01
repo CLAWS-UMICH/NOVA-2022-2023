@@ -3,40 +3,67 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Windows.WebCam;
+using System.IO;
 
 [System.Serializable]
 public class PhotoCaptureExample : MonoBehaviour
 {
-
-    [SerializeField]
-    GameObject screen;
     PhotoCapture photoCaptureObject = null;
     Texture2D targetTexture = null;
+    public List<GameObject> outputQuads;
 
-    bool isTakingPhoto = false;
-    List<GameObject> outputQuads;
+    private int photoCount = 0;
+    private int currentPage = 0;
+
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private GameObject existingProfileView;
+    [SerializeField] private GameObject newProfileView;
+
+    void Awake()
+    {
+        LoadPhotos();
+        if (photoCount == 0)
+        {
+            existingProfileView.SetActive(false);
+            newProfileView.SetActive(true);
+        }
+        else
+        {
+            existingProfileView.SetActive(true);
+            newProfileView.SetActive(false);
+        }
+    }
+
+    void LoadPhotos()
+    {
+        if (Directory.Exists(Application.persistentDataPath + "/GeoSample"))
+        {
+            string folder = Application.persistentDataPath + "/GeoSample";
+            DirectoryInfo d = new DirectoryInfo(folder);
+            photoCount = d.GetFiles().Length;
+            for (int i = 0; i < outputQuads.Count; ++i)
+            {
+                if(i + outputQuads.Count * currentPage >= photoCount)
+                {
+                    Renderer r = outputQuads[i].GetComponent<Renderer>();
+                    r.material = defaultMaterial;
+                    continue;
+                }
+                var file = d.GetFiles("*.jpg")[i + outputQuads.Count * currentPage];
+                byte[] bytes = File.ReadAllBytes(file.FullName);
+                Texture2D texture = new Texture2D(1, 1);
+                texture.LoadImage(bytes);
+                Renderer quadRenderer = outputQuads[i].GetComponent<Renderer>();
+                quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+                quadRenderer.material.SetTexture("_MainTex", texture);
+            }
+        }
+    }
 
     public void TakePhoto()
     {
-        //if (isTakingPhoto)
-        //{
-        //    return;
-        //}
-        //isTakingPhoto = true;
-
-        //GameObject activeNote = GetComponent<NoteController>().getCurrActiveNote();
-        //GameObject recentSample = activeNote.GetComponent<SampleController>().getRecentSample();
-        //if (recentSample)
-        //{
-        //    outputQuads = recentSample.GetComponent<VoiceController>().getAvalibleQuads();
-        //    StopAllCoroutines();
-            StartCoroutine(ReadyCamera());
-
-        //}
-        //else
-        //{
-        //    isTakingPhoto = false;
-        //}
+        StartCoroutine(ReadyCamera());
+        //StartPhoto();
     }
 
     IEnumerator ReadyCamera()
@@ -61,8 +88,7 @@ public class PhotoCaptureExample : MonoBehaviour
             cameraParameters.pixelFormat = CapturePixelFormat.BGRA32;
 
             // Activate the camera
-            photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result)
-            {
+            photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result) {
                 // Take a picture
                 photoCaptureObject.TakePhotoAsync(OnCapturedPhotoToMemory);
             });
@@ -71,21 +97,30 @@ public class PhotoCaptureExample : MonoBehaviour
 
     void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
     {
-        // Copy the raw image data into the target texture
-        photoCaptureFrame.UploadImageDataToTexture(targetTexture);
-
-        // Create a GameObject to which the texture can be applied
-        //GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        foreach(GameObject quad in outputQuads)
+        if (result.success)
         {
-            Renderer quadRenderer = quad.GetComponent<Renderer>() as Renderer;
-            quadRenderer.material = new Material(Shader.Find("Mixed Reality Toolkit/NoteBackplate"));
+            // Copy the raw image data into the target texture
+            photoCaptureFrame.UploadImageDataToTexture(targetTexture);
 
-            //quad.transform.parent = this.transform;
-            //quad.transform.localPosition = new Vector3(0.0f, 0.0f, 3.0f);
+            if (photoCount < outputQuads.Count * (currentPage + 1))
+            {
+                Renderer quadRenderer = outputQuads[photoCount % outputQuads.Count].GetComponent<Renderer>();
+                quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+                quadRenderer.material.SetTexture("_MainTex", targetTexture);
+            }
+            photoCount++;
+            existingProfileView.SetActive(true);
+            newProfileView.SetActive(false);
+            if (!Directory.Exists(Application.persistentDataPath + "/GeoSample"))
+            {
+                Directory.CreateDirectory(Application.persistentDataPath + "/GeoSample");
+            }
 
-            quadRenderer.material.SetTexture("_MainTex", targetTexture);
+            string filename = string.Format(@"GeoSample/CapturedImage{0}_n.jpg", photoCount);
+            string filePath = Path.Combine(Application.persistentDataPath, filename);
+            File.WriteAllBytes(filePath, targetTexture.EncodeToJPG());
         }
+
 
         // Deactivate the camera
         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
@@ -96,6 +131,30 @@ public class PhotoCaptureExample : MonoBehaviour
         // Shutdown the photo capture resource
         photoCaptureObject.Dispose();
         photoCaptureObject = null;
-        isTakingPhoto = false;
+    }
+
+    public void nextPage()
+    {
+        if (photoCount <= (currentPage+1) * outputQuads.Count)
+        {
+            return;
+        }
+        currentPage++;
+        LoadPhotos();
+    }
+
+    public void prevPage()
+    {
+        if(currentPage == 0)
+        {
+            return;
+        }
+        currentPage--;
+        LoadPhotos();
+    }
+
+    public void ClosePanel(GameObject panel)
+    {
+        panel.SetActive(false);
     }
 }
