@@ -1,63 +1,189 @@
-// using UnityEngine;
-// using System.Collections;
-// using System.Linq;
-// using UnityEngine.__XR__.WSA.WebCam;
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.Windows.WebCam;
+using System.IO;
 
-// [System.Serializable]
-// public class PhotoCaptureExample : MonoBehaviour {
-    
-//     [SerializeField]
-//     GameObject screen;
-//     UnityEngine.Windows.WebCam.PhotoCapture photoCaptureObject = null;
-//     Texture2D targetTexture = null;
+[System.Serializable]
+public class PhotoCaptureExample : MonoBehaviour
+{
+    PhotoCapture photoCaptureObject = null;
+    Texture2D targetTexture = null;
+    public List<GameObject> outputQuads;
 
-//     // Use this for initialization
-//     void Start() {
-//         Resolution cameraResolution = UnityEngine.Windows.WebCam.PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
-//         targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
+    private int photoCount = 0;
+    private int currentPage = 0;
 
-//         // Create a PhotoCapture object
-//         UnityEngine.Windows.WebCam.PhotoCapture.CreateAsync(false, delegate (UnityEngine.Windows.WebCam.PhotoCapture captureObject) {
-//             photoCaptureObject = captureObject;
-//             UnityEngine.Windows.WebCam.CameraParameters cameraParameters = new UnityEngine.Windows.WebCam.CameraParameters();
-//             cameraParameters.hologramOpacity = 0.0f;
-//             cameraParameters.cameraResolutionWidth = cameraResolution.width;
-//             cameraParameters.cameraResolutionHeight = cameraResolution.height;
-//             cameraParameters.pixelFormat = UnityEngine.Windows.WebCam.CapturePixelFormat.BGRA32;
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material defaultConfirmMaterial;
+    [SerializeField] private GameObject existingProfileView;
+    [SerializeField] private GameObject newProfileView;
+    [SerializeField] private GameObject confirmationQuad;
+    [SerializeField] private GameObject cameraView;
 
-//         });
-//     }
+    public string sampleName = "GeoSample";
 
-//     void takePicture() {
-//         // Activate the camera
-//         photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (UnityEngine.Windows.WebCam.PhotoCapture.PhotoCaptureResult result) {
-//             // Take a picture
-//             photoCaptureObject.TakePhotoAsync(OnCapturedPhotoToMemory);
-//         });
-//         OnStoppedPhotoMode();
-//     }
+    void Awake()
+    {
+        LoadPhotos();
+        if (photoCount == 0)
+        {
+            existingProfileView.SetActive(false);
+            newProfileView.SetActive(true);
+        }
+        else
+        {
+            existingProfileView.SetActive(true);
+            newProfileView.SetActive(false);
+        }
+    }
 
-//     void OnCapturedPhotoToMemory(UnityEngine.Windows.WebCam.PhotoCapture.PhotoCaptureResult result, UnityEngine.Windows.WebCam.PhotoCaptureFrame photoCaptureFrame) {
-//         // Copy the raw image data into the target texture
-//         photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+    void LoadPhotos()
+    {
+        if (Directory.Exists(Application.persistentDataPath + "/" + sampleName))
+        {
+            string folder = Application.persistentDataPath + "/" + sampleName;
+            DirectoryInfo d = new DirectoryInfo(folder);
+            photoCount = d.GetFiles().Length;
+            for (int i = 0; i < outputQuads.Count; ++i)
+            {
+                if(i + outputQuads.Count * currentPage >= photoCount)
+                {
+                    Renderer r = outputQuads[i].GetComponent<Renderer>();
+                    r.material = defaultMaterial;
+                    continue;
+                }
+                var file = d.GetFiles("*.jpg")[i + outputQuads.Count * currentPage];
+                byte[] bytes = File.ReadAllBytes(file.FullName);
+                Texture2D texture = new Texture2D(1, 1);
+                texture.LoadImage(bytes);
+                Renderer quadRenderer = outputQuads[i].GetComponent<Renderer>();
+                quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+                quadRenderer.material.SetTexture("_MainTex", texture);
+            }
+        }
+    }
+    public void TakePhoto()
+    {
+        StartPhoto();
+    }
 
-//         // Create a GameObject to which the texture can be applied
-//         GameObject __quad__ = GameObject.CreatePrimitive(PrimitiveType.Quad);
-//         Renderer quadRenderer = quad.GetComponent<Renderer>() as Renderer;
-//         quadRenderer.material = new Material(Shader.Find("Custom/Unlit/UnlitTexture"));
+    void StartPhoto()
+    {
+        Resolution cameraResolution = PhotoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
+        targetTexture = new Texture2D(cameraResolution.width, cameraResolution.height);
 
-//         quad.transform.parent = this.transform;
-//         quad.transform.localPosition = new Vector3(0.0f, 0.0f, 3.0f);
+        Renderer r = confirmationQuad.GetComponent<Renderer>();
+        r.material = defaultConfirmMaterial;
 
-//         quadRenderer.material.SetTexture("_MainTex", targetTexture);
+        // Create a PhotoCapture object
+        PhotoCapture.CreateAsync(false, delegate (PhotoCapture captureObject)
+        {
+            photoCaptureObject = captureObject;
+            CameraParameters cameraParameters = new CameraParameters();
+            cameraParameters.hologramOpacity = 0.0f;
+            cameraParameters.cameraResolutionWidth = cameraResolution.width;
+            cameraParameters.cameraResolutionHeight = cameraResolution.height;
+            cameraParameters.pixelFormat = CapturePixelFormat.BGRA32;
 
-//         // Deactivate the camera
-//         photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
-//     }
+            // Activate the camera
+            photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result) {
+                // Take a picture
+                photoCaptureObject.TakePhotoAsync(OnCapturedPhotoToMemory);
+            });
+        });
+    }
 
-//     void OnStoppedPhotoMode(UnityEngine.Windows.WebCam.PhotoCapture.PhotoCaptureResult result) {
-//         // Shutdown the photo capture resource
-//         photoCaptureObject.Dispose();
-//         photoCaptureObject = null;
-//     }
-// }
+    void Snap()
+    {
+        cameraView.SetActive(false);
+        confirmationQuad.SetActive(true);
+    }
+
+    void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
+    {
+        if (result.success)
+        {
+            //StartCoroutine(Snap());
+            Snap();
+
+            // Copy the raw image data into the target texture
+            photoCaptureFrame.UploadImageDataToTexture(targetTexture);
+
+            Renderer c_quadRenderer = confirmationQuad.GetComponent<Renderer>();
+            c_quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+            c_quadRenderer.material.SetTexture("_MainTex", targetTexture);
+        }
+        // Deactivate the camera
+        photoCaptureObject.StopPhotoModeAsync(OnStoppedPhotoMode);
+    }
+
+    public void ConfirmPhoto()
+    {
+        if (photoCount < outputQuads.Count * (currentPage + 1))
+        {
+            Renderer quadRenderer = outputQuads[photoCount % outputQuads.Count].GetComponent<Renderer>();
+            quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
+            quadRenderer.material.SetTexture("_MainTex", targetTexture);
+        }
+
+        photoCount++;
+        if (!Directory.Exists(Application.persistentDataPath + "/" + sampleName))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/" + sampleName);
+        }
+
+        string filename = string.Format(@"{0}/CapturedImage{1}_n.jpg", sampleName, photoCount);
+        string filePath = Path.Combine(Application.persistentDataPath, filename);
+        File.WriteAllBytes(filePath, targetTexture.EncodeToJPG());
+    }
+
+    void OnStoppedPhotoMode(PhotoCapture.PhotoCaptureResult result)
+    {
+        // Shutdown the photo capture resource
+        photoCaptureObject.Dispose();
+        photoCaptureObject = null;
+    }
+
+    public void nextPage()
+    {
+        if (photoCount <= (currentPage+1) * outputQuads.Count)
+        {
+            return;
+        }
+        currentPage++;
+        LoadPhotos();
+    }
+
+    public void prevPage()
+    {
+        if(currentPage == 0)
+        {
+            return;
+        }
+        currentPage--;
+        LoadPhotos();
+    }
+
+    public void ClosePanel(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
+    public void OpenPanel(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
+    public void CloseOpenView(GameObject panel)
+    {
+        panel.SetActive(false);
+        if(photoCount == 0)
+        {
+            newProfileView.SetActive(true);
+        }
+        else
+        {
+            existingProfileView.SetActive(true);
+        }
+    }
+}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Geosample 
 public class GeoSample 
 {
     public int sampleID;
