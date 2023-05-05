@@ -34,35 +34,35 @@ public class VEGATextResponseHandler : MonoBehaviour
             {
                 if (words[2] == "id")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.id.ToString();
+                    VEGAVariable = _astronaut.EVA.id.ToString();
                 }
                 else if (words[2] == "room")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.room.ToString();
+                    VEGAVariable = _astronaut.EVA.room.ToString();
                 }
                 else if (words[2] == "time")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.time.ToString();
+                    VEGAVariable = _astronaut.EVA.time.ToString();
                 }
                 else if (words[2] == "heart_bpm")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.heart_bpm.ToString();
+                    VEGAVariable = _astronaut.EVA.heart_bpm.ToString();
                 }
-                else if (words[2] == "p_o2")
+                else if (words[2] == "p_o2") //combine oxygens and add something for T_oxygen
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.p_o2.ToString();
+                    VEGAVariable = _astronaut.EVA.p_o2.ToString();
                 }
                 else if (words[2] == "batteryPercent")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.batteryPercent.ToString();
+                    VEGAVariable = _astronaut.EVA.batteryPercent.ToString();
                 }
                 else if (words[2] == "ox_primary")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.ox_primary.ToString();
+                    VEGAVariable = _astronaut.EVA.ox_primary.ToString();
                 }
                 else if (words[2] == "ox_secondary")
                 {
-                    VEGAVariable = _astronaut.AstronautVitals.ox_secondary.ToString();
+                    VEGAVariable = _astronaut.EVA.ox_secondary.ToString();
                 }
             }
             else if (words[1] == "menu")

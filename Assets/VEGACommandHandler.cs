@@ -11,6 +11,7 @@ public class VEGACommandHandler : MonoBehaviour
     public GameObject navigation;
     public GameObject task_list;
     //public GameObject luna;
+    //add a close all
     void Start()
     {
         EventBus.Subscribe<VEGA_OutputEvent>(ProcessVEGACommand);
