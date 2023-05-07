@@ -10,7 +10,7 @@ public class GeoSampleListController : MonoBehaviour
     GameObject[] sampleObjects;
     //The list of 3 geosample objects that will be displayed to the astronaut
     GeoSample[] holdingContainer = new GeoSample[3];
-    int currentIndex = 0;
+    public int currentIndex = 0;
 
     void Start()
     {

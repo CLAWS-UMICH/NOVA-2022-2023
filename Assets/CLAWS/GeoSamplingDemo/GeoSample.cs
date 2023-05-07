@@ -12,4 +12,5 @@ public class GeoSample
     public string location;
     public string RFID;
     public char taskType;
+    public string description;
 }
