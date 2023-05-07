@@ -14,6 +14,7 @@ public class VEGATextResponseHandler : MonoBehaviour
     Astronaut _astronaut;
     string VEGAVariable;
     string ResponseString;
+    private IEnumerator coroutine;
 
 
     void Start()
@@ -48,22 +49,24 @@ public class VEGATextResponseHandler : MonoBehaviour
                 {
                     VEGAVariable = _astronaut.EVA.heart_bpm.ToString();
                 }
-                else if (words[2] == "p_o2") //combine oxygens and add something for T_oxygen
+                else if (words[2] == "oxygen") //combine oxygens and add something for T_oxygen
                 {
                     VEGAVariable = _astronaut.EVA.p_o2.ToString();
+                //     VEGAVariable = _astronaut.EVA.ox_primary.ToString();
+                //     VEGAVariable = _astronaut.EVA.ox_secondary.ToString();
                 }
                 else if (words[2] == "batteryPercent")
                 {
                     VEGAVariable = _astronaut.EVA.batteryPercent.ToString();
                 }
-                else if (words[2] == "ox_primary")
-                {
-                    VEGAVariable = _astronaut.EVA.ox_primary.ToString();
-                }
-                else if (words[2] == "ox_secondary")
-                {
-                    VEGAVariable = _astronaut.EVA.ox_secondary.ToString();
-                }
+                // else if (words[2] == "ox_primary")
+                // {
+                //     VEGAVariable = _astronaut.EVA.ox_primary.ToString();
+                // }
+                // else if (words[2] == "ox_secondary")
+                // {
+                //     VEGAVariable = _astronaut.EVA.ox_secondary.ToString();
+                // }
             }
             else if (words[1] == "menu")
             {
@@ -113,14 +116,21 @@ public class VEGATextResponseHandler : MonoBehaviour
 
         ResponseString.Replace("*", VEGAVariable);
 
-        if (VEGAVariable != "") {
-            VEGAResponseTextBox();
+            if (VEGAVariable != "") {
+                if(words[2] == "oxygen"){
+                    VEGAVariable = "Your primary oxygen is at " + _astronaut.EVA.ox_primary.ToString() + " percent" +
+                        "\n Your secondary oxygen is at " +  _astronaut.EVA.ox_secondary.ToString() + " percent" +
+                        "\n Your p_o2 is at " + _astronaut.EVA.p_o2.ToString();
+                }
+                VEGAResponseTextBox();
+            }
         }
-    }
 
     void VEGAResponseTextBox()
     {
         text.text = VEGAVariable;
+
+        bool active = false;
         if (VEGAVariable == "")
         {
             textBox.SetActive(false);
@@ -128,6 +138,18 @@ public class VEGATextResponseHandler : MonoBehaviour
         else
         {
             textBox.SetActive(true);
+            active = true;
+            coroutine = PopUp(active);
+            StartCoroutine(coroutine);
+        }
+    }
+
+    IEnumerator PopUp(bool active){
+        while(active){
+            yield return new WaitForSeconds(3f);
+            textBox.SetActive(false);
+            active = false;
+           
         }
     }
 }
