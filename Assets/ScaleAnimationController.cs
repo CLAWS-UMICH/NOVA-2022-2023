@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class ScaleAnimationController : MonoBehaviour
 {
     [SerializeField]
@@ -16,9 +14,8 @@ public class ScaleAnimationController : MonoBehaviour
     private Vector3 initialScale;
     private float currentScale;
     private bool scaleUp = true;
-    //private IEnumerator coroutine;
     SpeechManager _speech;
-    
+
     private void Start()
     {
         initialScale = transform.localScale;
@@ -26,37 +23,39 @@ public class ScaleAnimationController : MonoBehaviour
 
         _speech = GameObject.Find("Speech to Text Manager").GetComponent<SpeechManager>();
 
-        //coroutine = Animate();
-        //StartCoroutine(coroutine);
-        //Debug.Log(_speech.speech);
-
+        StartCoroutine(Animate());
     }
 
-    private void Update()
+    private IEnumerator Animate()
     {
-        
-        if (_speech.speech)
+        while (true)
         {
-            if (scaleUp)
+            if (_speech.speech)
             {
-                currentScale += Time.deltaTime * animationSpeed;
-                if (currentScale >= maxScale)
+                if (scaleUp)
                 {
-                    currentScale = maxScale;
-                    scaleUp = false;
+                    currentScale += Time.deltaTime * animationSpeed * 2; // Increase animation speed
+                    if (currentScale >= maxScale)
+                    {
+                        currentScale = maxScale;
+                        scaleUp = false;
+                    }
                 }
-            }
-            else
-            {
-                currentScale -= Time.deltaTime * animationSpeed;
-                if (currentScale <= minScale)
+                else
                 {
-                    currentScale = minScale;
-                    scaleUp = true;
+                    currentScale -= Time.deltaTime * animationSpeed * 2; // Increase animation speed
+                    if (currentScale <= minScale)
+                    {
+                        currentScale = minScale;
+                        scaleUp = true;
+                    }
                 }
+
+                transform.localScale = initialScale * currentScale;
             }
 
-            transform.localScale = initialScale * currentScale;
+            yield return null; // Wait for the next frame
         }
     }
 }
+
