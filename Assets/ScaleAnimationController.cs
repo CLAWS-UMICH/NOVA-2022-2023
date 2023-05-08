@@ -34,7 +34,7 @@ public class ScaleAnimationController : MonoBehaviour
             {
                 if (scaleUp)
                 {
-                    currentScale += Time.deltaTime * animationSpeed * 2; // Increase animation speed
+                    currentScale += Time.deltaTime * animationSpeed; // Increase animation speed
                     if (currentScale >= maxScale)
                     {
                         currentScale = maxScale;
@@ -43,7 +43,7 @@ public class ScaleAnimationController : MonoBehaviour
                 }
                 else
                 {
-                    currentScale -= Time.deltaTime * animationSpeed * 2; // Increase animation speed
+                    currentScale -= Time.deltaTime * animationSpeed; // Increase animation speed
                     if (currentScale <= minScale)
                     {
                         currentScale = minScale;
@@ -58,4 +58,3 @@ public class ScaleAnimationController : MonoBehaviour
         }
     }
 }
-
