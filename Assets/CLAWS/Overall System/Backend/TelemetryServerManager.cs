@@ -4,6 +4,7 @@ using UnityEngine;
 using TSS;
 
 
+
 public class TelemetryServerManager : MonoBehaviour
 {
     TSSConnection tss;
@@ -37,6 +38,7 @@ public class TelemetryServerManager : MonoBehaviour
             if (telemMsg.GPS.Count > 0)
             {
                 Simulation.User.GPS = telemMsg.GPS[0];
+                EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
             }
             else
             {
