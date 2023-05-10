@@ -322,22 +322,27 @@ public class ButtonScreenController : MonoBehaviour
         confirmCreationScreen.SetActive(true);
     }
 
-    public void OpenRegWaypoint()
+    public void OpenWaypoint(string tag, string title)
+    {
+        //console.log("Tag " + tag + " Title: " + title);
+    }
+
+    public void OpenRegWaypoint(string type, string title)
     {
         OpenConfirmationScreen("Regular Waypoint");
     }
 
-    public void OpenCreateGeo()
+    public void OpenCreateGeo(string type, string title)
     {
         OpenConfirmationScreen("Geo Sample Waypoint");
     }
 
-    public void OpenCreateDanger()
+    public void OpenCreateDanger(string type, string title)
     {
         OpenConfirmationScreen("Danger Waypoint");
     }
 
-    public void CloseConfirmation()
+    public void CloseConfirmation(string type, string title)
     {
         confirmCreationScreen.SetActive(false);
     }
