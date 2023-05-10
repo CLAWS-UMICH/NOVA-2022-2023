@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TSS.Msgs;
 
 public class VitalsUpdatedEvent 
 {
@@ -90,4 +91,10 @@ public class GeoSampleUpdatedEvent
     {
         return "<GeoSampleUpdatedEvent>: samples were updated";
     }
+}
+
+// Event for letting us know GPS data was received from the server
+public class UpdatedGPSEvent
+{
+    
 }
