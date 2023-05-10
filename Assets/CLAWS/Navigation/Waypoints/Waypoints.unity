@@ -815,7 +815,6 @@ GameObject:
   - component: {fileID: 227710127}
   - component: {fileID: 227710129}
   - component: {fileID: 227710128}
-  - component: {fileID: 227710131}
   - component: {fileID: 227710132}
   m_Layer: 0
   m_Name: Home
@@ -894,31 +893,6 @@ MonoBehaviour:
   additionalOffset: {x: -0.03, y: 0, z: 0.7}
   additionalRotation: {x: 0, y: 0, z: 0}
   updateSolvers: 1
---- !u!114 &227710131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227710126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2f3efa3c4e5da44a6cb2ccfa4c50ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainScreen: {fileID: 551894651}
-  crewScreen: {fileID: 204684553}
-  missionScreen: {fileID: 1888653503}
-  openMapButton: {fileID: 2896614926166686541}
-  confirmCreationScreen: {fileID: 1504684834}
-  startNav1: {fileID: 2896614926300358880}
-  startNav2: {fileID: 2896614926544631857}
-  startNav3: {fileID: 2896614927535005913}
-  startNav4: {fileID: 2896614926317519470}
-  mapCam: {fileID: 846515774}
-  mainCam: {fileID: 8937764829177718856}
-  navObject: {fileID: 1358442374}
-  roverObject: {fileID: 2051755246}
 --- !u!114 &227710132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4399,7 +4373,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: CloseConfirmation
         m_Mode: 1
@@ -4894,7 +4868,7 @@ PrefabInstance:
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 227710131}
+      objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -5083,6 +5057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breadcrumb: {fileID: 996553710745987195, guid: 9274ab43b0df342bd8090218e457b0c1, type: 3}
   allBread: {fileID: 307654004}
+  placedAllBread: {fileID: 0}
   camera: {fileID: 8937764829177718854}
   crumbDistance: 5
 --- !u!1 &1364169204
@@ -5414,7 +5389,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: CreateAPoint
         m_Mode: 1
@@ -7170,7 +7145,7 @@ PrefabInstance:
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 227710131}
+      objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -8201,14 +8176,14 @@ PrefabInstance:
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 227710131}
+      objectReference: {fileID: 227710126}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenRegWaypoint
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -8348,6 +8323,36 @@ Transform:
   m_Father: {fileID: 1888653504}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1840580038 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2896614925803026036, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
+  m_PrefabInstance: {fileID: 1662849974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1840580049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840580038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2f3efa3c4e5da44a6cb2ccfa4c50ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainScreen: {fileID: 551894651}
+  crewScreen: {fileID: 204684553}
+  missionScreen: {fileID: 1888653503}
+  openMapButton: {fileID: 2896614926166686541}
+  confirmCreationScreen: {fileID: 1504684834}
+  startNav1: {fileID: 2896614926300358880}
+  startNav2: {fileID: 2896614926544631857}
+  startNav3: {fileID: 2896614927535005913}
+  startNav4: {fileID: 2896614926317519470}
+  mapCam: {fileID: 846515774}
+  mainCam: {fileID: 8937764829177718856}
+  navObject: {fileID: 1358442374}
+  roverObject: {fileID: 2051755246}
 --- !u!1 &1846547058
 GameObject:
   m_ObjectHideFlags: 0
@@ -11063,7 +11068,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnCrew
         m_Mode: 1
@@ -12634,7 +12639,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: CloseAll
         m_Mode: 1
@@ -15091,7 +15096,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: CloseAll
         m_Mode: 1
@@ -15902,7 +15907,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnLander
         m_Mode: 1
@@ -20121,7 +20126,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnMission
         m_Mode: 1
@@ -21614,7 +21619,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenCrewScreen
         m_Mode: 1
@@ -23401,7 +23406,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenMainScreen
         m_Mode: 1
@@ -25771,7 +25776,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: StartRoverNavigation
         m_Mode: 1
@@ -27085,7 +27090,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: StartMissionNavigation
         m_Mode: 1
@@ -27612,7 +27617,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnRover
         m_Mode: 1
@@ -29380,7 +29385,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenCrewScreen
         m_Mode: 1
@@ -30671,7 +30676,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenMissionScreen
         m_Mode: 1
@@ -31655,7 +31660,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: StartLanderNavigation
         m_Mode: 1
@@ -34542,7 +34547,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnRover
         m_Mode: 1
@@ -35623,7 +35628,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnCrew
         m_Mode: 1
@@ -38913,7 +38918,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnMission
         m_Mode: 1
@@ -39444,7 +39449,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnLander
         m_Mode: 1
@@ -42616,7 +42621,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenCrewScreen
         m_Mode: 1
@@ -43723,7 +43728,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenMissionScreen
         m_Mode: 1
@@ -44820,7 +44825,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnCrew
         m_Mode: 1
@@ -46267,7 +46272,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: CloseAll
         m_Mode: 1
@@ -47482,7 +47487,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnRover
         m_Mode: 1
@@ -49199,7 +49204,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnLander
         m_Mode: 1
@@ -51103,7 +51108,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: HoverOnMission
         m_Mode: 1
@@ -51842,7 +51847,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: OpenMissionScreen
         m_Mode: 1
@@ -52528,7 +52533,7 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 227710131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ButtonScreenController, Assembly-CSharp
         m_MethodName: StartCrewNavigation
         m_Mode: 1

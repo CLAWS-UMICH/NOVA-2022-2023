@@ -342,7 +342,7 @@ public class ButtonScreenController : MonoBehaviour
         OpenConfirmationScreen("Danger Waypoint");
     }
 
-    public void CloseConfirmation(string type, string title)
+    public void CloseConfirmation()
     {
         confirmCreationScreen.SetActive(false);
     }
@@ -359,6 +359,7 @@ public class ButtonScreenController : MonoBehaviour
                 TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
                 if (typeText != null)
                 {
+                    // Set the type waypoint
                     type = typeText.text;
                 }
             }
