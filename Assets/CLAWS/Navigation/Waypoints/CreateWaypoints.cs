@@ -5,12 +5,13 @@ using UnityEngine;
 public class CreateWaypoints : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] GameObject waypointPrefab;
+    [SerializeField] GameObject regPrefab;
+    [SerializeField] GameObject geoPrefab;
+    [SerializeField] GameObject dangerPrefab;
     [SerializeField] float offset;
 
-    public void CreateWaypoint(string type)
+    public void CreateWaypoint(string type, string title)
     {
-        
         // Get the player's position
         Vector3 playerPos = player.transform.position;
 
@@ -18,11 +19,24 @@ public class CreateWaypoints : MonoBehaviour
         Vector3 objectPos = new Vector3(playerPos.x, playerPos.y - offset, playerPos.z + 1f);
 
         // Instantiate the new object at the calculated position
-        Instantiate(waypointPrefab, objectPos, Quaternion.identity);
+        switch (type)
+        {
+            case "danger":
+                Instantiate(dangerPrefab, objectPos, Quaternion.identity);
+                break;
+            case "geosample":
+                Instantiate(geoPrefab, objectPos, Quaternion.identity);
+                break;
+            case "regular":
+                Instantiate(regPrefab, objectPos, Quaternion.identity);
+                break;
+            default:
+                Debug.Log("Unknown waypoint type");
+                break;
+        }
 
-        //////////////////////////////////////////////////
-        ///
-        // Create class with the specific type of waypoint that was created
+        // Create class oject with the specific type of waypoint that was created
+        Waypoint newWaypoint = new Waypoint(objectPos, title, (Type)System.Enum.Parse(typeof(Type), type));
     }
 
 }
