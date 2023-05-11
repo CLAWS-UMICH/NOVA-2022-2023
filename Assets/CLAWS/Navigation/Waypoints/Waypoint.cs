@@ -12,28 +12,26 @@ public enum Type
 
 public class Waypoint
 {
+    static string nextLetter = "A";
+    private string letter;
+
     private Vector3 position;
     private string title;
-    private string description;
     private Type type;
     private string json; // json property to store the serialized JSON data
 
-    public Waypoint()
-    {
-        position = new Vector3(0, 0, 0);
-        title = "DEFAULT";
-        description = "DEFAULT";
-        type = Type.Reg;
-        json = string.Empty;
-    }
-
-    public Waypoint(Vector3 pos, string ti, string desc, Type ty)
+    public Waypoint(Vector3 pos, string ti, Type ty)
     {
         position = pos;
         title = ti;
-        description = desc;
         type = ty;
+        letter = nextLetter;
         json = JsonConvert.SerializeObject(this);
+
+        nextLetter = ((char)(nextLetter[0] + 1)).ToString();
+
+        // Create instance for UI based on the type
+
     }
 
     public void SetPosition(Vector3 pos)
@@ -48,11 +46,6 @@ public class Waypoint
         json = JsonConvert.SerializeObject(this);
     }
 
-    public void SetDescription(string desc)
-    {
-        description = desc;
-        json = JsonConvert.SerializeObject(this);
-    }
 
     public void SetType(Type ty)
     {
@@ -70,10 +63,6 @@ public class Waypoint
         return title;
     }
 
-    public string GetDescription()
-    {
-        return description;
-    }
 
     public Type GetType()
     {
@@ -83,5 +72,10 @@ public class Waypoint
     public string GetJson()
     {
         return json;
+    }
+
+    public string GetLetter()
+    {
+        return letter;
     }
 }
