@@ -5,13 +5,15 @@ using Newtonsoft.Json;
 
 public enum Type
 {
-    Geo,
-    Reg,
-    Danger
+    geosample,
+    regular,
+    danger
 }
 
 public class Waypoint
 {
+    public static List<Waypoint> waypointsList = new List<Waypoint>();
+
     static string nextLetter = "A";
     private string letter;
 
@@ -29,6 +31,7 @@ public class Waypoint
         json = JsonConvert.SerializeObject(this);
 
         nextLetter = ((char)(nextLetter[0] + 1)).ToString();
+        waypointsList.Add(this);
 
         // Create instance for UI based on the type
 
