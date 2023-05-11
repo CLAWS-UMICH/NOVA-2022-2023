@@ -61,13 +61,13 @@ public class ButtonScreenController : MonoBehaviour
     IEnumerator _CloseAllScreens()
     {
         yield return new WaitForSeconds(1f);
-
+        openMapButton.SetActive(true);
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         confirmCreationScreen.SetActive(false);
         CloseNavButtons();
-        openMapButton.SetActive(true);
+        
         SetAllCullingToCamera();
     }
 
