@@ -253,12 +253,12 @@ public class ButtonScreenController : MonoBehaviour
         Transform playerPosition = mainCam.transform;
 
 
-        if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
-        {
+        //if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
+        //{
             navObject.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
 
             previousEndGoal = endPosition;
-        }
+        //}
 
         
     }
