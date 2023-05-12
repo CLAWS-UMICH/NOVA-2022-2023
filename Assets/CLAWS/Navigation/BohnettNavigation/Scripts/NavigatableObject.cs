@@ -11,7 +11,6 @@ public class NavigatableObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (isFinalDestination && other.gameObject.CompareTag("MainCamera"))
         {
             DestroyAllBreadCrumbs();
