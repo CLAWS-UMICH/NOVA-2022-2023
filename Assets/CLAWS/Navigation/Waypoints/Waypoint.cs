@@ -17,12 +17,12 @@ public class Waypoint
     static string nextLetter = "A";
     private string letter;
 
-    private Vector3 position;
+    private Transform position;
     private string title;
     private Type type;
     private string json; // json property to store the serialized JSON data
 
-    public Waypoint(Vector3 pos, string ti, Type ty)
+    public Waypoint(Transform pos, string ti, Type ty)
     {
         position = pos;
         title = ti;
@@ -33,11 +33,9 @@ public class Waypoint
         nextLetter = ((char)(nextLetter[0] + 1)).ToString();
         waypointsList.Add(this);
 
-        // Create instance for UI based on the type
-
     }
 
-    public void SetPosition(Vector3 pos)
+    public void SetPosition(Transform pos)
     {
         position = pos;
         json = JsonConvert.SerializeObject(this);
@@ -56,7 +54,7 @@ public class Waypoint
         json = JsonConvert.SerializeObject(this);
     }
 
-    public Vector3 GetPosition()
+    public Transform GetPosition()
     {
         return position;
     }
