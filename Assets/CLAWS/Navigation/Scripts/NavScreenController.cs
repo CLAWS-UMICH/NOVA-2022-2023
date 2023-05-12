@@ -15,6 +15,7 @@ public class NavScreenController : MonoBehaviour
     GameObject waypointConfirmationScreen;
 
     [SerializeField] GameObject mainCam;
+    [SerializeField] Camera mapCam;
     [SerializeField] GameObject openNavMenuButton;
     [SerializeField] GameObject gameManager;
 
@@ -22,6 +23,9 @@ public class NavScreenController : MonoBehaviour
     [SerializeField] GameObject missionTag;
     [SerializeField] GameObject obstacleTag;
     [SerializeField] GameObject UIWaypoint;
+
+    [SerializeField] GameObject landerObject;
+    [SerializeField] GameObject crewObject;
 
     string globalWaypointTextTitle;
     string globalWaypointType;
@@ -53,6 +57,7 @@ public class NavScreenController : MonoBehaviour
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
+        SetAllCullingToCamera();
 
     }
 
@@ -60,6 +65,7 @@ public class NavScreenController : MonoBehaviour
     {
         currentEndPosition = null;
         StartCoroutine(_CloseScreen());
+        SetAllCullingToCamera();
     }
 
     IEnumerator _CloseScreen()
@@ -73,6 +79,7 @@ public class NavScreenController : MonoBehaviour
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
+
     }
 
     IEnumerator _OpenNavMainMenu()
@@ -102,6 +109,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        ShowOnlyCrewIcons();
     }
 
     public void OpenCrewScreen()
@@ -119,6 +127,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        ShowOnlyGeoIcons();
     }
 
     public void OpenGeoScreen()
@@ -136,6 +145,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(true);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        ShowOnlyMissionIcons();
     }
 
     public void OpenMissionScreen()
@@ -153,6 +163,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(true);
         landerScreen.SetActive(false);
+        ShowOnlyRoverIcons();
     }
 
     public void OpenRoverScreen()
@@ -170,6 +181,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(true);
+        ShowOnlyLanderIcons();
     }
 
     public void OpenLanderScreen()
@@ -177,7 +189,61 @@ public class NavScreenController : MonoBehaviour
         StartCoroutine(_OpenLanderScreen());
     }
 
+    // Icon Stuff
+    // cam.cullingMask |= 1 << 3; adds the index 3 layer to the culling mask
+    // cam.cullingMask &= ~(1 << 3); removes the index 3 layer to the culling mask
+    // Instead of index of 3 you can use: cam.cullingMask |= 1 << LayerMask.NameToLayer("MyLayer");
 
+    void SetAllCullingToCamera()
+    {
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("GeoLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
+    }
+
+    void ShowOnlyCrewIcons()
+    {
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("GeoLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("CrewLayer");
+    }
+
+    void ShowOnlyMissionIcons()
+    {
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("GeoLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
+    }
+
+    void ShowOnlyLanderIcons()
+    {
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("GeoLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
+    }
+
+    void ShowOnlyGeoIcons()
+    {
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("MissionLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("GeoLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("RoverLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
+        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("GeoLayer");
+    }
+
+    void ShowOnlyRoverIcons()
+    {
+        SetAllCullingToCamera();
+    }
 
 
 
@@ -375,6 +441,16 @@ public class NavScreenController : MonoBehaviour
  
 
 
+    }
+
+    public void CrewTestNav()
+    {
+        updateCurrentEnd(crewObject.transform);
+    }
+
+    public void LanderTestNav()
+    {
+        updateCurrentEnd(landerObject.transform);
     }
 
     public void updateCurrentEnd(Transform end)
