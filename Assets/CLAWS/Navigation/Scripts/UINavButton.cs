@@ -20,7 +20,7 @@ public class UINavButton : MonoBehaviour
             {
                 // Pathfind to this location
                 // waypoint.GetPosition();
-                navScreenController.StartNav(waypoint.GetPosition());
+                navScreenController.updateCurrentEnd(waypoint.GetPosition());
 
             }
         }

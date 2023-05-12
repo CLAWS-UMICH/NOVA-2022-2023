@@ -28,6 +28,8 @@ public class NavScreenController : MonoBehaviour
 
     Transform previousEndGoal = null;
 
+    Transform currentEndPosition = null;
+
 
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class NavScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentEndPosition = null;
         openNavMenuButton.SetActive(true);
         mainNavScreen.SetActive(false);
         crewScreen.SetActive(false);
@@ -56,6 +58,7 @@ public class NavScreenController : MonoBehaviour
 
     public void CloseAll()
     {
+        currentEndPosition = null;
         StartCoroutine(_CloseScreen());
     }
 
@@ -374,19 +377,27 @@ public class NavScreenController : MonoBehaviour
 
     }
 
-    public void StartNav(Transform endPosition)
+    public void updateCurrentEnd(Transform end)
     {
-        Transform playerPosition = mainCam.transform;
+        currentEndPosition = end;
+    }
+
+    public void StartNav()
+    {
+        if (currentEndPosition != null)
+        {
+            Transform playerPosition = mainCam.transform;
 
 
-        //if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
-        //{
-        gameManager.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
+            //if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
+            //{
+            gameManager.GetComponent<Pathfinding>().startPathFinding(playerPosition, currentEndPosition);
 
-        previousEndGoal = endPosition;
-        //}
+            previousEndGoal = currentEndPosition;
+            //}
+            CloseAll();
+        }
 
-        CloseAll();
 
 
     }
