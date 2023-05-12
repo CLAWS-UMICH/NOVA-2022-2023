@@ -18,8 +18,6 @@ public class UINavButton : MonoBehaviour
         {
             if (waypoint.GetLetter() == letterOfObject)
             {
-                // Pathfind to this location
-                // waypoint.GetPosition();
                 navScreenController.updateCurrentEnd(waypoint.GetPosition());
 
             }

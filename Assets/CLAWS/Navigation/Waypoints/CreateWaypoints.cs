@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CreateWaypoints : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class CreateWaypoints : MonoBehaviour
         // Instantiate the new object at the calculated position
         Transform objectPosTransform;
         GameObject newObject = null;
+        TextMeshPro titleTextSign = null;
         switch (type)
         {
             case "danger":
@@ -28,9 +30,13 @@ public class CreateWaypoints : MonoBehaviour
                 break;
             case "geosample":
                 newObject = Instantiate(geoPrefab, objectPos, Quaternion.identity);
+                titleTextSign = geoPrefab.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
+                titleTextSign.text = title;
                 break;
             case "regular":
                 newObject = Instantiate(regPrefab, objectPos, Quaternion.identity);
+                titleTextSign = regPrefab.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
+                titleTextSign.text = title;
                 break;
             default:
                 Debug.Log("Unknown waypoint type");
