@@ -14,15 +14,19 @@ public class NavScreenController : MonoBehaviour
     GameObject landerScreen;
     GameObject waypointConfirmationScreen;
 
+    [SerializeField] GameObject mainCam;
     [SerializeField] GameObject openNavMenuButton;
     [SerializeField] GameObject gameManager;
 
     [SerializeField] GameObject geoTag;
     [SerializeField] GameObject missionTag;
     [SerializeField] GameObject obstacleTag;
+    [SerializeField] GameObject UIWaypoint;
 
     string globalWaypointTextTitle;
     string globalWaypointType;
+
+    Transform previousEndGoal = null;
 
 
     private void Awake()
@@ -182,11 +186,36 @@ public class NavScreenController : MonoBehaviour
     // WAYPOINTS
     // FOR TESTING ONLY SO YOU CAN SEE IF THE CONFIRMATION SCREEN OPENS USE THIS FUNCTIOn:
 
-    public void OpenConfirmationScreenTest()
+    List<GameObject> missionList = new List<GameObject>();
+    List<GameObject> geoList = new List<GameObject>();
+    List<GameObject> roverList = new List<GameObject>();
+    public List<Waypoint> allWaypoints = new List<Waypoint>();
+
+    public void OpenGeoConfirmationScreenTest()
+    {
+        string type = "geosample"; // Test type
+
+        string title = "Test geo title"; // Test title
+
+        // CALLS THE FUNCTION TO MAKE
+        OpenConfirmationScreen(type, title);
+    }
+
+    public void OpenRegConfirmationScreenTest()
+    {
+        string type = "regular"; // Test type
+
+        string title = "Test regular title"; // Test title
+
+        // CALLS THE FUNCTION TO MAKE
+        OpenConfirmationScreen(type, title);
+    }
+
+    public void OpenDangerConfirmationScreenTest()
     {
         string type = "danger"; // Test type
 
-        string title = "Test danger title"; // Test title
+        string title = "Test regular title"; // Test title
 
         // CALLS THE FUNCTION TO MAKE
         OpenConfirmationScreen(type, title);
@@ -269,11 +298,138 @@ public class NavScreenController : MonoBehaviour
     // CALL THIS WHEN THE BUTTON FOR CONFIRMING THE CREATION OF A WAYPOINT IS MADE
     public void CreateAPoint()
     {
-        // This is where you create the point or confirm you want to create one
+        int count = 0;
+        Vector3 position;
+        float yOffset;
 
+        // Create a waypoint based on the type
         CreateWaypoints way = gameManager.GetComponent<CreateWaypoints>();
         CloseConfirmation();
-        way.CreateWaypoint(globalWaypointType, globalWaypointTextTitle);
+        Waypoint newWaypoint = way.CreateWaypoint(globalWaypointType, globalWaypointTextTitle);
+        allWaypoints.Add(newWaypoint);
+
+        // Get the title and letter of the waypoint
+        string title = newWaypoint.GetTitle();
+        string letter = newWaypoint.GetLetter();
+
+        // Add the UI button element based on the type
+        switch (globalWaypointType)
+        {
+            case "geosample":
+                count++;
+                // Gets the position of the GeoButtons parent gameobject
+                // This is where the buttons will be instaniated
+                Transform geoButtons = geoScreen.transform.Find("GeoButtons");
+                position = geoButtons.position;
+
+                // Find the yOffset so that the new buttons are below each other
+                yOffset = -0.04f * geoList.Count;
+                position.y += yOffset;
+
+                // Create the buttons and set their title and letter
+                GameObject newGeoPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, geoButtons);
+                newGeoPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
+                newGeoPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+
+                geoList.Add(newGeoPrefab);
+                break;
+            case "regular":
+                count++;
+                // Gets the position of the GeoButtons parent gameobject
+                // This is where the buttons will be instaniated
+                Transform missionButtons = missionScreen.transform.Find("MissionButtons");
+                position = missionButtons.position;
+
+                // Find the yOffset so that the new buttons are below each other
+                yOffset = -0.04f * missionList.Count;
+                position.y += yOffset;
+
+                // Create the buttons and set their title and letter
+                GameObject newMissionPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, missionButtons);
+                newMissionPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
+                newMissionPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+
+                missionList.Add(newMissionPrefab);
+                break;
+            default:
+                Debug.Log("Unknown waypoint type");
+                break;
+        }
+
+        if (count > 0)
+        {
+            // The same as above but every waypoint is added to the rover buttons
+            Transform roverButtons = roverScreen.transform.Find("RoverButtons");
+            Vector3 roverPositionUI = roverButtons.position;
+            float roveryOffset = -0.04f * roverList.Count;
+            roverPositionUI.y += roveryOffset;
+            GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverPositionUI, Quaternion.identity, roverButtons);
+            newRoverUIPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
+            newRoverUIPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+
+            roverList.Add(newRoverUIPrefab);
+        }
+ 
+
+
+    }
+
+    public void StartNav(Transform endPosition)
+    {
+        Transform playerPosition = mainCam.transform;
+
+
+        //if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
+        //{
+        gameManager.GetComponent<Pathfinding>().startPathFinding(playerPosition, endPosition);
+
+        previousEndGoal = endPosition;
+        //}
+
+        CloseAll();
+
+
+    }
+
+    private bool ToggleFinalDestinationForCorrectEndTarget(Transform endPosition)
+    {
+        NavigatableObject endNavigation = endPosition.gameObject.GetComponent<NavigatableObject>();
+
+        if (endNavigation == null)
+        {
+            Debug.LogError("Object must contain the 'Navigatable Object' script in order to be considered a valid end position");
+            return false;
+        }
+        else
+        {
+            if (previousEndGoal != null)
+            {
+                NavigatableObject prevNav = previousEndGoal.GetComponent<NavigatableObject>();
+                if (prevNav == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    prevNav.ToggleFinalDestination();
+                }
+
+            }
+
+            RemoveOldPath(endNavigation);
+
+            endNavigation.ToggleFinalDestination();
+        }
+
+        return true;
+    }
+
+    private void RemoveOldPath(NavigatableObject endNav)
+    {
+        if (previousEndGoal != null)
+        {
+            endNav.DestroyAllBreadCrumbs();
+        }
     }
 
 }

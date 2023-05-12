@@ -10,7 +10,7 @@ public class CreateWaypoints : MonoBehaviour
     [SerializeField] GameObject dangerPrefab;
     [SerializeField] float offset;
 
-    public void CreateWaypoint(string type, string title)
+    public Waypoint CreateWaypoint(string type, string title)
     {
         // Get the player's position
         Vector3 playerPos = player.transform.position;
@@ -19,24 +19,29 @@ public class CreateWaypoints : MonoBehaviour
         Vector3 objectPos = new Vector3(playerPos.x, playerPos.y - offset, playerPos.z + 1f);
 
         // Instantiate the new object at the calculated position
+        Transform objectPosTransform;
+        GameObject newObject = null;
         switch (type)
         {
             case "danger":
-                Instantiate(dangerPrefab, objectPos, Quaternion.identity);
+                newObject = Instantiate(dangerPrefab, objectPos, Quaternion.identity);
                 break;
             case "geosample":
-                Instantiate(geoPrefab, objectPos, Quaternion.identity);
+                newObject = Instantiate(geoPrefab, objectPos, Quaternion.identity);
                 break;
             case "regular":
-                Instantiate(regPrefab, objectPos, Quaternion.identity);
+                newObject = Instantiate(regPrefab, objectPos, Quaternion.identity);
                 break;
             default:
                 Debug.Log("Unknown waypoint type");
                 break;
         }
 
+        objectPosTransform = newObject.transform;
+
         // Create class oject with the specific type of waypoint that was created
-        Waypoint newWaypoint = new Waypoint(objectPos, title, (Type)System.Enum.Parse(typeof(Type), type));
+        Waypoint newWaypoint = new Waypoint(objectPosTransform, title, (Type)System.Enum.Parse(typeof(Type), type));
+        return newWaypoint;
     }
 
 }
