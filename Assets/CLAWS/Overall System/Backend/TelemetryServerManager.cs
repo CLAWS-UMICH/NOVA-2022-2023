@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TSS;
+using TSS.Msgs;
 
 
 public class TelemetryServerManager : MonoBehaviour
@@ -37,6 +38,7 @@ public class TelemetryServerManager : MonoBehaviour
             if (telemMsg.GPS.Count > 0)
             {
                 Simulation.User.GPS = telemMsg.GPS[0];
+                EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
             }
             else
             {
@@ -65,6 +67,7 @@ public class TelemetryServerManager : MonoBehaviour
             if (telemMsg.UIA.Count > 0)
             {
                 Simulation.User.UIA = telemMsg.UIA[0];
+                EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
             }
             else
             {

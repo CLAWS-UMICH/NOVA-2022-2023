@@ -45,7 +45,7 @@ public class Breadcrumbs : MonoBehaviour
         Vector3 direction = currentPosition - prevCrumbPosition;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
         GameObject instantiated = Instantiate(breadcrumb, prevCrumbPosition, rotation);
-        crumbPositions.Insert(0, prevCrumbPosition); //List of positions for whenever needed
+       //crumbPositions.Insert(0, prevCrumbPosition); //List of positions for whenever needed
         instantiated.transform.SetParent(placedAllBread.transform);
         instantiated.transform.SetAsFirstSibling();
     }
@@ -58,11 +58,13 @@ public class Breadcrumbs : MonoBehaviour
             GameObject crumbChild = e.breadCrumb.transform.parent.GetChild(i).gameObject;
 
             willBreak = e.breadCrumb == crumbChild;
-
+            /*
             if (e.breadCrumb.transform.parent.gameObject == placedAllBread.gameObject)
             {
-                crumbPositions.Remove(crumbPositions[i]);
+                //Debug.Log(crumbPositions.Count);
+                //crumbPositions.RemoveAt(i);
             }
+            */
 
             Destroy(crumbChild.gameObject);
 

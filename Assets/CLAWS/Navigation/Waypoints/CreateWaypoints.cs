@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CreateWaypoints : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] GameObject waypointPrefab;
+    [SerializeField] GameObject regPrefab;
+    [SerializeField] GameObject geoPrefab;
+    [SerializeField] GameObject dangerPrefab;
     [SerializeField] float offset;
 
-    public void CreateWaypoint(string type)
+    public Waypoint CreateWaypoint(string type, string title)
     {
-        
         // Get the player's position
         Vector3 playerPos = player.transform.position;
 
@@ -18,11 +20,34 @@ public class CreateWaypoints : MonoBehaviour
         Vector3 objectPos = new Vector3(playerPos.x, playerPos.y - offset, playerPos.z + 1f);
 
         // Instantiate the new object at the calculated position
-        Instantiate(waypointPrefab, objectPos, Quaternion.identity);
+        Transform objectPosTransform;
+        GameObject newObject = null;
+        TextMeshPro titleTextSign = null;
+        switch (type)
+        {
+            case "danger":
+                newObject = Instantiate(dangerPrefab, objectPos, Quaternion.identity);
+                break;
+            case "geosample":
+                newObject = Instantiate(geoPrefab, objectPos, Quaternion.identity);
+                titleTextSign = geoPrefab.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
+                titleTextSign.text = title;
+                break;
+            case "regular":
+                newObject = Instantiate(regPrefab, objectPos, Quaternion.identity);
+                titleTextSign = regPrefab.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
+                titleTextSign.text = title;
+                break;
+            default:
+                Debug.Log("Unknown waypoint type");
+                break;
+        }
 
-        //////////////////////////////////////////////////
-        ///
-        // Create class with the specific type of waypoint that was created
+        objectPosTransform = newObject.transform;
+
+        // Create class oject with the specific type of waypoint that was created
+        Waypoint newWaypoint = new Waypoint(objectPosTransform, title, (Type)System.Enum.Parse(typeof(Type), type));
+        return newWaypoint;
     }
 
 }

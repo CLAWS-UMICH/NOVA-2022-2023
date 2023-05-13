@@ -61,13 +61,13 @@ public class ButtonScreenController : MonoBehaviour
     IEnumerator _CloseAllScreens()
     {
         yield return new WaitForSeconds(1f);
-
+        openMapButton.SetActive(true);
         mainScreen.SetActive(false);
         crewScreen.SetActive(false);
         missionScreen.SetActive(false);
         confirmCreationScreen.SetActive(false);
         CloseNavButtons();
-        openMapButton.SetActive(true);
+        
         SetAllCullingToCamera();
     }
 
@@ -281,6 +281,7 @@ public class ButtonScreenController : MonoBehaviour
                     return false;
                 } else
                 {
+                    
                     prevNav.ToggleFinalDestination();
                 }
 
@@ -288,6 +289,7 @@ public class ButtonScreenController : MonoBehaviour
 
             RemoveOldPath(endNavigation);
 
+            
             endNavigation.ToggleFinalDestination();
         }
 
@@ -304,63 +306,58 @@ public class ButtonScreenController : MonoBehaviour
 
 
     // WAYPOINTS
-    void OpenConfirmationScreen(string s)
+    // FOR TESTING ONLY SO YOU CAN SEE IF THE CONFIRMATION SCREEN OPENS USE THIS FUNCTIOn:
+
+    void OpenConfirmationScreenTest()
     {
-        Transform textTransform = confirmCreationScreen.transform.Find("Text");
-        if (textTransform != null)
+        string type = "regular"; // Test type
+
+        string title = "Test title of Waypoint"; // Test title
+
+        // CALLS THE FUNCTION TO MAKE
+        OpenConfirmationScreen(type, title);
+    }
+
+    void OpenConfirmationScreen(string type, string title)
+    {
+        // Add the type (Tag look at figma for the different tags. There can be "geosample, danger, regular"
+        // Add the title of the waypoint in text given the title parameter
+    }
+
+    // THIS FUNCTION IS CALLED BY VEGA
+    public void OpenWaypoint(string type, string title)
+    {
+        // ERROR HANDLING ON IF THE TYPE IS NOT 1 of the 3 WAYPOINT TYPES
+        switch (type)
         {
-            Transform typeTransform = textTransform.Find("Type");
-            if (typeTransform != null)
-            {
-                TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
-                if (typeText != null)
-                {
-                    typeText.text = s;
-                }
-            }
+            case "danger":
+                break;
+            case "geosample":
+                break;
+            case "regular":
+                break;
+            default:
+                Debug.Log("Unknown waypoint type");
+                break;
         }
-        confirmCreationScreen.SetActive(true);
+
+        OpenConfirmationScreen(type, title);
     }
 
-    public void OpenRegWaypoint()
-    {
-        OpenConfirmationScreen("Regular Waypoint");
-    }
 
-    public void OpenCreateGeo()
-    {
-        OpenConfirmationScreen("Geo Sample Waypoint");
-    }
-
-    public void OpenCreateDanger()
-    {
-        OpenConfirmationScreen("Danger Waypoint");
-    }
-
+    // CLOSES THE CONFIRMATION SCREEN
     public void CloseConfirmation()
     {
         confirmCreationScreen.SetActive(false);
     }
 
-    public void CreateAPoint()
+    // CALL THIS WHEN THE BUTTON FOR CONFIRMING THE CREATION OF A WAYPOINT IS MADE
+    public void CreateAPoint(string type, string title)
     {
-        string type = "";
-        Transform textTransform = confirmCreationScreen.transform.Find("Text");
-        if (textTransform != null)
-        {
-            Transform typeTransform = textTransform.Find("Type");
-            if (typeTransform != null)
-            {
-                TextMeshPro typeText = typeTransform.GetComponent<TextMeshPro>();
-                if (typeText != null)
-                {
-                    type = typeText.text;
-                }
-            }
-        }
+        // This is where you create the point or confirm you want to create one
 
         CreateWaypoints way = GetComponent<CreateWaypoints>();
-        way.CreateWaypoint(type);
+        way.CreateWaypoint(type, title);
         CloseConfirmation();
     }
 

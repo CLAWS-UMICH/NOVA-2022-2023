@@ -5,38 +5,37 @@ using Newtonsoft.Json;
 
 public enum Type
 {
-    Geo,
-    Reg,
-    Danger
+    geosample,
+    regular,
+    danger
 }
 
 public class Waypoint
 {
-    private Vector3 position;
+    public static List<Waypoint> waypointsList = new List<Waypoint>();
+
+    static string nextLetter = "A";
+    private string letter;
+
+    private Transform position;
     private string title;
-    private string description;
     private Type type;
     private string json; // json property to store the serialized JSON data
 
-    public Waypoint()
-    {
-        position = new Vector3(0, 0, 0);
-        title = "DEFAULT";
-        description = "DEFAULT";
-        type = Type.Reg;
-        json = string.Empty;
-    }
-
-    public Waypoint(Vector3 pos, string ti, string desc, Type ty)
+    public Waypoint(Transform pos, string ti, Type ty)
     {
         position = pos;
         title = ti;
-        description = desc;
         type = ty;
+        letter = nextLetter;
         json = JsonConvert.SerializeObject(this);
+
+        nextLetter = ((char)(nextLetter[0] + 1)).ToString();
+        waypointsList.Add(this);
+
     }
 
-    public void SetPosition(Vector3 pos)
+    public void SetPosition(Transform pos)
     {
         position = pos;
         json = JsonConvert.SerializeObject(this);
@@ -48,11 +47,6 @@ public class Waypoint
         json = JsonConvert.SerializeObject(this);
     }
 
-    public void SetDescription(string desc)
-    {
-        description = desc;
-        json = JsonConvert.SerializeObject(this);
-    }
 
     public void SetType(Type ty)
     {
@@ -60,7 +54,7 @@ public class Waypoint
         json = JsonConvert.SerializeObject(this);
     }
 
-    public Vector3 GetPosition()
+    public Transform GetPosition()
     {
         return position;
     }
@@ -70,10 +64,6 @@ public class Waypoint
         return title;
     }
 
-    public string GetDescription()
-    {
-        return description;
-    }
 
     public Type GetType()
     {
@@ -83,5 +73,10 @@ public class Waypoint
     public string GetJson()
     {
         return json;
+    }
+
+    public string GetLetter()
+    {
+        return letter;
     }
 }

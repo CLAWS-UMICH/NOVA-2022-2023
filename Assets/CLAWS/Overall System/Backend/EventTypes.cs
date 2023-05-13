@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TSS.Msgs;
 
 public class VitalsUpdatedEvent 
 {
@@ -89,5 +90,24 @@ public class GeoSampleUpdatedEvent
     public override string ToString()
     {
         return "<GeoSampleUpdatedEvent>: samples were updated";
+    }
+}
+
+// Event for letting us know GPS data was received from the server
+public class UpdatedGPSEvent
+{
+    
+}
+
+public class UIAMsgEvent
+{
+    public UIAMsgEvent()
+    {
+        Debug.Log("UIA Msg Event Created");
+    }
+
+    public override string ToString()
+    {
+        return "<UIAMsgEvent>: new UIA msg";
     }
 }
