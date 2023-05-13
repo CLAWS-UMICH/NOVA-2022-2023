@@ -12,7 +12,7 @@ public class Breadcrumbs : MonoBehaviour
     private Vector3 prevCrumbPosition;
     bool backtracingMode = false;
     private List<Vector3> crumbPositions = new();
-    [SerializeField] float crumbDistance = 5f;
+    [SerializeField] float crumbDistance = 2f;
 
     void Start()
     {
@@ -40,11 +40,13 @@ public class Breadcrumbs : MonoBehaviour
             distanceMoved = Vector3.Distance(currentPosition, prevCrumbPosition);
         }
     }
+
+    float offset = -0.5f;
     private void PlaceBreadcrumb()
     {
-        Vector3 direction = currentPosition - prevCrumbPosition;
+        Vector3 direction = prevCrumbPosition - currentPosition;
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(90f, 0f, 0f);
-        GameObject instantiated = Instantiate(breadcrumb, prevCrumbPosition, rotation);
+        GameObject instantiated = Instantiate(breadcrumb, prevCrumbPosition + new Vector3(0, offset, 0), rotation);
        //crumbPositions.Insert(0, prevCrumbPosition); //List of positions for whenever needed
         instantiated.transform.SetParent(placedAllBread.transform);
         instantiated.transform.SetAsFirstSibling();
