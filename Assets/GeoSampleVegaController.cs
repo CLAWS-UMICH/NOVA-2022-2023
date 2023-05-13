@@ -2,10 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class GeoSampleVegaController : MonoBehaviour
 {
-    void scrollDown() {
+    [SerializeField]
+    GameObject ListController;
+    [SerializeField]
+    GameObject ExpandedListController;
+    [SerializeField]
+    GameObject DescriptionController;
+    [SerializeField]
+    GameObject GalleryController;
 
+    //Keep track of whats in focus
+    // "list", "expand", "description", "gallery", "none"
+    string currentFocus = "";
+    //Serialized Objects- ListController, ExpandedListController, DescriptionController, Gallery, NotOpen
+
+    public void updateCurrentFocus(string NewFocus) {
+
+    }
+
+    public void scrollDown() {
+        //Dummy function
+        // VegaErrorSound();
     }
     void scrollUp() {
 
