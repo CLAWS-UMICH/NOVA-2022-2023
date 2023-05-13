@@ -190,6 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5116205010703930726}
+  - component: {fileID: 3488049217407472555}
   m_Layer: 0
   m_Name: PopUp
   m_TagString: Untagged
@@ -215,6 +216,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3488049217407472555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5116205010703930727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52833877ec38c904a94365790641e111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmp: {fileID: 5116205010051709320}
 --- !u!1 &5116205010847558880
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +379,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eaccfdc872a854e41a0c41edaf509779, type: 2}
+  - {fileID: 2100000, guid: c686c5593e1efc44497ddbfc480d2d54, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
