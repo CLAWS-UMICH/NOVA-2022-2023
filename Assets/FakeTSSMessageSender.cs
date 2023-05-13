@@ -5,12 +5,12 @@ using TSS.Msgs;
 
 public class FakeTSSMessageSender : MonoBehaviour
 {
-    public UIAMsg fakemsg = new UIAMsg();
+    public UIAMsg fakeUIA = new UIAMsg();
 
 
     public void Fake_SetUIAMsg()
     {
-        Simulation.User.UIA = fakemsg;
+        Simulation.User.UIA = fakeUIA;
         EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
     }
 }
