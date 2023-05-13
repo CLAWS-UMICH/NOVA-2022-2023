@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TSS;
-
+using TSS.Msgs;
 
 
 public class TelemetryServerManager : MonoBehaviour
@@ -67,6 +67,7 @@ public class TelemetryServerManager : MonoBehaviour
             if (telemMsg.UIA.Count > 0)
             {
                 Simulation.User.UIA = telemMsg.UIA[0];
+                EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
             }
             else
             {

@@ -98,3 +98,16 @@ public class UpdatedGPSEvent
 {
     
 }
+
+public class UIAMsgEvent
+{
+    public UIAMsgEvent()
+    {
+        Debug.Log("UIA Msg Event Created");
+    }
+
+    public override string ToString()
+    {
+        return "<UIAMsgEvent>: new UIA msg";
+    }
+}

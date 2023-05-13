@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TSS.Msgs;
 
 public class UIEgressControl : MonoBehaviour
 {
@@ -15,6 +16,17 @@ public class UIEgressControl : MonoBehaviour
     [SerializeField] GameObject oxygenRight;
     [SerializeField] GameObject oxygenVent;
     [SerializeField] GameObject depressPump;
+
+    [SerializeField] UIEgressSwitchControl i_supplyLeft;
+    [SerializeField] UIEgressSwitchControl i_wasteLeft;
+    [SerializeField] UIEgressSwitchControl i_supplyRight;
+    [SerializeField] UIEgressSwitchControl i_wasteRight;
+    [SerializeField] UIEgressSwitchControl i_pwrLeft;
+    [SerializeField] UIEgressSwitchControl i_pwrRight;
+    [SerializeField] UIEgressSwitchControl i_oxygenLeft;
+    [SerializeField] UIEgressSwitchControl i_oxygenRight;
+    [SerializeField] UIEgressSwitchControl i_oxygenVent;
+    [SerializeField] UIEgressSwitchControl i_depressPump;
 
     Dictionary<string, GameObject> switchDict = new Dictionary<string, GameObject>();
 
@@ -43,10 +55,24 @@ public class UIEgressControl : MonoBehaviour
         switchDict["DEPRESS PUMP"] = depressPump;
 
         //SetEMUOne(true);
-        SetEMUTwo(true);
+        //SetEMUTwo(true);
         //SetEnable(false);
-        SetFault(false);
+        //SetFault(false);
         //SetWaterOK(true);
+
+        i_supplyLeft = supplyLeft.GetComponent<UIEgressSwitchControl>();
+        i_wasteLeft = wasteLeft.GetComponent<UIEgressSwitchControl>();
+        i_supplyRight = supplyRight.GetComponent<UIEgressSwitchControl>();
+        i_wasteRight = wasteRight.GetComponent<UIEgressSwitchControl>();
+        i_pwrLeft = pwrLeft.GetComponent<UIEgressSwitchControl>();
+        i_pwrRight = pwrRight.GetComponent<UIEgressSwitchControl>();
+        i_oxygenLeft = oxygenLeft.GetComponent<UIEgressSwitchControl>();
+        i_oxygenRight = oxygenRight.GetComponent<UIEgressSwitchControl>();
+        i_oxygenVent = oxygenVent.GetComponent<UIEgressSwitchControl>();
+        i_depressPump = depressPump.GetComponent<UIEgressSwitchControl>();
+
+        // subscribe to UIA updates
+        EventBus.Subscribe<UIAMsgEvent>(UIA_Updated);
     }
 
     // Use to set the yellow flashing square on or off for switches
@@ -112,4 +138,21 @@ public class UIEgressControl : MonoBehaviour
         else
             enable.GetComponent<SpriteRenderer>().color = Color.gray;
     }
+
+
+    // callback functions for UIA updates
+    public void UIA_Updated(UIAMsgEvent e)
+    {
+        UIAMsg msg = Simulation.User.UIA;
+        i_supplyLeft.SetToggleState(msg.ev1_supply);
+        i_wasteLeft.SetToggleState(msg.ev_waste);
+        i_supplyRight.SetToggleState(msg.ev2_supply);
+        i_wasteRight.SetToggleState(msg.ev_waste);
+        i_pwrLeft.SetToggleState(msg.emu1);
+        i_pwrRight.SetToggleState(msg.emu2);
+        i_oxygenLeft.SetToggleState(msg.emu1_O2);
+        i_oxygenRight.SetToggleState(msg.emu2_O2);
+        i_oxygenVent.SetToggleState(msg.O2_vent);
+        i_depressPump.SetToggleState(msg.depress_pump);
+    } 
 }
