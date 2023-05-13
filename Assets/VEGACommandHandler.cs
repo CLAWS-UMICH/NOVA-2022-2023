@@ -10,6 +10,11 @@ public class VEGACommandHandler : MonoBehaviour
     public GameObject vitals;
     public GameObject navigation;
     public GameObject task_list;
+    //geosample
+    //uia
+    //messages
+    //nav -> create waypoint, go to certain waypoint
+
     //public GameObject luna;
     //add a close all
     void Start()
