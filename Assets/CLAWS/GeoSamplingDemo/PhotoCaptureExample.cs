@@ -29,7 +29,7 @@ public class PhotoCaptureExample : MonoBehaviour
         existingProfileView.SetActive(true);
     }
 
-    void LoadPhotos()
+    public void LoadPhotos()
     {
         if (Directory.Exists(Application.persistentDataPath + "/" + sampleName))
         {
@@ -38,7 +38,7 @@ public class PhotoCaptureExample : MonoBehaviour
             photoCount = d.GetFiles().Length;
             for (int i = 0; i < outputQuads.Count; ++i)
             {
-                if(i + outputQuads.Count * currentPage >= photoCount)
+                if (i + outputQuads.Count * currentPage >= photoCount)
                 {
                     Renderer r = outputQuads[i].GetComponent<Renderer>();
                     r.material = defaultMaterial;
@@ -51,6 +51,15 @@ public class PhotoCaptureExample : MonoBehaviour
                 Renderer quadRenderer = outputQuads[i].GetComponent<Renderer>();
                 quadRenderer.material = new Material(Shader.Find("Unlit/Texture"));
                 quadRenderer.material.SetTexture("_MainTex", texture);
+            }
+        }
+        else
+        {
+            photoCount = 0;
+            for (int i = 0; i < outputQuads.Count; ++i)
+            {
+                Renderer r = outputQuads[i].GetComponent<Renderer>();
+                r.material = defaultMaterial;
             }
         }
     }

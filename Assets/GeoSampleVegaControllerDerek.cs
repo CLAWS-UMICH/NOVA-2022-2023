@@ -63,6 +63,10 @@ public class GeoSampleVegaControllerDerek : MonoBehaviour
     void open_gallery() {
 
     }
+
+    /// <summary>
+    /// gallery part
+    /// </summary>
     void take_photo() {
 
     }

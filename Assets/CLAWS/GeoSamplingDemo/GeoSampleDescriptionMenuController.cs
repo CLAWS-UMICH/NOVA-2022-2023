@@ -15,6 +15,8 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
     [SerializeField] TMP_Text descriptionText;
     [SerializeField] TMP_Text lunarTimeText;
     [SerializeField] TMP_Text coordinateText;
+
+    [SerializeField] GameObject GeoSampleController;
     GeoSample sample;
     bool fromExpanded = false;
 
@@ -62,6 +64,7 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
     }
     public void openGallery() {
         photoController.GetComponent<PhotoCaptureExample>().sampleName = sample.sampleID.ToString();
+        photoController.GetComponent<PhotoCaptureExample>().LoadPhotos();
         photoController.SetActive(true);
         gameObject.SetActive(false);
     }
@@ -69,4 +72,21 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
         photoController.SetActive(false);
         gameObject.SetActive(true);
     }
+    public GeoSample GetSample()
+    {
+        return sample;
+    }
+    public void UpdateCurrentFocus()
+    {
+        if (fromExpanded)
+        {
+            GeoSampleController.GetComponent<GeoSampleVegaController>().updateCurrentFocus("expand");
+        }
+        else
+        {
+            GeoSampleController.GetComponent<GeoSampleVegaController>().updateCurrentFocus("list");
+
+        }
+    }
 }
+
