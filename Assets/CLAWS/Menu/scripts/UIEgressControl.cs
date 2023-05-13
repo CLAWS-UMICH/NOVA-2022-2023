@@ -42,10 +42,11 @@ public class UIEgressControl : MonoBehaviour
         switchDict["O2 VENT"] = oxygenVent;
         switchDict["DEPRESS PUMP"] = depressPump;
 
-        // SetEMUOne(false);
-        // SetEMUTwo(false);
-        // SetEnable(false);
-        // SetFault(false);
+        //SetEMUOne(true);
+        SetEMUTwo(true);
+        //SetEnable(false);
+        SetFault(false);
+        //SetWaterOK(true);
     }
 
     // Use to set the yellow flashing square on or off for switches
