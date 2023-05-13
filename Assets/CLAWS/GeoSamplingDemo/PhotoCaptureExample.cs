@@ -18,7 +18,6 @@ public class PhotoCaptureExample : MonoBehaviour
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material defaultConfirmMaterial;
     [SerializeField] private GameObject existingProfileView;
-    [SerializeField] private GameObject newProfileView;
     [SerializeField] private GameObject confirmationQuad;
     [SerializeField] private GameObject cameraView;
 
@@ -27,16 +26,7 @@ public class PhotoCaptureExample : MonoBehaviour
     void Awake()
     {
         LoadPhotos();
-        if (photoCount == 0)
-        {
-            existingProfileView.SetActive(false);
-            newProfileView.SetActive(true);
-        }
-        else
-        {
-            existingProfileView.SetActive(true);
-            newProfileView.SetActive(false);
-        }
+        existingProfileView.SetActive(true);
     }
 
     void LoadPhotos()
@@ -177,13 +167,6 @@ public class PhotoCaptureExample : MonoBehaviour
     public void CloseOpenView(GameObject panel)
     {
         panel.SetActive(false);
-        if(photoCount == 0)
-        {
-            newProfileView.SetActive(true);
-        }
-        else
-        {
-            existingProfileView.SetActive(true);
-        }
+        existingProfileView.SetActive(true);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [System.Serializable]
-public class GeoSampleListController : MonoBehaviour
+public class GeoSampleListExpandedController : MonoBehaviour
 {
     [SerializeField]
     GameObject[] sampleObjects;
