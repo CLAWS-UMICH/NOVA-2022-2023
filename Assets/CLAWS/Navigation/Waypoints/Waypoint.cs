@@ -7,7 +7,8 @@ public enum Type
 {
     geosample,
     regular,
-    danger
+    danger,
+    crew
 }
 
 public class Waypoint

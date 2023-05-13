@@ -23,6 +23,7 @@ public class CreateWaypoints : MonoBehaviour
         Transform objectPosTransform;
         GameObject newObject = null;
         TextMeshPro titleTextSign = null;
+        TextMeshPro letterTextSign = null;
         switch (type)
         {
             case "danger":
@@ -30,13 +31,15 @@ public class CreateWaypoints : MonoBehaviour
                 break;
             case "geosample":
                 newObject = Instantiate(geoPrefab, objectPos, Quaternion.identity);
-                titleTextSign = geoPrefab.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
+                titleTextSign = newObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
                 titleTextSign.text = title;
+
                 break;
             case "regular":
                 newObject = Instantiate(regPrefab, objectPos, Quaternion.identity);
-                titleTextSign = regPrefab.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
+                titleTextSign = newObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
                 titleTextSign.text = title;
+
                 break;
             default:
                 Debug.Log("Unknown waypoint type");
@@ -47,6 +50,12 @@ public class CreateWaypoints : MonoBehaviour
 
         // Create class oject with the specific type of waypoint that was created
         Waypoint newWaypoint = new Waypoint(objectPosTransform, title, (Type)System.Enum.Parse(typeof(Type), type));
+
+        if (type == "geosample" || type == "regular")
+        {
+            letterTextSign = newObject.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>();
+            letterTextSign.text = newWaypoint.GetLetter();
+        }
         return newWaypoint;
     }
 
