@@ -73,7 +73,181 @@ public class UIEgressControl : MonoBehaviour
 
         // subscribe to UIA updates
         EventBus.Subscribe<UIAMsgEvent>(UIA_Updated);
+        UIA_Updated(new UIAMsgEvent());
+
+        StartCoroutine(WaitForStep0());
     }
+
+    
+    // handle each step of the UIA procedure
+    IEnumerator WaitForStep0()
+    {
+        yield return new WaitForSeconds(3f);
+        PopUpManager.MakePopup("Set All UIA Switches to Off");
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step 0 condition
+            if (Simulation.User.UIA.emu1 == false 
+                && Simulation.User.UIA.ev1_supply == false
+                && Simulation.User.UIA.emu1_O2 == false
+                && Simulation.User.UIA.emu2 == false
+                && Simulation.User.UIA.ev2_supply == false
+                && Simulation.User.UIA.ev_waste == false
+                && Simulation.User.UIA.emu2_O2 == false
+                && Simulation.User.UIA.O2_vent == false
+                && Simulation.User.UIA.depress_pump == false)
+            {
+                break;
+            }
+        }
+        // step 0 complete
+        yield return new WaitForSeconds(3f);
+        StartCoroutine(WaitForStep1());
+    }
+
+    IEnumerator WaitForStep1()
+    {
+        PopUpManager.MakePopup("Switch EMU 1 PWR to ON");
+        SetSwitchFlashing("POWER 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1 == true)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("POWER 1", false);
+        SetEMUOne(true);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WaitForStep2());
+    }
+
+    IEnumerator WaitForStep2()
+    {
+        PopUpManager.MakePopup("Switch O2 Vent to OPEN until < 23 psi");
+        SetSwitchFlashing("O2 VENT", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.O2_vent == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("O2 VENT", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.O2_vent < 23)
+            {
+                break;
+            }
+            
+        }
+        PopUpManager.MakePopup("Switch O2 Vent to CLOSE");
+        SetSwitchFlashing("O2 VENT", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.O2_vent == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("O2 VENT", false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WaitForStep3());
+    }
+
+    IEnumerator WaitForStep3()
+    {
+        // supply
+        PopUpManager.MakePopup("Switch O2 Supply to OPEN until > 3000 psi");
+        SetSwitchFlashing("OXYGEN 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1_O2 == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("OXYGEN 1", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.o2_supply_pressure1 > 3000)
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
+        SetSwitchFlashing("OXYGEN 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1_O2 == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("OXYGEN 1", false);
+        yield return new WaitForSeconds(1f);
+
+        // vent
+        PopUpManager.MakePopup("Switch O2 Vent to OPEN until < 23 psi");
+        SetSwitchFlashing("O2 VENT", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.O2_vent == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("O2 VENT", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.O2_vent < 23)
+            {
+                break;
+            }
+
+        }
+        PopUpManager.MakePopup("Switch O2 Vent to CLOSE");
+        SetSwitchFlashing("O2 VENT", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.O2_vent == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("O2 VENT", false);
+        yield return new WaitForSeconds(1f);
+        // StartCoroutine(WaitForStep4());
+    }
+
+
+
 
     // Use to set the yellow flashing square on or off for switches
     // name is the name of the switch you want to affect
