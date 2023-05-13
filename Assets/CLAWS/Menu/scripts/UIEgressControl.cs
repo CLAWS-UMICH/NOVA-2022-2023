@@ -5,6 +5,9 @@ using TSS.Msgs;
 
 public class UIEgressControl : MonoBehaviour
 {
+    public int counter = 0;
+    public FakeTSSMessageSender fakeUIA;
+
     // Drag Switches here so they can be added to dictionary
     [SerializeField] GameObject supplyLeft;
     [SerializeField] GameObject wasteLeft;
@@ -70,6 +73,9 @@ public class UIEgressControl : MonoBehaviour
         i_oxygenRight = oxygenRight.GetComponent<UIEgressSwitchControl>();
         i_oxygenVent = oxygenVent.GetComponent<UIEgressSwitchControl>();
         i_depressPump = depressPump.GetComponent<UIEgressSwitchControl>();
+
+        // fake UIA
+        fakeUIA = GameObject.Find("Simulation Manager").GetComponent<FakeTSSMessageSender>();
 
         // subscribe to UIA updates
         EventBus.Subscribe<UIAMsgEvent>(UIA_Updated);
@@ -144,7 +150,7 @@ public class UIEgressControl : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             // step condition
-            if (Simulation.User.UIA_CONTROLS.O2_vent < 23)
+            if (Simulation.User.UIA_CONTROLS.o2_supply_pressure1 < 23)
             {
                 break;
             }
@@ -223,7 +229,7 @@ public class UIEgressControl : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             // step condition
-            if (Simulation.User.UIA_CONTROLS.O2_vent < 23)
+            if (Simulation.User.UIA_CONTROLS.o2_supply_pressure1 < 23)
             {
                 break;
             }
@@ -247,6 +253,103 @@ public class UIEgressControl : MonoBehaviour
     }
 
 
+
+
+    public void Next()
+    {
+        switch (counter)
+        {
+            case 0:
+                fakeUIA.fakeUIA.ev1_supply = false;
+                fakeUIA.fakeUIA.emu2 = false;
+                break;
+            case 1:
+                fakeUIA.fakeUIA.emu1 = true;
+                break;
+            case 2:
+                fakeUIA.fakeUIA.O2_vent = true;
+                break;
+            case 3:
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 22;
+                break;
+            case 4:
+                fakeUIA.fakeUIA.O2_vent = false;
+                break;
+            case 5:
+                fakeUIA.fakeUIA.emu1_O2 = true;
+                break;
+            case 6:
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 3000;
+                break;
+            case 7:
+                fakeUIA.fakeUIA.emu1_O2 = false;
+                break;
+            case 8:
+                fakeUIA.fakeUIA.O2_vent = true;
+                break;
+            case 9:
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 22;
+                break;
+            case 10:
+                fakeUIA.fakeUIA.O2_vent = false;
+                break;
+            case 11:
+                fakeUIA.fakeUIA.emu1_O2 = true;
+                break;
+            case 12:
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 1500;
+                break;
+            case 13:
+                fakeUIA.fakeUIA.emu1_O2 = false;
+                break;
+            case 14:
+                fakeUIA.fakeUIA.ev_waste = true;
+                break;
+            case 15:
+                fakeUIA.fakeUIAControl.ev1_waste = "true";
+                break;
+            case 16:
+                fakeUIA.fakeUIA.ev_waste = false;
+                break;
+            case 17:
+                fakeUIA.fakeUIA.ev1_supply = true;
+                break;
+            case 18:
+                fakeUIA.fakeUIAControl.ev1_supply = "true";
+                break;
+            case 19:
+                fakeUIA.fakeUIA.ev1_supply = false;
+                break;
+            case 20:
+                fakeUIA.fakeUIA.depress_pump = true;
+                break;
+            case 21:
+                fakeUIA.fakeUIAControl.depress_pump = 10;
+                break;
+            case 22:
+                fakeUIA.fakeUIA.depress_pump = false;
+                break;
+            case 23:
+                fakeUIA.fakeUIA.emu1_O2 = true;
+                break;
+            case 24:
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 3000;
+                break;
+            case 25:
+                fakeUIA.fakeUIA.emu1_O2 = false;
+                break;
+            case 26:
+                fakeUIA.fakeUIA.depress_pump = true;
+                break;
+            case 27:
+                fakeUIA.fakeUIAControl.depress_pump = 0;
+                break;
+            case 28:
+                fakeUIA.fakeUIA.depress_pump = false;
+                break;
+        }
+        counter++;
+    }
 
 
     // Use to set the yellow flashing square on or off for switches
