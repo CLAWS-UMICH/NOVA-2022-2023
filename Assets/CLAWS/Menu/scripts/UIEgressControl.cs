@@ -111,7 +111,6 @@ public class UIEgressControl : MonoBehaviour
         yield return new WaitForSeconds(3f);
         StartCoroutine(WaitForStep1());
     }
-
     IEnumerator WaitForStep1()
     {
         PopUpManager.MakePopup("Switch EMU 1 PWR to ON");
@@ -131,7 +130,6 @@ public class UIEgressControl : MonoBehaviour
         yield return new WaitForSeconds(1f);
         StartCoroutine(WaitForStep2());
     }
-
     IEnumerator WaitForStep2()
     {
         PopUpManager.MakePopup("Switch O2 Vent to OPEN until < 23 psi");
@@ -172,7 +170,6 @@ public class UIEgressControl : MonoBehaviour
         yield return new WaitForSeconds(1f);
         StartCoroutine(WaitForStep3());
     }
-
     IEnumerator WaitForStep3()
     {
         // supply
@@ -249,9 +246,241 @@ public class UIEgressControl : MonoBehaviour
         // step complete
         SetSwitchFlashing("O2 VENT", false);
         yield return new WaitForSeconds(1f);
-        // StartCoroutine(WaitForStep4());
+        StartCoroutine(WaitForStep4());
     }
+    IEnumerator WaitForStep4()
+    {
+        PopUpManager.MakePopup("Switch O2 Supply to OPEN until > 1500 psi");
+        SetSwitchFlashing("OXYGEN 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1_O2 == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("OXYGEN 1", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.o2_supply_pressure1 > 1500)
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
+        SetSwitchFlashing("OXYGEN 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1_O2 == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("OXYGEN 1", false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WaitForStep5());
+    }
+    IEnumerator WaitForStep5()
+    {
+        // dump waste
+        PopUpManager.MakePopup("Switch O2 EV-1 Waste to OPEN until water level < 5%");
+        SetSwitchFlashing("WASTE 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.ev_waste == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("WASTE 1", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.ev1_waste == "true")
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch EV-1 Waste to CLOSE");
+        SetSwitchFlashing("WASTE 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.ev_waste == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("WASTE 1", false);
+        yield return new WaitForSeconds(1f);
 
+        // refill waste
+        PopUpManager.MakePopup("Switch O2 EV-1 Supply to OPEN until water level > 95%");
+        SetSwitchFlashing("SUPPLY 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.ev1_supply == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("SUPPLY 1", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.ev1_supply == "true")
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch EV-1 Supply to CLOSE");
+        SetSwitchFlashing("SUPPLY 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.ev1_supply == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("SUPPLY 1", false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WaitForStep6());
+    }
+    IEnumerator WaitForStep6()
+    {
+        PopUpManager.MakePopup("Switch Depress Pump to ON until airlock pressure < 10.2 psi");
+        SetSwitchFlashing("DEPRESS PUMP", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.depress_pump == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("DEPRESS PUMP", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.depress_pump < 10.2)
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch Depress Pump to OFF");
+        SetSwitchFlashing("DEPRESS PUMP", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.depress_pump == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("DEPRESS PUMP", false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WaitForStep7());
+    }
+    IEnumerator WaitForStep7()
+    {
+        PopUpManager.MakePopup("Switch O2 Supply to OPEN until > 3000 psi");
+        SetSwitchFlashing("OXYGEN 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1_O2 == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("OXYGEN 1", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.o2_supply_pressure1 > 3000)
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
+        SetSwitchFlashing("OXYGEN 1", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.emu1_O2 == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("OXYGEN 1", false);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(WaitForStep8());
+    }
+    IEnumerator WaitForStep8()
+    {
+        PopUpManager.MakePopup("Switch Depress Pump to ON until airlock pressure < 0.1 psi");
+        SetSwitchFlashing("DEPRESS PUMP", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.depress_pump == true)
+            {
+                break;
+            }
+        }
+        SetSwitchFlashing("DEPRESS PUMP", false);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA_CONTROLS.depress_pump < 0.1)
+            {
+                break;
+            }
+        }
+        PopUpManager.MakePopup("Switch Depress Pump to OFF");
+        SetSwitchFlashing("DEPRESS PUMP", true);
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            // step condition
+            if (Simulation.User.UIA.depress_pump == false)
+            {
+                break;
+            }
+        }
+        // step complete
+        SetSwitchFlashing("DEPRESS PUMP", false);
+        yield return new WaitForSeconds(1f);
+        PopUpManager.MakePopup("UIA Procedures are complete. You may exit the airlock");
+    }
 
 
 
@@ -279,7 +508,7 @@ public class UIEgressControl : MonoBehaviour
                 fakeUIA.fakeUIA.emu1_O2 = true;
                 break;
             case 6:
-                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 3000;
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 3001;
                 break;
             case 7:
                 fakeUIA.fakeUIA.emu1_O2 = false;
@@ -297,7 +526,7 @@ public class UIEgressControl : MonoBehaviour
                 fakeUIA.fakeUIA.emu1_O2 = true;
                 break;
             case 12:
-                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 1500;
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 1501;
                 break;
             case 13:
                 fakeUIA.fakeUIA.emu1_O2 = false;
@@ -333,7 +562,7 @@ public class UIEgressControl : MonoBehaviour
                 fakeUIA.fakeUIA.emu1_O2 = true;
                 break;
             case 24:
-                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 3000;
+                fakeUIA.fakeUIAControl.o2_supply_pressure1 = 3001;
                 break;
             case 25:
                 fakeUIA.fakeUIA.emu1_O2 = false;

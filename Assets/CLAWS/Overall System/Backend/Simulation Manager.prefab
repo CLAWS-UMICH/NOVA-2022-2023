@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8267535550734177875}
   - component: {fileID: 8267535550734177966}
   - component: {fileID: 8267535550734177873}
+  - component: {fileID: 1713950596}
   m_Layer: 0
   m_Name: Simulation Manager
   m_TagString: Untagged
@@ -97,6 +98,104 @@ MonoBehaviour:
     activeTask: 0
   AstronautMessaging:
     priority: 
+  AstronautGeoSamples:
+    geoSampleList: []
+  EVA:
+    id: 0
+    room: 0
+    isRunning: 0
+    isPaused: 0
+    time: 0
+    timer: 
+    startedAt: 
+    heart_bpm: 0
+    p_sub: 0
+    p_suit: 0
+    t_sub: 0
+    v_fan: 0
+    p_o2: 0
+    rate_o2: 0
+    batteryPercent: 0
+    cap_battery: 0
+    battery_out: 0
+    p_h2o_g: 0
+    p_h2o_l: 0
+    p_sop: 0
+    rate_sop: 0
+    t_battery: 
+    t_oxygenPrimary: 0
+    t_oxygenSec: 0
+    ox_primary: 0
+    ox_secondary: 0
+    t_oxygen: 
+    cap_water: 0
+    t_water: 
+    createdAt: 
+    updatedAt: 
+  IMU:
+    id: 0
+    heading: 0
+    accel_x: 0
+    accel_y: 0
+    accel_z: 0
+    gyro_x: 0
+    gyro_y: 0
+    gyro_z: 0
+    mag_x: 0
+    mag_y: 0
+    mag_z: 0
+  GPS:
+    id: 0
+    device: 
+    mode: 0
+    time: 
+    ept: 0
+    lat: 0
+    lon: 0
+    alt: 0
+    epx: 0
+    epy: 0
+    epv: 0
+    track: 0
+    speed: 0
+    climb: 0
+    eps: 0
+    epc: 0
+  UIA:
+    id: 0
+    room: 0
+    started_at: 
+    emu1: 0
+    ev1_supply: 0
+    emu1_O2: 0
+    emu2: 0
+    ev2_supply: 0
+    ev_waste: 0
+    emu2_O2: 0
+    O2_vent: 0
+    depress_pump: 0
+    createdAt: 
+    updatedAt: 
+  UIA_CONTROLS:
+    id: 0
+    room: 0
+    started_at: 
+    emu1: 
+    emu2: 
+    o2_supply_pressure1: 0
+    o2_supply_pressure2: 0
+    ev1_supply: 
+    ev2_supply: 
+    ev1_waste: 
+    ev2_waste: 
+    emu1_O2: 
+    emu2_O2: 
+    oxygen_supp_out1: 0
+    oxygen_supp_out2: 0
+    O2_vent: 0
+    depress_pump: 0
+    createdAt: 
+    updatedAt: 
 --- !u!114 &8267535550734177873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +208,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d97fb5a4b3733438fb6564e5189624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1713950596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267535550734177874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7bb5d6988ab7a4285ef5f4f3dfa4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fakeUIA:
+    id: 0
+    room: 0
+    started_at: 
+    emu1: 0
+    ev1_supply: 1
+    emu1_O2: 0
+    emu2: 1
+    ev2_supply: 0
+    ev_waste: 0
+    emu2_O2: 0
+    O2_vent: 0
+    depress_pump: 0
+    createdAt: 
+    updatedAt: 
+  fakeUIAControl:
+    id: 0
+    room: 0
+    started_at: 
+    emu1: 
+    emu2: 
+    o2_supply_pressure1: 23
+    o2_supply_pressure2: 0
+    ev1_supply: 
+    ev2_supply: 
+    ev1_waste: 
+    ev2_waste: 
+    emu1_O2: 
+    emu2_O2: 
+    oxygen_supp_out1: 0
+    oxygen_supp_out2: 0
+    O2_vent: 0
+    depress_pump: 100
+    createdAt: 
+    updatedAt: 
