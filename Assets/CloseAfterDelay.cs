@@ -11,6 +11,7 @@ public class CloseAfterDelay : MonoBehaviour
 
     public Mode mode;
     public float delay = 1;
+    public bool destroy = false;
 
     void Start()
     {
@@ -31,6 +32,10 @@ public class CloseAfterDelay : MonoBehaviour
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(delay);
+        if (destroy)
+        {
+            Destroy(gameObject);
+        }
         gameObject.SetActive(false);
     }
 }
