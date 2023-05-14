@@ -61,6 +61,7 @@ public class NavScreenController : MonoBehaviour
     void Start()
     {
         currentSelectedButton = null;
+        playerWithinDistance = false;
         createPreDeterminedPoints();
         currentEndPosition = null;
         currentScreenOpen = "";
@@ -74,11 +75,12 @@ public class NavScreenController : MonoBehaviour
         waypointConfirmationScreen.SetActive(false);
         SetAllCullingToCamera();
 
+
     }
 
     public void CloseAll()
     {
-
+        playerWithinDistance = false;
         currentScreenOpen = "";
         currentEndPosition = null;
         StartCoroutine(_CloseScreen());
@@ -536,14 +538,15 @@ public class NavScreenController : MonoBehaviour
 
     private void createRoverButtons(string title, string letter)
     {
-        Transform roverButtons = roverScreen.transform.Find("RoverButtons");
-        Vector3 roverPositionUI = roverButtons.position;
+        Transform roverButton = roverScreen.transform.Find("RoverButtons");
+        Vector3 roverPositionUI = roverButton.position;
         float roveryOffset = -0.04f * roverList.Count;
         roverPositionUI.y += roveryOffset;
-        GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverPositionUI, Quaternion.identity, roverButtons);
+        GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverPositionUI, Quaternion.identity, roverButton);
         newRoverUIPrefab.transform.rotation = Quaternion.identity;
         newRoverUIPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newRoverUIPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+        roverButtons.Add(newRoverUIPrefab);
         testButtons.Add(newRoverUIPrefab);
     }
 
@@ -551,19 +554,19 @@ public class NavScreenController : MonoBehaviour
     {
         // Gets the position of the GeoButtons parent gameobject
         // This is where the buttons will be instaniated
-        Transform geoButtons = geoScreen.transform.Find("GeoButtons");
-        Vector3 position = geoButtons.position;
+        Transform geoButton = geoScreen.transform.Find("GeoButtons");
+        Vector3 position = geoButton.position;
 
         // Find the yOffset so that the new buttons are below each other
         float yOffset = -0.04f * geoList.Count;
         position.y += yOffset;
 
         // Create the buttons and set their title and letter
-        GameObject newGeoPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, geoButtons);
+        GameObject newGeoPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, geoButton);
         newGeoPrefab.transform.rotation = Quaternion.identity;
-        Debug.Log("Rotation: " + newGeoPrefab.transform.rotation);
         newGeoPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newGeoPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+        geoButtons.Add(newGeoPrefab);
         testButtons.Add(newGeoPrefab);
     }
 
@@ -571,18 +574,19 @@ public class NavScreenController : MonoBehaviour
     {
         // Gets the position of the GeoButtons parent gameobject
         // This is where the buttons will be instaniated
-        Transform missionButtons = missionScreen.transform.Find("MissionButtons");
-        Vector3 position = missionButtons.position;
+        Transform missionButton = missionScreen.transform.Find("MissionButtons");
+        Vector3 position = missionButton.position;
 
         // Find the yOffset so that the new buttons are below each other
         float yOffset = -0.04f * missionList.Count;
         position.y += yOffset;
 
         // Create the buttons and set their title and letter
-        GameObject newMissionPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, missionButtons);
+        GameObject newMissionPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, missionButton);
         newMissionPrefab.transform.rotation = Quaternion.identity;
         newMissionPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newMissionPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+        missionButtons.Add(newMissionPrefab);
         testButtons.Add(newMissionPrefab);
     }
 
@@ -613,34 +617,77 @@ public class NavScreenController : MonoBehaviour
 
     public void updateCurrentEnd(Transform end)
     {
+        playerWithinDistance = false;
         currentEndPosition = end;
     }
 
-    public void SelectWaypointLetter()
+    // Mission E
+    public void SelectWaypointLetter(string letter)
     {
+        List<GameObject> buttons = new List<GameObject>();
+
         switch (currentScreenOpen)
         {
-            case "Menu":
-
-                break;
             case "Crew":
-
+                buttons = crewButtons;
                 break;
             case "Geo":
-
+                buttons = geoButtons;
                 break;
             case "Mission":
-
+                buttons = missionButtons;
                 break;
             case "Rover":
-
-                break;
-            case "Lander":
-
+                buttons = roverButtons;
                 break;
             default:
                 Debug.Log("No Screen Open For Navigation");
                 break;
+        }
+
+        // Loop through the list and get the script on the UINavButton game object
+        foreach (GameObject button in buttons)
+        {
+            UINavButton uiScriptButton = button.GetComponent<UINavButton>();
+            if (uiScriptButton.GetLetter() == letter)
+            {
+                uiScriptButton.ButtonSelected();
+                break;
+            }
+        }
+
+    }
+    bool playerWithinDistance = false;
+
+    public void StartCheckingDistance(Transform end)
+    {
+        playerWithinDistance = false;
+        StartCoroutine(CheckPlayerDistanceCoroutine(end));
+    }
+
+    IEnumerator CheckPlayerDistanceCoroutine(Transform end)
+    {
+        while (!playerWithinDistance)
+        {
+            CheckPlayerDistance(end);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private void CheckPlayerDistance(Transform end)
+    {
+
+        // Check the distance between the player and this gameobject
+        float distanceToPlayer = Vector3.Distance(mainCam.transform.position, end.position);
+
+        // If the distance is within the threshold, set the bool variable to true and stop looping
+        if (distanceToPlayer <= 5f)
+        {
+            playerWithinDistance = true;
+            CancelInvoke("CheckPlayerDistance");
+
+            // Destroy breadcrumbs here
+            Debug.Log("Cancel Pathfding");
         }
     }
 
@@ -654,7 +701,7 @@ public class NavScreenController : MonoBehaviour
             //if (ToggleFinalDestinationForCorrectEndTarget(endPosition))
             //{
             gameManager.GetComponent<Pathfinding>().startPathFinding(playerPosition, currentEndPosition);
-
+            StartCheckingDistance(currentEndPosition);
             previousEndGoal = currentEndPosition;
             //}
             CloseAll();

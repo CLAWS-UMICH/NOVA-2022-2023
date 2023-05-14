@@ -34,4 +34,9 @@ public class UINavButton : MonoBehaviour
         navScreenController.turnOffPastButtonLightBlue();
         navScreenController.updateCurrentSelectedButton(lightBlueBorder);
     }
+
+    public string GetLetter()
+    {
+        return letterOfObject;
+    }
 }
