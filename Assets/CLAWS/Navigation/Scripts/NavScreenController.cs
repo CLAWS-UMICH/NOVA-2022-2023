@@ -6,6 +6,8 @@ using System;
 
 public class NavScreenController : MonoBehaviour
 {
+    GameObject test;
+
     GameObject mainNavScreen;
     GameObject crewScreen;
     GameObject geoScreen;
@@ -114,6 +116,7 @@ public class NavScreenController : MonoBehaviour
 
     public void OpenNavMainMenu()
     {
+        fixRotationOfButtons();
         currentScreenOpen = "Menu";
         StartCoroutine(_OpenNavMainMenu());
     }
@@ -298,6 +301,28 @@ public class NavScreenController : MonoBehaviour
     List<Waypoint> roverList = new List<Waypoint>();
     List<Waypoint> crewList = new List<Waypoint>();
     public List<Waypoint> allWaypoints = new List<Waypoint>();
+
+    List<GameObject> missionButtons = new List<GameObject>();
+    List<GameObject> geoButtons = new List<GameObject>();
+    List<GameObject> roverButtons = new List<GameObject>();
+    List<GameObject> crewButtons = new List<GameObject>();
+
+    List<GameObject> testButtons = new List<GameObject>();
+
+    private void fixRotationOfButtons()
+    {
+        while (testButtons.Count > 0)
+        {
+            // Get the first button in the list
+            GameObject button = testButtons[0];
+
+            // Set the rotation of the button to (0,0,0)
+            button.transform.localRotation = Quaternion.identity;
+
+            // Remove the button from the list
+            testButtons.RemoveAt(0);
+        }
+    }
 
     private void createPreDeterminedPoints()
     {
@@ -516,8 +541,10 @@ public class NavScreenController : MonoBehaviour
         float roveryOffset = -0.04f * roverList.Count;
         roverPositionUI.y += roveryOffset;
         GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverPositionUI, Quaternion.identity, roverButtons);
+        newRoverUIPrefab.transform.rotation = Quaternion.identity;
         newRoverUIPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newRoverUIPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+        testButtons.Add(newRoverUIPrefab);
     }
 
     private void createGeoButton(string title, string letter)
@@ -533,9 +560,11 @@ public class NavScreenController : MonoBehaviour
 
         // Create the buttons and set their title and letter
         GameObject newGeoPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, geoButtons);
+        newGeoPrefab.transform.rotation = Quaternion.identity;
+        Debug.Log("Rotation: " + newGeoPrefab.transform.rotation);
         newGeoPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newGeoPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
-
+        testButtons.Add(newGeoPrefab);
     }
 
     private void createRegularButton(string title, string letter)
@@ -551,8 +580,10 @@ public class NavScreenController : MonoBehaviour
 
         // Create the buttons and set their title and letter
         GameObject newMissionPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, missionButtons);
+        newMissionPrefab.transform.rotation = Quaternion.identity;
         newMissionPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newMissionPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
+        testButtons.Add(newMissionPrefab);
     }
 
 
