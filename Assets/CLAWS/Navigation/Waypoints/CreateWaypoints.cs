@@ -12,7 +12,7 @@ public class CreateWaypoints : MonoBehaviour
     [SerializeField] float offset;
     [SerializeField] float yOffset = 0f;
     Vector3 objectPos;
-    bool playerWithinDistance = false;
+    
     public Waypoint CreateWaypoint(string type, string title)
     {
         // Get the player's position
