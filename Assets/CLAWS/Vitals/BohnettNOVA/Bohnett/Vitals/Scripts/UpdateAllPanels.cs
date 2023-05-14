@@ -20,6 +20,8 @@ public class UpdateAllPanels : MonoBehaviour
 {
     private VitalPanel[] vitalPanels;
     private EVAMsg vitals;
+
+    public TextMeshProUGUI Timer;
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,6 +39,8 @@ public class UpdateAllPanels : MonoBehaviour
             UpdateVitalPanel(panel, vitalPanels[i]);
 
         }
+
+        Timer.text = vitals.timer;
     }
 
     private void UpdateVitalPanel(PanelInformation panel, VitalPanel vital)

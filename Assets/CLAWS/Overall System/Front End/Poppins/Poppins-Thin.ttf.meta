@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 5af6bb0d7eafbf145a838520fbfacbdd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Poppins Thin
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e91346fbe6fc4174a8b28e74971586aa, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
