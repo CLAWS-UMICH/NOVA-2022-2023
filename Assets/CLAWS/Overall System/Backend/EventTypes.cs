@@ -9,6 +9,7 @@ public class VitalsUpdatedEvent
 	    return "<VitalsUpdatedEvent>: vitals were updated";
     }
 }
+//Deprecated
 public class TasksUpdatedEvent 
 {
     public int index;

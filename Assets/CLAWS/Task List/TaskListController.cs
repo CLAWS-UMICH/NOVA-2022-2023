@@ -24,7 +24,8 @@ public class TaskListController : MonoBehaviour
 
     void Start()
     {
-        EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
+        //EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
+        refresh();
     }
 
     public void refresh()

@@ -11,8 +11,8 @@ public class TaskCollapse : MonoBehaviour
 
     private void Start()
     {
-        taskView.SetActive(true);
-        expanded.SetActive(false);
+        taskView.SetActive(false);
+        expanded.SetActive(true);
     }
 
     public void Toggle()

@@ -33,11 +33,11 @@ public class SubtaskListController : MonoBehaviour
         taskController = GetComponent<TaskListController>();
         currentIndex = 0;
         selectedIndex = -1;
-        EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
+        UpdateList();
+        //EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
     }
-    private void RecieveNewList(TasksUpdatedEvent e)
+    private void UpdateList()
     {
-        taskIndex = e.index;
         UpdateHoldingContainer();
         Render();
     }
