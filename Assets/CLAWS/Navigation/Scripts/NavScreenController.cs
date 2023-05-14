@@ -42,6 +42,8 @@ public class NavScreenController : MonoBehaviour
 
     Transform currentEndPosition = null;
 
+    private GameObject currentSelectedButton = null;
+
 
     private void Awake()
     {
@@ -56,6 +58,7 @@ public class NavScreenController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentSelectedButton = null;
         createPreDeterminedPoints();
         currentEndPosition = null;
         currentScreenOpen = "";
@@ -73,6 +76,7 @@ public class NavScreenController : MonoBehaviour
 
     public void CloseAll()
     {
+
         currentScreenOpen = "";
         currentEndPosition = null;
         StartCoroutine(_CloseScreen());
@@ -90,7 +94,8 @@ public class NavScreenController : MonoBehaviour
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
-
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
     }
 
     IEnumerator _OpenNavMainMenu()
@@ -103,6 +108,8 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
     }
 
     public void OpenNavMainMenu()
@@ -121,6 +128,8 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
         ShowOnlyCrewIcons();
     }
 
@@ -140,6 +149,8 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
         ShowOnlyGeoIcons();
     }
 
@@ -159,6 +170,8 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(true);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
         ShowOnlyMissionIcons();
     }
 
@@ -178,6 +191,8 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(true);
         landerScreen.SetActive(false);
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
         ShowOnlyRoverIcons();
     }
 
@@ -197,6 +212,8 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(true);
+        turnOffPastButtonLightBlue();
+        currentSelectedButton = null;
         ShowOnlyLanderIcons();
     }
 
@@ -548,6 +565,20 @@ public class NavScreenController : MonoBehaviour
     {
         updateCurrentEnd(landerObject.transform);
     }
+
+    public void updateCurrentSelectedButton(GameObject current)
+    {
+        currentSelectedButton = current;
+    }
+
+    public void turnOffPastButtonLightBlue()
+    {
+        if (currentSelectedButton != null)
+        {
+            currentSelectedButton.SetActive(false);
+        }
+    }
+
 
     public void updateCurrentEnd(Transform end)
     {
