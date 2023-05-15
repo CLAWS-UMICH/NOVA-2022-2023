@@ -10,6 +10,7 @@ public class VEGACommandHandler : MonoBehaviour
     public GameObject vitals;
     public GameObject navigation;
     public GameObject task_list;
+    public GameObject geosample;
     //geosample
     //uia
     //messages
@@ -35,12 +36,51 @@ public class VEGACommandHandler : MonoBehaviour
                 //words[2] is command
                 if(String.Equals(words[2],"open")){ 
                     //opens navigation
-                    navigation.SetActive(true);
+                    navigation.GetComponent<NavScreenController>().OpenNavMainMenu();
+                    //navigation.SetActive(true);
                 }
                 else if(String.Equals(words[2],"close")){
                     //close navigation
-                    Debug.Log("nav close");
-                    navigation.SetActive(false);
+                    // Debug.Log("nav close");
+                    // navigation.SetActive(false);
+                    navigation.GetComponent<NavScreenController>().CloseAll();
+                }
+                else if(String.Equals(words[2],"danger_waypoint")){
+                    navigation.GetComponent<NavScreenController>().OpenWaypoint("danger");
+                }
+                else if(String.Equals(words[2],"regular_waypoint")){
+                    navigation.GetComponent<NavScreenController>().OpenWaypoint("regular");
+                }
+                else if(String.Equals(words[2],"geosample_waypoint")){
+                    navigation.GetComponent<NavScreenController>().OpenWaypoint("geosample");
+                }
+                else if(String.Equals(words[2],"create_title")){
+                    //check that size is correct to prevent erroring out
+                    navigation.GetComponent<NavScreenController>().SetWaypointTitle(words[3]); 
+                }
+                else if(String.Equals(words[2],"confirm_waypoint")){
+                    navigation.GetComponent<NavScreenController>().CreateAPoint();
+                }
+                else if(String.Equals(words[2],"waypoint")){
+                    navigation.GetComponent<NavScreenController>().SelectWaypointLetter(words[3]);
+                }
+                else if(String.Equals(words[2],"open_crew")){
+                    navigation.GetComponent<NavScreenController>().OpenCrewScreen();
+                }
+                else if(String.Equals(words[2],"open_geosample")){
+                    navigation.GetComponent<NavScreenController>().OpenGeoScreen();
+                }
+                else if(String.Equals(words[2],"open_mission")){
+                    navigation.GetComponent<NavScreenController>().OpenMissionScreen();
+                }
+                else if(String.Equals(words[2],"open_rover")){
+                    navigation.GetComponent<NavScreenController>().OpenRoverScreen();
+                }
+                else if(String.Equals(words[2],"open_lander")){
+                    navigation.GetComponent<NavScreenController>().OpenLanderScreen();
+                }
+                else if(String.Equals(words[2],"start_nav")){
+                    navigation.GetComponent<NavScreenController>().StartNav();
                 }
             }
             else if(String.Equals(words[1],"task_list")){
@@ -53,7 +93,6 @@ public class VEGACommandHandler : MonoBehaviour
                     task_list.SetActive(false);
                 }
             }
-            
             else if(String.Equals(words[1],"vitals")){
                 if(String.Equals(words[2],"open")){
                     //open vitals
@@ -67,44 +106,78 @@ public class VEGACommandHandler : MonoBehaviour
             else if(String.Equals(words[1],"menu")){
                 if(String.Equals(words[2],"open")){
                     //open menu
-                    menu.GetComponent<MenuBarController>().DropBar();
+                    //menu.GetComponent<MenuBarController>().DropBar();
                 }
                 else if(String.Equals(words[2],"close")){
                     //close menu
                 }
             }
-            // else if(String.Equals(words[1],"luna")){
-            //     if(String.Equals(words[2],"open")){
-            //         luna.SetActive(true);
-            //     }
-            // }
-            // else if(String.Equals(words[1],"luna")){
-            //     if(String.Equals(words[2],"close")){
-            //         luna.SetActive(false);
-            //     }
-            // }
             else if(String.Equals(words[1],"messaging")){
                 if(String.Equals(words[2],"open")){
                 }
                 else if(String.Equals(words[2],"close")){
                 }
             }
-           
             else if(String.Equals(words[1],"uia_egress")){
                 if(String.Equals(words[2],"")){
                 }
             }
-            else if(String.Equals(words[1],"rover")){
-                if(String.Equals(words[2],"")){
-                }
-            }
             else if(String.Equals(words[1],"geosample")){
-                if(String.Equals(words[2],"")){
+                if(String.Equals(words[2],"open_button_a")){
+                    geosample.GetComponent<GeoSampleVegaController>().openButton1();
+                }
+                else if(String.Equals(words[2],"open_button_b")){
+                    geosample.GetComponent<GeoSampleVegaController>().openButton2();
+                }
+                else if(String.Equals(words[2],"open_button_c")){
+                    geosample.GetComponent<GeoSampleVegaController>().openButton3();
+                }
+                else if(String.Equals(words[2],"scroll_down")){
+                    geosample.GetComponent<GeoSampleVegaController>().scrollDown();
+                }
+                else if(String.Equals(words[2],"scroll_up")){
+                    geosample.GetComponent<GeoSampleVegaController>().scrollUp();
+                }
+                else if(String.Equals(words[2],"expand")){
+                    geosample.GetComponent<GeoSampleVegaController>().expand();
+                }
+                else if(String.Equals(words[2],"minimize")){
+                    geosample.GetComponent<GeoSampleVegaController>().minimize();
+                }
+                else if(String.Equals(words[2],"close")){
+                    geosample.GetComponent<GeoSampleVegaController>().close();
+                }
+                else if(String.Equals(words[2],"open")){
+                    geosample.GetComponent<GeoSampleVegaController>().open();
+                }
+                else if(String.Equals(words[2],"new_sample")){
+                    
+                }
+                else if(String.Equals(words[2],"record_note")){
+
+                }
+                else if(String.Equals(words[2],"take_photo")){
+                    geosample.GetComponent<GeoSampleVegaController>().take_photo();
+                }
+                else if(String.Equals(words[2],"open_gallery")){
+                    geosample.GetComponent<GeoSampleVegaController>().open_gallery();
+                }
+                else if(String.Equals(words[2],"page_right")){
+                    geosample.GetComponent<GeoSampleVegaController>().page_right();
+                }
+                else if(String.Equals(words[2],"page_left")){
+                    geosample.GetComponent<GeoSampleVegaController>().page_left();
+                }
+                else if(String.Equals(words[2],"close_gallery")){
+                    geosample.GetComponent<GeoSampleVegaController>().close_gallery();
+                }
+                else if(String.Equals(words[2],"enable_camera")){
+                    geosample.GetComponent<GeoSampleVegaController>().enable_camera();
+                }
+                else if(String.Equals(words[2],"cancel_photo")){
+                    geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
                 }
             }
-            
-            
-            
         }
     }
 }
