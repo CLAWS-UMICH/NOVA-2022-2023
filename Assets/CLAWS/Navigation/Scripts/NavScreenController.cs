@@ -700,13 +700,14 @@ public class NavScreenController : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(mainCam.transform.position, end.position);
 
         // If the distance is within the threshold, set the bool variable to true and stop looping
-        if (distanceToPlayer <= 5f)
+        if (distanceToPlayer <= 2.5f)
         {
             playerWithinDistance = true;
             CancelInvoke("CheckPlayerDistance");
 
             // Destroy breadcrumbs here
             Debug.Log("Cancel Pathfding");
+            NavigatableObject.DestroyAllBreadCrumbs();
         }
     }
 
