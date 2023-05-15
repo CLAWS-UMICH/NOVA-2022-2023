@@ -23,14 +23,17 @@ public class NavigatableObject : MonoBehaviour
         isFinalDestination = !isFinalDestination;
     }
 
-    public void DestroyAllBreadCrumbs()
+    static public void DestroyAllBreadCrumbs()
     {
-        foreach (Transform child in allBreadCrumbs.transform)
+        GameObject allBreadCrumbsObject = GameObject.Find("NavExtras/Breadcrumbs");
+        GameObject allPlacedBreadCrumbsObject = GameObject.Find("ParentBreadCrumbs");
+
+        foreach (Transform child in allBreadCrumbsObject.transform)
         {
             Destroy(child.gameObject);
         }
 
-        foreach (Transform child in allPlacedBreadCrumbs.transform)
+        foreach (Transform child in allPlacedBreadCrumbsObject.transform)
         {
             Destroy(child.gameObject);
         }
