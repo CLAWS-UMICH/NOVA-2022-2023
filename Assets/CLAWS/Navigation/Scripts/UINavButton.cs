@@ -22,7 +22,7 @@ public class UINavButton : MonoBehaviour
         {
             if (waypoint.GetLetter() == letterOfObject)
             {
-                navScreenController.updateCurrentEnd(waypoint.GetPosition());
+                navScreenController.updateCurrentEnd(waypoint.GetPosition(), waypoint.GetTitle() + " " + waypoint.GetLetter());
 
             }
         }
