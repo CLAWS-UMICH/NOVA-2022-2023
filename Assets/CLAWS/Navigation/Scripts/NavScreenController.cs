@@ -14,6 +14,7 @@ public class NavScreenController : MonoBehaviour
     GameObject missionScreen;
     GameObject roverScreen;
     GameObject landerScreen;
+    GameObject roverNavScreen;
     GameObject waypointConfirmationScreen;
 
     [SerializeField] GameObject mainCam;
@@ -33,6 +34,10 @@ public class NavScreenController : MonoBehaviour
     [SerializeField] GameObject mission1Object;
     [SerializeField] GameObject mission2Object;
     [SerializeField] GameObject mission3Object;
+
+    [SerializeField] GameObject roverObject;
+    GameObject roverObjectStartLocation;
+
 
     string globalWaypointTextTitle;
     string globalWaypointType;
@@ -55,11 +60,14 @@ public class NavScreenController : MonoBehaviour
         missionScreen = transform.Find("MissionScreen").gameObject;
         roverScreen = transform.Find("RoverScreen").gameObject;
         landerScreen = transform.Find("LanderScreen").gameObject;
+        roverNavScreen = transform.Find("RoverNavScreen").gameObject;
         waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
     }
     // Start is called before the first frame update
     void Start()
     {
+        roverObjectStartLocation = roverObject;
+        titleLetter = "";
         currentSelectedButton = null;
         playerWithinDistance = false;
         createPreDeterminedPoints();
@@ -72,6 +80,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
         SetAllCullingToCamera();
 
@@ -98,6 +107,7 @@ public class NavScreenController : MonoBehaviour
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
     }
@@ -112,6 +122,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
     }
@@ -133,6 +144,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyCrewIcons();
@@ -154,6 +166,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyGeoIcons();
@@ -175,6 +188,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(true);
         roverScreen.SetActive(false);
         landerScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyMissionIcons();
@@ -196,6 +210,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(true);
         landerScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyRoverIcons();
@@ -217,6 +232,7 @@ public class NavScreenController : MonoBehaviour
         missionScreen.SetActive(false);
         roverScreen.SetActive(false);
         landerScreen.SetActive(true);
+        roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyLanderIcons();
@@ -593,12 +609,12 @@ public class NavScreenController : MonoBehaviour
 
     public void CrewTestNav()
     {
-        updateCurrentEnd(crewObject.transform);
+        updateCurrentEnd(crewObject.transform, "Patrick A");
     }
 
     public void LanderTestNav()
     {
-        updateCurrentEnd(landerObject.transform);
+        updateCurrentEnd(landerObject.transform, "Lander");
     }
 
     public void updateCurrentSelectedButton(GameObject current)
@@ -614,11 +630,14 @@ public class NavScreenController : MonoBehaviour
         }
     }
 
+    string titleLetter = "";
 
-    public void updateCurrentEnd(Transform end)
+
+    public void updateCurrentEnd(Transform end, string str)
     {
         playerWithinDistance = false;
         currentEndPosition = end;
+        titleLetter = str;
     }
 
     // Mission E
@@ -691,9 +710,34 @@ public class NavScreenController : MonoBehaviour
         }
     }
 
+    IEnumerator OpenRoverNavScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        roverNavScreen.SetActive(true);
+        yield return new WaitForSeconds(10f);
+        roverNavScreen.SetActive(false);
+    }
+    Transform roverEndLocation = null;
     public void StartNav()
     {
-        if (currentEndPosition != null)
+        if (currentScreenOpen == "Rover")
+        {
+            roverThere = false;
+            recalled = false;
+            roverEndLocation = currentEndPosition;
+            roverObjectStartLocation = roverObject;
+            CloseAll();
+            roverNavScreen.transform.Find("Text/waypointText").GetComponent<TextMeshPro>().text = titleLetter;
+
+            // Give this to NASA
+            // Current End Position of where the rover should go: roverEndLocation
+            // Start Position: roverObjectStartLocation.transform.position;
+
+            updateRoverLocation();
+            StartCoroutine(OpenRoverNavScreen());
+
+        }
+        else if (currentEndPosition != null)
         {
             Transform playerPosition = mainCam.transform;
 
@@ -709,6 +753,41 @@ public class NavScreenController : MonoBehaviour
 
 
 
+    }
+    bool roverThere = false;
+    bool recalled = false;
+    // Every second update the rover location on the map
+    IEnumerator _updateRoverLocation(float totalDis)
+    {
+        while (!roverThere || recalled)
+        {
+            yield return new WaitForSeconds(1f);
+            roverObject.transform.position = roverObject.transform.position; // Update where it is from NASA TSS
+            updateRoverProgress(totalDis);
+        }
+    }
+
+    public void updateRoverProgress(float totalDis)
+    {
+        float percentageDone = Vector3.Distance(roverObject.transform.position, roverEndLocation.position) / totalDis * 100;
+
+        // Update UI based on the percentage
+
+    }
+
+    public void RecallRover()
+    {
+        recalled = true;
+
+        // GIVE TO NASA
+        // Give this position to bring rover back to beginning
+        // roverObjectStartLocation.transform.position;
+    }
+
+    private void updateRoverLocation()
+    {
+        float totalRoverDistance = Vector3.Distance(roverEndLocation.position, roverObject.transform.position);
+        StartCoroutine(_updateRoverLocation(totalRoverDistance));
     }
 
     private bool ToggleFinalDestinationForCorrectEndTarget(Transform endPosition)
