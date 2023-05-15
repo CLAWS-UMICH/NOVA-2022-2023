@@ -827,7 +827,7 @@ public class NavScreenController : MonoBehaviour
     {
         if (previousEndGoal != null)
         {
-            endNav.DestroyAllBreadCrumbs();
+            NavigatableObject.DestroyAllBreadCrumbs();
         }
     }
 
