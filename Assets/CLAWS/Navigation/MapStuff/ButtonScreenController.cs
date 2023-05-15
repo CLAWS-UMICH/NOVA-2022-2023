@@ -300,7 +300,7 @@ public class ButtonScreenController : MonoBehaviour
     {
         if (previousEndGoal != null)
         {
-            endNav.DestroyAllBreadCrumbs();
+            NavigatableObject.DestroyAllBreadCrumbs();
         }
     }
 
