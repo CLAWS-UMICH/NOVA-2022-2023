@@ -91,6 +91,10 @@ public class SpeechManager : MonoBehaviour
         synthesizer.SpeakTextAsync(message);
     }
 
+    public string GetMessage(){
+        return message;
+    }
+
     IEnumerator NoSpeech(){
         int i = 0;
         string prevMessage = message;

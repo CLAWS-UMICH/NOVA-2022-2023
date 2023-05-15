@@ -18,6 +18,10 @@ public class GeoSampleVegaController : MonoBehaviour
     [SerializeField] GameObject GalleryConfirmationView;
     [SerializeField] GameObject GalleryView;
 
+    GameObject speech;
+    string message;
+    private IEnumerator coroutine;
+
     //Keep track of whats in focus
     // "list", "expand", "description", "gallery", "none",
     // gallery - "confirm", "camera"
@@ -26,6 +30,24 @@ public class GeoSampleVegaController : MonoBehaviour
 
     public void updateCurrentFocus(string NewFocus) {
         currentFocus = NewFocus;
+    }
+
+    GameObject FindInActiveObjectByName(string name)
+    {
+        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if (objs[i].name == name)
+            {
+                return objs[i].gameObject;
+            }
+        }
+        return null;
+    }
+
+    void Start(){
+        //speech = GameObject.FindObjectOfType().Find("Speech to Text Manager");
+        speech = FindInActiveObjectByName("Speech to Text Manager");
     }
 
     public void scrollDown() {
@@ -84,9 +106,41 @@ public class GeoSampleVegaController : MonoBehaviour
         ExpandedListController.GetComponent<GeoSampleCollapse>().Toggle(ListController);
     }
     //Kriti
-    void recordNote() {
-
+    public void recordNote() {
+        speech.SetActive(true);
+        message = speech.GetComponent<SpeechManager>().GetMessage();
+        bool active = true;
+        coroutine = StartListening(active);
+        StartCoroutine(coroutine);
     }
+
+    IEnumerator StartListening(bool active){
+        int i = 0;
+        string prevMessage = message;
+        bool speaking = false;
+        while(active){
+            yield return new WaitForSeconds(0.8f);
+            message = speech.GetComponent<SpeechManager>().GetMessage();
+            i++;
+            if(message!=prevMessage){
+                speaking = true;
+                //add something here to update text box with message text
+            }
+            if(i==3 && speaking){
+                i = 0;
+                speaking = false;
+            }
+            else if(i==3 && !speaking){
+                i = 0;
+                speaking = false;
+                //finished speaking so stop recording. store message as description
+                speech.SetActive(false);
+                active = false;
+            }
+            prevMessage = message;
+        }  
+    }
+
     public void openButton1() {
         if (currentFocus == "list")
         {
@@ -179,7 +233,7 @@ public class GeoSampleVegaController : MonoBehaviour
     //same as edit note
     //Kriti
     void retry_note() {
-
+        
     }
     //Kriti - Adhav can do if not enough time
     //confirms for photo taking or description writing
