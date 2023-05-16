@@ -124,6 +124,7 @@ public class GeoSampleVegaController : MonoBehaviour
             i++;
             if(message!=prevMessage){
                 speaking = true;
+                DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().sample.description = message;
                 //add something here to update text box with message text
             }
             if(i==3 && speaking){
@@ -233,12 +234,17 @@ public class GeoSampleVegaController : MonoBehaviour
     //same as edit note
     //Kriti
     public void retry_note() {
-        
+        recordNote();
     }
     //Kriti - Adhav can do if not enough time
     //confirms for photo taking or description writing
-    public void confirm() {
-        recordNote();
+    public void retry() {
+        if(currentFocus == "description"){
+            recordNote();
+        }
+        else if(currentFocus == "gallery"){
+            retake_photo();
+        }
     }
 
     //gallery part

@@ -28,6 +28,7 @@ public class VEGACommandHandler : MonoBehaviour
     {
         Debug.Log("command");
         string[] words = e.output.Split(' ');
+        Debug.Log(e.output);
         if(String.Equals(words[0],"[command]")){
             Debug.Log("detected");
             if(String.Equals(words[1],"navigation")){
@@ -151,10 +152,10 @@ public class VEGACommandHandler : MonoBehaviour
                     geosample.GetComponent<GeoSampleVegaController>().open();
                 }
                 else if(String.Equals(words[2],"new_sample")){
-                    
+                    geosample.GetComponent<GeoSampleVegaController>().recordNote();
                 }
                 else if(String.Equals(words[2],"record_note")){
-
+                    geosample.GetComponent<GeoSampleVegaController>().recordNote();
                 }
                 else if(String.Equals(words[2],"take_photo")){
                     geosample.GetComponent<GeoSampleVegaController>().take_photo();

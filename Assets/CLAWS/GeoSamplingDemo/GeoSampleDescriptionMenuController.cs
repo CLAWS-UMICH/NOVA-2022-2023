@@ -17,7 +17,7 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
     [SerializeField] TMP_Text coordinateText;
 
     [SerializeField] GameObject GeoSampleController;
-    GeoSample sample;
+    public GeoSample sample;
     bool fromExpanded = false;
 
     //private void Start()

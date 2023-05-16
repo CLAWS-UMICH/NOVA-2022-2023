@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviour {
     // text.text = message;
 
     // the url at which bot's custom connector is hosted
-    private const string rasa_url = "http://3.145.151.89:8000/webhooks/rest/webhook"; // "http://localhost:5005/webhooks/rest/webhook";
+    private const string rasa_url = "http://3.144.25.193:8000/webhooks/rest/webhook"; // "http://localhost:5005/webhooks/rest/webhook";
 
     private void Start()
     {
