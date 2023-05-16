@@ -61,7 +61,7 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"confirm_waypoint")){
                     navigation.GetComponent<NavScreenController>().CreateAPoint();
                 }
-                else if(String.Equals(words[2],"waypoint")){
+                else if(String.Equals(words[2],"open_waypoint")){
                     navigation.GetComponent<NavScreenController>().SelectWaypointLetter(words[3]);
                 }
                 else if(String.Equals(words[2],"open_crew")){

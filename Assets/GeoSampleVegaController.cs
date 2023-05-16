@@ -232,13 +232,13 @@ public class GeoSampleVegaController : MonoBehaviour
     }
     //same as edit note
     //Kriti
-    void retry_note() {
+    public void retry_note() {
         
     }
     //Kriti - Adhav can do if not enough time
     //confirms for photo taking or description writing
-    void confirm() {
-
+    public void confirm() {
+        recordNote();
     }
 
     //gallery part
