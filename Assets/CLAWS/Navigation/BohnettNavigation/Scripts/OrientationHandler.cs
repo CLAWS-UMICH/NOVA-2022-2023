@@ -10,7 +10,7 @@ public class OrientationHandler : MonoBehaviour
     
     public List<GameObject> Screens; // to reposition these screens when reorienting
 
-    bool setOrigin = false;
+    bool originSet = false;
 
     public GameObject mainCamera;
     public GameObject mainCameraHolder;
@@ -32,7 +32,6 @@ public class OrientationHandler : MonoBehaviour
         StartCoroutine(FetchLocationCoroutine());
     }
     */
-
     /*
     public void FetchLocation()
     {
@@ -74,47 +73,23 @@ public class OrientationHandler : MonoBehaviour
                         location.lon
                     );
 
-        if (!setOrigin)
+        if (!originSet)
         {
+            // set the initial origin
             GPSUtils.ChangeOriginGPSCoords(user_coordinates);
-            setOrigin = true;
+            originSet = true;
         }
 
-        // user_location = location;
-
-        Debug.LogWarning("Recalculating user location.");
-        Debug.LogWarning("Origin is: " + GPSUtils.originGPSCoords.latitude + ' ' + GPSUtils.originGPSCoords.longitude);
-        Debug.LogWarning("User location is: " + location.lat + ' ' + location.lon);
-
-        Vector3 OldCameraAppPosition = mainCamera.transform.position;
-        OldCameraAppPosition.y = 0f;
+        Debug.Log("Recalculating user location.\n" +
+            "Origin is: " + GPSUtils.originGPSCoords.latitude + ' ' + GPSUtils.originGPSCoords.longitude + 
+            "\nUser location is: " + location.lat + ", " + location.lon);
 
         Vector3 NewCameraAppPosition = GPSUtils.GPSCoordsToAppPosition(user_coordinates);
         NewCameraAppPosition.y = 0f;
 
+        Debug.Log(NewCameraAppPosition.ToString());
+
         mainCameraHolder.transform.position = NewCameraAppPosition;
-
-        /*
-        Vector3 Delta = NewCameraAppPosition - OldCameraAppPosition;
-
-        mainCameraHolder.transform.position = mainCameraHolder.transform.position + Delta;
-        
-        // Vector3 AppPosition = LocationUtilities.CoordsToAppPosition(user_coordinates);
-        // AppPosition.y = mainCamera.transform.position.y;
-
-        // Vector3 OldAppPosition = mainCamera.transform.position;
-
-        // mainCameraHolder.transform.position = mainCameraHolder.transform.position + -(AppPosition - OldAppPosition);
-
-        // mainCamera.transform.position = AppPosition;
-
-        
-        foreach (GameObject screen in Screens)
-        {
-            screen.transform.position += Delta;
-        }
-        */
-        
     }
 
     public void SetNorth()

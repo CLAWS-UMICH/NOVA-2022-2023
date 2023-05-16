@@ -318,6 +318,8 @@ public class GPSUtils : MonoBehaviour
     // Ran when Vincenty's algorithm doesn't converge in 1000 iterations.
     static private (double, double) DistanceAndAngleBetweenCoords(GPSCoords coords1, GPSCoords coords2)
     {
+        Debug.Log("Vincenty's failed, running Haversine");
+
         // Credit to https://www.movable-type.co.uk/scripts/latlong.html
 
         double theta_1 = coords1.latitude * Math.PI / 180;
