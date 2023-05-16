@@ -8145,6 +8145,7 @@ MonoBehaviour:
   mission1Object: {fileID: 0}
   mission2Object: {fileID: 0}
   mission3Object: {fileID: 0}
+  roverObject: {fileID: 0}
 --- !u!1 &3150066459856065630
 GameObject:
   m_ObjectHideFlags: 0

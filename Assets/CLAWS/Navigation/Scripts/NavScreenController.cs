@@ -12,8 +12,8 @@ public class NavScreenController : MonoBehaviour
     GameObject crewScreen;
     GameObject geoScreen;
     GameObject missionScreen;
-    GameObject roverScreen;
-    GameObject landerScreen;
+    GameObject vehiclesScreen;
+    GameObject obstaclesScreen;
     GameObject roverNavScreen;
     GameObject waypointConfirmationScreen;
 
@@ -58,8 +58,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen = transform.Find("CrewScreen").gameObject;
         geoScreen = transform.Find("GeoScreen").gameObject;
         missionScreen = transform.Find("MissionScreen").gameObject;
-        roverScreen = transform.Find("RoverScreen").gameObject;
-        landerScreen = transform.Find("LanderScreen").gameObject;
+        vehiclesScreen = transform.Find("VehiclesScreen").gameObject;
+        obstaclesScreen = transform.Find("ObstaclesScreen").gameObject;
         roverNavScreen = transform.Find("RoverNavScreen").gameObject;
         waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
     }
@@ -78,8 +78,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
         SetAllCullingToCamera();
@@ -104,8 +104,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
@@ -120,8 +120,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
@@ -142,8 +142,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(true);
         geoScreen.SetActive(false);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
@@ -164,8 +164,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(true);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
@@ -186,8 +186,8 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
         missionScreen.SetActive(true);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
@@ -200,7 +200,7 @@ public class NavScreenController : MonoBehaviour
         StartCoroutine(_OpenMissionScreen());
     }
 
-    IEnumerator _OpenRoverScreen()
+    IEnumerator _OpenVehiclesScreen()
     {
         yield return new WaitForSeconds(1f);
         openNavMenuButton.SetActive(false);
@@ -208,21 +208,21 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(true);
-        landerScreen.SetActive(false);
+        vehiclesScreen.SetActive(true);
+        obstaclesScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyRoverIcons();
     }
 
-    public void OpenRoverScreen()
+    public void OpenVehiclesScreen()
     {
-        currentScreenOpen = "Rover";
-        StartCoroutine(_OpenRoverScreen());
+        currentScreenOpen = "Vehicles";
+        StartCoroutine(_OpenVehiclesScreen());
     }
 
-    IEnumerator _OpenLanderScreen()
+    IEnumerator _OpenObstaclesScreen()
     {
         yield return new WaitForSeconds(1f);
         openNavMenuButton.SetActive(false);
@@ -230,18 +230,18 @@ public class NavScreenController : MonoBehaviour
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
         missionScreen.SetActive(false);
-        roverScreen.SetActive(false);
-        landerScreen.SetActive(true);
+        vehiclesScreen.SetActive(false);
+        obstaclesScreen.SetActive(true);
         roverNavScreen.SetActive(false);
         turnOffPastButtonLightBlue();
         currentSelectedButton = null;
         ShowOnlyLanderIcons();
     }
 
-    public void OpenLanderScreen()
+    public void OpenObstaclesScreen()
     {
-        currentScreenOpen = "Lander";
-        StartCoroutine(_OpenLanderScreen());
+        currentScreenOpen = "Obstacles";
+        StartCoroutine(_OpenObstaclesScreen());
     }
 
     // Icon Stuff
@@ -552,9 +552,9 @@ public class NavScreenController : MonoBehaviour
 
     }
 
-    private void createRoverButtons(string title, string letter)
+    private void createRoverButtons(string title, string letter) //need to reintegrate into unity scene
     {
-        Transform roverButton = roverScreen.transform.Find("RoverButtons");
+        Transform roverButton = vehiclesScreen.transform.Find("RoverButtons");
         Vector3 roverPositionUI = roverButton.position;
         float roveryOffset = -0.04f * roverList.Count;
         roverPositionUI.y += roveryOffset;
