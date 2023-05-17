@@ -7,7 +7,7 @@ public class Breadcrumbs : MonoBehaviour
     [SerializeField] private GameObject breadcrumb;
     [SerializeField] private GameObject allBread;
     [SerializeField] private GameObject placedAllBread;
-    [SerializeField] private GameObject camera;
+    [SerializeField] private GameObject cam;
     private Vector3 currentPosition;
     private Vector3 prevCrumbPosition;
     bool backtracingMode = false;
@@ -16,7 +16,7 @@ public class Breadcrumbs : MonoBehaviour
 
     void Start()
     {
-        prevCrumbPosition = camera.transform.position;
+        prevCrumbPosition = cam.transform.position;
         EventBus.Subscribe<BreadCrumbCollisionEvent>(BreadCrumbRemove);
         
     }
@@ -30,7 +30,7 @@ public class Breadcrumbs : MonoBehaviour
                 crumbTransform.Rotate(new Vector3(0f, 180f, 0f));
             }
         }
-        currentPosition = camera.transform.position;
+        currentPosition = cam.transform.position;
         float distanceMoved = Vector3.Distance(currentPosition, prevCrumbPosition);
 
         while (distanceMoved >= crumbDistance)
