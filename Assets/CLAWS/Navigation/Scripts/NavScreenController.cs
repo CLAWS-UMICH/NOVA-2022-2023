@@ -466,6 +466,8 @@ public class NavScreenController : MonoBehaviour
         globalWaypointTextTitle = title;
         TextMeshPro titleText = waypointConfirmationScreen.transform.Find("Text/TitleText").GetComponent<TextMeshPro>();
         titleText.text = title;
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
+        coordText.text = "Set Latitude with VEGA";
 
     }
 
@@ -548,11 +550,15 @@ public class NavScreenController : MonoBehaviour
     public void SetWaypointLat(string lat)
     {
         globalLat = lat;
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
+        coordText.text = "Set Longitude with VEGA";
     }
 
     public void SetWaypointLong(string longt)
     {
         globalLong = longt;
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
+        coordText.text = $"{globalLat}, {globalLong}"; //set # of float values shown ?
     }
 
     // THIS FUNCTION IS CALLED BY VEGA
