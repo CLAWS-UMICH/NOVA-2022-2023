@@ -17,6 +17,7 @@ public class PopUpManager : MonoBehaviour
 
     // instance variables
     public GameObject PopUpPrefab;
+    public GameObject VegaPopUpPrefab;
     public GridObjectCollection gridObjectCollection;
 
     public static void MakePopup(string contents)
@@ -30,6 +31,13 @@ public class PopUpManager : MonoBehaviour
     public static void MakePopup(string contents, float delay)
     {
         PopUp popup = Instantiate(_instance.PopUpPrefab, _instance.transform).AddComponent<PopUp>();
+        popup.SetText(contents);
+        popup.SetTimer(delay);
+        _instance.gridObjectCollection.UpdateCollection();
+    }
+    public static void MakePopupVega(string contents, float delay)
+    {
+        PopUp popup = Instantiate(_instance.VegaPopUpPrefab, _instance.transform).AddComponent<PopUp>();
         popup.SetText(contents);
         popup.SetTimer(delay);
         _instance.gridObjectCollection.UpdateCollection();

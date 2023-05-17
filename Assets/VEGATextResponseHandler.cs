@@ -114,13 +114,16 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
         }
 
-        ResponseString.Replace("*", VEGAVariable);
+        string newString = ResponseString.Replace("*", VEGAVariable);
 
             if (VEGAVariable != "") {
                 if(words[2] == "oxygen"){
                     VEGAVariable = "Your primary oxygen is at " + _astronaut.EVA.ox_primary.ToString() + " percent" +
                         "\n Your secondary oxygen is at " +  _astronaut.EVA.ox_secondary.ToString() + " percent" +
                         "\n Your p_o2 is at " + _astronaut.EVA.p_o2.ToString();
+                }
+                else{
+                    VEGAVariable = newString;
                 }
                 VEGAResponseTextBox();
             }
@@ -133,14 +136,15 @@ public class VEGATextResponseHandler : MonoBehaviour
         bool active = false;
         if (VEGAVariable == "")
         {
-            textBox.SetActive(false);
+            //textBox.SetActive(false);
         }
         else
         {
-            textBox.SetActive(true);
-            active = true;
-            coroutine = PopUp(active);
-            StartCoroutine(coroutine);
+            // textBox.SetActive(true);
+            // active = true;
+            // coroutine = PopUp(active);
+            // StartCoroutine(coroutine);
+            PopUpManager.MakePopup(VEGAVariable);
         }
     }
 
