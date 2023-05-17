@@ -32,6 +32,7 @@ public class NavScreenController : MonoBehaviour
     [SerializeField] GameObject crewObject;
     [SerializeField] GameObject geoObject;
     [SerializeField] GameObject mission1Object;
+
     [SerializeField] GameObject mission3Object;
 
     [SerializeField] GameObject roverObject;
@@ -248,6 +249,8 @@ public class NavScreenController : MonoBehaviour
 
     public void OpenLanderScreen()
     {
+        currentEndPosition = landerObject.transform;
+        playerWithinDistance = false;
         currentScreenOpen = "Lander";
         StartCoroutine(_OpenLanderScreen());
     }
@@ -828,6 +831,7 @@ public class NavScreenController : MonoBehaviour
         }
         else if (currentEndPosition != null)
         {
+            NavigatableObject.DestroyAllBreadCrumbs();
             Transform playerPosition = mainCam.transform;
 
 
