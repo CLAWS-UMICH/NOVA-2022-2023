@@ -8,6 +8,8 @@ public class FakeTSSMessageSender : MonoBehaviour
     public UIAMsg fakeUIA = new UIAMsg();
     public UIAControlMsg fakeUIAControl = new UIAControlMsg();
 
+    public GPSMsg fakeGPS = new GPSMsg();
+
     private void Start()
     {
         StartCoroutine(Fake_SetUIA());
@@ -23,4 +25,11 @@ public class FakeTSSMessageSender : MonoBehaviour
             EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
         }
     }
+
+    public void Fake_SetGPS()
+    {
+        Simulation.User.GPS = fakeGPS;
+        EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
+    }
+
 }

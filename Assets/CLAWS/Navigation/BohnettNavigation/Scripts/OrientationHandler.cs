@@ -7,9 +7,6 @@ using TSS.Msgs;
 
 public class OrientationHandler : MonoBehaviour
 {
-    
-    public List<GameObject> Screens; // to reposition these screens when reorienting
-
     bool originSet = false;
 
     public GameObject mainCamera;
@@ -72,12 +69,11 @@ public class OrientationHandler : MonoBehaviour
                         location.lat,
                         location.lon
                     );
-
+        // TODO try getting rid of the if condition
         if (!originSet)
         {
             // set the initial origin
             GPSUtils.ChangeOriginGPSCoords(user_coordinates);
-            originSet = true;
         }
 
         Debug.Log("Recalculating user location.\n" +
@@ -90,6 +86,12 @@ public class OrientationHandler : MonoBehaviour
         Debug.Log(NewCameraAppPosition.ToString());
 
         mainCameraHolder.transform.position = NewCameraAppPosition;
+
+        if (!originSet)
+        {
+            EventBus.Publish<UpdatedGPSOriginEvent>(new UpdatedGPSOriginEvent());
+            originSet = true;
+        }
     }
 
     public void SetNorth()
@@ -100,7 +102,7 @@ public class OrientationHandler : MonoBehaviour
 
         float mainCameraY = mainCamera.transform.localRotation.eulerAngles.y;
 
-        mainCameraHolder.transform.eulerAngles = new Vector3(0f, 180 - mainCameraY, 0f);
+        mainCameraHolder.transform.eulerAngles = new Vector3(0f, mainCameraY, 0f);
 
         Vector3 mainCameraNewWorldPosition = mainCamera.transform.position;
 

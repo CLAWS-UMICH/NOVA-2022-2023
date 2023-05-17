@@ -97,7 +97,28 @@ public class GeoSampleUpdatedEvent
 // Event for letting us know GPS data was received from the server
 public class UpdatedGPSEvent
 {
-    
+    public UpdatedGPSEvent()
+    {
+        Debug.Log("GPS update event created");
+    }
+
+    public override string ToString()
+    {
+        return "<UpdatedGPSEvent>: new GPS msg";
+    }
+}
+
+public class UpdatedGPSOriginEvent
+{
+    public UpdatedGPSOriginEvent()
+    {
+        Debug.Log("GPS origin updated");
+    }
+
+    public override string ToString()
+    {
+        return "<UpdatedGPSOriginEvent>: new GPS origin";
+    }
 }
 
 public class UIAMsgEvent
