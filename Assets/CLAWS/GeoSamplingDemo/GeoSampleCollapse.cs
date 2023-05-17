@@ -15,11 +15,22 @@ public class GeoSampleCollapse : MonoBehaviour
     {
         StartCoroutine(ToggleCoroutine(newView));
     }
+    
+    public void Close() 
+    {
+        StartCoroutine(CloseCoroutine());
+    }
 
     IEnumerator ToggleCoroutine(GameObject newView)
     {
         yield return new WaitForSeconds(1f);
         newView.SetActive(!newView.activeSelf);
+        sampleView.SetActive(!sampleView.activeSelf);
+        controller.refresh();
+    }
+    IEnumerator CloseCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
         sampleView.SetActive(!sampleView.activeSelf);
         controller.refresh();
     }
