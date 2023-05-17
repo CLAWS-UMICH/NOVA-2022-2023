@@ -123,7 +123,7 @@ MonoBehaviour:
   breadcrumb: {fileID: 996553710745987195, guid: 9274ab43b0df342bd8090218e457b0c1, type: 3}
   allBread: {fileID: 2138205903829333034}
   placedAllBread: {fileID: 5898361833816790375}
-  camera: {fileID: 0}
+  cam: {fileID: 0}
   crumbDistance: 5
 --- !u!114 &2138205902728967898
 MonoBehaviour:
