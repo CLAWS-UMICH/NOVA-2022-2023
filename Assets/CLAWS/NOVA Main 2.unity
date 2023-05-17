@@ -4102,6 +4102,54 @@ MonoBehaviour:
             m_StringArgument: 2
             m_BoolArgument: 0
           m_CallState: 2
+  - keyword: Confirm
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1833229940}
+          m_TargetAssemblyTypeName: GeoSampleVegaController, Assembly-CSharp
+          m_MethodName: confirm_photo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 2
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Retake
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1833229940}
+          m_TargetAssemblyTypeName: GeoSampleVegaController, Assembly-CSharp
+          m_MethodName: retake_photo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 2
+            m_BoolArgument: 0
+          m_CallState: 2
+  - keyword: Retry
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1833229940}
+          m_TargetAssemblyTypeName: GeoSampleVegaController, Assembly-CSharp
+          m_MethodName: recordNote
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 2
+            m_BoolArgument: 0
+          m_CallState: 2
   persistentKeywords: 0
   speechConfirmationTooltipPrefab: {fileID: 8046114618238072051, guid: 271778f6c957b524981067a81d238394, type: 3}
 --- !u!4 &125641243
