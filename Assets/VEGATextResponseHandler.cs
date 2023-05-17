@@ -70,7 +70,6 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
             else if (words[1] == "menu")
             {
-
             }
             else if (words[1] == "task_list")
             {
@@ -85,7 +84,6 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
             else if (words[1] == "luna")
             {
-
             }
             else if (words[1] == "messaging")
             {
@@ -96,24 +94,18 @@ public class VEGATextResponseHandler : MonoBehaviour
             }
             else if (words[1] == "navigation")
             {
-
             }
-
             //phase 3
             else if (words[1] == "uia_egress")
             {
-
             }
             else if (words[1] == "rover")
             {
-
             }
             else if (words[1] == "geosample")
             {
-
             }
         }
-
         string newString = ResponseString.Replace("*", VEGAVariable);
 
             if (VEGAVariable != "") {
@@ -134,11 +126,7 @@ public class VEGATextResponseHandler : MonoBehaviour
         text.text = VEGAVariable;
 
         bool active = false;
-        if (VEGAVariable == "")
-        {
-            //textBox.SetActive(false);
-        }
-        else
+        if (VEGAVariable != "")
         {
             // textBox.SetActive(true);
             // active = true;

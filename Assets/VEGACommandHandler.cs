@@ -179,6 +179,21 @@ public class VEGACommandHandler : MonoBehaviour
                     geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
                 }
             }
+            else if(String.Equals(words[1],"all")){
+                if(String.Equals(words[2],"open")){
+                    navigation.GetComponent<NavScreenController>().OpenNavMainMenu();
+                    task_list.SetActive(true);
+                    vitals.SetActive(true);
+                    geosample.GetComponent<GeoSampleVegaController>().open();
+
+                }
+                else if(String.Equals(words[2],"close")){
+                    navigation.GetComponent<NavScreenController>().CloseAll();
+                    task_list.SetActive(false);
+                    vitals.SetActive(false);
+                    geosample.GetComponent<GeoSampleVegaController>().close();
+                }
+            }
         }
     }
 }
