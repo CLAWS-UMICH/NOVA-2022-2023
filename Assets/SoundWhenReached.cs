@@ -26,6 +26,7 @@ public class SoundWhenReached : MonoBehaviour
         if (!played && distance <= radius)
         {
             GetComponent<AudioSource>().Play();
+            PopUpManager.MakePopup("Destination reached");
             played = true;
         }
     }
