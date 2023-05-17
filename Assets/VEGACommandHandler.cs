@@ -75,10 +75,10 @@ public class VEGACommandHandler : MonoBehaviour
                     navigation.GetComponent<NavScreenController>().OpenMissionScreen();
                 }
                 else if(String.Equals(words[2],"open_rover")){
-                    navigation.GetComponent<NavScreenController>().OpenVehiclesScreen();
+                    navigation.GetComponent<NavScreenController>().OpenRoverScreen();
                 }
                 else if(String.Equals(words[2],"open_lander")){
-                    navigation.GetComponent<NavScreenController>().OpenObstaclesScreen();
+                    navigation.GetComponent<NavScreenController>().OpenLanderScreen();
                 }
                 else if(String.Equals(words[2],"start_nav")){
                     navigation.GetComponent<NavScreenController>().StartNav();
