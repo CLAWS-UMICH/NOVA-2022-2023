@@ -18,7 +18,7 @@ public class GeoSampleVegaController : MonoBehaviour
     [SerializeField] GameObject GalleryConfirmationView;
     [SerializeField] GameObject GalleryView;
 
-    GameObject speech;
+    public GameObject speech;
     string message;
     private IEnumerator coroutine;
 
@@ -30,24 +30,6 @@ public class GeoSampleVegaController : MonoBehaviour
 
     public void updateCurrentFocus(string NewFocus) {
         currentFocus = NewFocus;
-    }
-
-    GameObject FindInActiveObjectByName(string name)
-    {
-        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
-        for (int i = 0; i < objs.Length; i++)
-        {
-            if (objs[i].name == name)
-            {
-                return objs[i].gameObject;
-            }
-        }
-        return null;
-    }
-
-    void Start(){
-        //speech = GameObject.FindObjectOfType().Find("Speech to Text Manager");
-        speech = FindInActiveObjectByName("Speech to Text Manager");
     }
 
     [ContextMenu("ScrollDown")]
@@ -131,6 +113,7 @@ public class GeoSampleVegaController : MonoBehaviour
             if(message!=prevMessage){
                 speaking = true;
                 //add something here to update text box with message text
+                DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().sample.description = message;
             }
             if(i==3 && speaking){
                 i = 0;
@@ -140,6 +123,7 @@ public class GeoSampleVegaController : MonoBehaviour
                 i = 0;
                 speaking = false;
                 //finished speaking so stop recording. store message as description
+                message = speech.GetComponent<SpeechManager>().GetMessage();
                 speech.SetActive(false);
                 active = false;
             }
