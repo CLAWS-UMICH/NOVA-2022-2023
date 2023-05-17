@@ -25,7 +25,7 @@ public class GeoSampleVegaController : MonoBehaviour
     //Keep track of whats in focus
     // "list", "expand", "description", "gallery", "none",
     // gallery - "confirm", "camera"
-    string currentFocus = "";
+    string currentFocus = "list";
     //Serialized Objects- ListController, ExpandedListController, DescriptionController, Gallery, NotOpen
 
     public void updateCurrentFocus(string NewFocus) {
@@ -50,6 +50,7 @@ public class GeoSampleVegaController : MonoBehaviour
         speech = FindInActiveObjectByName("Speech to Text Manager");
     }
 
+    [ContextMenu("ScrollDown")]
     public void scrollDown() {
         if (currentFocus == "list")
         {
@@ -66,6 +67,7 @@ public class GeoSampleVegaController : MonoBehaviour
             Debug.Log("cannot perform this command");
         }
     }
+    [ContextMenu("ScrollUp")]
     public void scrollUp() {
         if (currentFocus == "list")
         {
@@ -82,6 +84,7 @@ public class GeoSampleVegaController : MonoBehaviour
             Debug.Log("cannot perform this command");
         }
     }
+    [ContextMenu("Expand")]
     public void expand() {
         if (currentFocus != "list")
         {
@@ -93,6 +96,7 @@ public class GeoSampleVegaController : MonoBehaviour
         updateCurrentFocus("expand");
         ListController.GetComponent<GeoSampleCollapse>().Toggle(ExpandedListController);
     }
+    [ContextMenu("Minimize")]
     public void minimize()
     {
         if (currentFocus != "expand")
@@ -105,6 +109,7 @@ public class GeoSampleVegaController : MonoBehaviour
         updateCurrentFocus("list");
         ExpandedListController.GetComponent<GeoSampleCollapse>().Toggle(ListController);
     }
+    [ContextMenu("RecordNote")]
     //Kriti
     public void recordNote() {
         speech.SetActive(true);
@@ -114,6 +119,7 @@ public class GeoSampleVegaController : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    [ContextMenu("StartListening")]
     IEnumerator StartListening(bool active){
         int i = 0;
         string prevMessage = message;
@@ -124,7 +130,6 @@ public class GeoSampleVegaController : MonoBehaviour
             i++;
             if(message!=prevMessage){
                 speaking = true;
-                DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().sample.description = message;
                 //add something here to update text box with message text
             }
             if(i==3 && speaking){
@@ -142,6 +147,7 @@ public class GeoSampleVegaController : MonoBehaviour
         }  
     }
 
+    [ContextMenu("OpenButton1")]
     public void openButton1() {
         if (currentFocus == "list")
         {
@@ -162,6 +168,7 @@ public class GeoSampleVegaController : MonoBehaviour
             Debug.Log("cannot perform this command");
         }
     }
+    [ContextMenu("OpenButton2")]
     public void openButton2() {
         if (currentFocus == "list")
         {
@@ -182,6 +189,7 @@ public class GeoSampleVegaController : MonoBehaviour
             Debug.Log("cannot perform this command");
         }
     }
+    [ContextMenu("OpenButton3")]
     public void openButton3() {
         if (currentFocus == "list")
         {
@@ -203,6 +211,7 @@ public class GeoSampleVegaController : MonoBehaviour
         }
     }
     //closes all geosample windows
+    [ContextMenu("Close")]
     public void close() {
         if (currentFocus == "none")
         {
@@ -220,6 +229,7 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryView.SetActive(false);
     }
     //opens the geosample window
+    [ContextMenu("Open")]
     public void open()
     {
         if (currentFocus != "none")
@@ -233,21 +243,19 @@ public class GeoSampleVegaController : MonoBehaviour
     }
     //same as edit note
     //Kriti
-    public void retry_note() {
-        recordNote();
+    void retry_note() {
+        
     }
     //Kriti - Adhav can do if not enough time
     //confirms for photo taking or description writing
-    public void retry() {
-        if(currentFocus == "description"){
-            recordNote();
-        }
-        else if(currentFocus == "gallery"){
-            retake_photo();
-        }
+
+    [ContextMenu("Confirm")]
+    void confirm() {
+
     }
 
     //gallery part
+    [ContextMenu("EnableCamera")]
     public void enable_camera()
     {
         if (currentFocus != "gallery")
@@ -260,6 +268,7 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryView.SetActive(false);
         GalleryCameraView.SetActive(true);
     }
+    [ContextMenu("TakePhoto")]
     public void take_photo()
     {
         if (currentFocus != "camera")
@@ -271,6 +280,7 @@ public class GeoSampleVegaController : MonoBehaviour
         updateCurrentFocus("confirm");
         GalleryController.GetComponent<PhotoCaptureExample>().TakePhoto();
     }
+    [ContextMenu("OpenGallery")]
     public void open_gallery()
     {
         if(currentFocus != "description")
@@ -285,6 +295,7 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryController.GetComponent<PhotoCaptureExample>().LoadPhotos();
         DescriptionController.SetActive(false);
     }
+
     public void confirm_photo() //hardcoded
     {
         if (currentFocus != "confirm")
@@ -310,6 +321,7 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryCameraView.SetActive(true);
         GalleryConfirmationView.SetActive(false);
     }
+    [ContextMenu("PageRight")]
     public void page_right()
     {
         if (currentFocus != "gallery")
@@ -321,6 +333,7 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryController.GetComponent<PhotoCaptureExample>().nextPage();
 
     }
+    [ContextMenu("PageLeft")]
     public void page_left()
     {
         if (currentFocus != "gallery")
@@ -332,6 +345,7 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryController.GetComponent<PhotoCaptureExample>().prevPage();
 
     }
+    [ContextMenu("CloseGallery")]
     public void close_gallery()
     {
         if (currentFocus != "gallery")
@@ -345,6 +359,7 @@ public class GeoSampleVegaController : MonoBehaviour
         DescriptionController.SetActive(true);
     }
 
+    [ContextMenu("CancelPhoto")]
     public void cancel_photo()
     {
         if (currentFocus != "camera" && currentFocus != "confirm")

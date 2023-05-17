@@ -51,6 +51,11 @@ public class NavScreenController : MonoBehaviour
 
     private GameObject currentSelectedButton = null;
 
+    public GameObject speech;
+    string message;
+    private IEnumerator coroutine;
+
+
 
     private void Awake()
     {
@@ -62,8 +67,12 @@ public class NavScreenController : MonoBehaviour
         obstaclesScreen = transform.Find("ObstaclesScreen").gameObject;
         roverNavScreen = transform.Find("RoverNavScreen").gameObject;
         waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
+        
     }
     // Start is called before the first frame update
+
+ 
+
     void Start()
     {
         roverObjectStartLocation = roverObject;
@@ -458,6 +467,82 @@ public class NavScreenController : MonoBehaviour
         TextMeshPro titleText = waypointConfirmationScreen.transform.Find("Text/TitleText").GetComponent<TextMeshPro>();
         titleText.text = title;
 
+    }
+
+    public void recordLat() {
+        speech.SetActive(true);
+        message = speech.GetComponent<SpeechManager>().GetMessage();
+        bool active = true;
+        coroutine = StartListeningLat(active);
+        StartCoroutine(coroutine);
+        speech.SetActive(false);
+    }
+
+    public void recordCoordLong() {
+        speech.SetActive(true);
+        message = speech.GetComponent<SpeechManager>().GetMessage();
+        bool active = true;
+        coroutine = StartListeningLong(active);
+        StartCoroutine(coroutine);
+        speech.SetActive(false);
+    }
+
+    IEnumerator StartListeningLat(bool active){
+        int i = 0;
+        string prevMessage = message;
+        bool speaking = false;
+        while(active){
+            yield return new WaitForSeconds(0.8f);
+            message = speech.GetComponent<SpeechManager>().GetMessage();
+            i++;
+            if(message!=prevMessage){
+                speaking = true;
+                //add something here to update text box with message text
+            }
+            if(i==3 && speaking){
+                i = 0;
+                speaking = false;
+            }
+            else if(i==3 && !speaking){
+                i = 0;
+                speaking = false;
+                SetWaypointLat(message);
+                Debug.Log("latitute: " + globalLat);
+                //finished speaking so stop recording. store message as description
+                active = false;
+                
+            }
+            prevMessage = message;
+        }  
+    }
+
+    IEnumerator StartListeningLong(bool active){
+        int i = 0;
+        string prevMessage = message;
+        bool speaking = false;
+        while(active){
+            yield return new WaitForSeconds(0.8f);
+            message = speech.GetComponent<SpeechManager>().GetMessage();
+            i++;
+            if(message!=prevMessage){
+                speaking = true;
+                //add something here to update text box with message text
+            }
+            if(i==3 && speaking){
+                i = 0;
+                speaking = false;
+            }
+            else if(i==3 && !speaking){
+                i = 0;
+                speaking = false;
+                SetWaypointLong(message);
+                Debug.Log("longitude: " + globalLong);
+                //finished speaking so stop recording. store message as description
+                active = false;
+                
+            }
+            prevMessage = message;
+        }  
     }
 
     public void SetWaypointLat(string lat)
