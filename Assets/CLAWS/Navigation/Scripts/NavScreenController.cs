@@ -66,8 +66,7 @@ public class NavScreenController : MonoBehaviour
         roverScreen = transform.Find("RoverScreen").gameObject;
         landerScreen = transform.Find("LanderScreen").gameObject;
         roverNavScreen = transform.Find("RoverUpdateScreen").gameObject;
-        waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
-        
+        waypointConfirmationScreen = transform.Find("WaypointConfirmScreen").gameObject;
     }
     // Start is called before the first frame update
 
@@ -396,6 +395,11 @@ public class NavScreenController : MonoBehaviour
         OpenConfirmationScreen(type);
     }
 
+    private void Update()
+    {
+        //Debug.Log(waypointConfirmationScreen);
+    }
+
     public void OpenRegConfirmationScreenTest()
     {
         string type = "regular"; // Test type
@@ -416,15 +420,11 @@ public class NavScreenController : MonoBehaviour
 
     void OpenConfirmationScreen(string type)
     {
-
-        // Add the type (Tag look at figma for the different tags. There can be "geosample, danger, regular"
-        // Add the title of the waypoint in text given the title parameter
-
         TextMeshPro titleText = waypointConfirmationScreen.transform.Find("Text/TitleText").GetComponent<TextMeshPro>();
-        titleText.text = "Set title with VEGA";
-
-
+        titleText.text = "\"Set title\" with VEGA";
         waypointConfirmationScreen.SetActive(true);
+
+
 
         switch (type)
         {
@@ -461,9 +461,6 @@ public class NavScreenController : MonoBehaviour
         globalWaypointTextTitle = title;
         TextMeshPro titleText = waypointConfirmationScreen.transform.Find("Text/TitleText").GetComponent<TextMeshPro>();
         titleText.text = title;
-        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
-        coordText.text = "Set Latitude with VEGA";
-
     }
 
     public void recordLat() {
@@ -488,10 +485,11 @@ public class NavScreenController : MonoBehaviour
         int i = 0;
         string prevMessage = message;
         bool speaking = false;
-        while(active){
-            yield return new WaitForSeconds(0.8f);
+        while (active){
+            yield return new WaitForSeconds(2f);
             message = speech.GetComponent<SpeechManager>().GetMessage();
             i++;
+            
             if(message!=prevMessage){
                 speaking = true;
                 //add something here to update text box with message text
@@ -545,15 +543,15 @@ public class NavScreenController : MonoBehaviour
     public void SetWaypointLat(string lat)
     {
         globalLat = lat;
-        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
-        coordText.text = "Set Longitude with VEGA";
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/LatText").GetComponent<TextMeshPro>();
+        coordText.text = lat;
     }
 
     public void SetWaypointLong(string longt)
     {
         globalLong = longt;
-        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
-        coordText.text = $"{globalLat}, {globalLong}"; //set # of float values shown ?
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/LongText").GetComponent<TextMeshPro>();
+        coordText.text = longt;
     }
 
     // THIS FUNCTION IS CALLED BY VEGA
