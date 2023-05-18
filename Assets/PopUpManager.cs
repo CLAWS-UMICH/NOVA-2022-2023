@@ -37,7 +37,7 @@ public class PopUpManager : MonoBehaviour
     }
     public static void MakePopupVega(string contents, float delay)
     {
-        PopUp popup = Instantiate(_instance.VegaPopUpPrefab, _instance.transform).AddComponent<PopUp>();
+        PopUp popup = Instantiate(_instance.VegaPopUpPrefab, _instance.transform).GetComponent<PopUp>();
         popup.SetText(contents);
         popup.SetTimer(delay);
         _instance.gridObjectCollection.UpdateCollection();

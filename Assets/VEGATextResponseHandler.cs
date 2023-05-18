@@ -126,13 +126,13 @@ public class VEGATextResponseHandler : MonoBehaviour
         text.text = VEGAVariable;
 
         bool active = false;
-        if (VEGAVariable != "")
+        if (VEGAVariable != "") 
         {
             // textBox.SetActive(true);
             // active = true;
             // coroutine = PopUp(active);
             // StartCoroutine(coroutine);
-            PopUpManager.MakePopup(VEGAVariable);
+            PopUpManager.MakePopupVega(VEGAVariable,3);
         }
     }
 
