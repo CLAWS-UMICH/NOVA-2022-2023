@@ -17,7 +17,7 @@ public class SketchYawOffset : MonoBehaviour
     }
         
     IEnumerator LunaMove() {
-        for(int i = 0; i < 100; i++) {
+        while (true) {
             yield return new WaitForSeconds(timeDelay);
             gameObject.transform.rotation = Quaternion.Euler(0, playerCam.transform.rotation.eulerAngles.y + offset, 0);
         }
