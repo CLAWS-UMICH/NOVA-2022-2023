@@ -17,6 +17,7 @@ public class GeoSampleManager : MonoBehaviour
         string coordinate = "42.1234 N, 24.1234 E";
         Simulation.User.AstronautGeoSamples.geoSampleList.Insert(0, new GeoSample(id, rockType, System.DateTime.Now.ToString(), coordinate, "23940329", 'n', "", s));
         EventBus.Publish<GeoSampleUpdatedEvent>(new GeoSampleUpdatedEvent(0));
+        PopUpManager.MakePopup("New Geo Sample Added.");
         id++;
         
     }
