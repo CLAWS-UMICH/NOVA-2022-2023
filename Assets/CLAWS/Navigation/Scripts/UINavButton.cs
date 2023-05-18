@@ -7,6 +7,7 @@ public class UINavButton : MonoBehaviour
 {
     NavScreenController navScreenController;
     string letterOfObject;
+    string titleOfObject;
     GameObject lightBlueBorder;
 
     void Awake()
@@ -22,6 +23,7 @@ public class UINavButton : MonoBehaviour
         {
             if (waypoint.GetLetter() == letterOfObject)
             {
+                titleOfObject = waypoint.GetTitle();
                 navScreenController.updateCurrentEnd(waypoint.GetPosition(), waypoint.GetTitle() + " " + waypoint.GetLetter());
 
             }
@@ -32,7 +34,7 @@ public class UINavButton : MonoBehaviour
     {
         lightBlueBorder.SetActive(true);
         navScreenController.turnOffPastButtonLightBlue();
-        navScreenController.updateCurrentSelectedButton(lightBlueBorder);
+        navScreenController.updateCurrentSelectedButton(lightBlueBorder, titleOfObject);
     }
 
     public string GetLetter()
