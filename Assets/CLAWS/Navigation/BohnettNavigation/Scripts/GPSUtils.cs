@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[System.Serializable]
 public class GPSCoords
 {
     public double latitude;
@@ -341,14 +342,15 @@ public class GPSUtils : MonoBehaviour
 
         double angle = theta * 180 / Math.PI;
 
-        return (d, angle);
+        return (d, angle + 180);
     }
 
 
 
     static public Vector3 GPSCoordsToAppPosition(GPSCoords coords)
     {
-        (double distanceFromOrigin, double angleFromOrigin) = GPSCoordsAndAngleBetweenCoords(coords, originGPSCoords);
+        // (double distanceFromOrigin, double angleFromOrigin) = GPSCoordsAndAngleBetweenCoords(coords, originGPSCoords);
+        (double distanceFromOrigin, double angleFromOrigin) = DistanceAndAngleBetweenCoords(coords, originGPSCoords);
         double distanceFromOriginX = distanceFromOrigin * Math.Sin(angleFromOrigin * Math.PI / 180);
         double distanceFromOriginZ = distanceFromOrigin * Math.Cos(angleFromOrigin * Math.PI / 180);
 

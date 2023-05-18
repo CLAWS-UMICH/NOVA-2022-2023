@@ -32,7 +32,7 @@ public class NavScreenController : MonoBehaviour
     [SerializeField] GameObject crewObject;
     [SerializeField] GameObject geoObject;
     [SerializeField] GameObject mission1Object;
-    [SerializeField] GameObject mission2Object;
+
     [SerializeField] GameObject mission3Object;
 
     [SerializeField] GameObject roverObject;
@@ -63,9 +63,9 @@ public class NavScreenController : MonoBehaviour
         crewScreen = transform.Find("CrewScreen").gameObject;
         geoScreen = transform.Find("GeoScreen").gameObject;
         missionScreen = transform.Find("MissionScreen").gameObject;
-        roverScreen = transform.Find("roverScreen").gameObject;
-        landerScreen = transform.Find("landerScreen").gameObject;
-        roverNavScreen = transform.Find("RoverNavScreen").gameObject;
+        roverScreen = transform.Find("RoverScreen").gameObject;
+        landerScreen = transform.Find("LanderScreen").gameObject;
+        roverNavScreen = transform.Find("RoverUpdateScreen").gameObject;
         waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
         
     }
@@ -249,6 +249,8 @@ public class NavScreenController : MonoBehaviour
 
     public void OpenLanderScreen()
     {
+        currentEndPosition = landerObject.transform;
+        playerWithinDistance = false;
         currentScreenOpen = "Lander";
         StartCoroutine(_OpenLanderScreen());
     }
@@ -375,13 +377,6 @@ public class NavScreenController : MonoBehaviour
         roverList.Add(newMission1);
         allWaypoints.Add(newMission1);
 
-        Waypoint newMission2 = new Waypoint(mission2Object.transform, "Crater Exploration", (Type)System.Enum.Parse(typeof(Type), "regular"));
-        mission2Object.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMission2.GetLetter();
-        createRegularButton(newMission2.GetTitle(), newMission2.GetLetter());
-        createRoverButtons(newMission2.GetTitle(), newMission2.GetLetter());
-        missionList.Add(newMission2);
-        roverList.Add(newMission2);
-        allWaypoints.Add(newMission2);
 
         Waypoint newMission3 = new Waypoint(mission3Object.transform, "Lunar Mapping", (Type)System.Enum.Parse(typeof(Type), "regular"));
         mission3Object.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMission3.GetLetter();
@@ -645,10 +640,12 @@ public class NavScreenController : MonoBehaviour
 
     private void createRoverButtons(string title, string letter) //need to reintegrate into unity scene
     {
-        Transform roverButton = roverScreen.transform.Find("RoverButtons");
+        Transform roverButton = roverScreen.transform.Find("WaypointButtons");
         Vector3 roverPositionUI = roverButton.position;
         float roveryOffset = -0.04f * roverList.Count;
         roverPositionUI.y += roveryOffset;
+        roverPositionUI.z += -0.55f / 100f;
+        roverPositionUI.x += .8f / 100f;
         GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverPositionUI, Quaternion.identity, roverButton);
         newRoverUIPrefab.transform.rotation = Quaternion.identity;
         newRoverUIPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
@@ -667,7 +664,8 @@ public class NavScreenController : MonoBehaviour
         // Find the yOffset so that the new buttons are below each other
         float yOffset = -0.04f * geoList.Count;
         position.y += yOffset;
-
+        position.z += -0.55f / 100f;
+        position.x += .8f / 100f;
         // Create the buttons and set their title and letter
         GameObject newGeoPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, geoButton);
         newGeoPrefab.transform.rotation = Quaternion.identity;
@@ -687,6 +685,8 @@ public class NavScreenController : MonoBehaviour
         // Find the yOffset so that the new buttons are below each other
         float yOffset = -0.04f * missionList.Count;
         position.y += yOffset;
+        position.z += -0.55f / 100f;
+        position.x += .8f / 100f;
 
         // Create the buttons and set their title and letter
         GameObject newMissionPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, missionButton);
@@ -831,6 +831,7 @@ public class NavScreenController : MonoBehaviour
         }
         else if (currentEndPosition != null)
         {
+            NavigatableObject.DestroyAllBreadCrumbs();
             Transform playerPosition = mainCam.transform;
 
 

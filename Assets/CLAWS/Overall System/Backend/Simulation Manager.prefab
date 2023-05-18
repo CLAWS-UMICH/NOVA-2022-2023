@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8267535550734177966}
   - component: {fileID: 8267535550734177873}
   - component: {fileID: 1713950596}
+  - component: {fileID: 1877589675}
   m_Layer: 0
   m_Name: Simulation Manager
   m_TagString: Untagged
@@ -94,7 +95,23 @@ MonoBehaviour:
     t_water: 
   AstronautTasks:
     progress: 0
-    taskList: []
+    taskList:
+    - taskId: 0
+      taskTitle: testtask1
+      taskDesc: taskdesc
+      taskType: 99
+      completed: 0
+      subtaskList: []
+    - taskId: 1
+      taskTitle: testtask2
+      taskDesc: taskdesc
+      taskType: 102
+      completed: 0
+      subtaskList:
+      - subTaskId: 0
+        title: sub1
+        description: subdesk1
+        taskType: 99
     activeTask: 0
   AstronautMessaging:
     priority: 
@@ -255,3 +272,35 @@ MonoBehaviour:
     depress_pump: 100
     createdAt: 
     updatedAt: 
+  fakeGPS:
+    id: 0
+    device: 
+    mode: 0
+    time: 
+    ept: 0
+    lat: 29.564513016675804
+    lon: -95.08146692146562
+    alt: 0
+    epx: 0
+    epy: 0
+    epv: 0
+    track: 0
+    speed: 0
+    climb: 0
+    eps: 0
+    epc: 0
+--- !u!114 &1877589675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267535550734177874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0137142d82108478a82822f84fff9147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  mainCameraHolder: {fileID: 0}
+  mrtkSceneContent: {fileID: 0}

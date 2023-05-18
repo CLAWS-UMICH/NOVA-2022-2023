@@ -123,7 +123,7 @@ MonoBehaviour:
   breadcrumb: {fileID: 996553710745987195, guid: 9274ab43b0df342bd8090218e457b0c1, type: 3}
   allBread: {fileID: 2138205903829333034}
   placedAllBread: {fileID: 5898361833816790375}
-  camera: {fileID: 0}
+  cam: {fileID: 0}
   crumbDistance: 5
 --- !u!114 &2138205902728967898
 MonoBehaviour:
@@ -205,7 +205,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 355984215c2324e43ae2082b67328a2e, type: 2}
+  - {fileID: 2100000, guid: 2ebff6c6df8a13542b148495f72831c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -265,9 +265,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138205902990691671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.040001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 5.9, y: 7.040001, z: -40.1}
+  m_LocalScale: {x: 2.3, y: 2.3, z: 2.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2138205902952827693}
   - {fileID: 2138205904363935586}
@@ -364,7 +364,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 55
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
