@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class IconsStayInMap : MonoBehaviour
 {
-    public Transform MinimapCam;
-	public float MinimapSize;
+    Transform MinimapCam;
+	float MinimapSize = 16.5f;
 	Vector3 TempV3;
-    [SerializeField] float iconEdgeSize;
-	[SerializeField] float regularIconSize;
+    float iconEdgeSize = 0.1f;
+	float regularIconSize = 0.3f;
 
 	void Awake() {
+
+		MinimapCam = Camera.main.gameObject.transform;
 		// Regular Icon Size
 		regularIconSize = transform.localScale.x * 1.25f;
 		iconEdgeSize = transform.localScale.x;

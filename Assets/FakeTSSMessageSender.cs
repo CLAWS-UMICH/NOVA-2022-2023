@@ -12,18 +12,14 @@ public class FakeTSSMessageSender : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Fake_SetUIA());
+        Fake_SetUIA();
     }   
 
-    IEnumerator Fake_SetUIA()
+    public void Fake_SetUIA()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            Simulation.User.UIA = fakeUIA;
-            Simulation.User.UIA_CONTROLS = fakeUIAControl;
-            EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
-        }
+        Simulation.User.UIA = fakeUIA;
+        Simulation.User.UIA_CONTROLS = fakeUIAControl;
+        EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
     }
 
     public void Fake_SetGPS()

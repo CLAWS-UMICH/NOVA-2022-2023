@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class LUNAFOVManager : MonoBehaviour
 {
-    SketchYawOffset sketchYawOffset;
-
-    private void Start()
-    {
-        sketchYawOffset = GameObject.Find("LunaTransform").GetComponent<SketchYawOffset>();
-    }
+    public SketchYawOffset sketchYawOffset;
 
     public void LUNALeft()
     {

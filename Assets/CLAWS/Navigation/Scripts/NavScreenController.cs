@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Text.RegularExpressions;
 
 public class NavScreenController : MonoBehaviour
 {
@@ -310,9 +311,9 @@ public class NavScreenController : MonoBehaviour
     {
         mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
         mapCam.cullingMask |= 1 << LayerMask.NameToLayer("GeoLayer");
-        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
         mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
         mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
     }
 
 
@@ -357,7 +358,7 @@ public class NavScreenController : MonoBehaviour
     {
 
         Waypoint newCrew = new Waypoint(crewObject.transform, "Patrick", (Type)System.Enum.Parse(typeof(Type), "crew"));
-        crewObject.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
+        crewObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
         crewList.Add(newCrew);
         allWaypoints.Add(newCrew);
 
@@ -421,7 +422,7 @@ public class NavScreenController : MonoBehaviour
         // Add the title of the waypoint in text given the title parameter
 
         TextMeshPro titleText = waypointConfirmationScreen.transform.Find("Text/TitleText").GetComponent<TextMeshPro>();
-        titleText.text = "Set title with VEGA";
+        titleText.text = "\"Set Title\" with VEGA";
 
 
         waypointConfirmationScreen.SetActive(true);
@@ -458,11 +459,10 @@ public class NavScreenController : MonoBehaviour
 
     public void SetWaypointTitle(string title)
     {
+
         globalWaypointTextTitle = title;
         TextMeshPro titleText = waypointConfirmationScreen.transform.Find("Text/TitleText").GetComponent<TextMeshPro>();
         titleText.text = title;
-        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
-        coordText.text = "Set Latitude with VEGA";
 
     }
 
@@ -544,16 +544,25 @@ public class NavScreenController : MonoBehaviour
 
     public void SetWaypointLat(string lat)
     {
-        globalLat = lat;
-        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
-        coordText.text = "Set Longitude with VEGA";
+        // Remove "set latitude" using Replace
+        string result = lat.Replace("set latitude", string.Empty);
+
+        // Remove spaces using Replace
+        result = result.Replace(" ", string.Empty);
+        globalLat = result;
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/LatText").GetComponent<TextMeshPro>();
+        coordText.text = "Latitude: " + result;
     }
 
     public void SetWaypointLong(string longt)
     {
-        globalLong = longt;
-        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/CoordText").GetComponent<TextMeshPro>();
-        coordText.text = $"{globalLat}, {globalLong}"; //set # of float values shown ?
+        string result = longt.Replace("set longitude", string.Empty);
+
+        // Remove spaces using Replace
+        result = result.Replace(" ", string.Empty);
+        globalLong = result;
+        TextMeshPro coordText = waypointConfirmationScreen.transform.Find("Text/LongText").GetComponent<TextMeshPro>();
+        coordText.text = "Longitude: " + result; //set # of float values shown ?
     }
 
     // THIS FUNCTION IS CALLED BY VEGA

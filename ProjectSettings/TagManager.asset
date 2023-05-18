@@ -29,11 +29,11 @@ TagManager:
   - LanderLayer
   - GeoLayer
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MissionMini
+  - CrewMini
+  - RoverMini
+  - LanderMini
+  - GeoMini
   - 
   - 
   - 
