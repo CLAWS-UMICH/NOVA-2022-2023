@@ -41,7 +41,7 @@ public class Breadcrumbs : MonoBehaviour
         }
     }
 
-    float offset = -0.5f;
+    float offset = 0f;
     private void PlaceBreadcrumb()
     {
         Vector3 direction = prevCrumbPosition - currentPosition;
