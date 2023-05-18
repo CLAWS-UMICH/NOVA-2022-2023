@@ -100,3 +100,17 @@ MonoBehaviour:
       id: 0
       description: 
       axisConstraint: 0
+  - localizationKey: 
+    keyword: LUNA Turn on Lights
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: LUNA Turn off Lights
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
