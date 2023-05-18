@@ -66,8 +66,8 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
     public void openGallery() {
         photoController.GetComponent<PhotoCaptureExample>().sampleName = sample.sampleID.ToString();
         photoController.GetComponent<PhotoCaptureExample>().LoadPhotos();
-        photoController.SetActive(true);
-        gameObject.SetActive(false);
+        // photoController.SetActive(true);
+        // gameObject.SetActive(false);
     }
     public void closeGallery() {
         photoController.SetActive(false);
