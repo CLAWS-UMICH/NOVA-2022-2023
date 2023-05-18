@@ -13,15 +13,15 @@ public class FakeTSSMessageSender : MonoBehaviour
     private void Start()
     {
         Fake_SetUIA();
-    }   
-
+    }
+    [ContextMenu("SetUIA")]
     public void Fake_SetUIA()
     {
         Simulation.User.UIA = fakeUIA;
         Simulation.User.UIA_CONTROLS = fakeUIAControl;
         EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
     }
-
+    [ContextMenu("SetGPS")]
     public void Fake_SetGPS()
     {
         Simulation.User.GPS = fakeGPS;
