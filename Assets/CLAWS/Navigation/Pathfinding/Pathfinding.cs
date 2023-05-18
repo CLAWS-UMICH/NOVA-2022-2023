@@ -135,8 +135,8 @@ public class Pathfinding : MonoBehaviour {
             {
                 instantiatedObject.transform.LookAt(FinalPath[i].vPosition);
             }
-            instantiatedObject.SetActive(false);
-            isClose(instantiatedObject);
+            instantiatedObject.SetActive(true);
+            //isClose(instantiatedObject);
             instantiatedObject.transform.SetParent(empty.transform);
         }
     }

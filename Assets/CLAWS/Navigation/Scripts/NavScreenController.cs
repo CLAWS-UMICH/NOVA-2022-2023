@@ -311,9 +311,9 @@ public class NavScreenController : MonoBehaviour
     {
         mapCam.cullingMask |= 1 << LayerMask.NameToLayer("MissionLayer");
         mapCam.cullingMask |= 1 << LayerMask.NameToLayer("GeoLayer");
-        mapCam.cullingMask |= 1 << LayerMask.NameToLayer("LanderLayer");
         mapCam.cullingMask |= 1 << LayerMask.NameToLayer("RoverLayer");
         mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("CrewLayer"));
+        mapCam.cullingMask &= ~(1 << LayerMask.NameToLayer("LanderLayer"));
     }
 
 
@@ -358,7 +358,7 @@ public class NavScreenController : MonoBehaviour
     {
 
         Waypoint newCrew = new Waypoint(crewObject.transform, "Patrick", (Type)System.Enum.Parse(typeof(Type), "crew"));
-        crewObject.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
+        crewObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
         crewList.Add(newCrew);
         allWaypoints.Add(newCrew);
 

@@ -65,7 +65,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1728
+    m_Bits: 260048576
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: dde3201ffa0714345a2ade512fcaf093, type: 2}
   m_TargetDisplay: 1
@@ -106,7 +106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &392618270699939001
 Transform:
   m_ObjectHideFlags: 0
@@ -116,8 +116,8 @@ Transform:
   m_GameObject: {fileID: 8365719477588361099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 3.27}
-  m_LocalScale: {x: 1.9, y: 1.9, z: 1.9}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 21.3, y: 21.3, z: 21.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5083274695301152251}
   m_RootOrder: 0
@@ -162,9 +162,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: b55b3150617d33942ac00f78bc483a6a, type: 3}
-  m_Color: {r: 0.22895159, g: 0.39955086, b: 0.990566, a: 1}
+  m_Color: {r: 0.73333335, g: 0.7921569, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
