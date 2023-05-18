@@ -96,12 +96,6 @@ MonoBehaviour:
   AstronautTasks:
     progress: 0
     taskList:
-    - taskId: 0
-      taskTitle: testtask1
-      taskDesc: taskdesc
-      taskType: 99
-      completed: 0
-      subtaskList: []
     - taskId: 1
       taskTitle: testtask2
       taskDesc: taskdesc
@@ -111,6 +105,20 @@ MonoBehaviour:
       - subTaskId: 0
         title: sub1
         description: subdesk1
+        taskType: 99
+    - taskId: 0
+      taskTitle: Perform UIA Egress
+      taskDesc: Prepare suit to exit airlock
+      taskType: 99
+      completed: 0
+      subtaskList:
+      - subTaskId: 0
+        title: Power on EMU-1
+        description: 
+        taskType: 99
+      - subTaskId: 0
+        title: Power on EMU-1
+        description: 
         taskType: 99
     activeTask: 0
   AstronautMessaging:
