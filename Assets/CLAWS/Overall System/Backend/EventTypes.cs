@@ -94,6 +94,25 @@ public class GeoSampleUpdatedEvent
     }
 }
 
+public class GeoSpecRecievedEvent 
+{
+    public int index;
+
+    public GeoSpecRecievedEvent()
+    {
+        index = -1;
+    }
+
+    public GeoSpecRecievedEvent(int updateIndex)
+    {
+        index = updateIndex;
+    }
+    public override string ToString()
+    {
+        return "<GeoSampleRecievedEvent>: New sample spec recieved";
+    }
+}
+
 // Event for letting us know GPS data was received from the server
 public class UpdatedGPSEvent
 {

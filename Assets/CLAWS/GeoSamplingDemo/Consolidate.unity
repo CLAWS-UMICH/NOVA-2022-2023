@@ -17662,7 +17662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614927243916834, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2896614927243916837, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_LocalScale.x
@@ -19765,6 +19765,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030340097}
   - component: {fileID: 1030340096}
+  - component: {fileID: 1030340098}
   m_Layer: 0
   m_Name: GeoSample
   m_TagString: Untagged
@@ -19812,6 +19813,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1030340098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030340095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72581abaee12647b7b11b45f2e2596e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1039211284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24851,12 +24864,23 @@ MonoBehaviour:
   descriptionText: {fileID: 787582874}
   lunarTimeText: {fileID: 1371368862}
   coordinateText: {fileID: 1117156116}
+  compositionText: {fileID: 1485748463}
   GeoSampleController: {fileID: 1030340095}
   sample:
     sampleID: -1
     rockType: 
     lunarTime: 
     location: 
+    specMsg:
+      SiO2: 0
+      TiO2: 0
+      Al2O3: 0
+      FeO: 0
+      MnO: 0
+      MgO: 0
+      CaO: 0
+      K2O: 0
+      P2O3: 0
     RFID: 
     taskType: 0
     description: 
@@ -26938,6 +26962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeDelay: 10
   playerCam: {fileID: 8937764829177718854}
+  offset: 0
 --- !u!1 &1464763121
 GameObject:
   m_ObjectHideFlags: 0
@@ -37538,6 +37563,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1713950596, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
+      propertyPath: fakeSpecMsg.SiO2
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8267535550734177872, guid: 5b850bde4df9d1f4d86559d9c6e26e40, type: 3}
       propertyPath: m_RootOrder
       value: 4

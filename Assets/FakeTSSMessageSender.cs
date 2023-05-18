@@ -7,7 +7,7 @@ public class FakeTSSMessageSender : MonoBehaviour
 {
     public UIAMsg fakeUIA = new UIAMsg();
     public UIAControlMsg fakeUIAControl = new UIAControlMsg();
-
+    public specMsg fakeSpecMsg = new specMsg();
     public GPSMsg fakeGPS = new GPSMsg();
 
     private void Start()
@@ -30,6 +30,11 @@ public class FakeTSSMessageSender : MonoBehaviour
     {
         Simulation.User.GPS = fakeGPS;
         EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
+    }
+    [ContextMenu("SetSpectrometer")]
+    public void Fake_SetSpectrometer() {
+        Simulation.User.GEO = fakeSpecMsg;
+        EventBus.Publish<GeoSpecRecievedEvent>(new GeoSpecRecievedEvent());
     }
 
 }

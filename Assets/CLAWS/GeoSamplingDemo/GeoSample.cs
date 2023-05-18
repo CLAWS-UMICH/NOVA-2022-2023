@@ -11,6 +11,7 @@ public class GeoSample
     public string lunarTime;
     // Coordinates
     public string location;
+    public specMsg specMsg;
     public string RFID;
     public char taskType;
     public string description;
@@ -24,7 +25,7 @@ public class GeoSample
         description = "";
     }
     public GeoSample(int sampleID_in, string rockType_in, string lunarTime_in,
-    string location_in, string RFID_in, char taskType_in, string description_in) {
+    string location_in, string RFID_in, char taskType_in, string description_in, specMsg s) {
         sampleID = sampleID_in;
         rockType = rockType_in;
         lunarTime = lunarTime_in;
@@ -32,5 +33,6 @@ public class GeoSample
         RFID = RFID_in;
         taskType = taskType_in;
         description = description_in;
+        specMsg = s;
     }
 }

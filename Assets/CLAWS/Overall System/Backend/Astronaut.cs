@@ -18,6 +18,7 @@ public class Astronaut : MonoBehaviour
     public GPSMsg GPS;
     public UIAMsg UIA;
     public UIAControlMsg UIA_CONTROLS;
+    public specMsg GEO;
 
 
 }
