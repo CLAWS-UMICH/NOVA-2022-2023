@@ -24,20 +24,6 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Luna On
-    keyCode: 91
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Luna Off
-    keyCode: 93
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
     keyword: Test Command
     keyCode: 304
     action:
@@ -109,6 +95,34 @@ MonoBehaviour:
       axisConstraint: 0
   - localizationKey: 
     keyword: LUNA Turn off Lights
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: LUNA Left
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: LUNA Right
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: LUNA Center
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Set Title
     keyCode: 0
     action:
       id: 0
