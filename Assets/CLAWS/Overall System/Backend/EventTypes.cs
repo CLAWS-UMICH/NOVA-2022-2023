@@ -133,3 +133,16 @@ public class UIAMsgEvent
         return "<UIAMsgEvent>: new UIA msg";
     }
 }
+
+public class UIACompleteEvent
+{
+    public UIACompleteEvent()
+    {
+        Debug.Log("UIA Complete Event");
+    }
+
+    public override string ToString()
+    {
+        return "<UIACompleteEvent>: UIA complete";
+    }
+}

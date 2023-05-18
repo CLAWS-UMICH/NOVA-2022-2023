@@ -79,11 +79,17 @@ public class UIEgressControl : MonoBehaviour
 
         // subscribe to UIA updates
         EventBus.Subscribe<UIAMsgEvent>(UIA_Updated);
+        EventBus.Subscribe<UIACompleteEvent>(UIA_Complete);
         UIA_Updated(new UIAMsgEvent());
 
         StartCoroutine(WaitForStep0());
     }
 
+    public void UIA_Complete(UIACompleteEvent e)
+    {
+        Debug.Log("UIA Egress Complete");
+        gameObject.SetActive(false);
+    }
     
     // handle each step of the UIA procedure
     IEnumerator WaitForStep0()
@@ -479,6 +485,7 @@ public class UIEgressControl : MonoBehaviour
         // step complete
         SetSwitchFlashing("DEPRESS PUMP", false);
         yield return new WaitForSeconds(1f);
+        EventBus.Publish<UIACompleteEvent>(new UIACompleteEvent());
         PopUpManager.MakePopup("UIA Procedures are complete. You may exit the airlock");
     }
 
@@ -578,6 +585,13 @@ public class UIEgressControl : MonoBehaviour
                 break;
         }
         counter++;
+        fakeUIA.Fake_SetUIA();
+    }
+
+    public void EgressSkip()
+    {
+        EventBus.Publish<UIACompleteEvent>(new UIACompleteEvent());
+        PopUpManager.MakePopup("UIA Procedures are complete. You may exit the airlock");
     }
 
 

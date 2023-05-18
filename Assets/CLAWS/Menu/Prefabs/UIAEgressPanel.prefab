@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74586672359064933}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03, y: 0.3, z: 0.507}
-  m_LocalScale: {x: 9, y: 9, z: 6}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6671399974026399564}
@@ -4623,7 +4623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 988426586526797934, guid: 73259ee8e3646e8489363623bf0a10ed, type: 3}
       propertyPath: m_text
-      value: '02 VENT
+      value: '0<sub>2</sub> VENT
 
 '
       objectReference: {fileID: 0}

@@ -31,7 +31,7 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: UIA Next
+    keyword: Egress Next
     keyCode: 8
     action:
       id: 0
@@ -124,6 +124,20 @@ MonoBehaviour:
   - localizationKey: 
     keyword: Set Title
     keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Set Preset GPS
+    keyCode: 0
+    action:
+      id: 0
+      description: 
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Egress Skip
+    keyCode: 27
     action:
       id: 0
       description: 
