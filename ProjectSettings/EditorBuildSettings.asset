@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/CLAWS/NOVA Main 2.unity
+    path: Assets/CLAWS/NOVA Main.unity
     guid: 19c62bae25e2b3d49992766b1c9ca9ff
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 234a5619fe89cfd4790a8ae9a379e44e, type: 2}
