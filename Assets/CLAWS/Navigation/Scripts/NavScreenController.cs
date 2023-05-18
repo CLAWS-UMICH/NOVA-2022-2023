@@ -78,6 +78,7 @@ public class NavScreenController : MonoBehaviour
     {
         roverObjectStartLocation = roverObject;
         titleLetter = "";
+        titleOfCurrentWaypoint = "";
         currentSelectedButton = null;
         playerWithinDistance = false;
         createPreDeterminedPoints();
@@ -717,8 +718,11 @@ public class NavScreenController : MonoBehaviour
         updateCurrentEnd(landerObject.transform, "Lander");
     }
 
-    public void updateCurrentSelectedButton(GameObject current)
+    string titleOfCurrentWaypoint = "";
+
+    public void updateCurrentSelectedButton(GameObject current, string titleOfObject)
     {
+        titleOfCurrentWaypoint = titleOfObject;
         currentSelectedButton = current;
     }
 
@@ -840,6 +844,7 @@ public class NavScreenController : MonoBehaviour
         }
         else if (currentEndPosition != null)
         {
+
             NavigatableObject.DestroyAllBreadCrumbs();
             Transform playerPosition = mainCam.transform;
 
@@ -851,6 +856,8 @@ public class NavScreenController : MonoBehaviour
             previousEndGoal = currentEndPosition;
             //}
             CloseAll();
+
+            PopUpManager.MakePopup("Starting navigation to " + titleOfCurrentWaypoint);
         }
 
 
