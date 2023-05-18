@@ -96,8 +96,9 @@ public class PhotoCaptureExample : MonoBehaviour
 
     void Snap()
     {
-        cameraView.SetActive(false);
-        confirmationQuad.SetActive(true);
+        // cameraView.SetActive(false);
+        cameraView.GetComponent<GeoSampleCollapse>().Toggle(confirmationQuad.gameObject);
+        // confirmationQuad.SetActive(true);
     }
 
     void OnCapturedPhotoToMemory(PhotoCapture.PhotoCaptureResult result, PhotoCaptureFrame photoCaptureFrame)
