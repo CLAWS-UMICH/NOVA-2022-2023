@@ -28,12 +28,13 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
     //}
     public void closed() {
         if(fromExpanded == true) {
-            descriptionController.gameObject.SetActive(true);
+            gameObject.GetComponent<GeoSampleCollapse>().Toggle(descriptionController.gameObject);
+            // descriptionController.gameObject.SetActive(true);
         }
         else {
-            controller.gameObject.SetActive(true);
+            // controller.gameObject.SetActive(true);
+            gameObject.GetComponent<GeoSampleCollapse>().Toggle(controller.gameObject);
         }
-        gameObject.SetActive(false);
     }
     public void UpdateDescriptionMenuList(int button)
     {
