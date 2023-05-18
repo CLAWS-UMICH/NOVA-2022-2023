@@ -10,7 +10,8 @@ public class SketchYawOffset : MonoBehaviour
     private float timeDelay;
     [SerializeField]
     GameObject playerCam;
-    // Start is called before the first frame update
+    public float offset;
+
     void Start() {
         EnterLunaMode();
     }
@@ -18,7 +19,7 @@ public class SketchYawOffset : MonoBehaviour
     IEnumerator LunaMove() {
         for(int i = 0; i < 100; i++) {
             yield return new WaitForSeconds(timeDelay);
-            gameObject.transform.rotation = Quaternion.Euler(0, playerCam.transform.rotation.eulerAngles.y, 0);
+            gameObject.transform.rotation = Quaternion.Euler(0, playerCam.transform.rotation.eulerAngles.y + offset, 0);
         }
     }
     public void EnterLunaMode() {
