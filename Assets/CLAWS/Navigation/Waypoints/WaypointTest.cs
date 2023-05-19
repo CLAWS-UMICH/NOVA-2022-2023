@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WaypointTest : MonoBehaviour
 {
-    public Transform player;
+    Transform player;
     public Transform topPart;
     public Transform bottomPart;
     public float scaleMultiplier = 1.0f;
-    public float maxScale = 2.0f;
+    public float maxScale = 4.0f;
     public float minScale = 0.5f;
     public float bottomPartDistanceThreshold = 2.5f;
     public float topPartDistanceThreshold = 7.5f;
@@ -16,6 +16,11 @@ public class WaypointTest : MonoBehaviour
 
     private float initialTopPartScale;
     bool topIsOn = true;
+
+    private void Awake()
+    {
+        player = Camera.main.transform;
+    }
 
     private void Update()
     {

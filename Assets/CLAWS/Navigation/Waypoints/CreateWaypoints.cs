@@ -37,14 +37,13 @@ public class CreateWaypoints : MonoBehaviour
                 break;
             case "geosample":
                 newObject = Instantiate(geoPrefab, objectPos, Quaternion.identity);
-                titleTextSign = newObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
-                titleTextSign.text = title;
+                titleTextSign = newObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>();
 
                 break;
             case "regular":
                 newObject = Instantiate(regPrefab, objectPos, Quaternion.identity);
-                titleTextSign = newObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/TextMeshPro").GetComponent<TextMeshPro>();
-                titleTextSign.text = title;
+                titleTextSign = newObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>();
+        
 
                 break;
             default:
@@ -61,6 +60,7 @@ public class CreateWaypoints : MonoBehaviour
         {
             letterTextSign = newObject.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>();
             letterTextSign.text = newWaypoint.GetLetter();
+            titleTextSign.text = newWaypoint.GetLetter();
         }
         return newWaypoint;
     }
