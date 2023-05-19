@@ -83,7 +83,6 @@ public class NavScreenController : MonoBehaviour
         roverSmallScreen = transform.Find("RoverSmallUpdate").gameObject;
         slider2 = transform.Find("RoverSmallUpdate/Canvas/Slider").gameObject;
 
-
     }
     // Start is called before the first frame update
 
@@ -356,6 +355,7 @@ public class NavScreenController : MonoBehaviour
     List<GameObject> crewButtons = new List<GameObject>();
 
     List<GameObject> testButtons = new List<GameObject>();
+    int firstMessage = 0;
 
     private void fixRotationOfButtons()
     {
@@ -400,8 +400,15 @@ public class NavScreenController : MonoBehaviour
             roverList.Add(newMissionA);
             allWaypoints.Add(newMissionA);
         }
+        roverButtons[5].SetActive(false);
+        roverButtons[6].SetActive(false);
+        roverButtons[7].SetActive(false);
+        roverButtons[8].SetActive(false);
+        missionButtons[5].SetActive(false);
+        missionButtons[6].SetActive(false);
+        missionButtons[7].SetActive(false);
+        missionButtons[8].SetActive(false);
 
-        //transform.GetComponent<GridObjectCollection>().UpdateCollection();
 
 
 
@@ -410,6 +417,82 @@ public class NavScreenController : MonoBehaviour
         crewObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
         crewList.Add(newCrew);
         allWaypoints.Add(newCrew);
+
+    }
+
+    int firstMessageM = 0;
+
+    public void ScrollDown()
+    {
+        Transform roverButton = roverScreen.transform.Find("ButtonStuff");
+
+        int len = roverButtons.Count;
+        if (firstMessage + 4 < len && firstMessage >= 0)
+        {
+            if (firstMessage != 0)
+            {
+                Debug.Log("firstMessage");
+                roverButtons[firstMessage - 1].SetActive(true);
+                roverButtons[firstMessage + 4].SetActive(false);
+                firstMessage--;
+                roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
+            }
+        }
+
+
+    }
+
+    public void ScrollDownMission()
+    {
+        Transform missionButton = roverScreen.transform.Find("ButtonStuffMission");
+
+        int len = roverButtons.Count;
+        if (firstMessage + 4 < len && firstMessage >= 0)
+        {
+            if (firstMessage != 0)
+            {
+                Debug.Log("firstMessage");
+                roverButtons[firstMessage - 1].SetActive(true);
+                roverButtons[firstMessage + 4].SetActive(false);
+                firstMessage--;
+                missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+            }
+        }
+
+
+    }
+
+    public void ScrollUp()
+    {
+        Transform roverButton = roverScreen.transform.Find("ButtonStuff");
+
+
+        int len = missionButtons.Count;
+        if (firstMessageM + 5 < len && firstMessageM >= 0)
+        {
+            missionButtons[firstMessageM].SetActive(false);
+            missionButtons[firstMessageM + 5].SetActive(true);
+            firstMessageM++;
+            roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
+        }
+
+
+    }
+
+    public void ScrollUpMission()
+    {
+        Transform missionButton = roverScreen.transform.Find("ButtonStuffMission");
+
+
+        int len = missionButtons.Count;
+        if (firstMessageM + 5 < len && firstMessageM >= 0)
+        {
+            missionButtons[firstMessage].SetActive(false);
+            missionButtons[firstMessage + 5].SetActive(true);
+            firstMessageM++;
+            missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+        }
+
 
     }
 
@@ -681,6 +764,7 @@ public class NavScreenController : MonoBehaviour
         newRoverUIPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newRoverUIPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
         roverButtons.Add(newRoverUIPrefab);
+        firstMessage = 0;
         testButtons.Add(newRoverUIPrefab);
         roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
     }
@@ -710,22 +794,16 @@ public class NavScreenController : MonoBehaviour
     {
         // Gets the position of the GeoButtons parent gameobject
         // This is where the buttons will be instaniated
-        Transform missionButton = missionScreen.transform.Find("MissionButtons");
-        Vector3 position = missionButton.position;
-
-        // Find the yOffset so that the new buttons are below each other
-        float yOffset = -0.04f * missionList.Count;
-        position.y += yOffset;
-        position.z += -0.55f / 100f;
-        position.x += .8f / 100f;
-
-        // Create the buttons and set their title and letter
-        GameObject newMissionPrefab = Instantiate(UIWaypoint, position, Quaternion.identity, missionButton);
+        Transform missionButton = missionScreen.transform.Find("ButtonStuffMission");
+        GameObject newMissionPrefab = Instantiate(UIWaypoint, missionButton);
+        newMissionPrefab.transform.localScale = new Vector3(2.86298656f, 2.71759987f, 0.201269999f);
         newMissionPrefab.transform.rotation = Quaternion.identity;
         newMissionPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newMissionPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
         missionButtons.Add(newMissionPrefab);
+        firstMessageM = 0;
         testButtons.Add(newMissionPrefab);
+        missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
 

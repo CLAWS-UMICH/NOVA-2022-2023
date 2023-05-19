@@ -63,7 +63,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138205902728967896}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.040001, z: 0}
+  m_LocalPosition: {x: -5.9, y: 7.040001, z: -81.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -120,11 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017b227ade6e94e0fa9506c4b8fbd9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breadcrumb: {fileID: 996553710745987195, guid: 9274ab43b0df342bd8090218e457b0c1, type: 3}
+  breadcrumb: {fileID: 996553710745987195, guid: 1c7cf81dc37672f4f9f68daf47e31979, type: 3}
   allBread: {fileID: 2138205903829333034}
   placedAllBread: {fileID: 5898361833816790375}
   cam: {fileID: 0}
-  crumbDistance: 5
+  crumbDistance: 1
 --- !u!114 &2138205902728967898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +368,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1970752
+    m_Bits: 1978944
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 94ae3f38f28c1024ba311efd6a60bfcd, type: 2}
   m_TargetDisplay: 1
