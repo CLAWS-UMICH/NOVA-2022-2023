@@ -55,26 +55,28 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"geosample_waypoint")){
                     navigation.GetComponent<NavScreenController>().OpenWaypoint("geosample");
                 }
-                else if(String.Equals(words[2],"create_title")){
-                    //check that size is correct to prevent erroring out
-                    navigation.GetComponent<NavScreenController>().SetWaypointTitle(words[3]); 
-                }
+                // else if(String.Equals(words[2],"create_title")){
+                //     //check that size is correct to prevent erroring out
+                //     string[] tmp = e.output.Split(':');
+                //     navigation.GetComponent<NavScreenController>().SetWaypointTitle(tmp[1]); 
+                // }
                 else if(String.Equals(words[2],"confirm_waypoint")){
                     navigation.GetComponent<NavScreenController>().CreateAPoint();
                 }
                 else if(String.Equals(words[2],"open_waypoint")){
-                    navigation.GetComponent<NavScreenController>().SelectWaypointLetter(words[3]);
+                    string[] tmp = e.output.Split(':');
+                    navigation.GetComponent<NavScreenController>().SelectWaypointLetter(tmp[1]);
                 }
                 else if(String.Equals(words[2],"open_crew")){
                     navigation.GetComponent<NavScreenController>().OpenCrewScreen();
                 }
-                else if(String.Equals(words[2],"open_geosample")){
+                else if(String.Equals(words[2],"navigation_geosample")){
                     navigation.GetComponent<NavScreenController>().OpenGeoScreen();
                 }
                 else if(String.Equals(words[2],"open_mission")){
                     navigation.GetComponent<NavScreenController>().OpenMissionScreen();
                 }
-                else if(String.Equals(words[2],"open_rover")){
+                else if(String.Equals(words[2],"rover_open")){
                     navigation.GetComponent<NavScreenController>().OpenRoverScreen();
                 }
                 else if(String.Equals(words[2],"open_lander")){
@@ -83,11 +85,18 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"start_nav")){
                     navigation.GetComponent<NavScreenController>().StartNav();
                 }
-                //cancel navigation
-
-                //backtracking on
-
-                //backtracking off
+                else if(String.Equals(words[2],"recall_rover")){
+                    //navigation.GetComponent<NavScreenController>().StartNav();
+                }
+                else if(String.Equals(words[2],"backtracking_on")){
+                    //navigation.GetComponent<NavScreenController>().StartNav();
+                }
+                else if(String.Equals(words[2],"backtracking_off")){
+                    //navigation.GetComponent<NavScreenController>().StartNav();
+                }
+                else if(String.Equals(words[2],"cancel_navigation")){
+                    //navigation.GetComponent<NavScreenController>().StartNav();
+                }
             }
             else if(String.Equals(words[1],"task_list")){
                 if(String.Equals(words[2],"open")){
@@ -128,12 +137,12 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"open_button_c")){
                     geosample.GetComponent<GeoSampleVegaController>().openButton3();
                 }
-                else if(String.Equals(words[2],"scroll_down")){
-                    geosample.GetComponent<GeoSampleVegaController>().scrollDown();
-                }
-                else if(String.Equals(words[2],"scroll_up")){
-                    geosample.GetComponent<GeoSampleVegaController>().scrollUp();
-                }
+                // else if(String.Equals(words[2],"scroll_down")){
+                //     geosample.GetComponent<GeoSampleVegaController>().scrollDown();
+                // }
+                // else if(String.Equals(words[2],"scroll_up")){
+                //     geosample.GetComponent<GeoSampleVegaController>().scrollUp();
+                // }
                 else if(String.Equals(words[2],"expand")){
                     geosample.GetComponent<GeoSampleVegaController>().expand();
                 }
@@ -172,6 +181,9 @@ public class VEGACommandHandler : MonoBehaviour
                 }
                 else if(String.Equals(words[2],"cancel_photo")){
                     geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
+                }
+                else if(String.Equals(words[2],"exit_note")){
+                    //geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
                 }
             }
             else if(String.Equals(words[1],"all")){
