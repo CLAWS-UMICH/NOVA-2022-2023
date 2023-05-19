@@ -25,7 +25,7 @@ public class MessagingNewHandler : MonoBehaviour
             yield return new WaitForSeconds(10f); //change to 600 -- 10 minutes
             ScrollManager.GetComponent<ScrollManager>().GetMSG();
             ScrollManager.GetComponent<ScrollManager>().ScrollUp();
-            PopUpManager.MakePopup("Walking over to station A right now.");
+            PopUpManager.MakePopupMessaging("Walking over to station A right now.",3);
             active = false;
 
         }  
