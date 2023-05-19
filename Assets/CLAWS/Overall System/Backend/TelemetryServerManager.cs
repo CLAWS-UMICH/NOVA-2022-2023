@@ -7,7 +7,7 @@ using TSS.Msgs;
 
 public class TelemetryServerManager : MonoBehaviour
 {
-    TSSConnection tss;
+    public TSSConnection tss;
     string tssUri;
 
     int msgCount = 0;
