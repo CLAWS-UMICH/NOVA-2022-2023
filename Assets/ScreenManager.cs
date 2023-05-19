@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public enum Screens
+{
+    UIA,
+    Vitals,
+    Geosampling,
+    Messaging,
+    Navigation
+}
+
 public class ScreenManager : MonoBehaviour
 {
 
@@ -12,15 +22,6 @@ public class ScreenManager : MonoBehaviour
     GameObject NavigationPanel;
 
     // STATE MACHINE
-    [System.Serializable]
-    public enum Screens
-    { 
-        UIA, 
-        Vitals, 
-        Geosampling, 
-        Messaging, 
-        Navigation
-    }
     public static Screens CurrScreen = Screens.UIA;
 
     public void SwitchScreen(Screens ScreenToShow)
@@ -65,8 +66,19 @@ public class ScreenManager : MonoBehaviour
             default:
                 break;
         }
+        CurrScreen = ScreenToShow;
+        Debug.Log("Curr Screen = " + ScreenToShow.ToString());
     }
     
+    public static void ScrollUp()
+    {
+        EventBus.Publish<ScrollEvent>(new ScrollEvent(CurrScreen, Direction.up));
+    }
+
+    public static void ScrollDown()
+    {
+        EventBus.Publish<ScrollEvent>(new ScrollEvent(CurrScreen, Direction.down));
+    }
 
     // RANDOM STUFF
     public void CloseScreen(GameObject Screen)
