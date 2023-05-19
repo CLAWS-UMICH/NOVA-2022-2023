@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MessagingNewHandler : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject messaging;
     public GameObject speech;
-    public GameObject panel;
+    public GameObject ScrollManager;
+    public TextMeshPro panel;
+    public GameObject backplate;
     string message;
     private IEnumerator coroutine;
 
@@ -39,7 +42,7 @@ public class MessagingNewHandler : MonoBehaviour
             i++;
             if(message!=prevMessage){
                 speaking = true;
-                //panel.text = message;
+                panel.text = message;
                 //add something here to update text box with message text
             }
             if(i==3 && speaking){
@@ -49,7 +52,12 @@ public class MessagingNewHandler : MonoBehaviour
             else if(i==3 && !speaking){
                 i = 0;
                 speaking = false;
-                //transform.SendMSG(message);
+                Debug.Log("message: " + message);
+                ScrollManager.GetComponent<ScrollManager>().SendMSG(message);
+                panel.text = "";
+                backplate.SetActive(false);
+                ScrollManager.GetComponent<ScrollManager>().ScrollUp();
+                
                 //finished speaking so stop recording. store message as description
                 active = false;
             }

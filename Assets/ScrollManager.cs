@@ -31,7 +31,7 @@ public class ScrollManager : MonoBehaviour
         Children.Add(msg);
     }
 
-    public void ScrollDown(string message){
+    public void ScrollDown(){
         Debug.Log(firstMessage);
         // GameObject msg = Instantiate(MessageOutPrefab, transform);
         // msg.GetComponent<TextHandler>().SetText(message);
@@ -53,9 +53,7 @@ public class ScrollManager : MonoBehaviour
         
     }
 
-    public void ScrollUp(string message){ 
-        string temp = "hi";
-        Debug.Log(firstMessage);
+    public void ScrollUp(){ 
         
         int len = Children.Count;
         if(firstMessage+4 < len && firstMessage >=0){
