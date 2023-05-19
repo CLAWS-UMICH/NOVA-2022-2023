@@ -83,6 +83,11 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"start_nav")){
                     navigation.GetComponent<NavScreenController>().StartNav();
                 }
+                //cancel navigation
+
+                //backtracking on
+
+                //backtracking off
             }
             else if(String.Equals(words[1],"task_list")){
                 if(String.Equals(words[2],"open")){
