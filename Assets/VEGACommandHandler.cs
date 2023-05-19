@@ -83,6 +83,11 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"start_nav")){
                     navigation.GetComponent<NavScreenController>().StartNav();
                 }
+                //cancel navigation
+
+                //backtracking on
+
+                //backtracking off
             }
             else if(String.Equals(words[1],"task_list")){
                 if(String.Equals(words[2],"open")){
@@ -111,16 +116,6 @@ public class VEGACommandHandler : MonoBehaviour
                 }
                 else if(String.Equals(words[2],"close")){
                     //close menu
-                }
-            }
-            else if(String.Equals(words[1],"messaging")){
-                if(String.Equals(words[2],"open")){
-                }
-                else if(String.Equals(words[2],"close")){
-                }
-            }
-            else if(String.Equals(words[1],"uia_egress")){
-                if(String.Equals(words[2],"")){
                 }
             }
             else if(String.Equals(words[1],"geosample")){
