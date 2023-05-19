@@ -11,6 +11,8 @@ public class VEGACommandHandler : MonoBehaviour
     public GameObject navigation;
     public GameObject task_list;
     public GameObject geosample;
+    public GameObject messaging;
+
     //geosample
     //uia
     //messages
@@ -86,7 +88,7 @@ public class VEGACommandHandler : MonoBehaviour
                     navigation.GetComponent<NavScreenController>().StartNav();
                 }
                 else if(String.Equals(words[2],"recall_rover")){
-                    //navigation.GetComponent<NavScreenController>().StartNav();
+                    navigation.GetComponent<NavScreenController>().RecallRover();
                 }
                 else if(String.Equals(words[2],"backtracking_on")){
                     //navigation.GetComponent<NavScreenController>().StartNav();
@@ -95,8 +97,32 @@ public class VEGACommandHandler : MonoBehaviour
                     //navigation.GetComponent<NavScreenController>().StartNav();
                 }
                 else if(String.Equals(words[2],"cancel_navigation")){
-                    //navigation.GetComponent<NavScreenController>().StartNav();
+                    //navigation.GetComponent<NavScreenController>().EndNavigation();
                 }
+            }
+            else if(String.Equals(words[1],"messaging")){
+                if(String.Equals(words[2],"open")){
+                    messaging.SetActive(true);
+                }
+                else if(String.Equals(words[2],"close")){
+                    messaging.SetActive(false);
+                }
+                else if(String.Equals(words[2],"sender_open")){
+                    string[] tmp = e.output.Split(':');
+                    if(tmp[1]=="Jane" || tmp[1]=="jane"){
+                        messaging.GetComponent<MessagingNewHandler>().Jane();
+                    }
+                    else if(tmp[1]=="Niel" || tmp[1]=="niel" || tmp[1]=="kneel"){
+                        messaging.GetComponent<MessagingNewHandler>().Niel();
+                    }
+                    else if(tmp[1]=="MCC" || tmp[1]=="Mcc" || tmp[1]=="mcc" || tmp[1]=="mc" || tmp[1]=="Mc"|| tmp[1]=="m" || tmp[1]=="M"|| tmp[1]=="c" || tmp[1]=="C"){
+                        messaging.GetComponent<MessagingNewHandler>().MCC();
+                    }
+                }
+                else if(String.Equals(words[2],"record_message")){
+                    messaging.GetComponent<MessagingNewHandler>().Recorder();
+                }
+                
             }
             else if(String.Equals(words[1],"task_list")){
                 if(String.Equals(words[2],"open")){
@@ -155,9 +181,6 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"open")){
                     geosample.GetComponent<GeoSampleVegaController>().open();
                 }
-                else if(String.Equals(words[2],"new_sample")){
-                    geosample.GetComponent<GeoSampleVegaController>().recordNote();
-                }
                 else if(String.Equals(words[2],"record_note")){
                     geosample.GetComponent<GeoSampleVegaController>().recordNote();
                 }
@@ -183,7 +206,7 @@ public class VEGACommandHandler : MonoBehaviour
                     geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
                 }
                 else if(String.Equals(words[2],"exit_note")){
-                    //geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
+                    geosample.GetComponent<GeoSampleVegaController>().DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().closed();
                 }
             }
             else if(String.Equals(words[1],"all")){
