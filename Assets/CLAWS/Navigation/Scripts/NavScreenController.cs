@@ -5,6 +5,8 @@ using TMPro;
 using System;
 using System.Text.RegularExpressions;
 using Microsoft.MixedReality.Toolkit.Utilities;
+using TSS;
+using TSS.Msgs;
 
 public class NavScreenController : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class NavScreenController : MonoBehaviour
     GameObject slider2;
     GameObject roverSmallScreen;
 
+    [SerializeField] GameObject telemMan;
     [SerializeField] GameObject mainCam;
     [SerializeField] Camera mapCam;
     [SerializeField] GameObject openNavMenuButton;
@@ -956,6 +959,7 @@ public class NavScreenController : MonoBehaviour
         roverSmallScreen.SetActive(true);
     }
     Transform roverEndLocation = null;
+    
     public void StartNav()
     {
         if (currentScreenOpen == "Rover")
@@ -970,6 +974,13 @@ public class NavScreenController : MonoBehaviour
             // Give this to NASA
             // Current End Position of where the rover should go: roverEndLocation
             // Start Position: roverObjectStartLocation.transform.position;
+            double startLat = roverObject.GetComponent<IsGPSObject>().coords.latitude;
+            double startLong = roverObject.GetComponent<IsGPSObject>().coords.longitude;
+
+            //.GetComponent<TSSConnection>().SendRoverNavigateCommand((float)startLat, (float)startLong);
+            telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverNavigateCommand((float)startLat, (float)startLong);
+            Debug.Log("Start ROver Navigation");
+            
             _updateRoverObjectCoords();
             updateRoverLocation();
             StartCoroutine(OpenRoverNavScreen());
@@ -1028,6 +1039,8 @@ public class NavScreenController : MonoBehaviour
 
         slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
         slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
+        string prog = Simulation.User.ROVER.navigation_status;
+        transform.Find("RoverUpdateScreen/Text/StatusText").GetComponent<TextMeshPro>().text = "Status: " + prog;
 
         if (percentageDone >= 95)
         {
@@ -1043,6 +1056,7 @@ public class NavScreenController : MonoBehaviour
         // GIVE TO NASA
         // Give this position to bring rover back to beginning
         // roverObjectStartLocation.transform.position;
+        telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverRecallCommand();
 
         // Turn off 
         StartCoroutine(_recallRover());
