@@ -30,7 +30,7 @@ public class PopUpManager : MonoBehaviour
 
     public static void MakePopup(string contents, float delay)
     {
-        PopUp popup = Instantiate(_instance.PopUpPrefab, _instance.transform).AddComponent<PopUp>();
+        PopUp popup = Instantiate(_instance.PopUpPrefab, _instance.transform).GetComponent<PopUp>();
         popup.SetText(contents);
         popup.SetTimer(delay);
         _instance.gridObjectCollection.UpdateCollection();

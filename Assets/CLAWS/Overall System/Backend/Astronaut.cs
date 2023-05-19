@@ -13,12 +13,14 @@ public class Astronaut : MonoBehaviour
     public GeoSampleList AstronautGeoSamples; 
 
     // TSS objects
-    public EVAMsg EVA; // vitals
+    public SimulationStates EVA; // vitals TODO;
+    public SimulationFailures EVA_failures;
     public IMUMsg IMU;
     public GPSMsg GPS;
     public UIAMsg UIA;
-    public UIAControlMsg UIA_CONTROLS;
-    public specMsg GEO;
+    public RoverMsg ROVER;
+    public SpecMsg GEO;
+
 
 
 }

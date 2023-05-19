@@ -19,7 +19,7 @@ using System;
 public class UpdateAllPanels : MonoBehaviour
 {
     private VitalPanel[] vitalPanels;
-    private EVAMsg vitals;
+    private SimulationStates vitals;
 
     public TextMeshProUGUI Timer;
     // Start is called before the first frame update
@@ -102,18 +102,18 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Math.Floor(vitals.ox_primary)).ToString();
+                return ((int)Math.Floor(vitals.oxygen_primary_time)).ToString();
 
             case 1:
-                return vitals.t_oxygen;
+                return vitals.o2_time_left.ToString();
       
 
             case 2:
-                return "Rate: " + vitals.rate_o2;
+                return "Rate: " + vitals.o2_rate.ToString();
        
 
             case 3:
-                return "Pressure: " + vitals.p_o2;
+                return "Pressure: " + vitals.o2_pressure.ToString();
           
 
             default:
@@ -128,10 +128,10 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Math.Floor(vitals.ox_secondary)).ToString();
+                return ((int)Math.Floor(vitals.oxygen_secondary_time)).ToString();
 
             case 1:
-                return vitals.t_oxygen;
+                return vitals.o2_time_left.ToString();
            
 
             default:
@@ -146,7 +146,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return vitals.p_suit + " psi";
+                return vitals.suits_pressure + " psi";
             
             default:
                 return "N/A";
@@ -159,10 +159,10 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return vitals.p_h2o_l + " psi";
+                return vitals.h2o_liquid_pressure.ToString() + " psi";
 
             case 1:
-                return vitals.p_h2o_g + " psi";
+                return vitals.h2o_gas_pressure.ToString() + " psi";
 
             default:
                 return "N/A";
@@ -176,10 +176,10 @@ public class UpdateAllPanels : MonoBehaviour
         {
             case 0:
                 // Debug.Log(((int)Mathf.Floor(vitals.cap_water)).ToString());
-                return ((int)Math.Floor(vitals.cap_water)).ToString(); 
+                return ((int)Math.Floor(vitals.water_capacity)).ToString(); 
 
             case 1:
-                return vitals.t_water;
+                return vitals.h2o_time_left.ToString();
 
             default:
                 return "N/A";
@@ -192,7 +192,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return vitals.v_fan + " rpm";
+                return vitals.fan_tachometer.ToString() + " rpm";
 
             default:
                 return "N/A";
@@ -205,10 +205,10 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Math.Floor(vitals.cap_battery)).ToString();
+                return ((int)Math.Floor(vitals.battery_percentage)).ToString();
 
             case 1:
-                return vitals.t_battery;
+                return vitals.battery_time_left.ToString();
 
 
             default:
@@ -224,13 +224,13 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return vitals.heart_bpm + " bpm";
+                return vitals.heart_rate + " bpm";
 
             case 1:
-                return vitals.p_sub + " psi";
+                return vitals.sub_pressure + " psi";
 
             case 2:
-                return vitals.t_sub + " C";
+                return vitals.temperature + " C";
 
 
             default:
@@ -245,19 +245,19 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return ((int)Math.Floor(vitals.ox_primary)).ToString();
+                return ((int)Math.Floor(vitals.primary_oxygen)).ToString();
 
             case 1:
-                return ((int)Math.Floor(vitals.cap_battery)).ToString();
+                return ((int)Math.Floor(vitals.secondary_oxygen)).ToString();
 
             case 2:
-                return vitals.t_oxygen;
+                return vitals.o2_time_left.ToString();
 
             case 3:
-                return vitals.t_battery;
+                return vitals.battery_time_left.ToString();
 
             case 4:
-                return vitals.p_suit + " psi";
+                return vitals.suits_pressure + " psi";
 
 
             default:

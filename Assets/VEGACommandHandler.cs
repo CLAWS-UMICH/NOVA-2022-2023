@@ -118,16 +118,6 @@ public class VEGACommandHandler : MonoBehaviour
                     //close menu
                 }
             }
-            else if(String.Equals(words[1],"messaging")){
-                if(String.Equals(words[2],"open")){
-                }
-                else if(String.Equals(words[2],"close")){
-                }
-            }
-            else if(String.Equals(words[1],"uia_egress")){
-                if(String.Equals(words[2],"")){
-                }
-            }
             else if(String.Equals(words[1],"geosample")){
                 if(String.Equals(words[2],"open_button_a")){
                     geosample.GetComponent<GeoSampleVegaController>().openButton1();

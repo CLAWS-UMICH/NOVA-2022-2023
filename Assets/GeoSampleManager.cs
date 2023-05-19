@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TSS.Msgs;
 
 public class GeoSampleManager : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class GeoSampleManager : MonoBehaviour
     }
 
     private void CreateGeoSample(GeoSpecRecievedEvent e) {
-        specMsg s = Simulation.User.GEO;
+
+        SpecMsg s = Simulation.User.GEO;
         string rockType = getRockType(s);
         string coordinate = "42.1234 N, 24.1234 E";
         Simulation.User.AstronautGeoSamples.geoSampleList.Insert(0, new GeoSample(id, rockType, System.DateTime.Now.ToString(), coordinate, "23940329", 'n', "", s));
@@ -21,7 +23,7 @@ public class GeoSampleManager : MonoBehaviour
         id++;
 
     }
-    private string getRockType(specMsg s) {
+    private string getRockType(SpecMsg s) {
         //Mare Basalt
         if(sigma(s.SiO2, 40.58) && sigma(s.TiO2, 12.83) && sigma(s.Al2O3, 10.91) && sigma(s.FeO, 13.18) && sigma(s.MnO, 0.19) && sigma(s.MgO, 6.7) && sigma(s.CaO, 10.64) && sigma(s.K2O, -0.11) && sigma(s.P2O3, 0.34)) {
             return "Mare Basalt";

@@ -35,11 +35,12 @@ public class VEGATextResponseHandler : MonoBehaviour
             {
                 if (words[2] == "id")
                 {
-                    VEGAVariable = _astronaut.EVA.id.ToString();
+                    // TODO remove
+                    // VEGAVariable = _astronaut.EVA.id.ToString();
                 }
                 else if (words[2] == "room")
                 {
-                    VEGAVariable = _astronaut.EVA.room.ToString();
+                    VEGAVariable = _astronaut.EVA.room_id.ToString();
                 }
                 else if (words[2] == "time")
                 {
@@ -47,17 +48,17 @@ public class VEGATextResponseHandler : MonoBehaviour
                 }
                 else if (words[2] == "heart_bpm")
                 {
-                    VEGAVariable = _astronaut.EVA.heart_bpm.ToString();
+                    VEGAVariable = _astronaut.EVA.heart_rate.ToString();
                 }
                 else if (words[2] == "oxygen") //combine oxygens and add something for T_oxygen
                 {
-                    VEGAVariable = _astronaut.EVA.p_o2.ToString();
+                    VEGAVariable = _astronaut.EVA.o2_pressure.ToString();
                 //     VEGAVariable = _astronaut.EVA.ox_primary.ToString();
                 //     VEGAVariable = _astronaut.EVA.ox_secondary.ToString();
                 }
                 else if (words[2] == "batteryPercent")
                 {
-                    VEGAVariable = _astronaut.EVA.batteryPercent.ToString();
+                    VEGAVariable = _astronaut.EVA.battery_percentage.ToString();
                 }
                 // else if (words[2] == "ox_primary")
                 // {
@@ -110,9 +111,9 @@ public class VEGATextResponseHandler : MonoBehaviour
 
             if (VEGAVariable != "") {
                 if(words[2] == "oxygen"){
-                    VEGAVariable = "Your primary oxygen is at " + _astronaut.EVA.ox_primary.ToString() + " percent" +
-                        "\n Your secondary oxygen is at " +  _astronaut.EVA.ox_secondary.ToString() + " percent" +
-                        "\n Your p_o2 is at " + _astronaut.EVA.p_o2.ToString();
+                    VEGAVariable = "Your primary oxygen is at " + _astronaut.EVA.primary_oxygen.ToString() + " percent" +
+                        "\n Your secondary oxygen is at " +  _astronaut.EVA.secondary_oxygen.ToString() + " percent" +
+                        "\n Your p_o2 is at " + _astronaut.EVA.o2_pressure.ToString();
                 }
                 else{
                     VEGAVariable = newString;

@@ -27,17 +27,21 @@ public class TelemetryServerManager : MonoBehaviour
 
     public async void Connect()
     {
+        string team_name = "CLAWS";
+        string username = "Tester 1";
+        string university = "University of Michigan";
+        string user_guid = "fdbee7e5-9887-495e-aabb-f10d1386a7e9";
         tssUri = "ws://localhost:3001"; // TODO fix
-        var connecting = tss.ConnectToURI(tssUri);
+        var connecting = tss.ConnectToURI(tssUri, team_name, username, university, user_guid);
         Debug.Log("Connecting to " + tssUri);
         
         tss.OnTSSTelemetryMsg += (telemMsg) =>
         {
             msgCount++;
 
-            if (telemMsg.GPS.Count > 0)
+            if (telemMsg.gpsMsg != null)
             {
-                Simulation.User.GPS = telemMsg.GPS[0];
+                Simulation.User.GPS = telemMsg.gpsMsg;
                 EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
             }
             else
@@ -45,18 +49,18 @@ public class TelemetryServerManager : MonoBehaviour
                 Debug.LogError("No GPS Msg received");
             }
 
-            if (telemMsg.IMU.Count > 0)
+            if (telemMsg.imuMsg != null)
             {
-                Simulation.User.IMU = telemMsg.IMU[0];
+                Simulation.User.IMU = telemMsg.imuMsg;
             }
             else
             {
                 Debug.LogError("No IMU Msg received");
             }
 
-            if (telemMsg.EVA.Count > 0)
+            if (telemMsg.simulationStates != null)
             {
-                Simulation.User.EVA = telemMsg.EVA[0];
+                Simulation.User.EVA = telemMsg.simulationStates;
                 EventBus.Publish<VitalsUpdatedEvent>(new VitalsUpdatedEvent());
             }
             else
@@ -64,9 +68,9 @@ public class TelemetryServerManager : MonoBehaviour
                 Debug.LogError("No EVA Msg received");
             }
 
-            if (telemMsg.UIA.Count > 0)
+            if (telemMsg.uiaMsg != null)
             {
-                Simulation.User.UIA = telemMsg.UIA[0];
+                Simulation.User.UIA = telemMsg.uiaMsg;
                 EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
             }
             else
@@ -74,13 +78,22 @@ public class TelemetryServerManager : MonoBehaviour
                 Debug.LogError("No UIA Msg received");
             }
 
-            if (telemMsg.UIA_CONTROLS.Count > 0)
+            if (telemMsg.roverMsg != null)
             {
-                Simulation.User.UIA_CONTROLS = telemMsg.UIA_CONTROLS[0];
+                Simulation.User.ROVER = telemMsg.roverMsg;
             }
             else
             {
-                Debug.LogError("No UIA_CONTROLS Msg received");
+                Debug.LogError("No rover Msg received");
+            }
+
+            if (telemMsg.specMsg != null)
+            {
+                Simulation.User.GEO = telemMsg.specMsg;
+            }
+            else
+            {
+                Debug.LogError("No geo spec Msg received");
             }
         };
 

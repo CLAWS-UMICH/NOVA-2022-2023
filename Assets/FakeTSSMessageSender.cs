@@ -6,8 +6,7 @@ using TSS.Msgs;
 public class FakeTSSMessageSender : MonoBehaviour
 {
     public UIAMsg fakeUIA = new UIAMsg();
-    public UIAControlMsg fakeUIAControl = new UIAControlMsg();
-    public specMsg fakeSpecMsg = new specMsg();
+    public SpecMsg fakeSpecMsg = new SpecMsg();
     public GPSMsg fakeGPS = new GPSMsg();
 
     private void Start()
@@ -18,7 +17,6 @@ public class FakeTSSMessageSender : MonoBehaviour
     public void Fake_SetUIA()
     {
         Simulation.User.UIA = fakeUIA;
-        Simulation.User.UIA_CONTROLS = fakeUIAControl;
         EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
     }
     [ContextMenu("SetGPS")]
