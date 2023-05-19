@@ -114,6 +114,7 @@ public class GeoSampleVegaController : MonoBehaviour
                 speaking = true;
                 //add something here to update text box with message text
                 DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().sample.description = message;
+                DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().descriptionText.text = message;
             }
             if(i==3 && speaking){
                 i = 0;
@@ -124,6 +125,7 @@ public class GeoSampleVegaController : MonoBehaviour
                 speaking = false;
                 //finished speaking so stop recording. store message as description
                 message = speech.GetComponent<SpeechManager>().GetMessage();
+                // Debug.Log(message);
                 speech.SetActive(false);
                 active = false;
             }

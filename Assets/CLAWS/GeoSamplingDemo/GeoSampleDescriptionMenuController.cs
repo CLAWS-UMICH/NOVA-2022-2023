@@ -12,7 +12,7 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
     [SerializeField] GeoSampleListController descriptionController;
     [SerializeField] GameObject photoController;
     [SerializeField] TMP_Text titleText;
-    [SerializeField] TMP_Text descriptionText;
+    [SerializeField] public TMP_Text descriptionText;
     [SerializeField] TMP_Text lunarTimeText;
     [SerializeField] TMP_Text coordinateText;
     [SerializeField] TMP_Text compositionText;
