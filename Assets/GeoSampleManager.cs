@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TSS.Msgs;
 
 public class GeoSampleManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GeoSampleManager : MonoBehaviour
     }
 
     private void CreateGeoSample(GeoSpecRecievedEvent e) {
-        specMsg s = Simulation.User.GEO;
+        SpecMsg s = Simulation.User.GEO;
         string rockType = "rock";
         string coordinate = "42.1234 N, 24.1234 E";
         Simulation.User.AstronautGeoSamples.geoSampleList.Insert(0, new GeoSample(id, rockType, System.DateTime.Now.ToString(), coordinate, "23940329", 'n', "", s));
