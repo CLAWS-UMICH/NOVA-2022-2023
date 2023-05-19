@@ -31,13 +31,21 @@ public class TelemetryServerManager : MonoBehaviour
         string username = "Patrick";
         string university = "University of Michigan";
         string user_guid = "fdbee7e5-9887-495e-aabb-f10d1386a7e9";
-        tssUri = "ws://localhost:3001"; // TODO fix
+        tssUri = "ws://192.168.50.10:3001"; // TODO fix
         var connecting = tss.ConnectToURI(tssUri, team_name, username, university, user_guid);
         Debug.Log("Connecting to " + tssUri);
+
+        tss.OnOpen += () =>
+        {
+            Debug.Log("Connection Successful");
+            PopUpManager.MakePopup("Connected to TSS");
+        };
         
         tss.OnTSSTelemetryMsg += (telemMsg) =>
         {
             msgCount++;
+            Debug.Log("telem message updated");
+            Debug.Log(telemMsg.simulationStates.time);
 
             if (telemMsg.gpsMsg != null)
             {
