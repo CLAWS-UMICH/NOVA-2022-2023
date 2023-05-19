@@ -21,11 +21,11 @@ public enum LUNAState
 public class ScreenManager : MonoBehaviour
 {
 
-    GameObject UIAPanel;
-    GameObject VitalsPanel;
-    GameObject GeosamplingPanel;
-    GameObject MessagingPanel;
-    GameObject NavigationPanel;
+    public GameObject UIAPanel;
+    public List<GameObject> VitalsPanel;
+    public GeoSampleVegaController GeosamplingPanel;
+    public GameObject MessagingPanel;
+    public NavScreenController NavigationPanel;
 
     // STATE MACHINE
     public static Screens CurrScreen = Screens.UIA;
@@ -37,42 +37,57 @@ public class ScreenManager : MonoBehaviour
         {
             case "UIA":
                 UIAPanel.SetActive(true);
-                VitalsPanel.SetActive(false);
-                GeosamplingPanel.SetActive(false);
+                foreach (GameObject g in VitalsPanel)
+                {
+                    g.SetActive(false);
+                }
+                GeosamplingPanel.minimize();
                 MessagingPanel.SetActive(false);
-                NavigationPanel.SetActive(false);
+                NavigationPanel.CloseAll();
                 CurrScreen = Screens.UIA;
                 break;
             case "Vitals":
                 UIAPanel.SetActive(false);
-                VitalsPanel.SetActive(true);
-                GeosamplingPanel.SetActive(false);
+                foreach (GameObject g in VitalsPanel)
+                {
+                    g.SetActive(true);
+                }
+                GeosamplingPanel.minimize();
                 MessagingPanel.SetActive(false);
-                NavigationPanel.SetActive(false);
+                NavigationPanel.CloseAll();
                 CurrScreen = Screens.Vitals;
                 break;
             case "Geosampling":
                 UIAPanel.SetActive(false);
-                VitalsPanel.SetActive(false);
-                GeosamplingPanel.SetActive(true);
+                foreach (GameObject g in VitalsPanel)
+                {
+                    g.SetActive(false);
+                }
+                GeosamplingPanel.open();
                 MessagingPanel.SetActive(false);
-                NavigationPanel.SetActive(false);
+                NavigationPanel.CloseAll();
                 CurrScreen = Screens.Geosampling;
                 break;
             case "Messaging":
                 UIAPanel.SetActive(false);
-                VitalsPanel.SetActive(false);
-                GeosamplingPanel.SetActive(false);
+                foreach (GameObject g in VitalsPanel)
+                {
+                    g.SetActive(false);
+                }
+                GeosamplingPanel.minimize();
                 MessagingPanel.SetActive(true);
-                NavigationPanel.SetActive(false);
+                NavigationPanel.CloseAll();
                 CurrScreen = Screens.Messaging;
                 break;
             case "Navigation":
                 UIAPanel.SetActive(false);
-                VitalsPanel.SetActive(false);
-                GeosamplingPanel.SetActive(false);
+                foreach (GameObject g in VitalsPanel)
+                {
+                    g.SetActive(false);
+                }
+                GeosamplingPanel.open();
                 MessagingPanel.SetActive(false);
-                NavigationPanel.SetActive(true);
+                NavigationPanel.OpenNavMainMenu();
                 CurrScreen = Screens.Navigation;
                 break;
             default:
