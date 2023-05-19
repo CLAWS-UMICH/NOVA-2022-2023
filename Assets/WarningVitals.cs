@@ -39,17 +39,17 @@ public class WarningVitals : MonoBehaviour
         VitalPanel vitpanel;
 
         vitpanel = FindPanelWithInformationType(PanelInformation.OxygenPrimary);
-        if (TempVital.p_o2 <= 12){
+        if (Simulation.User.EVA.primary_oxygen <= 12){
             // var colorTheme = this.GetComponent<Interactable>().ActiveThemes[0];
             // colorTheme.StateProperties[0].Values[0].Color = Color.green;
             //Debug.Log("hi");
             // gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
             //Color color = (Color)ColorConverter.ConvertFromString("#FFDFD991");
             //gameObject.GetComponent<MeshRenderer>().material.color = red;
-            if (vitpanel != null)
-            {
-                vitpanel.SetPanelError(red);
-            }
+            // if (vitpanel != null)
+            // {
+            //     vitpanel.SetPanelError(red);
+            // }
 
 
             //Color color = (Color)ColorConverter.ConvertFromString("#FFDFD991");
@@ -71,7 +71,7 @@ public class WarningVitals : MonoBehaviour
             panel.SetActive(false);
             if (vitpanel != null)
             {
-                vitpanel.SetPanelError(normal);
+                // vitpanel.SetPanelError(normal);
             }
         }
 

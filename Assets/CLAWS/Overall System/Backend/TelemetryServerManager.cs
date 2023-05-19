@@ -7,7 +7,7 @@ using TSS.Msgs;
 
 public class TelemetryServerManager : MonoBehaviour
 {
-    TSSConnection tss;
+    public TSSConnection tss;
     string tssUri;
 
     int msgCount = 0;
@@ -94,10 +94,19 @@ public class TelemetryServerManager : MonoBehaviour
             {
                 Debug.LogError("No rover Msg received");
             }
-
             if (telemMsg.specMsg != null)
             {
-                Simulation.User.GEO = telemMsg.specMsg;
+                if(Simulation.User.GEO.SiO2 != telemMsg.specMsg.SiO2 &&
+                Simulation.User.GEO.TiO2 != telemMsg.specMsg.TiO2 &&
+                Simulation.User.GEO.Al2O3 != telemMsg.specMsg.Al2O3 &&
+                Simulation.User.GEO.FeO != telemMsg.specMsg.FeO &&
+                Simulation.User.GEO.MnO != telemMsg.specMsg.MgO &&
+                Simulation.User.GEO.CaO != telemMsg.specMsg.CaO &&
+                Simulation.User.GEO.K2O != telemMsg.specMsg.K2O &&
+                Simulation.User.GEO.P2O3 != telemMsg.specMsg.P2O3) {
+                    Simulation.User.GEO = telemMsg.specMsg;
+                    EventBus.Publish<GeoSpecRecievedEvent>(new GeoSpecRecievedEvent());
+                }
             }
             else
             {
