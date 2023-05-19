@@ -165,3 +165,21 @@ public class UIACompleteEvent
         return "<UIACompleteEvent>: UIA complete";
     }
 }
+
+public enum Direction { up, down }
+
+public class ScrollEvent
+{
+    Screens screen;
+    Direction direction;
+
+    public ScrollEvent(Screens _screen, Direction _dir)
+    {
+        Debug.Log("Scrolling " + _screen.ToString() + " " + _dir.ToString());
+    }
+
+    public override string ToString()
+    {
+        return "<ScrollEvent>: " + screen.ToString() + " " + direction.ToString();
+    }
+}
