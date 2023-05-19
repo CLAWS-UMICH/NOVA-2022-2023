@@ -74,10 +74,36 @@ public class OrientationHandler : MonoBehaviour
         {
             // set the initial origin
             GPSUtils.ChangeOriginGPSCoords(user_coordinates);
+
+            Debug.Log("Recalculating user location.\n" +
+            "Origin is: " + GPSUtils.originGPSCoords.latitude + ' ' + GPSUtils.originGPSCoords.longitude +
+            "\nUser location is: " + location.lat + ", " + location.lon);
+
+            Vector3 NewCameraAppPosition = GPSUtils.GPSCoordsToAppPosition(user_coordinates);
+            NewCameraAppPosition.y = 0f;
+
+            Debug.Log(NewCameraAppPosition.ToString());
+
+            mainCameraHolder.transform.position = NewCameraAppPosition;
         }
 
+        if (!originSet)
+        {
+            EventBus.Publish<UpdatedGPSOriginEvent>(new UpdatedGPSOriginEvent());
+            originSet = true;
+        }
+    }
+
+    public void Recalibrate()
+    {
+        GPSMsg location = Simulation.User.GPS;
+        GPSCoords user_coordinates = new GPSCoords(
+                        location.lat,
+                        location.lon
+                    );
+
         Debug.Log("Recalculating user location.\n" +
-            "Origin is: " + GPSUtils.originGPSCoords.latitude + ' ' + GPSUtils.originGPSCoords.longitude + 
+            "Origin is: " + GPSUtils.originGPSCoords.latitude + ' ' + GPSUtils.originGPSCoords.longitude +
             "\nUser location is: " + location.lat + ", " + location.lon);
 
         Vector3 NewCameraAppPosition = GPSUtils.GPSCoordsToAppPosition(user_coordinates);
@@ -86,12 +112,6 @@ public class OrientationHandler : MonoBehaviour
         Debug.Log(NewCameraAppPosition.ToString());
 
         mainCameraHolder.transform.position = NewCameraAppPosition;
-
-        if (!originSet)
-        {
-            EventBus.Publish<UpdatedGPSOriginEvent>(new UpdatedGPSOriginEvent());
-            originSet = true;
-        }
     }
 
     public void SetNorth()

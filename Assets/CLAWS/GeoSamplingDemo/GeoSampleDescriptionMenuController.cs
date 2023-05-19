@@ -49,7 +49,7 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
         descriptionText.text = sample.description;
         lunarTimeText.text = sample.lunarTime;
         coordinateText.text = sample.location;
-        compositionText.text = $"SiO2: {sample.specMsg.SiO2}\nTiO2: {sample.specMsg.TiO2}\nAl2O3: {sample.specMsg.Al2O3}\nFeO: {sample.specMsg.FeO}\nMnO: {sample.specMsg.MnO}\nMgO: {sample.specMsg.MgO}\nCaO: {sample.specMsg.CaO}\nK2O: {sample.specMsg.K2O}\nP2O3: {sample.specMsg.P2O3}";
+       // compositionText.text = $"SiO2: {sample.specMsg.SiO2}\nTiO2: {sample.specMsg.TiO2}\nAl2O3: {sample.specMsg.Al2O3}\nFeO: {sample.specMsg.FeO}\nMnO: {sample.specMsg.MnO}\nMgO: {sample.specMsg.MgO}\nCaO: {sample.specMsg.CaO}\nK2O: {sample.specMsg.K2O}\nP2O3: {sample.specMsg.P2O3}";
     }
     public void UpdateDescriptionMenuDescription(int button)
     {

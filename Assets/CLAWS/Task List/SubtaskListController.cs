@@ -133,6 +133,17 @@ public class SubtaskListController : MonoBehaviour
 
     public void completeTask()
     {
+        StartCoroutine(_completeTask());
+    }
+    
+    IEnumerator _completeTask()
+    {
+        yield return new WaitForSeconds(1f);
+        _completeTaskpt2();
+    }
+    void _completeTaskpt2()
+    {
+        Debug.Log("task completed");
         textController.gameObject.SetActive(false);
         //If the task object is completed
         if (selectedIndex < 0)

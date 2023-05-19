@@ -6,12 +6,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 public class UIEgressSwitchControl : MonoBehaviour
 {
     [SerializeField] GameObject yellowSquare;
-    Interactable toggle;
-
-    private void Start()
-    {
-        toggle = transform.GetComponentInChildren<Interactable>();
-    }
+    [SerializeField] Interactable toggle;
 
     public void SetToggleState(bool state)
     {

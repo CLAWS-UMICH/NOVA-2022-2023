@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TSS.Msgs;
 
+[System.Serializable]
 public class AddDummySample : MonoBehaviour
 {
     int id = 1;
     string[] rocks = {"Slate", "Olivine Basalt", "Vesicular Basalt", "Mare Basalt"};
+    [SerializeField]
+    GameObject sim;
     SpecMsg spec;
+
+    private void Start()
+    {
+        spec = sim.GetComponent<FakeTSSMessageSender>().fakeSpecMsg;
+    }
 
     [ContextMenu("AddRandomSample")]
     public void AddRandomSample() {
