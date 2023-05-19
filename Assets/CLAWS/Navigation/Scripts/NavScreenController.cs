@@ -17,6 +17,8 @@ public class NavScreenController : MonoBehaviour
     GameObject landerScreen;
     GameObject roverNavScreen;
     GameObject waypointConfirmationScreen;
+    GameObject slider;
+    GameObject roverSmallScreen;
 
     [SerializeField] GameObject mainCam;
     [SerializeField] Camera mapCam;
@@ -68,7 +70,10 @@ public class NavScreenController : MonoBehaviour
         landerScreen = transform.Find("LanderScreen").gameObject;
         roverNavScreen = transform.Find("RoverUpdateScreen").gameObject;
         waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
-        
+        slider = transform.Find("RoverUpdateScreen/Canvas/Slider").gameObject;
+        roverSmallScreen = transform.Find("RoverSmallUpdate").gameObject;
+
+
     }
     // Start is called before the first frame update
 
@@ -85,6 +90,7 @@ public class NavScreenController : MonoBehaviour
         currentEndPosition = null;
         currentScreenOpen = "";
         openNavMenuButton.SetActive(true);
+
         mainNavScreen.SetActive(false);
         crewScreen.SetActive(false);
         geoScreen.SetActive(false);
@@ -93,6 +99,7 @@ public class NavScreenController : MonoBehaviour
         landerScreen.SetActive(false);
         roverNavScreen.SetActive(false);
         waypointConfirmationScreen.SetActive(false);
+        roverSmallScreen.SetActive(false);
         SetAllCullingToCamera();
 
 
@@ -824,6 +831,7 @@ public class NavScreenController : MonoBehaviour
         roverNavScreen.SetActive(true);
         yield return new WaitForSeconds(10f);
         roverNavScreen.SetActive(false);
+        roverSmallScreen.SetActive(true);
     }
     Transform roverEndLocation = null;
     public void StartNav()
@@ -871,7 +879,7 @@ public class NavScreenController : MonoBehaviour
     // Every second update the rover location on the map
     IEnumerator _updateRoverLocation(float totalDis)
     {
-        while (!roverThere || recalled)
+        while (!roverThere && !recalled)
         {
             yield return new WaitForSeconds(1f);
             roverObject.transform.position = roverObject.transform.position; // Update where it is from NASA TSS
@@ -881,9 +889,11 @@ public class NavScreenController : MonoBehaviour
 
     public void updateRoverProgress(float totalDis)
     {
-        float percentageDone = Vector3.Distance(roverObject.transform.position, roverEndLocation.position) / totalDis * 100;
+        float percentageDone = (totalDis - Vector3.Distance(roverObject.transform.position, roverEndLocation.position)) / totalDis * 100;
 
         // Update UI based on the percentage
+
+        slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
 
     }
 
@@ -894,6 +904,9 @@ public class NavScreenController : MonoBehaviour
         // GIVE TO NASA
         // Give this position to bring rover back to beginning
         // roverObjectStartLocation.transform.position;
+
+        // Turn off 
+        roverSmallScreen.SetActive(false);
     }
 
     private void updateRoverLocation()
