@@ -191,8 +191,8 @@ MonoBehaviour:
     fix_status: 
     time: 
     ept: 0
-    lat: 0
-    lon: 0
+    lat: 29.56451
+    lon: -95.08147
     alt: 0
     epx: 0
     epy: 0
