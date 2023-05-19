@@ -28,7 +28,7 @@ public class TelemetryServerManager : MonoBehaviour
     public async void Connect()
     {
         string team_name = "CLAWS";
-        string username = "Tester 1";
+        string username = "Patrick";
         string university = "University of Michigan";
         string user_guid = "fdbee7e5-9887-495e-aabb-f10d1386a7e9";
         tssUri = "ws://localhost:3001"; // TODO fix
