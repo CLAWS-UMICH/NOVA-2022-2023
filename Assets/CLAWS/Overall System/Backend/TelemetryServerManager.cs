@@ -28,24 +28,16 @@ public class TelemetryServerManager : MonoBehaviour
     public async void Connect()
     {
         string team_name = "CLAWS";
-        string username = "Patrick";
+        string username = "Tester 1";
         string university = "University of Michigan";
         string user_guid = "fdbee7e5-9887-495e-aabb-f10d1386a7e9";
-        tssUri = "ws://192.168.50.10:3001"; // TODO fix
+        tssUri = "ws://localhost:3001"; // TODO fix
         var connecting = tss.ConnectToURI(tssUri, team_name, username, university, user_guid);
         Debug.Log("Connecting to " + tssUri);
-
-        tss.OnOpen += () =>
-        {
-            Debug.Log("Connection Successful");
-            PopUpManager.MakePopup("Connected to TSS");
-        };
         
         tss.OnTSSTelemetryMsg += (telemMsg) =>
         {
             msgCount++;
-            Debug.Log("telem message updated");
-            Debug.Log(telemMsg.simulationStates.time);
 
             if (telemMsg.gpsMsg != null)
             {
@@ -97,7 +89,17 @@ public class TelemetryServerManager : MonoBehaviour
 
             if (telemMsg.specMsg != null)
             {
-                Simulation.User.GEO = telemMsg.specMsg;
+                if(Simulation.User.GEO.SiO2 != telemMsg.specMsg.SiO2 &&
+                Simulation.User.GEO.TiO2 != telemMsg.specMsg.TiO2 &&
+                Simulation.User.GEO.Al2O3 != telemMsg.specMsg.Al2O3 &&
+                Simulation.User.GEO.FeO != telemMsg.specMsg.FeO &&
+                Simulation.User.GEO.MnO != telemMsg.specMsg.MgO &&
+                Simulation.User.GEO.CaO != telemMsg.specMsg.CaO &&
+                Simulation.User.GEO.K2O != telemMsg.specMsg.K2O &&
+                Simulation.User.GEO.P2O3 != telemMsg.specMsg.P2O3) {
+                    Simulation.User.GEO = telemMsg.specMsg;
+                    EventBus.Publish<GeoSpecRecievedEvent>(new GeoSpecRecievedEvent());
+                }
             }
             else
             {
