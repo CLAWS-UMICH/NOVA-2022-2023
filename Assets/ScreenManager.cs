@@ -9,7 +9,13 @@ public enum Screens
     Vitals,
     Geosampling,
     Messaging,
-    Navigation
+    Navigation, 
+    TaskList
+}
+[System.Serializable]
+public enum LUNAState
+{
+    left, right, center
 }
 
 public class ScreenManager : MonoBehaviour
@@ -23,61 +29,81 @@ public class ScreenManager : MonoBehaviour
 
     // STATE MACHINE
     public static Screens CurrScreen = Screens.UIA;
+    public static LUNAState LUNA = LUNAState.center;
 
-    public void SwitchScreen(Screens ScreenToShow)
+    public void SwitchScreen(string ScreenToShow)
     {
         switch (ScreenToShow)
         {
-            case Screens.UIA:
+            case "UIA":
                 UIAPanel.SetActive(true);
                 VitalsPanel.SetActive(false);
                 GeosamplingPanel.SetActive(false);
                 MessagingPanel.SetActive(false);
                 NavigationPanel.SetActive(false);
+                CurrScreen = Screens.UIA;
                 break;
-            case Screens.Vitals:
+            case "Vitals":
                 UIAPanel.SetActive(false);
                 VitalsPanel.SetActive(true);
                 GeosamplingPanel.SetActive(false);
                 MessagingPanel.SetActive(false);
                 NavigationPanel.SetActive(false);
+                CurrScreen = Screens.Vitals;
                 break;
-            case Screens.Geosampling:
+            case "Geosampling":
                 UIAPanel.SetActive(false);
                 VitalsPanel.SetActive(false);
                 GeosamplingPanel.SetActive(true);
                 MessagingPanel.SetActive(false);
                 NavigationPanel.SetActive(false);
+                CurrScreen = Screens.Geosampling;
                 break;
-            case Screens.Messaging:
+            case "Messaging":
                 UIAPanel.SetActive(false);
                 VitalsPanel.SetActive(false);
                 GeosamplingPanel.SetActive(false);
                 MessagingPanel.SetActive(true);
                 NavigationPanel.SetActive(false);
+                CurrScreen = Screens.Messaging;
                 break;
-            case Screens.Navigation:
+            case "Navigation":
                 UIAPanel.SetActive(false);
                 VitalsPanel.SetActive(false);
                 GeosamplingPanel.SetActive(false);
                 MessagingPanel.SetActive(false);
                 NavigationPanel.SetActive(true);
+                CurrScreen = Screens.Navigation;
                 break;
             default:
                 break;
         }
-        CurrScreen = ScreenToShow;
         Debug.Log("Curr Screen = " + ScreenToShow.ToString());
     }
     
     public static void ScrollUp()
     {
-        EventBus.Publish<ScrollEvent>(new ScrollEvent(CurrScreen, Direction.up));
+        if (LUNA == LUNAState.center)
+        {
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(CurrScreen, Direction.up));
+        }
+        else if (LUNA == LUNAState.right)
+        {
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.TaskList, Direction.up));
+        }
+        
     }
 
     public static void ScrollDown()
     {
-        EventBus.Publish<ScrollEvent>(new ScrollEvent(CurrScreen, Direction.down));
+        if (LUNA == LUNAState.center)
+        {
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(CurrScreen, Direction.down));
+        }
+        else if (LUNA == LUNAState.right)
+        {
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.TaskList, Direction.down));
+        }
     }
 
     // RANDOM STUFF
