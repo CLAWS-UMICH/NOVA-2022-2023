@@ -3333,7 +3333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coords:
     latitude: 29.564543
-    longitude: -95.051644
+    longitude: -95.081644
 --- !u!1001 &1641115659
 PrefabInstance:
   m_ObjectHideFlags: 0

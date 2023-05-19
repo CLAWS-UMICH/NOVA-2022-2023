@@ -354,6 +354,6 @@ public class GPSUtils : MonoBehaviour
         double distanceFromOriginX = distanceFromOrigin * Math.Sin(angleFromOrigin * Math.PI / 180);
         double distanceFromOriginZ = distanceFromOrigin * Math.Cos(angleFromOrigin * Math.PI / 180);
 
-        return new Vector3((float)distanceFromOriginX, -2f, (float)distanceFromOriginZ);
+        return new Vector3((float)distanceFromOriginX, 0f, (float)distanceFromOriginZ);
     }
 }
