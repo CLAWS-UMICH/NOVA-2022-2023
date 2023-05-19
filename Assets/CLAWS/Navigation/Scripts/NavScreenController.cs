@@ -224,6 +224,7 @@ public class NavScreenController : MonoBehaviour
     public void OpenMissionScreen()
     {
         currentScreenOpen = "Mission";
+        OpenMission();
         StartCoroutine(_OpenMissionScreen());
     }
 
@@ -246,6 +247,7 @@ public class NavScreenController : MonoBehaviour
     public void OpenRoverScreen()
     {
         currentScreenOpen = "Rover";
+        OpenRover();
         StartCoroutine(_OpenRoverScreen());
     }
 
@@ -376,15 +378,15 @@ public class NavScreenController : MonoBehaviour
     {
 
         List<string> regNames = new List<string>();
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
-        regNames.Add("Lunar Hiking");
+        regNames.Add("Rock A1");
+        regNames.Add("Sand Land");
+        regNames.Add("Meteor C1");
+        regNames.Add("Rock A2");
+        regNames.Add("Walkway");
+        regNames.Add("Trailer");
+        regNames.Add("Meteor Edge");
+        regNames.Add("Hill");
+        regNames.Add("Yard Edge");
 
         GameObject[] missionArray = {missionA, missionB, missionC, missionD, missionE, missionF, missionG, missionH, missionI};
 
@@ -400,14 +402,9 @@ public class NavScreenController : MonoBehaviour
             roverList.Add(newMissionA);
             allWaypoints.Add(newMissionA);
         }
-        roverButtons[5].SetActive(false);
-        roverButtons[6].SetActive(false);
-        roverButtons[7].SetActive(false);
-        roverButtons[8].SetActive(false);
-        missionButtons[5].SetActive(false);
-        missionButtons[6].SetActive(false);
-        missionButtons[7].SetActive(false);
-        missionButtons[8].SetActive(false);
+
+        OpenRover();
+        OpenMission();
 
 
 
@@ -420,11 +417,34 @@ public class NavScreenController : MonoBehaviour
 
     }
 
+    private void OpenMission()
+    {
+        firstMessageM = 0;
+        Transform missionButton = missionScreen.transform.Find("ButtonStuffMission");
+        for (int i = 5; i < missionButtons.Count; i++)
+        {
+            missionButtons[i].SetActive(false);
+        }
+        missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+    }
+
+    private void OpenRover()
+    {
+        firstMessage = 0;
+        Transform roverButton = roverScreen.transform.Find("ButtonStuff");
+        for (int i = 5; i < roverButtons.Count; i++)
+        {
+            roverButtons[i].SetActive(false);
+        }
+        roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
+    }
+
     int firstMessageM = 0;
 
     public void ScrollDown()
     {
-        Transform roverButton = roverScreen.transform.Find("ButtonStuff");
+        Debug.Log(roverButtons.Count);
+        GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
 
         int len = roverButtons.Count;
         if (firstMessage + 4 < len && firstMessage >= 0)
@@ -436,6 +456,7 @@ public class NavScreenController : MonoBehaviour
                 roverButtons[firstMessage + 4].SetActive(false);
                 firstMessage--;
                 roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
+                StartCoroutine(updateCollection(roverButton));
             }
         }
 
@@ -444,18 +465,21 @@ public class NavScreenController : MonoBehaviour
 
     public void ScrollDownMission()
     {
-        Transform missionButton = roverScreen.transform.Find("ButtonStuffMission");
+        Debug.Log(missionButtons.Count);
+        GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
 
-        int len = roverButtons.Count;
-        if (firstMessage + 4 < len && firstMessage >= 0)
+        int len = missionButtons.Count;
+        if (firstMessageM + 4 < len && firstMessageM >= 0)
         {
-            if (firstMessage != 0)
+            if (firstMessageM != 0)
             {
-                Debug.Log("firstMessage");
-                roverButtons[firstMessage - 1].SetActive(true);
-                roverButtons[firstMessage + 4].SetActive(false);
-                firstMessage--;
+                Debug.Log("firstMessage: " + firstMessageM);
+
+                missionButtons[firstMessageM - 1].SetActive(true);
+                missionButtons[firstMessageM + 4].SetActive(false);
+                firstMessageM--;
                 missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+                StartCoroutine(updateCollection(missionButton));
             }
         }
 
@@ -464,37 +488,46 @@ public class NavScreenController : MonoBehaviour
 
     public void ScrollUp()
     {
-        Transform roverButton = roverScreen.transform.Find("ButtonStuff");
+        GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
 
 
-        int len = missionButtons.Count;
-        if (firstMessageM + 5 < len && firstMessageM >= 0)
+        int len = roverButtons.Count;
+        if (firstMessage + 5 < len && firstMessage >= 0)
         {
-            missionButtons[firstMessageM].SetActive(false);
-            missionButtons[firstMessageM + 5].SetActive(true);
-            firstMessageM++;
+            roverButtons[firstMessage].SetActive(false);
+            roverButtons[firstMessage + 5].SetActive(true);
+            firstMessage++;
             roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
+            StartCoroutine(updateCollection(roverButton));
         }
 
 
+    }
+
+    IEnumerator updateCollection(GameObject buttonType)
+    {
+        yield return new WaitForSeconds(0f);
+        buttonType.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
     public void ScrollUpMission()
     {
-        Transform missionButton = roverScreen.transform.Find("ButtonStuffMission");
+        GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
 
 
         int len = missionButtons.Count;
         if (firstMessageM + 5 < len && firstMessageM >= 0)
         {
-            missionButtons[firstMessage].SetActive(false);
-            missionButtons[firstMessage + 5].SetActive(true);
+            Debug.Log("firstMessage: " + firstMessageM);
+            missionButtons[firstMessageM].SetActive(false);
+            missionButtons[firstMessageM + 5].SetActive(true);
             firstMessageM++;
             missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+            StartCoroutine(updateCollection(missionButton));
         }
 
-
     }
+
 
     public void OpenGeoConfirmationScreenTest()
     {
@@ -937,7 +970,7 @@ public class NavScreenController : MonoBehaviour
             // Give this to NASA
             // Current End Position of where the rover should go: roverEndLocation
             // Start Position: roverObjectStartLocation.transform.position;
-
+            _updateRoverObjectCoords();
             updateRoverLocation();
             StartCoroutine(OpenRoverNavScreen());
 
@@ -963,6 +996,7 @@ public class NavScreenController : MonoBehaviour
 
 
     }
+
     bool roverThere = false;
     bool recalled = false;
     // Every second update the rover location on the map
@@ -976,6 +1010,15 @@ public class NavScreenController : MonoBehaviour
         }
     }
 
+    private void RoverMadeIt()
+    {
+        roverThere = true;
+        PopUpManager.MakePopup("Rover arrived at its destination!");
+        roverSmallScreen.SetActive(false);
+        roverNavScreen.SetActive(false);
+
+    }
+
     public void updateRoverProgress(float totalDis)
     {
         float percentageDone = (totalDis - Vector3.Distance(roverObject.transform.position, roverEndLocation.position)) / totalDis * 100;
@@ -985,6 +1028,11 @@ public class NavScreenController : MonoBehaviour
 
         slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
         slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
+
+        if (percentageDone >= 95)
+        {
+            RoverMadeIt();
+        }
 
     }
 
@@ -1022,6 +1070,17 @@ public class NavScreenController : MonoBehaviour
     {
         float totalRoverDistance = Vector3.Distance(roverEndLocation.position, roverObject.transform.position);
         StartCoroutine(_updateRoverLocation(totalRoverDistance));
+    }
+
+    IEnumerator _updateRoverObjectCoords()
+    {
+        while (!roverThere && !recalled)
+        {
+            yield return new WaitForSeconds(1f);
+            GPSCoords coords = new GPSCoords(Simulation.User.ROVER.lat, Simulation.User.ROVER.lon);
+            Vector3 location = GPSUtils.GPSCoordsToAppPosition(coords);
+            roverObject.transform.position = location;
+        }
     }
 
     private bool ToggleFinalDestinationForCorrectEndTarget(Transform endPosition)
@@ -1063,6 +1122,11 @@ public class NavScreenController : MonoBehaviour
         {
             NavigatableObject.DestroyAllBreadCrumbs();
         }
+    }
+
+    public void EndNavigation()
+    {
+        NavigatableObject.DestroyAllBreadCrumbs();
     }
 
 }
