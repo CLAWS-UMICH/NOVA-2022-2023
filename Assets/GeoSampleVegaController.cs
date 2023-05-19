@@ -9,8 +9,8 @@ public class GeoSampleVegaController : MonoBehaviour
     GameObject ListController;
     [SerializeField]
     GameObject ExpandedListController;
-    [SerializeField]
-    GameObject DescriptionController;
+    
+    public GameObject DescriptionController;
     [SerializeField]
     GameObject GalleryController;
 

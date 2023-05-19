@@ -7969,6 +7969,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messaging: {fileID: 6340000079389854058}
+  messagingInbox: {fileID: 0}
+  JaneScreen: {fileID: 3535868162232851310}
+  JaneContents: {fileID: 3535868162760834350}
+  JaneGrid: {fileID: 3535868163060117703}
+  NielScreen: {fileID: 1472392616577661590}
+  NielContents: {fileID: 1472392618009885088}
+  NielGrid: {fileID: 1472392616861929761}
+  MccScreen: {fileID: 1472392617441055607}
+  MccContents: {fileID: 1472392616999933565}
+  MccGrid: {fileID: 1472392616092232718}
   ScrollManager: {fileID: 3535868163060117703}
 --- !u!1001 &1163312919437811090
 PrefabInstance:
