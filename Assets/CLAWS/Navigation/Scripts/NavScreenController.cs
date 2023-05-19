@@ -18,6 +18,7 @@ public class NavScreenController : MonoBehaviour
     GameObject roverNavScreen;
     GameObject waypointConfirmationScreen;
     GameObject slider;
+    GameObject slider2;
     GameObject roverSmallScreen;
 
     [SerializeField] GameObject mainCam;
@@ -71,7 +72,9 @@ public class NavScreenController : MonoBehaviour
         roverNavScreen = transform.Find("RoverUpdateScreen").gameObject;
         waypointConfirmationScreen = transform.Find("WaypointScreen").gameObject;
         slider = transform.Find("RoverUpdateScreen/Canvas/Slider").gameObject;
+
         roverSmallScreen = transform.Find("RoverSmallUpdate").gameObject;
+        slider2 = transform.Find("RoverSmallUpdate/Canvas/Slider").gameObject;
 
 
     }
@@ -829,7 +832,7 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         roverNavScreen.SetActive(true);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(6.9f);
         roverNavScreen.SetActive(false);
         roverSmallScreen.SetActive(true);
     }
@@ -893,7 +896,9 @@ public class NavScreenController : MonoBehaviour
 
         // Update UI based on the percentage
 
+
         slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
+        slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
 
     }
 
@@ -906,7 +911,25 @@ public class NavScreenController : MonoBehaviour
         // roverObjectStartLocation.transform.position;
 
         // Turn off 
+        StartCoroutine(_recallRover());
+    }
+
+    IEnumerator _recallRover()
+    {
+        yield return new WaitForSeconds(1f);
         roverSmallScreen.SetActive(false);
+    }
+
+    public void closeRoverConfirm ()
+    {
+        StartCoroutine(_closeRoverScreen());
+    }
+
+    IEnumerator _closeRoverScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        roverNavScreen.SetActive(false);
+        roverSmallScreen.SetActive(true);
     }
 
     private void updateRoverLocation()
