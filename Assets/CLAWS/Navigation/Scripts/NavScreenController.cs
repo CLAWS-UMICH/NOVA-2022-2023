@@ -365,6 +365,7 @@ public class NavScreenController : MonoBehaviour
 
         Waypoint newGeo = new Waypoint(geoObject.transform, "MRS-001", (Type)System.Enum.Parse(typeof(Type), "geosample"));
         geoObject.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newGeo.GetLetter();
+        geoObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newGeo.GetLetter();
         createGeoButton(newGeo.GetTitle(), newGeo.GetLetter());
         createRoverButtons(newGeo.GetTitle(), newGeo.GetLetter());
         geoList.Add(newGeo);
@@ -373,6 +374,7 @@ public class NavScreenController : MonoBehaviour
 
         Waypoint newMission1 = new Waypoint(mission1Object.transform, "Lunar Hiking", (Type)System.Enum.Parse(typeof(Type), "regular"));
         mission1Object.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMission1.GetLetter();
+        mission1Object.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newMission1.GetLetter();
         createRegularButton(newMission1.GetTitle(), newMission1.GetLetter());
         createRoverButtons(newMission1.GetTitle(), newMission1.GetLetter());
         missionList.Add(newMission1);
@@ -382,6 +384,7 @@ public class NavScreenController : MonoBehaviour
 
         Waypoint newMission3 = new Waypoint(mission3Object.transform, "Lunar Mapping", (Type)System.Enum.Parse(typeof(Type), "regular"));
         mission3Object.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMission3.GetLetter();
+        mission3Object.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newMission3.GetLetter();
         createRegularButton(newMission3.GetTitle(), newMission3.GetLetter());
         createRoverButtons(newMission3.GetTitle(), newMission3.GetLetter());
         missionList.Add(newMission3);

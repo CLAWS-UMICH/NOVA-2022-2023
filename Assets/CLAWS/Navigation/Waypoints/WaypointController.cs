@@ -8,12 +8,15 @@ public class WaypointController : MonoBehaviour
     [SerializeField] float minScale = 1f;
     [SerializeField] float distanceAway = 5f;
     [SerializeField] float coneAngle = 90f;
+    [SerializeField] Transform childObject;
+    [SerializeField] GameObject childObject2;
+
 
     float distance;
     bool isVisible;
     float updateDistance;
-    Transform childObject;
-    GameObject childObject2;
+    //Transform childObject;
+    //GameObject childObject2;
     GameObject player;
 
     
@@ -29,8 +32,8 @@ public class WaypointController : MonoBehaviour
     void Start()
     {
 
-        childObject = transform.Find("WaypointSign/Plate");
-        childObject2 = GameObject.Find("WaypointSign/Bottom");
+        //childObject = transform.Find("WaypointSign/Plate");
+        //childObject2 = GameObject.Find("WaypointSign/Bottom");
         StartCoroutine(CheckDistance());
     }
 
@@ -51,7 +54,7 @@ public class WaypointController : MonoBehaviour
             {
                 isVisible = true;
                 sign.SetActive(true);
-                if (distance / 5f < minScale)
+                if (distance / 5f < 1f)
                 {
                     childObject2.SetActive(true);
                 } else
@@ -74,7 +77,7 @@ public class WaypointController : MonoBehaviour
         {
             updateDistance = Vector3.Distance(sign.transform.position, player.transform.position);
             sign.transform.rotation = Quaternion.Euler(0, player.transform.eulerAngles.y, 0);
-            float scale = updateDistance / 10f;
+            float scale = updateDistance / 5f;
             scale = Mathf.Max(scale, minScale);
             childObject.localScale = Vector3.one * scale;
         }
