@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Text.RegularExpressions;
+using Microsoft.MixedReality.Toolkit.Utilities;
 
 public class NavScreenController : MonoBehaviour
 {
@@ -34,10 +35,16 @@ public class NavScreenController : MonoBehaviour
     // Predetermed Objects
     [SerializeField] GameObject landerObject;
     [SerializeField] GameObject crewObject;
-    [SerializeField] GameObject geoObject;
-    [SerializeField] GameObject mission1Object;
+    [SerializeField] GameObject missionA;
+    [SerializeField] GameObject missionB;
+    [SerializeField] GameObject missionC;
+    [SerializeField] GameObject missionD;
+    [SerializeField] GameObject missionE;
+    [SerializeField] GameObject missionF;
+    [SerializeField] GameObject missionG;
+    [SerializeField] GameObject missionH;
+    [SerializeField] GameObject missionI;
 
-    [SerializeField] GameObject mission3Object;
 
     [SerializeField] GameObject roverObject;
     GameObject roverObjectStartLocation;
@@ -368,38 +375,42 @@ public class NavScreenController : MonoBehaviour
     private void createPreDeterminedPoints()
     {
 
+        List<string> regNames = new List<string>();
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+        regNames.Add("Lunar Hiking");
+
+        GameObject[] missionArray = {missionA, missionB, missionC, missionD, missionE, missionF, missionG, missionH, missionI};
+
+
+        for (int i = 0; i < 9; i++)
+        {
+            Waypoint newMissionA = new Waypoint(missionArray[i].transform, regNames[i], (Type)System.Enum.Parse(typeof(Type), "regular"));
+            missionArray[i].transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMissionA.GetLetter();
+            missionArray[i].transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newMissionA.GetLetter();
+            createRegularButton(newMissionA.GetTitle(), newMissionA.GetLetter());
+            createRoverButtons(newMissionA.GetTitle(), newMissionA.GetLetter());
+            missionList.Add(newMissionA);
+            roverList.Add(newMissionA);
+            allWaypoints.Add(newMissionA);
+        }
+
+        //transform.GetComponent<GridObjectCollection>().UpdateCollection();
+
+
+
+
         Waypoint newCrew = new Waypoint(crewObject.transform, "Patrick", (Type)System.Enum.Parse(typeof(Type), "crew"));
         crewObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
         crewList.Add(newCrew);
         allWaypoints.Add(newCrew);
 
-        Waypoint newGeo = new Waypoint(geoObject.transform, "MRS-001", (Type)System.Enum.Parse(typeof(Type), "geosample"));
-        geoObject.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newGeo.GetLetter();
-        geoObject.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newGeo.GetLetter();
-        createGeoButton(newGeo.GetTitle(), newGeo.GetLetter());
-        createRoverButtons(newGeo.GetTitle(), newGeo.GetLetter());
-        geoList.Add(newGeo);
-        roverList.Add(newGeo);
-        allWaypoints.Add(newGeo);
-
-        Waypoint newMission1 = new Waypoint(mission1Object.transform, "Lunar Hiking", (Type)System.Enum.Parse(typeof(Type), "regular"));
-        mission1Object.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMission1.GetLetter();
-        mission1Object.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newMission1.GetLetter();
-        createRegularButton(newMission1.GetTitle(), newMission1.GetLetter());
-        createRoverButtons(newMission1.GetTitle(), newMission1.GetLetter());
-        missionList.Add(newMission1);
-        roverList.Add(newMission1);
-        allWaypoints.Add(newMission1);
-
-
-        Waypoint newMission3 = new Waypoint(mission3Object.transform, "Lunar Mapping", (Type)System.Enum.Parse(typeof(Type), "regular"));
-        mission3Object.transform.Find("Icons/Letter/LetterText").GetComponent<TextMeshPro>().text = newMission3.GetLetter();
-        mission3Object.transform.Find("WaypointSign/Plate/Backplate/IconAndText/Letter").GetComponent<TextMeshPro>().text = newMission3.GetLetter();
-        createRegularButton(newMission3.GetTitle(), newMission3.GetLetter());
-        createRoverButtons(newMission3.GetTitle(), newMission3.GetLetter());
-        missionList.Add(newMission3);
-        roverList.Add(newMission3);
-        allWaypoints.Add(newMission3);
     }
 
     public void OpenGeoConfirmationScreenTest()
@@ -663,18 +674,15 @@ public class NavScreenController : MonoBehaviour
 
     private void createRoverButtons(string title, string letter) //need to reintegrate into unity scene
     {
-        Transform roverButton = roverScreen.transform.Find("WaypointButtons");
-        Vector3 roverPositionUI = roverButton.position;
-        float roveryOffset = -0.04f * roverList.Count;
-        roverPositionUI.y += roveryOffset;
-        roverPositionUI.z += -0.55f / 100f;
-        roverPositionUI.x += .8f / 100f;
-        GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverPositionUI, Quaternion.identity, roverButton);
+        Transform roverButton = roverScreen.transform.Find("ButtonStuff");
+        GameObject newRoverUIPrefab = Instantiate(UIWaypoint, roverButton);
+        newRoverUIPrefab.transform.localScale = new Vector3(2.86298656f, 2.71759987f, 0.201269999f);
         newRoverUIPrefab.transform.rotation = Quaternion.identity;
         newRoverUIPrefab.transform.Find("Text/Title").GetComponent<TextMeshPro>().text = title;
         newRoverUIPrefab.transform.Find("Text/Letter").GetComponent<TextMeshPro>().text = letter;
         roverButtons.Add(newRoverUIPrefab);
         testButtons.Add(newRoverUIPrefab);
+        roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
     private void createGeoButton(string title, string letter)
