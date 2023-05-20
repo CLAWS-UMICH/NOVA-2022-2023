@@ -28,6 +28,7 @@ public class MessagingNewHandler : MonoBehaviour
         
     }
     public void CloseMessaging(CloseEvent e){
+        e.screen = Screens.Messaging;
         messaging.SetActive(false);
     }
 

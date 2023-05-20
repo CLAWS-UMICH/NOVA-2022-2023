@@ -51,6 +51,8 @@ public class ScrollManager : MonoBehaviour
     
     public void ScrollDown(ScrollEvent e){
         Debug.Log(firstMessage);
+        e.direction = Direction.down;
+        e.screen = Screens.Messaging;
         // GameObject msg = Instantiate(MessageOutPrefab, transform);
         // msg.GetComponent<TextHandler>().SetText(message);
         // Children.Add(msg);
@@ -72,7 +74,8 @@ public class ScrollManager : MonoBehaviour
     }
 
     public void ScrollUp(ScrollEvent e){ 
-        
+        e.direction = Direction.up;
+        e.screen = Screens.Messaging;
         int len = Children.Count;
         if(firstMessage+4 < len && firstMessage >=0){
             Children[firstMessage].SetActive(false);
