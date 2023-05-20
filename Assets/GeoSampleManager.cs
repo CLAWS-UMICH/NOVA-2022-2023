@@ -10,6 +10,7 @@ public class GeoSampleManager : MonoBehaviour
     void Start()
     {
         EventBus.Subscribe<GeoSpecRecievedEvent>(CreateGeoSample);
+        EventBus.Subscribe<ScrollEvent>(OnScroll);
     }
 
     private void CreateGeoSample(GeoSpecRecievedEvent e) {
@@ -22,6 +23,16 @@ public class GeoSampleManager : MonoBehaviour
         PopUpManager.MakePopup("New Geo Sample Added.");
         id++;
 
+    }
+    private void OnScroll(ScrollEvent e) {
+        if(e.screen == Geosampling) {
+            if(e.direction == down) {
+                gameObject.GetComponent<GeoSampleVegaController>().scrollDown();
+            }
+            else if(e.direction == up) {
+                gameObject.GetComponent<GeoSampleVegaController>().scrollUp();
+            }
+        }
     }
     private string getRockType(SpecMsg s) {
         //Mare Basalt
