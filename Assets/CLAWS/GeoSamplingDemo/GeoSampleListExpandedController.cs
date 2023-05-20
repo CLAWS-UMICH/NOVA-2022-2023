@@ -76,7 +76,7 @@ public class GeoSampleListExpandedController : MonoBehaviour
     {
         sampleObjects[index].SetActive(true);
         //Change Title text
-        sampleObjects[index].transform.GetChild(3).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = "Sample " + (holdingContainer[index].sampleID) + ": " + holdingContainer[index].rockType;
+        sampleObjects[index].transform.GetChild(3).gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = holdingContainer[index].rockType;
         //Change Subtitle text
         sampleObjects[index].transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshPro>().text = holdingContainer[index].lunarTime;
         sampleObjects[index].transform.GetChild(3).gameObject.transform.GetChild(2).gameObject.GetComponent<TextMeshPro>().text = holdingContainer[index].location;

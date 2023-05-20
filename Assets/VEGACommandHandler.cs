@@ -91,13 +91,13 @@ public class VEGACommandHandler : MonoBehaviour
                     navigation.GetComponent<NavScreenController>().RecallRover();
                 }
                 else if(String.Equals(words[2],"backtracking_on")){
-                    //navigation.GetComponent<NavScreenController>().StartNav();
+                    Breadcrumbs.SetBacktrackingMode(true);
                 }
                 else if(String.Equals(words[2],"backtracking_off")){
-                    //navigation.GetComponent<NavScreenController>().StartNav();
+                    Breadcrumbs.SetBacktrackingMode(false);
                 }
                 else if(String.Equals(words[2],"cancel_navigation")){
-                    //navigation.GetComponent<NavScreenController>().EndNavigation();
+                    navigation.GetComponent<NavScreenController>().EndNavigation();
                 }
             }
             else if(String.Equals(words[1],"messaging")){
@@ -109,6 +109,7 @@ public class VEGACommandHandler : MonoBehaviour
                 }
                 else if(String.Equals(words[2],"sender_open")){
                     string[] tmp = e.output.Split(':');
+                    Debug.Log(tmp);
                     if(tmp[1]=="Jane" || tmp[1]=="jane"){
                         messaging.GetComponent<MessagingNewHandler>().Jane();
                     }

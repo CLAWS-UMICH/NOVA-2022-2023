@@ -170,8 +170,8 @@ public enum Direction { up, down }
 
 public class ScrollEvent
 {
-    Screens screen;
-    Direction direction;
+    public Screens screen;
+    public Direction direction;
 
     public ScrollEvent(Screens _screen, Direction _dir)
     {

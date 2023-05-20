@@ -628,6 +628,15 @@ public class NavScreenController : MonoBehaviour
         speech.SetActive(false);
     }
 
+    public void recordTitle() {
+        speech.SetActive(true);
+        message = speech.GetComponent<SpeechManager>().GetMessage();
+        bool active = true;
+        coroutine = StartListeningTitle(active);
+        StartCoroutine(coroutine);
+        speech.SetActive(false);
+    }
+
     IEnumerator StartListeningLat(bool active){
         int i = 0;
         string prevMessage = message;
@@ -648,7 +657,7 @@ public class NavScreenController : MonoBehaviour
                 i = 0;
                 speaking = false;
                 SetWaypointLat(message);
-                Debug.Log("latitute: " + globalLat);
+                Debug.Log("lattitude: " + globalLat);
                 //finished speaking so stop recording. store message as description
                 active = false;
                 
@@ -678,6 +687,35 @@ public class NavScreenController : MonoBehaviour
                 speaking = false;
                 SetWaypointLong(message);
                 Debug.Log("longitude: " + globalLong);
+                //finished speaking so stop recording. store message as description
+                active = false;
+                
+            }
+            prevMessage = message;
+        }  
+    }
+
+    IEnumerator StartListeningTitle(bool active){
+        int i = 0;
+        string prevMessage = message;
+        bool speaking = false;
+        while(active){
+            yield return new WaitForSeconds(0.8f);
+            message = speech.GetComponent<SpeechManager>().GetMessage();
+            i++;
+            if(message!=prevMessage){
+                speaking = true;
+                //add something here to update text box with message text
+            }
+            if(i==3 && speaking){
+                i = 0;
+                speaking = false;
+            }
+            else if(i==3 && !speaking){
+                i = 0;
+                speaking = false;
+                SetWaypointTitle(message);
+                Debug.Log("title: " + globalWaypointTextTitle);
                 //finished speaking so stop recording. store message as description
                 active = false;
                 
