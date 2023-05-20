@@ -60,7 +60,7 @@ public class MessagingNewHandler : MonoBehaviour
     
     IEnumerator FiveMinuteReply(bool active){
         while(active){
-            yield return new WaitForSeconds(10f); //change to 600 -- 10 minutes
+            yield return new WaitForSeconds(30f); //change to 600 -- 10 minutes
             ScrollManager.GetComponent<ScrollManager>().GetMSG();
             ScrollManager.GetComponent<ScrollManager>().ScrollUp();
             PopUpManager.MakePopupMessaging("Walking over to station A right now.",3);

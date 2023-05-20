@@ -22,6 +22,8 @@ public class ScrollManager : MonoBehaviour
 
     void Start()
     {
+        EventBus.Subscribe<ScrollEvent>(ScrollDown);
+        EventBus.Subscribe<ScrollEvent>(ScrollUp);
         foreach (Transform child in transform)
         {
            Children.Add(child.gameObject);
@@ -47,7 +49,7 @@ public class ScrollManager : MonoBehaviour
     }
 
     
-    public void ScrollDown(){
+    public void ScrollDown(ScrollEvent e){
         Debug.Log(firstMessage);
         // GameObject msg = Instantiate(MessageOutPrefab, transform);
         // msg.GetComponent<TextHandler>().SetText(message);
@@ -67,6 +69,23 @@ public class ScrollManager : MonoBehaviour
         // Children[len-1].SetActive(false);
         // Children[len-4].SetActive(true);
         
+    }
+
+    public void ScrollUp(ScrollEvent e){ 
+        
+        int len = Children.Count;
+        if(firstMessage+4 < len && firstMessage >=0){
+            Children[firstMessage].SetActive(false);
+            Children[firstMessage+4].SetActive(true);
+            // if(firstMessage != 0){
+            //     Children[firstMessage-1].SetActive(false);
+            // }
+            firstMessage++;
+            transform.GetComponent<GridObjectCollection>().UpdateCollection();
+        }
+        
+        //msg.
+
     }
 
     public void ScrollUp(){ 
