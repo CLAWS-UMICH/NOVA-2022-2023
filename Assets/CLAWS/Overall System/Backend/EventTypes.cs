@@ -183,3 +183,14 @@ public class ScrollEvent
         return "<ScrollEvent>: " + screen.ToString() + " " + direction.ToString();
     }
 }
+
+
+public class CloseEvent
+{
+    public Screens screen;
+
+    public CloseEvent(Screens _screen)
+    {
+        screen = _screen;
+    }
+}
