@@ -96,6 +96,11 @@ public class ScreenManager : MonoBehaviour
         Debug.Log("Curr Screen = " + ScreenToShow.ToString());
     }
     
+    public void CloseScreen(string ScreenToClose)
+    {
+
+    }
+
     public static void ScrollUp()
     {
         if (LUNA == LUNAState.center)
