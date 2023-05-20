@@ -97,7 +97,7 @@ public class VEGACommandHandler : MonoBehaviour
                     //navigation.GetComponent<NavScreenController>().StartNav();
                 }
                 else if(String.Equals(words[2],"cancel_navigation")){
-                    //navigation.GetComponent<NavScreenController>().EndNavigation();
+                    navigation.GetComponent<NavScreenController>().EndNavigation();
                 }
             }
             else if(String.Equals(words[1],"messaging")){
