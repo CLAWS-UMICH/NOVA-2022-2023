@@ -10,7 +10,7 @@ public class Breadcrumbs : MonoBehaviour
     [SerializeField] private GameObject cam;
     private Vector3 currentPosition;
     private Vector3 prevCrumbPosition;
-    bool backtracingMode = false;
+    static bool backtracingMode = false;
     private List<Vector3> crumbPositions = new();
     [SerializeField] float crumbDistance = 2f;
 
@@ -76,6 +76,11 @@ public class Breadcrumbs : MonoBehaviour
 
         }
         
+    }
+
+    public static void SetBacktrackingMode(bool toggle)
+    {
+        backtracingMode = toggle;
     }
 }
 
