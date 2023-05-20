@@ -26,11 +26,12 @@ public class VEGATextResponseHandler : MonoBehaviour
     void ProcessVEGATextResponse(VEGA_OutputEvent e)
     {
         VEGAVariable = "";
-        string[] VEGAStrings = e.output.Split("'");
-        ResponseString = VEGAStrings[1];
+        
 
         string[] words = e.output.Split(' ');
         if (words[0] == "[text]") {
+            string[] VEGAStrings = e.output.Split("'");
+            ResponseString = VEGAStrings[1];
             if (words[1] == "vitals")
             {
                 if (words[2] == "id")
@@ -106,7 +107,7 @@ public class VEGATextResponseHandler : MonoBehaviour
             else if (words[1] == "geosample")
             {
             }
-        }
+        
         string newString = ResponseString.Replace("*", VEGAVariable);
 
             if (VEGAVariable != "") {
@@ -121,6 +122,7 @@ public class VEGATextResponseHandler : MonoBehaviour
                 VEGAResponseTextBox();
             }
         }
+}
 
     void VEGAResponseTextBox()
     {
