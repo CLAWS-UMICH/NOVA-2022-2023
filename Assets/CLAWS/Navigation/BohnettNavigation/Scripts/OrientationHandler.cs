@@ -140,28 +140,28 @@ public class OrientationHandler : MonoBehaviour
     {
         Vector3 change = mainCamera.transform.forward * magnitude;
         change.y = 0;
-        mainCameraHolder.transform.position -= change;
+        mainCamera.transform.position += change;
     }
 
     public void ShiftSouth(int magnitude)
     {
         Vector3 change = mainCamera.transform.forward * magnitude;
         change.y = 0;
-        mainCameraHolder.transform.position += change;
+        mainCamera.transform.position -= change;
     }
 
     public void ShiftEast(int magnitude)
     {
         Vector3 change = mainCamera.transform.right * magnitude;
         change.y = 0;
-        mainCameraHolder.transform.position += change;
+        mainCamera.transform.position -= change;
     }
 
     public void ShiftWest(int magnitude)
     {
         Vector3 change = mainCamera.transform.right * magnitude;
         change.y = 0;
-        mainCameraHolder.transform.position -= change;
+        mainCamera.transform.position += change;
     }
 
     public void ShiftRotationClockwise(int magnitude)
