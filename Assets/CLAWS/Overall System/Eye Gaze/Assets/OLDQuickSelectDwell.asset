@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3db035c6526baa42b9beae76c31a814, type: 3}
-  m_Name: QuickSelectDwell
+  m_Name: OLDQuickSelectDwell
   m_EditorClassIdentifier: 
   dwellTriggerPointerType: 5
   dwellIntentDelay: 0
   dwellStartDelay: 0.2
-  timeToCompleteDwell: 2.2
+  timeToCompleteDwell: 1
   timeToAllowDwellResume: 0
   decayDwellOverTime: 1
