@@ -109,6 +109,7 @@ public class VEGACommandHandler : MonoBehaviour
                 }
                 else if(String.Equals(words[2],"sender_open")){
                     string[] tmp = e.output.Split(':');
+                    Debug.Log(tmp);
                     if(tmp[1]=="Jane" || tmp[1]=="jane"){
                         messaging.GetComponent<MessagingNewHandler>().Jane();
                     }
