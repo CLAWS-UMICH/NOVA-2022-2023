@@ -114,7 +114,11 @@ public class ScreenManager : MonoBehaviour
         {
             EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.TaskList, Direction.up));
         }
-        
+        else if (LUNA == LUNAState.left)
+        {
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.Navigation, Direction.up));
+        }
+
     }
 
     public static void ScrollDown()
