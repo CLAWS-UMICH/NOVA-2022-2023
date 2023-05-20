@@ -22,8 +22,13 @@ public class SketchYawOffset : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(0, playerCam.transform.rotation.eulerAngles.y + offset, 0);
         }
     }
+    [ContextMenu("Luna Fic")]
     public void EnterLunaMode() {
         lunaCoroutine = StartCoroutine(LunaMove());
+    }
+    [ContextMenu("Fix Luna")]
+    public void StopLunaMode() {
+        StopCouroutine(lunaCoroutine);
     }
 
     // Update is called once per frame
