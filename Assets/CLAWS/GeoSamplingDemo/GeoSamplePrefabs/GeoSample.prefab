@@ -15582,7 +15582,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21202819797275496, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21507,7 +21507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7760152626669504719
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30342,7 +30342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614926313252432, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_text
-      value: GALLERY
+      value: PICTURES
       objectReference: {fileID: 0}
     - target: {fileID: 2896614926313252432, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_fontSize
@@ -31419,6 +31419,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2896614925803026040, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
+      propertyPath: iconStyle
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -31517,7 +31521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614926313252432, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_text
-      value: EDIT
+      value: WRITE DESCRIPTION
       objectReference: {fileID: 0}
     - target: {fileID: 2896614926313252432, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_fontSize
@@ -31569,7 +31573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614927243916834, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2896614927243916837, guid: 91b9e5aa594860647a6f71b22b0e1cde, type: 3}
       propertyPath: m_LocalScale.x
