@@ -22,11 +22,12 @@ public class MessagingNewHandler : MonoBehaviour
 
     void Start()
     {
+        EventBus.Subscribe<CloseEvent>(CloseMessaging);
         reply = FiveMinuteReply(true);
         StartCoroutine(reply);
         
     }
-    public void CloseMessaging(){
+    public void CloseMessaging(CloseEvent e){
         messaging.SetActive(false);
     }
 
