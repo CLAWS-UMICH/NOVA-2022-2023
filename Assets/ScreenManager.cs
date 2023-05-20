@@ -98,9 +98,10 @@ public class ScreenManager : MonoBehaviour
         Debug.Log("Curr Screen = " + ScreenToShow.ToString());
     }
     
-    public void CloseScreen(string ScreenToClose)
+    public void CloseScreen()
     {
-
+        EventBus.Publish<CloseEvent>(new CloseEvent(CurrScreen));
+        CurrScreen = Screens.Home;
     }
 
     public static void ScrollUp()
