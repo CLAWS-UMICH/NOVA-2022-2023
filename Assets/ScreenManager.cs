@@ -5,10 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public enum Screens
 {
+    Home,
     UIA,
     Vitals,
     Geosampling,
     Messaging,
+    Messaging_chat,
     Navigation, 
     TaskList
 }
