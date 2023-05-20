@@ -25,11 +25,11 @@ public class GeoSampleManager : MonoBehaviour
 
     }
     private void OnScroll(ScrollEvent e) {
-        if(e.screen == Geosampling) {
-            if(e.direction == down) {
+        if(e.screen == Screens.Geosampling) {
+            if(e.direction == Direction.down) {
                 gameObject.GetComponent<GeoSampleVegaController>().scrollDown();
             }
-            else if(e.direction == up) {
+            else if(e.direction == Direction.up) {
                 gameObject.GetComponent<GeoSampleVegaController>().scrollUp();
             }
         }
