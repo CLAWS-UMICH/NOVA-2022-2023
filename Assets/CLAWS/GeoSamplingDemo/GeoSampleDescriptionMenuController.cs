@@ -19,7 +19,7 @@ public class GeoSampleDescriptionMenuController : MonoBehaviour
 
     [SerializeField] GameObject GeoSampleController;
     public GeoSample sample;
-    bool fromExpanded = false;
+    public bool fromExpanded = false;
 
     //private void Start()
     //{
