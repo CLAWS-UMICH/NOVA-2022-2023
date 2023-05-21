@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TSS.Msgs;
+using TMPro;
 
 public class UIEgressControl : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class UIEgressControl : MonoBehaviour
     [SerializeField] UIEgressSwitchControl i_oxygenRight;
     [SerializeField] UIEgressSwitchControl i_oxygenVent;
     [SerializeField] UIEgressSwitchControl i_depressPump;
+
+    [SerializeField] TextMeshPro tmp;
 
     Dictionary<string, GameObject> switchDict = new Dictionary<string, GameObject>();
 
@@ -151,12 +154,14 @@ public class UIEgressControl : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
             // step condition
             if (Simulation.User.UIA_State.uia_supply_pressure <= 23)
             {
                 break;
             }   
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch O2 Vent to CLOSE");
         SetSwitchFlashing("O2 VENT", true);
         while (true)
@@ -191,6 +196,7 @@ public class UIEgressControl : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
             // step condition
             if (Simulation.User.UIA_State.uia_supply_pressure >= 3000)
             {
@@ -199,6 +205,7 @@ public class UIEgressControl : MonoBehaviour
         }
         PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
         SetSwitchFlashing("OXYGEN 1", true);
+        tmp.text = "";
         while (true)
         {
             yield return new WaitForSeconds(1f);
@@ -228,6 +235,7 @@ public class UIEgressControl : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
             // step condition
             if (Simulation.User.UIA_State.uia_supply_pressure <= 23)
             {
@@ -235,6 +243,7 @@ public class UIEgressControl : MonoBehaviour
             }
 
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch O2 Vent to CLOSE");
         SetSwitchFlashing("O2 VENT", true);
         while (true)
@@ -268,12 +277,14 @@ public class UIEgressControl : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
             // step condition
             if (Simulation.User.UIA_State.uia_supply_pressure >= 1500)
             {
                 break;
             }
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
         SetSwitchFlashing("OXYGEN 1", true);
         while (true)
@@ -307,6 +318,7 @@ public class UIEgressControl : MonoBehaviour
         SetSwitchFlashing("WASTE 1", false);
         while (true)
         {
+            tmp.text = Simulation.User.UIA_State.water_level.ToString() + "%";
             yield return new WaitForSeconds(1f);
             // step condition
             if (Simulation.User.UIA_State.water_level <= 5)
@@ -314,6 +326,7 @@ public class UIEgressControl : MonoBehaviour
                 break;
             }
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch EV-1 Waste to CLOSE");
         SetSwitchFlashing("WASTE 1", true);
         while (true)
@@ -345,12 +358,14 @@ public class UIEgressControl : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            tmp.text = Simulation.User.UIA_State.water_level.ToString() + "%";
             // step condition
             if (Simulation.User.UIA_State.water_level >= 95)
             {
                 break;
             }
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch EV-1 Supply to CLOSE");
         SetSwitchFlashing("SUPPLY 1", true);
         while (true)
@@ -384,12 +399,14 @@ public class UIEgressControl : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
+            tmp.text = Simulation.User.UIA_State.airlock_pressure.ToString() + " psi";
             // step condition
             if (Simulation.User.UIA_State.airlock_pressure < 10.2f)
             {
                 break;
             }
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch Depress Pump to OFF");
         SetSwitchFlashing("DEPRESS PUMP", true);
         while (true)
@@ -424,11 +441,13 @@ public class UIEgressControl : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             // step condition
+            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
             if (Simulation.User.UIA_State.uia_supply_pressure >= 3000)
             {
                 break;
             }
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
         SetSwitchFlashing("OXYGEN 1", true);
         while (true)
@@ -499,11 +518,13 @@ public class UIEgressControl : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             // step condition
+            tmp.text = Simulation.User.UIA_State.airlock_pressure.ToString() + " psi";
             if (Simulation.User.UIA_State.airlock_pressure < 0.1f)
             {
                 break;
             }
         }
+        tmp.text = "";
         PopUpManager.MakePopup("Switch Depress Pump to OFF");
         SetSwitchFlashing("DEPRESS PUMP", true);
         while (true)
