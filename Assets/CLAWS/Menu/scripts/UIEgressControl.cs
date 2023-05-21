@@ -151,17 +151,12 @@ public class UIEgressControl : MonoBehaviour
             }
         }
         SetSwitchFlashing("O2 VENT", false);
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
-            // step condition
-            if (Simulation.User.UIA_State.uia_supply_pressure <= 23)
-            {
-                break;
-            }   
-        }
-        tmp.text = "";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "29 psi";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "24 psi";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "19 psi";
         PopUpManager.MakePopup("Switch O2 Vent to CLOSE");
         SetSwitchFlashing("O2 VENT", true);
         while (true)
@@ -173,6 +168,7 @@ public class UIEgressControl : MonoBehaviour
                 break;
             }
         }
+        tmp.text = "";
         // step complete
         SetSwitchFlashing("O2 VENT", false);
         yield return new WaitForSeconds(1f);
@@ -193,16 +189,17 @@ public class UIEgressControl : MonoBehaviour
             }
         }
         SetSwitchFlashing("OXYGEN 1", false);
-        while (true)
-        {
-            yield return new WaitForSeconds(1f);
-            tmp.text = Simulation.User.UIA_State.uia_supply_pressure.ToString() + " psi";
-            // step condition
-            if (Simulation.User.UIA_State.uia_supply_pressure >= 3000)
-            {
-                break;
-            }
-        }
+        yield return new WaitForSeconds(1f);
+        tmp.text = "19 psi";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "200 psi";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "1400 psi";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "2300 psi";
+        yield return new WaitForSeconds(1f);
+        tmp.text = "3200 psi";
+        yield return new WaitForSeconds(1f);
         PopUpManager.MakePopup("Switch O2 Supply to CLOSE");
         SetSwitchFlashing("OXYGEN 1", true);
         tmp.text = "";

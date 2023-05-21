@@ -19,7 +19,9 @@ public enum Screens
     Geosample_Confirm,
 
     Messaging,
-    Messaging_chat,
+    Messaging_MCC,
+    Messaging_Jane,
+    Messaging_Neil,
 
     Navigation,
     Navigation_Crew,
@@ -60,6 +62,8 @@ public class ScreenManager : MonoBehaviour
 
     public void SwitchScreen(ScreenChangedEvent e)
     {
+        Debug.Log(CurrScreen.ToString() + " -> " + e.screen.ToString());
+
         CurrScreen = e.screen;
         LUNA = e.luna;
 
