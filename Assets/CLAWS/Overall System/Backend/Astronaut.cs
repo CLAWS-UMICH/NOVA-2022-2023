@@ -18,6 +18,7 @@ public class Astronaut : MonoBehaviour
     public IMUMsg IMU;
     public GPSMsg GPS;
     public UIAMsg UIA;
+    public UIAState UIA_State;
     public RoverMsg ROVER;
     public SpecMsg GEO;
 

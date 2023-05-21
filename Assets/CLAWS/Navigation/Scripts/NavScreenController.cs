@@ -1056,17 +1056,17 @@ public class NavScreenController : MonoBehaviour
 
     public void CrewTestNav()
     {
-        updateCurrentEnd(crewObject.transform, "Patrick A");
+        updateCurrentEnd(crewObject.transform, "Patrick J", "");
     }
 
     public void LanderTestNav()
     {
-        updateCurrentEnd(landerObject.transform, "Lander");
+        updateCurrentEnd(landerObject.transform, "Lander", "");
     }
 
     string titleOfCurrentWaypoint = "";
 
-    public void updateCurrentSelectedButton(GameObject current, string titleOfObject)
+    public void updateCurrentSelectedButton(GameObject current, string titleOfObject, string letter)
     {
         titleOfCurrentWaypoint = titleOfObject;
         currentSelectedButton = current;
@@ -1081,13 +1081,14 @@ public class NavScreenController : MonoBehaviour
     }
 
     string titleLetter = "";
+    string roverLetter = "";
 
-
-    public void updateCurrentEnd(Transform end, string str)
+    public void updateCurrentEnd(Transform end, string str, string l)
     {
         playerWithinDistance = false;
         currentEndPosition = end;
         titleLetter = str;
+        roverLetter = l;
     }
 
     // Mission E
@@ -1169,12 +1170,54 @@ public class NavScreenController : MonoBehaviour
         roverNavScreen.SetActive(false);
         roverSmallScreen.SetActive(true);
     }
+
+    public void OpenRoverNavScreenFromMenu()
+    {
+        StartCoroutine(OpenRoverNavScreen());
+    }
     Transform roverEndLocation = null;
     
     public void StartNav()
     {
         if (currentScreenOpen == "Rover")
         {
+            GameObject roverEndGameObject = missionA;
+
+            switch (roverLetter)
+            {
+                case "A":
+                    roverEndGameObject = missionA;
+                    break;
+                case "B":
+                    roverEndGameObject = missionB;
+                    break;
+                case "C":
+                    roverEndGameObject = missionC;
+                    break;
+                case "D":
+                    roverEndGameObject = missionD;
+                    break;
+                case "E":
+                    roverEndGameObject = missionE;
+                    break;
+                case "F":
+                    roverEndGameObject = missionF;
+                    break;
+                case "G":
+                    roverEndGameObject = missionG;
+                    break;
+                case "H":
+                    roverEndGameObject = missionH;
+                    break;
+                case "I":
+                    roverEndGameObject = missionI;
+                    break;
+                default:
+                    Debug.Log("No waypoint");
+                    break;
+            }
+
+            
             roverThere = false;
             recalled = false;
             roverEndLocation = currentEndPosition;
@@ -1185,8 +1228,11 @@ public class NavScreenController : MonoBehaviour
             // Give this to NASA
             // Current End Position of where the rover should go: roverEndLocation
             // Start Position: roverObjectStartLocation.transform.position;
-            double startLat = roverObject.GetComponent<IsGPSObject>().coords.latitude;
-            double startLong = roverObject.GetComponent<IsGPSObject>().coords.longitude;
+
+            // TODO fix send the waypoint location rather than rover location
+            double startLat = roverEndGameObject.GetComponent<IsGPSObject>().coords.latitude;
+            double startLong = roverEndGameObject.GetComponent<IsGPSObject>().coords.longitude;
+
 
             //.GetComponent<TSSConnection>().SendRoverNavigateCommand((float)startLat, (float)startLong);
             telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverNavigateCommand((float)startLat, (float)startLong);
@@ -1236,8 +1282,6 @@ public class NavScreenController : MonoBehaviour
     {
         roverThere = true;
         PopUpManager.MakePopup("Rover arrived at its destination!");
-        roverSmallScreen.SetActive(false);
-        roverNavScreen.SetActive(false);
 
     }
 
@@ -1248,8 +1292,8 @@ public class NavScreenController : MonoBehaviour
         // Update UI based on the percentage
 
 
-        slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
-        slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
+        slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone, roverLetter);
+        slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone, roverLetter);
         string prog = Simulation.User.ROVER.navigation_status;
         transform.Find("RoverUpdateScreen/Text/StatusText").GetComponent<TextMeshPro>().text = "Status: " + prog;
 
@@ -1277,6 +1321,8 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         roverSmallScreen.SetActive(false);
+        roverNavScreen.SetActive(true);
+
     }
 
     public void closeRoverConfirm ()
@@ -1288,7 +1334,10 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         roverNavScreen.SetActive(false);
-        roverSmallScreen.SetActive(true);
+        if (!recalled)
+        {
+            roverSmallScreen.SetActive(true);
+        }
     }
 
     private void updateRoverLocation()

@@ -22,14 +22,43 @@ public class MessagingNewHandler : MonoBehaviour
 
     void Start()
     {
-        EventBus.Subscribe<CloseEvent>(CloseMessaging);
+        EventBus.Subscribe<CloseEvent>(Callback_CloseMessaging);
         reply = FiveMinuteReply(true);
         StartCoroutine(reply);
         
     }
-    public void CloseMessaging(CloseEvent e){
+
+    IEnumerator CloseChildren(GameObject child)
+    {
+        yield return new WaitForSeconds(1f);
+        child.SetActive(false);
+    }
+
+    public void Callback_CloseMessaging(CloseEvent e){
+        if (e.screen == Screens.Messaging || e.screen == Screens.Messaging_MCC 
+            || e.screen == Screens.Messaging_Jane || e.screen == Screens.Messaging_Neil) 
+        {
+            CloseMessaging();
+
+        }
+    }
+
+    public void CloseMessaging() {
+        for (int a = 0; a < transform.childCount; a++)
+        {
+            StartCoroutine(CloseChildren(transform.GetChild(a).gameObject));
+        }
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+
+    }
+
+    public void OpenMessaging(CloseEvent e){
         e.screen = Screens.Messaging;
-        messaging.SetActive(false);
+
+         for (int a = 0; a < transform.childCount; a++)
+        {
+            transform.GetChild(a).gameObject.SetActive(false);
+        }
     }
 
     public void Recorder(){

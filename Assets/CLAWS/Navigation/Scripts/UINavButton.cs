@@ -24,7 +24,7 @@ public class UINavButton : MonoBehaviour
             if (waypoint.GetLetter() == letterOfObject)
             {
                 titleOfObject = waypoint.GetTitle();
-                navScreenController.updateCurrentEnd(waypoint.GetPosition(), waypoint.GetTitle() + " " + waypoint.GetLetter());
+                navScreenController.updateCurrentEnd(waypoint.GetPosition(), waypoint.GetTitle() + " " + waypoint.GetLetter(), waypoint.GetLetter());
 
             }
         }
@@ -34,7 +34,7 @@ public class UINavButton : MonoBehaviour
     {
         lightBlueBorder.SetActive(true);
         navScreenController.turnOffPastButtonLightBlue();
-        navScreenController.updateCurrentSelectedButton(lightBlueBorder, titleOfObject);
+        navScreenController.updateCurrentSelectedButton(lightBlueBorder, titleOfObject, letterOfObject);
     }
 
     public string GetLetter()

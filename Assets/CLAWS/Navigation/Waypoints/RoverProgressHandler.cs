@@ -8,8 +8,9 @@ public class RoverProgressHandler : MonoBehaviour
 {
     public Slider slider;
     public TextMeshPro valueText;
+    public TextMeshPro letter;
 
-    public void UpdateProgressBar(float value)
+    public void UpdateProgressBar(float value, string l)
     {
         // Ensure the value is between 0 and 100
         value = Mathf.Clamp(value, 0f, 100f);
@@ -19,6 +20,7 @@ public class RoverProgressHandler : MonoBehaviour
 
         // Update the progress bar's value
         slider.value = roundedValue;
-        valueText.text = roundedValue.ToString();
+        valueText.text = roundedValue.ToString() + "%";
+        letter.text = l;
     }
 }
