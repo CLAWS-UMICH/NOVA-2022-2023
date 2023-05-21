@@ -93,6 +93,8 @@ public class NavScreenController : MonoBehaviour
 
     void Start()
     {
+        EventBus.Subscribe<CloseEvent>(CloseNavigation);
+
         roverObjectStartLocation = roverObject;
         titleLetter = "";
         titleOfCurrentWaypoint = "";
@@ -115,6 +117,19 @@ public class NavScreenController : MonoBehaviour
         SetAllCullingToCamera();
 
 
+
+
+    }
+
+    // Close all screens when clicking close screen
+    private void CloseNavigation(CloseEvent e)
+    {
+        if (e.screen == Screens.Navigation || e.screen == Screens.Navigation_Crew || e.screen == Screens.Navigation_Geo
+            || e.screen == Screens.Navigation_Lander || e.screen == Screens.Navigation_Lander || e.screen == Screens.Navigation_Mission
+            || e.screen == Screens.Navigation_Rover || e.screen == Screens.Navigation_Rover_Confirm|| e.screen == Screens.Navigation_Waypoint_Confirm)
+        {
+            CloseAll();
+        }
     }
 
     public void CloseAll()
