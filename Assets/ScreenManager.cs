@@ -49,72 +49,20 @@ public class ScreenManager : MonoBehaviour
     public NavScreenController NavigationPanel;
 
     // STATE MACHINE
-    public static Screens CurrScreen = Screens.UIA;
+    public static Screens CurrScreen = Screens.Home;
     public static LUNAState LUNA = LUNAState.center;
 
-    public void SwitchScreen(string ScreenToShow)
+    private void Start()
     {
-        switch (ScreenToShow)
-        {
-            case "UIA":
-                UIAPanel.SetActive(true);
-                foreach (GameObject g in VitalsPanel)
-                {
-                    g.SetActive(false);
-                }
-                GeosamplingPanel.minimize();
-                MessagingPanel.SetActive(false);
-                NavigationPanel.CloseAll();
-                CurrScreen = Screens.UIA;
-                break;
-            case "Vitals":
-                UIAPanel.SetActive(false);
-                foreach (GameObject g in VitalsPanel)
-                {
-                    g.SetActive(true);
-                }
-                GeosamplingPanel.minimize();
-                MessagingPanel.SetActive(false);
-                NavigationPanel.CloseAll();
-                CurrScreen = Screens.Vitals;
-                break;
-            case "Geosampling":
-                UIAPanel.SetActive(false);
-                foreach (GameObject g in VitalsPanel)
-                {
-                    g.SetActive(false);
-                }
-                GeosamplingPanel.open();
-                MessagingPanel.SetActive(false);
-                NavigationPanel.CloseAll();
-                CurrScreen = Screens.Geosampling;
-                break;
-            case "Messaging":
-                UIAPanel.SetActive(false);
-                foreach (GameObject g in VitalsPanel)
-                {
-                    g.SetActive(false);
-                }
-                GeosamplingPanel.minimize();
-                MessagingPanel.SetActive(true);
-                NavigationPanel.CloseAll();
-                CurrScreen = Screens.Messaging;
-                break;
-            case "Navigation":
-                UIAPanel.SetActive(false);
-                foreach (GameObject g in VitalsPanel)
-                {
-                    g.SetActive(false);
-                }
-                GeosamplingPanel.open();
-                MessagingPanel.SetActive(false);
-                NavigationPanel.OpenNavMainMenu();
-                CurrScreen = Screens.Navigation;
-                break;
-            default:
-                break;
-        }
-        Debug.Log("Curr Screen = " + ScreenToShow.ToString());
+        EventBus.Subscribe<ScreenChangedEvent>(SwitchScreen);
+    }
+
+    public void SwitchScreen(ScreenChangedEvent e)
+    {
+        CurrScreen = e.screen;
+        LUNA = e.luna;
+
+        // handle luna
     }
     
     public void CloseScreen()

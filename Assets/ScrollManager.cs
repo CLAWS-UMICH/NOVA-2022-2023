@@ -73,6 +73,27 @@ public class ScrollManager : MonoBehaviour
         
     }
 
+    public void ScrollDown(){
+        // GameObject msg = Instantiate(MessageOutPrefab, transform);
+        // msg.GetComponent<TextHandler>().SetText(message);
+        // Children.Add(msg);
+        int len = Children.Count;
+        if(firstMessage+3 < len  && firstMessage >=0){
+            if(firstMessage != 0){
+                Debug.Log("firstMessage");
+                Children[firstMessage-1].SetActive(true);
+                Children[firstMessage+3].SetActive(false);
+                firstMessage--;
+                transform.GetComponent<GridObjectCollection>().UpdateCollection();
+            }
+        }
+        
+        // int len = Children.Count;
+        // Children[len-1].SetActive(false);
+        // Children[len-4].SetActive(true);
+        
+    }
+
     public void ScrollUp(ScrollEvent e){ 
         e.direction = Direction.up;
         e.screen = Screens.Messaging;
@@ -122,7 +143,7 @@ public class ScrollManager : MonoBehaviour
         string prevMessage = message;
         bool speaking = false;
         while(active){
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(1.5f);
             message = speech.GetComponent<SpeechManager>().GetMessage();
             i++;
             if(message!=prevMessage){

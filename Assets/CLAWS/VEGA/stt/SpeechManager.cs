@@ -100,7 +100,7 @@ public class SpeechManager : MonoBehaviour
         string prevMessage = message;
         
         while(true){
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(2f);
             
             i++;
             if(message!=prevMessage){
@@ -121,7 +121,7 @@ public class SpeechManager : MonoBehaviour
                 //Debug.Log("speech happened");
             }
             else if(i==3 && !speech){
-                //Debug.Log(message);
+                Debug.Log("hey");
                 //Debug.Log("speech did not happen");
                 panel.SetActive(false);
 
