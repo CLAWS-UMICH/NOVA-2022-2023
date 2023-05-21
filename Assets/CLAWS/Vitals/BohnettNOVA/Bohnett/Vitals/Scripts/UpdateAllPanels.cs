@@ -146,7 +146,7 @@ public class UpdateAllPanels : MonoBehaviour
         switch (i)
         {
             case 0:
-                return vitals.suits_pressure + " psi";
+                return vitals.suit_pressure + " psi";
             
             default:
                 return "N/A";
@@ -257,7 +257,7 @@ public class UpdateAllPanels : MonoBehaviour
                 return vitals.battery_time_left.ToString();
 
             case 4:
-                return vitals.suits_pressure + " psi";
+                return vitals.suit_pressure + " psi";
 
 
             default:

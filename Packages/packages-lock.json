@@ -336,7 +336,7 @@
       "dependencies": {
         "com.endel.nativewebsocket": "1.1.4"
       },
-      "hash": "de08c7ad1f28e7e1e7a89b26f56f4349c267dc03"
+      "hash": "c6f9de2ad3edd26d140c4465291192b19b44b908"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
