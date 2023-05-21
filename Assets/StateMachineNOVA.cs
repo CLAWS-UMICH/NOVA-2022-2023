@@ -78,12 +78,14 @@ public class StateMachineNOVA : MonoBehaviour
         }
     }
 
+    [ContextMenu("CloseScreen")]
     public void CloseScreen()
     {
         EventBus.Publish<CloseEvent>(new CloseEvent(CurrScreen));
         CurrScreen = Screens.Home;
     }
 
+    [ContextMenu("ScrollUp")]
     public void ScrollUp()
     {
         if (LUNA == LUNAState.center)
@@ -101,6 +103,7 @@ public class StateMachineNOVA : MonoBehaviour
 
     }
 
+    [ContextMenu("ScrollDown")]
     public void ScrollDown()
     {
         if (LUNA == LUNAState.center)
