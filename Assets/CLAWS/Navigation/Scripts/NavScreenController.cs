@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using Microsoft.MixedReality.Toolkit.Utilities;
 using TSS;
 using TSS.Msgs;
+using UnityEngine.InputSystem;
 
 public class NavScreenController : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public class NavScreenController : MonoBehaviour
 
     private void Awake()
     {
+
         mainNavScreen = transform.Find("MainNavScreen").gameObject;
         crewScreen = transform.Find("CrewScreen").gameObject;
         geoScreen = transform.Find("GeoScreen").gameObject;
@@ -93,6 +95,7 @@ public class NavScreenController : MonoBehaviour
 
     void Start()
     {
+        EventBus.Subscribe<ScrollEvent>(ScrollProperScreen);
         EventBus.Subscribe<CloseEvent>(CloseNavigation);
 
         roverObjectStartLocation = roverObject;
@@ -457,8 +460,9 @@ public class NavScreenController : MonoBehaviour
         roverButton.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
-    int firstMessageM = 0;
+    int firstMessageM = 0; // Keeps track of the top option in our gridCollections
 
+    /*
     public void ScrollDown()
     {
         Debug.Log(roverButtons.Count);
@@ -480,7 +484,9 @@ public class NavScreenController : MonoBehaviour
 
 
     }
+    */
 
+    /*
     public void ScrollDownMission()
     {
         Debug.Log(missionButtons.Count);
@@ -503,7 +509,9 @@ public class NavScreenController : MonoBehaviour
 
 
     }
+    */
 
+    /*
     public void ScrollUp()
     {
         GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
@@ -521,6 +529,155 @@ public class NavScreenController : MonoBehaviour
 
 
     }
+    */
+
+
+    // ================== NEW SCROLL EVENT METHODS ==========================
+    // Added the ability to respond to ScrollEvents to move the navigation lists
+    private void ScrollProperScreen(ScrollEvent e)
+    {
+        
+        switch(e.screen)
+        {
+            case Screens.Navigation_Crew:
+                if (e.direction == Direction.up)
+                {
+                    ScrollUp(crewScreen, crewButtons);
+                } else
+                {
+                    ScrollDown(crewScreen, crewButtons);
+                }
+                break;
+
+            case Screens.Navigation_Geo:
+                if (e.direction == Direction.up)
+                {
+                    ScrollUp(geoScreen, geoButtons);
+                }
+                else
+                {
+                    ScrollDown(geoScreen, geoButtons);
+                }
+                break;
+
+            case Screens.Navigation_Mission:
+                //Debug.Log("01");
+                if (e.direction == Direction.up)
+                {
+                    ScrollUp(missionScreen, missionButtons);
+                }
+                else
+                {
+                    ScrollDown(missionScreen, missionButtons);
+                }
+                break;
+
+
+            case Screens.Navigation_Rover:
+                if (e.direction == Direction.up)
+                {
+                    ScrollUp(roverScreen, roverButtons);
+                }
+                else
+                {
+                    ScrollDown(roverScreen, roverButtons);
+                }
+                break;
+
+            default:
+                Debug.Log(":(");
+                return;
+        }
+    }
+
+
+
+    // General Scroll Up function for navigation windows
+    private void ScrollUp(GameObject screen, List<GameObject> buttons)
+    {
+        //Debug.Log("Going Up");
+        GameObject button = GiveAppropriateGameObjectFromChildren(screen);
+
+        if (button == null)
+        {
+            return;
+        }
+
+        int len = buttons.Count;
+        if (firstMessage + 5 < len && firstMessage >= 0)
+        {
+            buttons[firstMessage].SetActive(false);
+            buttons[firstMessage + 5].SetActive(true);
+            firstMessage++;
+            button.GetComponent<GridObjectCollection>().UpdateCollection();
+            StartCoroutine(updateCollection(button));
+        }
+    }
+
+    // General Scroll Down function for navigation windows
+    private void ScrollDown(GameObject screen, List<GameObject> buttons)
+    {
+        //Debug.Log("Going Down");
+        GameObject button = GiveAppropriateGameObjectFromChildren(screen);
+
+        if (button == null)
+        {
+            return;
+        }
+
+        int len = buttons.Count;
+        if (firstMessageM + 4 < len && firstMessageM >= 0)
+        {
+            if (firstMessageM != 0)
+            {
+                Debug.Log("firstMessage: " + firstMessageM);
+
+                buttons[firstMessageM - 1].SetActive(true);
+                buttons[firstMessageM + 4].SetActive(false);
+                firstMessageM--;
+                button.GetComponent<GridObjectCollection>().UpdateCollection();
+                StartCoroutine(updateCollection(button));
+            }
+        }
+    }
+
+    // Gets the button from the child of the screen gameObject
+    private GameObject GiveAppropriateGameObjectFromChildren(GameObject screen)
+    {
+        GameObject button;
+        if (screen == missionScreen)
+        {
+            button = screen.transform.Find("ButtonStuffMission").gameObject;
+        }
+        else
+        {
+            button = screen.transform.Find("ButtonStuff").gameObject;
+        }
+
+        return button;
+    }
+
+    
+
+    
+    // Debug methods to simulate events getting sent
+    public void RaiseScrollEventUp()
+    {
+        Debug.Log("HMMM");
+        //ScrollProperScreen(new ScrollEvent(Screens.Navigation_Mission, Direction.up));
+
+        
+    }
+
+    public void RaiseScrollEventDown()
+    {
+       Debug.Log("AHHH");
+       // ScrollProperScreen(new ScrollEvent(Screens.Navigation_Mission, Direction.down));
+    }
+    
+    // =======================================================================
+
+
 
     IEnumerator updateCollection(GameObject buttonType)
     {
@@ -528,6 +685,7 @@ public class NavScreenController : MonoBehaviour
         buttonType.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
+    /*
     public void ScrollUpMission()
     {
         GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
@@ -545,7 +703,7 @@ public class NavScreenController : MonoBehaviour
         }
 
     }
-
+    */
 
     public void OpenGeoConfirmationScreenTest()
     {
