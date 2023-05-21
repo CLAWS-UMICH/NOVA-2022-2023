@@ -11,7 +11,7 @@ public enum Screens
 
     Vitals,
 
-    Geosample,
+    Geosampling,
     Geosample_Expanded,
     Geosample_Description,
     Geosample_Gallery,
