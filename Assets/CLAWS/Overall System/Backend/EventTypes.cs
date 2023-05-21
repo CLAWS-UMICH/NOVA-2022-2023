@@ -194,3 +194,12 @@ public class CloseEvent
         screen = _screen;
     }
 }
+
+public class ScreenChangedEvent 
+{
+    public Screens screen;
+
+    public ScreenChangedEvent(Screens _screen) {
+        screen = _screen;
+    }
+}
