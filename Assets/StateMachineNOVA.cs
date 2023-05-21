@@ -46,8 +46,8 @@ public class StateMachineNOVA : MonoBehaviour
 {
     // Start is called before the first frame update
     public LUNAFOVManager lunafov;
-    public static Screens CurrScreen = Screens.Home;
-    public static LUNAState LUNA = LUNAState.center;
+    public Screens CurrScreen = Screens.Home;
+    public LUNAState LUNA = LUNAState.center;
 
     
     private void Start()
@@ -84,7 +84,7 @@ public class StateMachineNOVA : MonoBehaviour
         CurrScreen = Screens.Home;
     }
 
-    public static void ScrollUp()
+    public void ScrollUp()
     {
         if (LUNA == LUNAState.center)
         {
@@ -101,7 +101,7 @@ public class StateMachineNOVA : MonoBehaviour
 
     }
 
-    public static void ScrollDown()
+    public void ScrollDown()
     {
         if (LUNA == LUNAState.center)
         {
@@ -113,10 +113,4 @@ public class StateMachineNOVA : MonoBehaviour
         }
     }
     
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
