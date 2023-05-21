@@ -197,9 +197,11 @@ public class CloseEvent
 
 public class ScreenChangedEvent 
 {
-    public Screens screen;
+    public Screens screen; // Screens.Home, Screens.etc
+    public LUNAState luna; // LUNAState.left, LUNAState.center, LUNAState.right
 
-    public ScreenChangedEvent(Screens _screen) {
+    public ScreenChangedEvent(Screens _screen, LUNAState _luna) {
         screen = _screen;
+        luna = _luna;
     }
 }
