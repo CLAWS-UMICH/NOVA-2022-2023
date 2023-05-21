@@ -85,6 +85,13 @@ public class StateMachineNOVA : MonoBehaviour
         CurrScreen = Screens.Home;
     }
 
+    [ContextMenu("Back")]
+    public void Back()
+    {
+        EventBus.Publish<BackEvent>(new BackEvent(CurrScreen));
+        CurrScreen = Screens.Home;
+    }
+
     [ContextMenu("ScrollUp")]
     public void ScrollUp()
     {
@@ -113,6 +120,10 @@ public class StateMachineNOVA : MonoBehaviour
         else if (LUNA == LUNAState.right)
         {
             EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.TaskList, Direction.down));
+        }
+        else if (LUNA == LUNAState.left)
+        {
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.Navigation, Direction.down));
         }
     }
     

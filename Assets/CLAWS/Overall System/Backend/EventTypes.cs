@@ -195,6 +195,16 @@ public class CloseEvent
     }
 }
 
+public class BackEvent
+{
+    public Screens screen;
+
+    public BackEvent(Screens _screen)
+    {
+        screen = _screen;
+    }
+}
+
 public class ScreenChangedEvent 
 {
     public Screens screen; // Screens.Home, Screens.etc
