@@ -49,8 +49,8 @@ public class TelemetryServerManager : MonoBehaviour
 
             if (telemMsg.gpsMsg != null)
             {
-                Simulation.User.GPS = telemMsg.gpsMsg;
-                EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
+                // Simulation.User.GPS = telemMsg.gpsMsg;
+                // EventBus.Publish<UpdatedGPSEvent>(new UpdatedGPSEvent());
             }
             else
             {
