@@ -908,7 +908,7 @@ public class NavScreenController : MonoBehaviour
 
     string titleOfCurrentWaypoint = "";
 
-    public void updateCurrentSelectedButton(GameObject current, string titleOfObject)
+    public void updateCurrentSelectedButton(GameObject current, string titleOfObject, string letter)
     {
         titleOfCurrentWaypoint = titleOfObject;
         currentSelectedButton = current;
@@ -1012,6 +1012,11 @@ public class NavScreenController : MonoBehaviour
         roverNavScreen.SetActive(false);
         roverSmallScreen.SetActive(true);
     }
+
+    public void OpenRoverNavScreenFromMenu()
+    {
+        StartCoroutine(OpenRoverNavScreen());
+    }
     Transform roverEndLocation = null;
     
     public void StartNav()
@@ -1070,7 +1075,6 @@ public class NavScreenController : MonoBehaviour
             double startLat = roverEndGameObject.GetComponent<IsGPSObject>().coords.latitude;
             double startLong = roverEndGameObject.GetComponent<IsGPSObject>().coords.longitude;
 
-            Debug.Log(startLat);
 
             //.GetComponent<TSSConnection>().SendRoverNavigateCommand((float)startLat, (float)startLong);
             telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverNavigateCommand((float)startLat, (float)startLong);
@@ -1120,8 +1124,6 @@ public class NavScreenController : MonoBehaviour
     {
         roverThere = true;
         PopUpManager.MakePopup("Rover arrived at its destination!");
-        roverSmallScreen.SetActive(false);
-        roverNavScreen.SetActive(false);
 
     }
 
@@ -1132,8 +1134,8 @@ public class NavScreenController : MonoBehaviour
         // Update UI based on the percentage
 
 
-        slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
-        slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone);
+        slider.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone, roverLetter);
+        slider2.GetComponent<RoverProgressHandler>().UpdateProgressBar(percentageDone, roverLetter);
         string prog = Simulation.User.ROVER.navigation_status;
         transform.Find("RoverUpdateScreen/Text/StatusText").GetComponent<TextMeshPro>().text = "Status: " + prog;
 
@@ -1161,6 +1163,8 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         roverSmallScreen.SetActive(false);
+        roverNavScreen.SetActive(true);
+
     }
 
     public void closeRoverConfirm ()
@@ -1172,7 +1176,10 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         roverNavScreen.SetActive(false);
-        roverSmallScreen.SetActive(true);
+        if (!recalled)
+        {
+            roverSmallScreen.SetActive(true);
+        }
     }
 
     private void updateRoverLocation()
