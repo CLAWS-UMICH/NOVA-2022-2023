@@ -908,7 +908,7 @@ public class NavScreenController : MonoBehaviour
 
     string titleOfCurrentWaypoint = "";
 
-    public void updateCurrentSelectedButton(GameObject current, string titleOfObject)
+    public void updateCurrentSelectedButton(GameObject current, string titleOfObject, string letter)
     {
         titleOfCurrentWaypoint = titleOfObject;
         currentSelectedButton = current;
