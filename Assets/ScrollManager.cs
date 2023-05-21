@@ -22,16 +22,12 @@ public class ScrollManager : MonoBehaviour
 
     void Start()
     {
-        EventBus.Subscribe<ScrollEvent>(ScrollDown);
-        EventBus.Subscribe<ScrollEvent>(ScrollUp);
+        EventBus.Subscribe<ScrollEvent>(Scroll);
         foreach (Transform child in transform)
         {
            Children.Add(child.gameObject);
            firstMessage = 0;
         }
-
-        //gridObjectCollection = GetComponent<GridObjectCollection>();
-
     }
 
     public void SendMSG(string message){
@@ -46,31 +42,6 @@ public class ScrollManager : MonoBehaviour
         msg.SetActive(false);
         msg.GetComponent<TextHandler>().SetText("Walking over to station A right now.");
         Children.Add(msg);
-    }
-
-    
-    public void ScrollDown(ScrollEvent e){
-        Debug.Log(firstMessage);
-        e.direction = Direction.down;
-        e.screen = Screens.Messaging;
-        // GameObject msg = Instantiate(MessageOutPrefab, transform);
-        // msg.GetComponent<TextHandler>().SetText(message);
-        // Children.Add(msg);
-        int len = Children.Count;
-        if(firstMessage+3 < len  && firstMessage >=0){
-            if(firstMessage != 0){
-                Debug.Log("firstMessage");
-                Children[firstMessage-1].SetActive(true);
-                Children[firstMessage+3].SetActive(false);
-                firstMessage--;
-                transform.GetComponent<GridObjectCollection>().UpdateCollection();
-            }
-        }
-        
-        // int len = Children.Count;
-        // Children[len-1].SetActive(false);
-        // Children[len-4].SetActive(true);
-        
     }
 
     public void ScrollDown(){
@@ -88,28 +59,6 @@ public class ScrollManager : MonoBehaviour
             }
         }
         
-        // int len = Children.Count;
-        // Children[len-1].SetActive(false);
-        // Children[len-4].SetActive(true);
-        
-    }
-
-    public void ScrollUp(ScrollEvent e){ 
-        e.direction = Direction.up;
-        e.screen = Screens.Messaging;
-        int len = Children.Count;
-        if(firstMessage+4 < len && firstMessage >=0){
-            Children[firstMessage].SetActive(false);
-            Children[firstMessage+4].SetActive(true);
-            // if(firstMessage != 0){
-            //     Children[firstMessage-1].SetActive(false);
-            // }
-            firstMessage++;
-            transform.GetComponent<GridObjectCollection>().UpdateCollection();
-        }
-        
-        //msg.
-
     }
 
     public void ScrollUp(){ 
@@ -118,15 +67,20 @@ public class ScrollManager : MonoBehaviour
         if(firstMessage+4 < len && firstMessage >=0){
             Children[firstMessage].SetActive(false);
             Children[firstMessage+4].SetActive(true);
-            // if(firstMessage != 0){
-            //     Children[firstMessage-1].SetActive(false);
-            // }
             firstMessage++;
             transform.GetComponent<GridObjectCollection>().UpdateCollection();
         }
         
-        //msg.
 
+    }
+
+    public void Scroll(ScrollEvent e){
+        if(e.direction == Direction.up && (e.screen == Screens.Messaging_Jane || e.screen == Screens.Messaging_Neil || e.screen == Screens.Messaging_MCC )){
+            ScrollUp();
+        }
+        else if(e.direction == Direction.down && (e.screen == Screens.Messaging_Jane || e.screen == Screens.Messaging_Neil || e.screen == Screens.Messaging_MCC )){
+            ScrollDown();
+        }
     }
 
     public void recordMessage() {

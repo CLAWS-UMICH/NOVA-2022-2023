@@ -6,6 +6,7 @@ using TMPro;
 public class MessagingNewHandler : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject closeButton;
     public GameObject messaging;
     public GameObject messagingInbox;
     public GameObject JaneScreen;
@@ -34,6 +35,12 @@ public class MessagingNewHandler : MonoBehaviour
         child.SetActive(false);
     }
 
+    IEnumerator OpenChildren(GameObject child)
+    {
+        yield return new WaitForSeconds(1f);
+        child.SetActive(true);
+    }
+
     public void Callback_CloseMessaging(CloseEvent e){
         if (e.screen == Screens.Messaging || e.screen == Screens.Messaging_MCC 
             || e.screen == Screens.Messaging_Jane || e.screen == Screens.Messaging_Neil) 
@@ -52,13 +59,10 @@ public class MessagingNewHandler : MonoBehaviour
 
     }
 
-    public void OpenMessaging(CloseEvent e){
-        e.screen = Screens.Messaging;
-
-         for (int a = 0; a < transform.childCount; a++)
-        {
-            transform.GetChild(a).gameObject.SetActive(false);
-        }
+    public void OpenMessaging(){
+        StartCoroutine(OpenChildren(messagingInbox));
+        StartCoroutine(OpenChildren(closeButton));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging, LUNAState.center));
     }
 
     public void Recorder(){
@@ -74,19 +78,22 @@ public class MessagingNewHandler : MonoBehaviour
     }
 
     public void Jane(){
-        messagingInbox.SetActive(false);
-        JaneContents.SetActive(true);
-        JaneScreen.SetActive(true);
+        StartCoroutine(CloseChildren(messagingInbox));
+        StartCoroutine(OpenChildren(JaneContents));
+        StartCoroutine(OpenChildren(JaneScreen));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_Jane, LUNAState.center));
     }
     public void Niel(){
-        messagingInbox.SetActive(false);
-        NielContents.SetActive(true);
-        NielScreen.SetActive(true);
+        StartCoroutine(CloseChildren(messagingInbox));
+        StartCoroutine(OpenChildren(NielContents));
+        StartCoroutine(OpenChildren(NielScreen));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_Neil, LUNAState.center));
     }
     public void MCC(){
-        messagingInbox.SetActive(false);
-        MccContents.SetActive(true);
-        MccScreen.SetActive(true);
+        StartCoroutine(CloseChildren(messagingInbox));
+        StartCoroutine(OpenChildren(MccContents));
+        StartCoroutine(OpenChildren(MccScreen));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_MCC, LUNAState.center));
     }
     
     IEnumerator FiveMinuteReply(bool active){
