@@ -482,7 +482,7 @@ Transform:
   - {fileID: 4349398229015320603}
   - {fileID: 1472392618009885091}
   m_Father: {fileID: 6340000079389854053}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8362192227114516681
 MonoBehaviour:
@@ -949,7 +949,7 @@ Transform:
   - {fileID: 4349398228795857388}
   - {fileID: 1472392616999933564}
   m_Father: {fileID: 6340000079389854053}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6700685259248621868
 MonoBehaviour:
@@ -1583,7 +1583,7 @@ Transform:
   - {fileID: 4349398228927801874}
   - {fileID: 4349398229685150379}
   m_Father: {fileID: 3535868163658394304}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1811356009169933902
 BoxCollider:
@@ -2283,7 +2283,7 @@ Transform:
   - {fileID: 4349398228448248579}
   - {fileID: 4349398230433516474}
   m_Father: {fileID: 3535868163658394304}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1811356009918938975
 BoxCollider:
@@ -2983,7 +2983,7 @@ Transform:
   - {fileID: 4349398229721210947}
   - {fileID: 4349398228892002554}
   m_Father: {fileID: 3535868163658394304}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1811356011053538335
 BoxCollider:
@@ -3671,7 +3671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3535868163658394304}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3535868161942442970
 MeshFilter:
@@ -3755,7 +3755,7 @@ Transform:
   - {fileID: 1811356010467119355}
   - {fileID: 3535868162760834349}
   m_Father: {fileID: 6340000079389854053}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6189098898585904074
 MonoBehaviour:
@@ -3799,7 +3799,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3535868163658394304}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3535868162279614478
 SpriteRenderer:
@@ -4072,7 +4072,7 @@ Transform:
   m_Children:
   - {fileID: 3535868162898560351}
   m_Father: {fileID: 6340000079389854053}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3535868162357305841
 MeshFilter:
@@ -4942,7 +4942,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3535868163658394304}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5120,7 +5120,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9209548524961502507}
   - {fileID: 3535868161942442961}
   - {fileID: 3535868163423686586}
   - {fileID: 3535868162279614479}
@@ -5128,7 +5127,7 @@ Transform:
   - {fileID: 1811356009169933895}
   - {fileID: 1811356009918938966}
   m_Father: {fileID: 6340000079389854053}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3822542232433834465
 MonoBehaviour:
@@ -8004,6 +8003,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9209548524961502507}
   - {fileID: 3535868162357305609}
   - {fileID: 3535868163658394304}
   - {fileID: 3535868162232851309}
@@ -11869,7 +11869,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3535868163658394304}
+    m_TransformParent: {fileID: 6340000079389854053}
     m_Modifications:
     - target: {fileID: 2896614925667050873, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: m_LocalScale.x
@@ -11901,15 +11901,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026039, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09379712
+      value: 0.12209713
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026039, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.10167877
+      value: 0.015178754
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026039, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.27986938
+      value: 0.08586934
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026039, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: m_LocalRotation.w

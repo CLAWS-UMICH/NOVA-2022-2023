@@ -6,6 +6,10 @@ public class LUNAFOVManager : MonoBehaviour
 {
     public SketchYawOffset sketchYawOffset;
 
+    void Start(){
+        Debug.Log("start");
+    }
+
     public void LUNALeft()
     {
         sketchYawOffset.offset = 20;
