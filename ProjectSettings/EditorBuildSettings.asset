@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/CLAWS/OldScenes/NOVA Main.unity
-    guid: 19c62bae25e2b3d49992766b1c9ca9ff
+    path: Assets/CLAWS/SUPERNOVA.unity
+    guid: e32538d5765e81046b759a81cb724d03
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 234a5619fe89cfd4790a8ae9a379e44e, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: ee8b604c09565a644be416067e8f7150, type: 2}

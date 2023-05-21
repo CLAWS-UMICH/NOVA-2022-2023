@@ -1027,6 +1027,8 @@ public class NavScreenController : MonoBehaviour
             // Give this to NASA
             // Current End Position of where the rover should go: roverEndLocation
             // Start Position: roverObjectStartLocation.transform.position;
+
+            // TODO fix send the waypoint location rather than rover location
             double startLat = roverObject.GetComponent<IsGPSObject>().coords.latitude;
             double startLong = roverObject.GetComponent<IsGPSObject>().coords.longitude;
 

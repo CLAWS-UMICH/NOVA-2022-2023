@@ -30,8 +30,8 @@ public class TelemetryServerManager : MonoBehaviour
         string team_name = "CLAWS";
         string username = "Patrick";
         string university = "University of Michigan";
-        string user_guid = "eb0dde22-a403-45cd-a3bc-45c797634d31";// "eb0dde22-a403-45cd-a3bc-45c797634d32";
-        tssUri = "ws://localhost:3001"; // "ws://192.168.50.10:3001"; // TODO fix
+        string user_guid = "eb0dde22-a403-45cd-a3bc-45c797634d32";
+        tssUri = "ws://192.168.50.10:3001"; // "ws://localhost:3001"; 
         var connecting = tss.ConnectToURI(tssUri, team_name, username, university, user_guid);
         Debug.Log("Connecting to " + tssUri);
 
@@ -84,6 +84,16 @@ public class TelemetryServerManager : MonoBehaviour
             else
             {
                 Debug.LogError("No UIA Msg received");
+            }
+
+            if (telemMsg.uiaState != null)
+            {
+                Simulation.User.UIA_State = telemMsg.uiaState;
+                EventBus.Publish<UIAMsgEvent>(new UIAMsgEvent());
+            }
+            else
+            {
+                Debug.LogError("UIA State Updated");
             }
 
             if (telemMsg.roverMsg != null)
