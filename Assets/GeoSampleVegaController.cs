@@ -28,9 +28,36 @@ public class GeoSampleVegaController : MonoBehaviour
     string currentFocus = "list";
     //Serialized Objects- ListController, ExpandedListController, DescriptionController, Gallery, NotOpen
 
+    //TODO: see how none works
+    private void changeWindowManager(string focus) {
+        if(focus == "list") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Geosampling, LUNAState.left));
+        }
+        else if(focus == "expand") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Geosample_Expanded, LUNAState.center));
+        }
+        else if(focus == "description") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Geosample_Description, LUNAState.center));
+        }
+        else if(focus == "gallery") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Geosample_Gallery, LUNAState.center));
+        }
+        else if(focus == "confirm") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Geosample_Confirm, LUNAState.center));
+        }
+        else if(focus == "camera") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Geosample_Camera, LUNAState.center));
+        }
+        else if(focus == "none") {
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+        }
+    }
+
     public void updateCurrentFocus(string NewFocus) {
         currentFocus = NewFocus;
+        changeWindowManager(NewFocus);
     }
+    
 
     [ContextMenu("ScrollDown")]
     public void scrollDown() {
@@ -204,6 +231,18 @@ public class GeoSampleVegaController : MonoBehaviour
             //vega error sound
             Debug.Log("cannot perform this command");
             return;
+        }
+        if (currentFocus == "description") {
+            if(DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().fromExpanded == false) {
+                updateCurrentFocus("list");
+                ListController.SetActive(true);
+                DescriptionController.SetActive(false);
+            }
+            else {
+                updateCurrentFocus("expand");
+                ExpandedListController.SetActive(true);
+                DescriptionController.SetActive(false);
+            }
         }
         updateCurrentFocus("none");
         ListController.SetActive(false);
