@@ -24,7 +24,7 @@ public class UINavButton : MonoBehaviour
             if (waypoint.GetLetter() == letterOfObject)
             {
                 titleOfObject = waypoint.GetTitle();
-                navScreenController.updateCurrentEnd(waypoint.GetPosition(), waypoint.GetTitle() + " " + waypoint.GetLetter());
+                navScreenController.updateCurrentEnd(waypoint.GetPosition(), waypoint.GetTitle() + " " + waypoint.GetLetter(), waypoint.GetLetter());
 
             }
         }

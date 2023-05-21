@@ -898,12 +898,12 @@ public class NavScreenController : MonoBehaviour
 
     public void CrewTestNav()
     {
-        updateCurrentEnd(crewObject.transform, "Patrick A");
+        updateCurrentEnd(crewObject.transform, "Patrick J", "");
     }
 
     public void LanderTestNav()
     {
-        updateCurrentEnd(landerObject.transform, "Lander");
+        updateCurrentEnd(landerObject.transform, "Lander", "");
     }
 
     string titleOfCurrentWaypoint = "";
@@ -923,13 +923,14 @@ public class NavScreenController : MonoBehaviour
     }
 
     string titleLetter = "";
+    string roverLetter = "";
 
-
-    public void updateCurrentEnd(Transform end, string str)
+    public void updateCurrentEnd(Transform end, string str, string l)
     {
         playerWithinDistance = false;
         currentEndPosition = end;
         titleLetter = str;
+        roverLetter = l;
     }
 
     // Mission E
@@ -1017,6 +1018,43 @@ public class NavScreenController : MonoBehaviour
     {
         if (currentScreenOpen == "Rover")
         {
+            GameObject roverEndGameObject = missionA;
+
+            switch (roverLetter)
+            {
+                case "A":
+                    roverEndGameObject = missionA;
+                    break;
+                case "B":
+                    roverEndGameObject = missionB;
+                    break;
+                case "C":
+                    roverEndGameObject = missionC;
+                    break;
+                case "D":
+                    roverEndGameObject = missionD;
+                    break;
+                case "E":
+                    roverEndGameObject = missionE;
+                    break;
+                case "F":
+                    roverEndGameObject = missionF;
+                    break;
+                case "G":
+                    roverEndGameObject = missionG;
+                    break;
+                case "H":
+                    roverEndGameObject = missionH;
+                    break;
+                case "I":
+                    roverEndGameObject = missionI;
+                    break;
+                default:
+                    Debug.Log("No waypoint");
+                    break;
+            }
+
+            
             roverThere = false;
             recalled = false;
             roverEndLocation = currentEndPosition;
@@ -1029,8 +1067,10 @@ public class NavScreenController : MonoBehaviour
             // Start Position: roverObjectStartLocation.transform.position;
 
             // TODO fix send the waypoint location rather than rover location
-            double startLat = roverObject.GetComponent<IsGPSObject>().coords.latitude;
-            double startLong = roverObject.GetComponent<IsGPSObject>().coords.longitude;
+            double startLat = roverEndGameObject.GetComponent<IsGPSObject>().coords.latitude;
+            double startLong = roverEndGameObject.GetComponent<IsGPSObject>().coords.longitude;
+
+            Debug.Log(startLat);
 
             //.GetComponent<TSSConnection>().SendRoverNavigateCommand((float)startLat, (float)startLong);
             telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverNavigateCommand((float)startLat, (float)startLong);
