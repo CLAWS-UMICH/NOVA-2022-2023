@@ -18,11 +18,11 @@ public class CountdownScript : MonoBehaviour
     }
 
     IEnumerator Countdown() {
-        if(CountdownNumber < 1) {
-            gameObject.SetActive(false);
+        while(CountdownNumber > 0) {
+            yield return new WaitForSeconds(1f);
+            CountdownNumber--;
+            Number.text = CountdownNumber.ToString();
         }
-        yield return new WaitForSeconds(1f);
-        CountdownNumber--;
-        Number.text = CountdownNumber.ToString();
+        gameObject.SetActive(false);
     }
 }
