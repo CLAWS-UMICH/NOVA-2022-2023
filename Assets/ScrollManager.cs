@@ -143,7 +143,7 @@ public class ScrollManager : MonoBehaviour
         string prevMessage = message;
         bool speaking = false;
         while(active){
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(1.5f);
             message = speech.GetComponent<SpeechManager>().GetMessage();
             i++;
             if(message!=prevMessage){
