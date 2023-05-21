@@ -41,12 +41,12 @@ public enum LUNAState
 
 public class ScreenManager : MonoBehaviour
 {
-
     public GameObject UIAPanel;
     public List<GameObject> VitalsPanel;
     public GeoSampleVegaController GeosamplingPanel;
     public GameObject MessagingPanel;
     public NavScreenController NavigationPanel;
+    public LUNAFOVManager lunafov;
 
     // STATE MACHINE
     public static Screens CurrScreen = Screens.Home;
@@ -54,6 +54,7 @@ public class ScreenManager : MonoBehaviour
 
     private void Start()
     {
+        lunafov = GetComponent<LUNAFOVManager>();
         EventBus.Subscribe<ScreenChangedEvent>(SwitchScreen);
     }
 
@@ -63,6 +64,18 @@ public class ScreenManager : MonoBehaviour
         LUNA = e.luna;
 
         // handle luna
+        if (LUNA == LUNAState.center)
+        {
+            lunafov.LUNACenter();
+        }
+        else if (LUNA == LUNAState.left)
+        {
+            lunafov.LUNALeft();
+        }
+        else if (LUNA == LUNAState.right)
+        {
+            lunafov.LUNARight();
+        }
     }
     
     public void CloseScreen()
