@@ -175,6 +175,8 @@ public class ScrollEvent
 
     public ScrollEvent(Screens _screen, Direction _dir)
     {
+        screen = _screen;
+        direction = _dir;
         Debug.Log("Scrolling " + _screen.ToString() + " " + _dir.ToString());
     }
 

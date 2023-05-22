@@ -13,13 +13,16 @@ public class LUNAFOVManager : MonoBehaviour
     public void LUNALeft()
     {
         sketchYawOffset.offset = 20;
+        StateMachineNOVA.LUNA = LUNAState.left;
     }
     public void LUNACenter()
     {
         sketchYawOffset.offset = 0;
+        StateMachineNOVA.LUNA = LUNAState.center;
     }
     public void LUNARight()
     {
         sketchYawOffset.offset = -20;
+        StateMachineNOVA.LUNA = LUNAState.right;
     }
 }
