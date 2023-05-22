@@ -1182,6 +1182,7 @@ public class NavScreenController : MonoBehaviour
             UINavButton uiScriptButton = button.GetComponent<UINavButton>();
             if (uiScriptButton.GetLetter() == letter)
             {
+                Debug.Log(uiScriptButton.GetLetter());
                 uiScriptButton.ButtonSelected();
                 break;
             }
