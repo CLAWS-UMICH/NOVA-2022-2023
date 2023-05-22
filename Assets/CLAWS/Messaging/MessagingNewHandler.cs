@@ -60,6 +60,13 @@ public class MessagingNewHandler : MonoBehaviour
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
 
     }
+    public void CloseMess() {
+        for (int a = 0; a < transform.childCount; a++)
+        {
+            StartCoroutine(CloseChildren(transform.GetChild(a).gameObject));
+        }
+
+    }
 
     public void OpenMessaging(){
         StartCoroutine(OpenChildren(messagingInbox));
@@ -130,7 +137,7 @@ public class MessagingNewHandler : MonoBehaviour
         if(e.screen != Screens.Messaging_Jane && e.screen != Screens.Messaging_Neil 
         && e.screen != Screens.Messaging_MCC && e.screen != Screens.Messaging) {
             if(e.luna == LUNAState.center) {
-                CloseMessaging();
+                CloseMess();
             }
         }
     }
