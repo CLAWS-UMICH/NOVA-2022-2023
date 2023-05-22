@@ -134,10 +134,9 @@ public class NavScreenController : MonoBehaviour
             || e.screen == Screens.Navigation_Rover || e.screen == Screens.Navigation_Rover_Confirm|| e.screen == Screens.Navigation_Waypoint_Confirm)
         {
             CloseAll();
-            
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
         }
 
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     private void ScrollManager(ScrollEvent e)
