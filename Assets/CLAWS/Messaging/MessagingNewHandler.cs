@@ -95,6 +95,25 @@ public class MessagingNewHandler : MonoBehaviour
         StartCoroutine(OpenChildren(MccScreen));
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_MCC, LUNAState.center));
     }
+
+    public void backJane(){
+        StartCoroutine(CloseChildren(messagingInbox));
+        StartCoroutine(OpenChildren(JaneContents));
+        StartCoroutine(OpenChildren(JaneScreen));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_Jane, LUNAState.center));
+    }
+    public void backNiel(){
+        StartCoroutine(CloseChildren(messagingInbox));
+        StartCoroutine(OpenChildren(NielContents));
+        StartCoroutine(OpenChildren(NielScreen));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_Neil, LUNAState.center));
+    }
+    public void backMCC(){
+        StartCoroutine(CloseChildren(messagingInbox));
+        StartCoroutine(OpenChildren(MccContents));
+        StartCoroutine(OpenChildren(MccScreen));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging_MCC, LUNAState.center));
+    }
     
     IEnumerator FiveMinuteReply(bool active){
         while(active){
