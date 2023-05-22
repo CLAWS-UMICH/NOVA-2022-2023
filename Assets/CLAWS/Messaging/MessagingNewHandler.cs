@@ -25,6 +25,7 @@ public class MessagingNewHandler : MonoBehaviour
     {
         EventBus.Subscribe<CloseEvent>(Callback_CloseMessaging);
         EventBus.Subscribe<BackEvent>(Callback_BackMessaging);
+        EventBus.Subscribe<ScreenChangedEvent>(ChangeEvent);
         reply = FiveMinuteReply(true);
         StartCoroutine(reply);
         
@@ -57,6 +58,13 @@ public class MessagingNewHandler : MonoBehaviour
             StartCoroutine(CloseChildren(transform.GetChild(a).gameObject));
         }
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+
+    }
+    public void CloseMess() {
+        for (int a = 0; a < transform.childCount; a++)
+        {
+            StartCoroutine(CloseChildren(transform.GetChild(a).gameObject));
+        }
 
     }
 
@@ -123,6 +131,15 @@ public class MessagingNewHandler : MonoBehaviour
         StartCoroutine(OpenChildren(messagingInbox));
         StartCoroutine(CloseChildren(MccScreen));
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Messaging, LUNAState.center));
+    }
+
+    private void ChangeEvent(ScreenChangedEvent e) {
+        if(e.screen != Screens.Messaging_Jane && e.screen != Screens.Messaging_Neil 
+        && e.screen != Screens.Messaging_MCC && e.screen != Screens.Messaging) {
+            if(e.luna == LUNAState.center) {
+                CloseMess();
+            }
+        }
     }
     
     IEnumerator FiveMinuteReply(bool active){

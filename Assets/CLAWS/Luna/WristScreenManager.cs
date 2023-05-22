@@ -118,11 +118,11 @@ public class WristScreenManager : MonoBehaviour
                 currentScreenOpen = Messaging_MCC;
                 break;
             case Screens.Messaging_Jane:
-                Messaging_Jane.SetActive(true);
+                Messaging_MCC.SetActive(true);
                 currentScreenOpen = Messaging_Jane;
                 break;
             case Screens.Messaging_Neil:
-                Messaging_Neil.SetActive(true);
+                Messaging_MCC.SetActive(true);
                 currentScreenOpen = Messaging_Neil;
                 break;
             case Screens.Navigation:
