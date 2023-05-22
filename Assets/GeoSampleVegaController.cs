@@ -276,6 +276,7 @@ public class GeoSampleVegaController : MonoBehaviour
     }
     [ContextMenu("CloseAll")]
     public void closeAll() {
+        Debug.Log("Closed all geosampling");
         currentFocus = "none";
         ListController.SetActive(false);
         ExpandedListController.SetActive(false);

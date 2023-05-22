@@ -92,6 +92,7 @@ public class StateMachineNOVA : MonoBehaviour
         EventBus.Publish<CloseEvent>(new CloseEvent(Screens.TaskList));
         EventBus.Publish<CloseEvent>(new CloseEvent(Screens.Messaging));
         EventBus.Publish<CloseEvent>(new CloseEvent(Screens.Navigation));
+        gameObject.transform.Find("GeoSample").gameObject.GetComponent<GeoSampleVegaController>().closeAll();
     }
 
 
