@@ -7,7 +7,7 @@ public class WaypointController : MonoBehaviour
     [SerializeField] GameObject sign;
     [SerializeField] float minScale = 1f;
     [SerializeField] float distanceAway = 5f;
-    [SerializeField] float coneAngle = 90f;
+    [SerializeField] float coneAngle = 110f;
     [SerializeField] Transform childObject;
     [SerializeField] GameObject childObject2;
 
