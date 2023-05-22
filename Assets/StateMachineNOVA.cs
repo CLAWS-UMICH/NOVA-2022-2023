@@ -84,6 +84,18 @@ public class StateMachineNOVA : MonoBehaviour
         EventBus.Publish<CloseEvent>(new CloseEvent(CurrScreen));
     }
 
+    [ContextMenu("CloseAll")]
+    public void CloseAll()
+    {
+        EventBus.Publish<CloseEvent>(new CloseEvent(Screens.Vitals));
+        // TODO geosampling
+        EventBus.Publish<CloseEvent>(new CloseEvent(Screens.TaskList));
+        EventBus.Publish<CloseEvent>(new CloseEvent(Screens.Messaging));
+        EventBus.Publish<CloseEvent>(new CloseEvent(Screens.Navigation));
+    }
+
+
+
     [ContextMenu("Back")]
     public void Back()
     {

@@ -107,7 +107,7 @@ public class TaskListController : MonoBehaviour
     }
 
     public void Callback_CloseTask(CloseEvent e){
-        if (StateMachineNOVA.LUNA == LUNAState.right) 
+        if (StateMachineNOVA.LUNA == LUNAState.right || e.screen == Screens.TaskList) 
         {
             CloseTasks();
         }

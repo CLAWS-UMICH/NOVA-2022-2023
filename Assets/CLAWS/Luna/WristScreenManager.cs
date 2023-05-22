@@ -158,8 +158,8 @@ public class WristScreenManager : MonoBehaviour
                 currentScreenOpen = Navigation_Waypoint_Confirm;
                 break;
             case Screens.TaskList:
-                Home.SetActive(true);
-                currentScreenOpen = Navigation_Rover_Confirm;
+                TaskList.SetActive(true);
+                currentScreenOpen = TaskList;
                 break;
             case Screens.TaskList_CurrentTask:
                 TaskList_CurrentTask.SetActive(true);
