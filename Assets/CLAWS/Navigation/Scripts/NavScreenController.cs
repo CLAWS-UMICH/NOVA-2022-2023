@@ -1180,8 +1180,9 @@ public class NavScreenController : MonoBehaviour
         foreach (GameObject button in buttons)
         {
             UINavButton uiScriptButton = button.GetComponent<UINavButton>();
-            if (uiScriptButton.GetLetter() == letter)
+            if (uiScriptButton.GetLetter() == letter.ToUpper())
             {
+                Debug.Log(uiScriptButton.GetLetter());
                 uiScriptButton.ButtonSelected();
                 break;
             }

@@ -72,13 +72,13 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"open_crew")){
                     navigation.GetComponent<NavScreenController>().OpenCrewScreen();
                 }
-                else if(String.Equals(words[2],"navigation_geosample")){
+                else if(String.Equals(words[2],"open_geosample")){
                     navigation.GetComponent<NavScreenController>().OpenGeoScreen();
                 }
                 else if(String.Equals(words[2],"open_mission")){
                     navigation.GetComponent<NavScreenController>().OpenMissionScreen();
                 }
-                else if(String.Equals(words[2],"rover_open")){
+                else if(String.Equals(words[2],"open_rover")){
                     navigation.GetComponent<NavScreenController>().OpenRoverScreen();
                 }
                 else if(String.Equals(words[2],"open_lander")){
@@ -96,7 +96,7 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"backtracking_off")){
                     Breadcrumbs.SetBacktrackingModeOff();
                 }
-                else if(String.Equals(words[2],"cancel_navigation")){
+                else if(String.Equals(words[2],"cancel_nav")){
                     navigation.GetComponent<NavScreenController>().EndNavigation();
                 }
             }

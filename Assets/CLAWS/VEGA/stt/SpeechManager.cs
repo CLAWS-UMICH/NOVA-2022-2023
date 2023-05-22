@@ -61,7 +61,7 @@ public class SpeechManager : MonoBehaviour
         _speech = GameObject.Find("Speech to Text Manager");
         _animation = GameObject.Find("GlowingRing");
         //_speech = GameObject.Find("Speech to Text Manager").GetComponent<GameObject>();
-        config = SpeechConfig.FromSubscription("08eaa43596804d23abc1c7a4da98bf2f", "eastus");
+        config = SpeechConfig.FromSubscription("ee65b57801d0472c919ed6506f0c11f5", "southcentralus");
         config.SpeechRecognitionLanguage = "en-US";
         config.SpeechSynthesisVoiceName = "en-US-JennyNeural";
         
