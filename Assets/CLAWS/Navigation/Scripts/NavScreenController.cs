@@ -96,9 +96,9 @@ public class NavScreenController : MonoBehaviour
 
     void Start()
     {
-        //EventBus.Subscribe<ScrollEvent>(ScrollProperScreen);
         EventBus.Subscribe<CloseEvent>(CloseNavigation);
         EventBus.Subscribe<ScrollEvent>(ScrollManager);
+        EventBus.Subscribe<ScreenChangedEvent>(SC);
 
         roverObjectStartLocation = roverObject;
         titleLetter = "";
@@ -134,7 +134,6 @@ public class NavScreenController : MonoBehaviour
             || e.screen == Screens.Navigation_Rover || e.screen == Screens.Navigation_Rover_Confirm|| e.screen == Screens.Navigation_Waypoint_Confirm)
         {
             CloseAll();
-            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
         }
 
     }
@@ -165,6 +164,23 @@ public class NavScreenController : MonoBehaviour
                 ScrollDown();
             }
         }
+    }
+
+    private void SC(ScreenChangedEvent e)
+    {
+        if (!(e.screen == Screens.Navigation || e.screen == Screens.Navigation_Crew || e.screen == Screens.Navigation_Geo
+            || e.screen == Screens.Navigation_Lander || e.screen == Screens.Navigation_Lander || e.screen == Screens.Navigation_Mission
+            || e.screen == Screens.Navigation_Rover || e.screen == Screens.Navigation_Rover_Confirm || e.screen == Screens.Navigation_Waypoint_Confirm)
+            && e.luna == LUNAState.center)
+        {
+            Debug.Log("test");
+            playerWithinDistance = false;
+            currentScreenOpen = "";
+            currentEndPosition = null;
+            StartCoroutine(_CloseScreen());
+            SetAllCullingToCamera();
+        }
+
     }
 
     public void CloseAll()
