@@ -1183,14 +1183,26 @@ public class NavScreenController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         roverNavScreen.SetActive(true);
         yield return new WaitForSeconds(6.9f);
-        roverNavScreen.SetActive(false);
-        roverSmallScreen.SetActive(true);
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+
+        if (!recalled)
+        {
+            roverNavScreen.SetActive(false);
+            roverSmallScreen.SetActive(true);
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+        }
+    }
+
+    IEnumerator RoverFromMenu()
+    {
+        yield return new WaitForSeconds(1f);
+        roverNavScreen.SetActive(true);
+        roverSmallScreen.SetActive(false);
     }
 
     public void OpenRoverNavScreenFromMenu()
     {
-        StartCoroutine(OpenRoverNavScreen());
+        StartCoroutine(RoverFromMenu());
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
 
     }
     Transform roverEndLocation = null;
@@ -1339,6 +1351,7 @@ public class NavScreenController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         roverSmallScreen.SetActive(false);
         roverNavScreen.SetActive(true);
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
 
     }
 
