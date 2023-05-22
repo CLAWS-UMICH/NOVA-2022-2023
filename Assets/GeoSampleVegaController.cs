@@ -274,6 +274,22 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryConfirmationView.SetActive(false);
         GalleryView.SetActive(false);
     }
+    [ContextMenu("CloseAll")]
+    public void closeAll() {
+        currentFocus = "none";
+        ListController.SetActive(false);
+        ExpandedListController.SetActive(false);
+        DescriptionController.SetActive(false);
+        GalleryController.SetActive(false);
+    }
+    [ContextMenu("CloseCenter")] 
+    public void closeCenter() {
+        currentFocus = "list";
+        ListController.SetActive(true);
+        ExpandedListController.SetActive(false);
+        DescriptionController.SetActive(false);
+        GalleryController.SetActive(false);
+    }
     [ContextMenu("Back")] 
     public void back() {
         if (currentFocus == "description") {

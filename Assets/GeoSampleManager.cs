@@ -13,6 +13,7 @@ public class GeoSampleManager : MonoBehaviour
         EventBus.Subscribe<ScrollEvent>(OnScroll);
         EventBus.Subscribe<CloseEvent>(CloseGeo);
         EventBus.Subscribe<BackEvent>(BackGeo);
+        EventBus.Subscribe<ScreenChangedEvent>(ScreenChanged);
     }
 
     private void CreateGeoSample(GeoSpecRecievedEvent e) {
@@ -25,6 +26,15 @@ public class GeoSampleManager : MonoBehaviour
         PopUpManager.MakePopup("New Geo Sample Added.");
         id++;
 
+    }
+    private void ScreenChanged(ScreenChangedEvent e) {
+        if((e.screen != Screens.Geosampling && e.screen != Screens.Geosample_Expanded 
+        && e.screen != Screens.Geosample_Description && e.screen != Screens.Geosample_Gallery
+        && e.screen != Screens.Geosample_Camera && e.screen != Screens.Geosample_Confirm)) {
+            if(e.luna == LUNAState.center) {
+                gameObject.GetComponent<GeoSampleVegaController>().closeCenter();
+            }
+        }
     }
     private void OnScroll(ScrollEvent e) {
         if(e.screen == Screens.Geosampling || e.screen == Screens.Geosample_Expanded) {
