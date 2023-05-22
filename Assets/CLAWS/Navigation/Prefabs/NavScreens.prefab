@@ -1078,7 +1078,8 @@ MonoBehaviour:
   obstacleTag: {fileID: 5033239518474018318}
   UIWaypoint: {fileID: 2687867899690506720, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
   landerObject: {fileID: 0}
-  crewObject: {fileID: 0}
+  janeObject: {fileID: 0}
+  neilObject: {fileID: 0}
   missionA: {fileID: 0}
   missionB: {fileID: 0}
   missionC: {fileID: 0}
@@ -12696,6 +12697,7 @@ Transform:
   m_Children:
   - {fileID: 2457204301434329802}
   - {fileID: 7792208244650050612}
+  - {fileID: 2359880627014507798}
   m_Father: {fileID: 5033239519430588412}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24832,7 +24834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ScrollUp
+      value: ScrollDown
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -25010,7 +25012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ScrollDown
+      value: ScrollUp
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -25288,6 +25290,76 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7417477451051908623, guid: 663f409b0b978024b94a031c7a083b8f, type: 3}
   m_PrefabInstance: {fileID: 47256448079408755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &428619802265568501
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5033239518513640212}
+    m_Modifications:
+    - target: {fileID: 2687867899188726212, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_text
+      value: Neil
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506720, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_Name
+      value: WaypointUI Prefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.348
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.223
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622555119337327912, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_text
+      value: K
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+--- !u!4 &2359880627014507798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+  m_PrefabInstance: {fileID: 428619802265568501}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1437045432920513141
 PrefabInstance:
@@ -28190,7 +28262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ScrollDownMission
+      value: ScrollUpMission
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -28756,7 +28828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ScrollUpMission
+      value: ScrollDownMission
       objectReference: {fileID: 0}
     - target: {fileID: 2896614925803026045, guid: ba713a58151b9064bb7730f59c38bef1, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -28850,7 +28922,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2687867899188726212, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
       propertyPath: m_text
-      value: Patrick
+      value: Jane
       objectReference: {fileID: 0}
     - target: {fileID: 2687867899690506720, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
       propertyPath: m_Name
@@ -28899,6 +28971,10 @@ PrefabInstance:
     - target: {fileID: 2687867899690506723, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622555119337327912, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
+      propertyPath: m_text
+      value: J
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fb98b6a0506a02439ac8a9f026e2a52, type: 3}
