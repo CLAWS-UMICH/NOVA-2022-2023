@@ -32,7 +32,7 @@ public class GeoSampleManager : MonoBehaviour
         && e.screen != Screens.Geosample_Description && e.screen != Screens.Geosample_Gallery
         && e.screen != Screens.Geosample_Camera && e.screen != Screens.Geosample_Confirm)) {
             if(e.luna == LUNAState.center) {
-                gameObject.GetComponent<GeoSampleVegaController>().closeAll();
+                gameObject.GetComponent<GeoSampleVegaController>().closeCenter();
             }
         }
     }

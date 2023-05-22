@@ -287,7 +287,14 @@ public class GeoSampleVegaController : MonoBehaviour
     }
     [ContextMenu("CloseCenter")] 
     public void closeCenter() {
-
+        currentFocus = "list";
+        ListController.SetActive(true);
+        ExpandedListController.SetActive(false);
+        DescriptionController.SetActive(false);
+        GalleryController.SetActive(false);
+        GalleryCameraView.SetActive(false);
+        GalleryConfirmationView.SetActive(false);
+        GalleryView.SetActive(false);
     }
     [ContextMenu("Back")] 
     public void back() {
