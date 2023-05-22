@@ -25,6 +25,7 @@ public class TaskListController : MonoBehaviour
     void Start()
     {
         //EventBus.Subscribe<TasksUpdatedEvent>(RecieveNewList);
+        EventBus.Subscribe<CloseEvent>(Callback_CloseTask);
         refresh();
     }
 
@@ -103,5 +104,27 @@ public class TaskListController : MonoBehaviour
         taskObjects[index].transform.GetChild(3).gameObject.transform.GetChild(0).gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().color = color;
         //Change Circle number TODO: Find actual index
         taskObjects[index].transform.GetChild(3).gameObject.transform.GetChild(0).gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = number.ToString();
+    }
+
+    public void Callback_CloseTask(CloseEvent e){
+        if (StateMachineNOVA.LUNA == LUNAState.right) 
+        {
+            CloseTasks();
+        }
+    }
+
+    public void CloseTasks() {
+        for (int a = 0; a < transform.childCount; a++)
+        {
+            StartCoroutine(_CloseScreen(transform.GetChild(a).gameObject));
+        }
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+
+    }
+
+    IEnumerator _CloseScreen(GameObject Screen)
+    {
+        yield return new WaitForSeconds(1f);
+        Screen.SetActive(false);
     }
 }

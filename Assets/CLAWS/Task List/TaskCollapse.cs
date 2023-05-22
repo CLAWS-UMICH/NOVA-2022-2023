@@ -20,11 +20,23 @@ public class TaskCollapse : MonoBehaviour
         StartCoroutine(ToggleCoroutine());
     }
 
+
     IEnumerator ToggleCoroutine()
     {
         yield return new WaitForSeconds(1f);
         expanded.SetActive(!expanded.activeSelf);
         taskView.SetActive(!taskView.activeSelf);
         controller.refresh();
+    }
+
+    public void OpenTask(){
+        StartCoroutine(OpenChildren(expanded));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
+    }
+
+    IEnumerator OpenChildren(GameObject Screen)
+    {
+        yield return new WaitForSeconds(1f);
+        Screen.SetActive(true);
     }
 }
