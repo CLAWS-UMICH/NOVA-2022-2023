@@ -243,6 +243,25 @@ public class GeoSampleVegaController : MonoBehaviour
                 ExpandedListController.SetActive(true);
                 DescriptionController.SetActive(false);
             }
+            return;
+        }
+        if (currentFocus == "gallery") {
+            updateCurrentFocus("description");
+            GalleryCameraView.SetActive(false);
+            DescriptionController.SetActive(true);
+            return;
+        }
+        if (currentFocus == "camera") {
+            updateCurrentFocus("gallery");
+            GalleryCameraView.SetActive(false);
+            GalleryView.SetActive(true);
+            return;
+        }
+        if(currentFocus == "confirm") {
+            updateCurrentFocus("camera");
+            GalleryCameraView.SetActive(true);
+            GalleryConfirmationView.SetActive(false);
+            return;
         }
         updateCurrentFocus("none");
         ListController.SetActive(false);
@@ -252,6 +271,40 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryCameraView.SetActive(false);
         GalleryConfirmationView.SetActive(false);
         GalleryView.SetActive(false);
+    }
+    [ContextMenu("Back")] 
+    public void back() {
+        if (currentFocus == "description") {
+            if(DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().fromExpanded == false) {
+                updateCurrentFocus("list");
+                ListController.SetActive(true);
+                DescriptionController.SetActive(false);
+            }
+            else {
+                updateCurrentFocus("expand");
+                ExpandedListController.SetActive(true);
+                DescriptionController.SetActive(false);
+            }
+            return;
+        }
+        if (currentFocus == "gallery") {
+            updateCurrentFocus("description");
+            GalleryCameraView.SetActive(false);
+            DescriptionController.SetActive(true);
+            return;
+        }
+        if (currentFocus == "camera") {
+            updateCurrentFocus("gallery");
+            GalleryCameraView.SetActive(false);
+            GalleryView.SetActive(true);
+            return;
+        }
+        if(currentFocus == "confirm") {
+            updateCurrentFocus("camera");
+            GalleryCameraView.SetActive(true);
+            GalleryConfirmationView.SetActive(false);
+            return;
+        }
     }
     //opens the geosample window
     [ContextMenu("Open")]

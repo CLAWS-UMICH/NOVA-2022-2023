@@ -11,6 +11,8 @@ public class GeoSampleManager : MonoBehaviour
     {
         EventBus.Subscribe<GeoSpecRecievedEvent>(CreateGeoSample);
         EventBus.Subscribe<ScrollEvent>(OnScroll);
+        EventBus.Subscribe<CloseEvent>(CloseGeo);
+        EventBus.Subscribe<BackEvent>(BackGeo);
     }
 
     private void CreateGeoSample(GeoSpecRecievedEvent e) {
@@ -25,7 +27,6 @@ public class GeoSampleManager : MonoBehaviour
 
     }
     private void OnScroll(ScrollEvent e) {
-        Debug.Log(e.screen.ToString() + e.direction.ToString());
         if(e.screen == Screens.Geosampling || e.screen == Screens.Geosample_Expanded) {
             if(e.direction == Direction.down) {
                 gameObject.GetComponent<GeoSampleVegaController>().scrollDown();
@@ -33,6 +34,20 @@ public class GeoSampleManager : MonoBehaviour
             else if(e.direction == Direction.up) {
                 gameObject.GetComponent<GeoSampleVegaController>().scrollUp();
             }
+        }
+    }
+    private void CloseGeo(CloseEvent e) {
+        if(e.screen == Screens.Geosampling || e.screen == Screens.Geosample_Expanded 
+        || e.screen == Screens.Geosample_Description|| e.screen == Screens.Geosample_Gallery
+        || e.screen == Screens.Geosample_Camera || e.screen == Screens.Geosample_Confirm) {
+                gameObject.GetComponent<GeoSampleVegaController>().close();
+        }
+    }
+    private void BackGeo(BackEvent e) {
+        if(e.screen == Screens.Geosampling || e.screen == Screens.Geosample_Expanded 
+        || e.screen == Screens.Geosample_Description|| e.screen == Screens.Geosample_Gallery
+        || e.screen == Screens.Geosample_Camera || e.screen == Screens.Geosample_Confirm) {
+                gameObject.GetComponent<GeoSampleVegaController>().back();
         }
     }
     private string getRockType(SpecMsg s) {
