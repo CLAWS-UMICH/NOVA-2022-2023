@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class ScreenManager : MonoBehaviour
 {
-
-
-    
-    
-
     // RANDOM STUFF
     public void CloseScreen(GameObject Screen)
     {

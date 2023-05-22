@@ -175,11 +175,8 @@ public class ScrollEvent
 
     public ScrollEvent(Screens _screen, Direction _dir)
     {
-        // Debug
         screen = _screen;
         direction = _dir;
-
-
         Debug.Log("Scrolling " + _screen.ToString() + " " + _dir.ToString());
     }
 
@@ -195,6 +192,16 @@ public class CloseEvent
     public Screens screen;
 
     public CloseEvent(Screens _screen)
+    {
+        screen = _screen;
+    }
+}
+
+public class BackEvent
+{
+    public Screens screen;
+
+    public BackEvent(Screens _screen)
     {
         screen = _screen;
     }
