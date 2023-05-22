@@ -40,7 +40,7 @@ public class WristScreenManager : MonoBehaviour
     {
         GameObject currentScreenOpen = Home;
         GameObject pastScreenOpen = null;
-        //EventBus.Subscribe<ScreenChangedEvent>(ChangeWristScreen);
+        EventBus.Subscribe<ScreenChangedEvent>(ChangeWristScreen);
 
         Home = transform.Find("Home").gameObject;
 
@@ -69,87 +69,109 @@ public class WristScreenManager : MonoBehaviour
 
         TaskList = transform.Find("TaskList").gameObject;
         TaskList_CurrentTask = transform.Find("TaskList_CurrentTask").gameObject;
+        pastScreenOpen = Home;
     }
 
     public void ChangeWristScreen(ScreenChangedEvent e)
     {
-        pastScreenOpen = currentScreenOpen;
-
+        foreach(Transform child in gameObject.transform)
+            {
+                if(child.gameObject.activeSelf)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
         switch(e.screen)
         {
+            
             case Screens.Home:
-                currentScreenOpen = Home;
+                Home.SetActive(true);
                 break;
             case Screens.Vitals:
-                currentScreenOpen = Vitals;
+                Vitals.SetActive(true);
                 break;
             case Screens.Geosampling:
-                currentScreenOpen = Geosampling;
+                Geosampling.SetActive(true);
                 break;
             case Screens.Geosample_Expanded:
-                currentScreenOpen = Geosample_Expanded;
+                Geosample_Expanded.SetActive(true);
                 break;
             case Screens.Geosample_Description:
-                currentScreenOpen = Geosample_Description;
+                Geosample_Description.SetActive(true);
                 break;
             case Screens.Geosample_Gallery:
-                currentScreenOpen = Geosample_Gallery;
+                Geosample_Gallery.SetActive(true);
                 break;
             case Screens.Geosample_Camera:
-                currentScreenOpen = Geosample_Camera;
+                Geosample_Camera.SetActive(true);
                 break;
             case Screens.Geosample_Confirm:
+                Geosample_Confirm.SetActive(true);
                 currentScreenOpen = Geosample_Confirm;
                 break;
             case Screens.Messaging:
+                Messaging.SetActive(true);
                 currentScreenOpen = Messaging;
                 break;
             case Screens.Messaging_MCC:
+                Messaging_MCC.SetActive(true);
                 currentScreenOpen = Messaging_MCC;
                 break;
             case Screens.Messaging_Jane:
+                Messaging_Jane.SetActive(true);
                 currentScreenOpen = Messaging_Jane;
                 break;
             case Screens.Messaging_Neil:
+                Messaging_Neil.SetActive(true);
                 currentScreenOpen = Messaging_Neil;
                 break;
             case Screens.Navigation:
+                Navigation.SetActive(true);
                 currentScreenOpen = Navigation;
                 break;
             case Screens.Navigation_Crew:
+                Navigation_Crew.SetActive(true);
                 currentScreenOpen = Navigation_Crew;
                 break;
             case Screens.Navigation_Geo:
+                Navigation_Geo.SetActive(true);
                 currentScreenOpen = Navigation_Geo;
                 break;
             case Screens.Navigation_Mission:
+                Navigation_Mission.SetActive(true);
                 currentScreenOpen = Navigation_Mission;
                 break;
             case Screens.Navigation_Rover:
+                Navigation_Rover.SetActive(true);
                 currentScreenOpen = Navigation_Rover;
                 break;
             case Screens.Navigation_Lander:
+                Navigation_Lander.SetActive(true);
                 currentScreenOpen = Navigation_Lander;
                 break;
             case Screens.Navigation_Rover_Confirm:
+                Navigation_Rover_Confirm.SetActive(true);
                 currentScreenOpen = Navigation_Rover_Confirm;
                 break;
             case Screens.Navigation_Waypoint_Confirm:
+                Navigation_Waypoint_Confirm.SetActive(true);
                 currentScreenOpen = Navigation_Waypoint_Confirm;
                 break;
             case Screens.TaskList:
+                Home.SetActive(true);
                 currentScreenOpen = Navigation_Rover_Confirm;
                 break;
             case Screens.TaskList_CurrentTask:
-                currentScreenOpen = Navigation_Rover_Confirm;
+                TaskList_CurrentTask.SetActive(true);
+                currentScreenOpen = TaskList_CurrentTask;
                 break;
             default:
                 Debug.Log("No screen matched");
                 break;
         }
 
-        Debug.Log(pastScreenOpen);
-        pastScreenOpen.SetActive(false);
-        currentScreenOpen.SetActive(true);
+        
+        // pastScreenOpen.SetActive(false);
+        pastScreenOpen = currentScreenOpen;
     }
 }
