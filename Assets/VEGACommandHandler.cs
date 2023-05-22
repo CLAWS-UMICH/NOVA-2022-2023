@@ -138,11 +138,11 @@ public class VEGACommandHandler : MonoBehaviour
             else if(String.Equals(words[1],"vitals")){
                 if(String.Equals(words[2],"open")){
                     //open vitals
-                    vitals.SetActive(true);
+                    vitals.GetComponent<VitalsManager>().OpenVitals();
                 }
                 else if(String.Equals(words[2],"close")){
                     //close vitals
-                    vitals.SetActive(false);
+                    vitals.GetComponent<VitalsManager>().CloseVitals();
                 }
             }
             else if(String.Equals(words[1],"menu")){
@@ -206,22 +206,22 @@ public class VEGACommandHandler : MonoBehaviour
                 else if(String.Equals(words[2],"cancel_photo")){
                     geosample.GetComponent<GeoSampleVegaController>().cancel_photo();
                 }
-                else if(String.Equals(words[2],"exit_note")){
-                    geosample.GetComponent<GeoSampleVegaController>().DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().closed();
-                }
+                // else if(String.Equals(words[2],"exit_note")){
+                //     geosample.GetComponent<GeoSampleVegaController>().DescriptionController.GetComponent<GeoSampleDescriptionMenuController>().closed();
+                // }
             }
             else if(String.Equals(words[1],"all")){
                 if(String.Equals(words[2],"open")){
                     navigation.GetComponent<NavScreenController>().OpenNavMainMenu();
-                    task_list.SetActive(true);
-                    vitals.SetActive(true);
+                    task_list.GetComponent<TaskCollapse>().OpenTask();
+                    vitals.GetComponent<VitalsManager>().OpenVitals();
                     geosample.GetComponent<GeoSampleVegaController>().open();
 
                 }
                 else if(String.Equals(words[2],"close")){
                     navigation.GetComponent<NavScreenController>().CloseAll();
-                    task_list.SetActive(false);
-                    vitals.SetActive(false);
+                    task_list.GetComponent<TaskListController>().CloseTasks();
+                    vitals.GetComponent<VitalsManager>().CloseVitals();
                     geosample.GetComponent<GeoSampleVegaController>().close();
                 }
             }
