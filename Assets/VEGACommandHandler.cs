@@ -91,10 +91,10 @@ public class VEGACommandHandler : MonoBehaviour
                     navigation.GetComponent<NavScreenController>().RecallRover();
                 }
                 else if(String.Equals(words[2],"backtracking_on")){
-                    Breadcrumbs.SetBacktrackingMode(true);
+                    Breadcrumbs.SetBackTrackingModeOn();
                 }
                 else if(String.Equals(words[2],"backtracking_off")){
-                    Breadcrumbs.SetBacktrackingMode(false);
+                    Breadcrumbs.SetBacktrackingModeOff();
                 }
                 else if(String.Equals(words[2],"cancel_navigation")){
                     navigation.GetComponent<NavScreenController>().EndNavigation();

@@ -78,9 +78,14 @@ public class Breadcrumbs : MonoBehaviour
         
     }
 
-    static public void SetBacktrackingMode(bool toggle)
+    static public void SetBacktrackingModeOff()
     {
-        backtracingMode = toggle;
+        backtracingMode = false;
+    }
+
+    static public void SetBackTrackingModeOn()
+    {
+        backtracingMode = true;
     }
 }
 
