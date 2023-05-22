@@ -84,7 +84,11 @@ public class UIEgressControl : MonoBehaviour
         EventBus.Subscribe<UIAMsgEvent>(UIA_Updated);
         EventBus.Subscribe<UIACompleteEvent>(UIA_Complete);
         UIA_Updated(new UIAMsgEvent());
+        gameObject.SetActive(false);
+    }
 
+    private void OnEnable()
+    {
         StartCoroutine(WaitForStep0());
     }
 
