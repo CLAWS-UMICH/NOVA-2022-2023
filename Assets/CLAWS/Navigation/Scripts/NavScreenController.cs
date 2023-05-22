@@ -1350,7 +1350,8 @@ public class NavScreenController : MonoBehaviour
         while (!roverThere && !recalled)
         {
             yield return new WaitForSeconds(1f);
-            roverObject.transform.position = roverObject.transform.position; // Update where it is from NASA TSS
+            GPSCoords coords = new GPSCoords(Simulation.User.ROVER.lat, Simulation.User.ROVER.lon);
+            roverObject.transform.position = GPSUtils.GPSCoordsToAppPosition(coords);
             updateRoverProgress(totalDis);
         }
     }

@@ -14,8 +14,8 @@ public class FakeTSSMessageSender : MonoBehaviour
     {
         Fake_SetUIA();
 
-        StartCoroutine(FakeVitals());
-        StartCoroutine(FakeVitals2());
+        // StartCoroutine(FakeVitals());
+        // StartCoroutine(FakeVitals2());
     }
     [ContextMenu("SetUIA")]
     public void Fake_SetUIA()
