@@ -38,7 +38,7 @@ public class TaskCollapse : MonoBehaviour
         StartCoroutine(OpenChildren(expanded));
         StartCoroutine(OpenChildren(cb));
         StartCoroutine(OpenChildren(line));
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.TaskList, LUNAState.right));
     }
 
     public void forward()
