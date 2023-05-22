@@ -1184,6 +1184,7 @@ public class NavScreenController : MonoBehaviour
             {
                 Debug.Log(uiScriptButton.GetLetter());
                 uiScriptButton.ButtonSelected();
+                uiScriptButton.ButtonClicked();
                 break;
             }
         }
