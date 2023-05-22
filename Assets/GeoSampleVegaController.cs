@@ -281,9 +281,6 @@ public class GeoSampleVegaController : MonoBehaviour
         ExpandedListController.SetActive(false);
         DescriptionController.SetActive(false);
         GalleryController.SetActive(false);
-        GalleryCameraView.SetActive(false);
-        GalleryConfirmationView.SetActive(false);
-        GalleryView.SetActive(false);
     }
     [ContextMenu("CloseCenter")] 
     public void closeCenter() {
@@ -292,9 +289,6 @@ public class GeoSampleVegaController : MonoBehaviour
         ExpandedListController.SetActive(false);
         DescriptionController.SetActive(false);
         GalleryController.SetActive(false);
-        GalleryCameraView.SetActive(false);
-        GalleryConfirmationView.SetActive(false);
-        GalleryView.SetActive(false);
     }
     [ContextMenu("Back")] 
     public void back() {
