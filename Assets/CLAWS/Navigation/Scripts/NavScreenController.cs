@@ -95,8 +95,9 @@ public class NavScreenController : MonoBehaviour
 
     void Start()
     {
-        EventBus.Subscribe<ScrollEvent>(ScrollProperScreen);
+        //EventBus.Subscribe<ScrollEvent>(ScrollProperScreen);
         EventBus.Subscribe<CloseEvent>(CloseNavigation);
+        EventBus.Subscribe<ScrollEvent>(ScrollManager);
 
         roverObjectStartLocation = roverObject;
         titleLetter = "";
@@ -136,6 +137,34 @@ public class NavScreenController : MonoBehaviour
         }
 
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+    }
+
+    private void ScrollManager(ScrollEvent e)
+    {
+        if (e.direction == Direction.up) 
+        {
+            if (e.screen == Screens.Navigation_Mission)
+            {
+                ScrollUpMission();
+            }
+
+            if (e.screen == Screens.Navigation_Rover)
+            {
+                ScrollUp();
+            }
+        }
+        else if (e.direction == Direction.down)
+        {
+            if (e.screen == Screens.Navigation_Mission)
+            {
+                ScrollDownMission();
+            }
+
+            if (e.screen == Screens.Navigation_Rover)
+            {
+                ScrollDown();
+            }
+        }
     }
 
     public void CloseAll()
@@ -472,8 +501,9 @@ public class NavScreenController : MonoBehaviour
 
     int firstMessageM = 0; // Keeps track of the top option in our gridCollections
 
-    /*
-    public void ScrollDown()
+    
+    // Scrolls Rover Up
+    public void ScrollUp()
     {
         Debug.Log(roverButtons.Count);
         GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
@@ -494,10 +524,10 @@ public class NavScreenController : MonoBehaviour
 
 
     }
-    */
+    
 
-    /*
-    public void ScrollDownMission()
+    // Scrolls Mission Up
+    public void ScrollUpMission()
     {
         Debug.Log(missionButtons.Count);
         GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
@@ -519,10 +549,10 @@ public class NavScreenController : MonoBehaviour
 
 
     }
-    */
+    
 
-    /*
-    public void ScrollUp()
+    // Scroll Rover Down
+    public void ScrollDown()
     {
         GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
 
@@ -539,11 +569,33 @@ public class NavScreenController : MonoBehaviour
 
 
     }
-    */
+
+
+    // Scroll Down Mission
+    public void ScrollDownMission()
+    {
+        GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
+
+
+        int len = missionButtons.Count;
+        if (firstMessageM + 5 < len && firstMessageM >= 0)
+        {
+            Debug.Log("firstMessage: " + firstMessageM);
+            missionButtons[firstMessageM].SetActive(false);
+            missionButtons[firstMessageM + 5].SetActive(true);
+            firstMessageM++;
+            missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+            StartCoroutine(updateCollection(missionButton));
+        }
+
+    }
+
 
 
     // ================== NEW SCROLL EVENT METHODS ==========================
     // Added the ability to respond to ScrollEvents to move the navigation lists
+
+    /*
     private void ScrollProperScreen(ScrollEvent e)
     {
         
@@ -690,7 +742,7 @@ public class NavScreenController : MonoBehaviour
     }
     
     // =======================================================================
-
+    */
 
 
     IEnumerator updateCollection(GameObject buttonType)
@@ -699,25 +751,8 @@ public class NavScreenController : MonoBehaviour
         buttonType.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
-    /*
-    public void ScrollUpMission()
-    {
-        GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
-
-
-        int len = missionButtons.Count;
-        if (firstMessageM + 5 < len && firstMessageM >= 0)
-        {
-            Debug.Log("firstMessage: " + firstMessageM);
-            missionButtons[firstMessageM].SetActive(false);
-            missionButtons[firstMessageM + 5].SetActive(true);
-            firstMessageM++;
-            missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
-            StartCoroutine(updateCollection(missionButton));
-        }
-
-    }
-    */
+   
+    
 
     public void OpenGeoConfirmationScreenTest()
     {
