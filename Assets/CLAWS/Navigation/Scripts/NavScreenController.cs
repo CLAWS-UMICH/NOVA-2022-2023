@@ -38,7 +38,8 @@ public class NavScreenController : MonoBehaviour
 
     // Predetermed Objects
     [SerializeField] GameObject landerObject;
-    [SerializeField] GameObject crewObject;
+    [SerializeField] GameObject janeObject;
+    [SerializeField] GameObject neilObject;
     [SerializeField] GameObject missionA;
     [SerializeField] GameObject missionB;
     [SerializeField] GameObject missionC;
@@ -470,10 +471,16 @@ public class NavScreenController : MonoBehaviour
 
 
 
-        Waypoint newCrew = new Waypoint(crewObject.transform, "Patrick", (Type)System.Enum.Parse(typeof(Type), "crew"));
-        crewObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
+        Waypoint newCrew = new Waypoint(janeObject.transform, "Jane", (Type)System.Enum.Parse(typeof(Type), "crew"));
+        janeObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew.GetLetter();
         crewList.Add(newCrew);
         allWaypoints.Add(newCrew);
+
+        Waypoint newCrew2 = new Waypoint(neilObject.transform, "Neil", (Type)System.Enum.Parse(typeof(Type), "crew"));
+        neilObject.transform.Find("Letter/LetterText").GetComponent<TextMeshPro>().text = newCrew2.GetLetter();
+        
+        crewList.Add(newCrew2);
+        allWaypoints.Add(newCrew2);
 
     }
 
@@ -1104,9 +1111,14 @@ public class NavScreenController : MonoBehaviour
     }
 
 
-    public void CrewTestNav()
+    public void CrewTestNavJane()
     {
-        updateCurrentEnd(crewObject.transform, "Patrick J", "");
+        updateCurrentEnd(janeObject.transform, "Jane J", "");
+    }
+
+    public void CrewTestNavNeil()
+    {
+        updateCurrentEnd(neilObject.transform, "Neil K", "");
     }
 
     public void LanderTestNav()
