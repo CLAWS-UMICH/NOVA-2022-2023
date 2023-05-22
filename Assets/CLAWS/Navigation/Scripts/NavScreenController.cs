@@ -134,16 +134,18 @@ public class NavScreenController : MonoBehaviour
             CloseAll();
             
         }
+
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     public void CloseAll()
     {
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
         playerWithinDistance = false;
         currentScreenOpen = "";
         currentEndPosition = null;
         StartCoroutine(_CloseScreen());
         SetAllCullingToCamera();
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     IEnumerator _CloseScreen()
@@ -958,6 +960,7 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         waypointConfirmationScreen.SetActive(false);
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     public void CloseConfirmation()
@@ -1176,17 +1179,18 @@ public class NavScreenController : MonoBehaviour
 
     IEnumerator OpenRoverNavScreen()
     {
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
         yield return new WaitForSeconds(1f);
         roverNavScreen.SetActive(true);
         yield return new WaitForSeconds(6.9f);
         roverNavScreen.SetActive(false);
         roverSmallScreen.SetActive(true);
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     public void OpenRoverNavScreenFromMenu()
     {
         StartCoroutine(OpenRoverNavScreen());
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
 
     }
     Transform roverEndLocation = null;
@@ -1250,7 +1254,6 @@ public class NavScreenController : MonoBehaviour
 
             //.GetComponent<TSSConnection>().SendRoverNavigateCommand((float)startLat, (float)startLong);
             telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverNavigateCommand((float)startLat, (float)startLong);
-            Debug.Log("Start ROver Navigation");
             
             _updateRoverObjectCoords();
             updateRoverLocation();
@@ -1342,6 +1345,7 @@ public class NavScreenController : MonoBehaviour
     public void closeRoverConfirm ()
     {
         StartCoroutine(_closeRoverScreen());
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     IEnumerator _closeRoverScreen()

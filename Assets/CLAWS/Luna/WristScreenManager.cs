@@ -40,7 +40,7 @@ public class WristScreenManager : MonoBehaviour
     {
         GameObject currentScreenOpen = Home;
         GameObject pastScreenOpen = null;
-        EventBus.Subscribe<ScreenChangedEvent>(ChangeWristScreen);
+        //EventBus.Subscribe<ScreenChangedEvent>(ChangeWristScreen);
 
         Home = transform.Find("Home").gameObject;
 
@@ -54,9 +54,9 @@ public class WristScreenManager : MonoBehaviour
         Geosample_Confirm = transform.Find("Geosample_Confirm").gameObject;
 
         Messaging = transform.Find("Messaging").gameObject;
-        Messaging_MCC = transform.Find("Messaging_MCC").gameObject;
-        Messaging_Jane = transform.Find("Messaging_Jane").gameObject;
-        Messaging_Neil = transform.Find("Messaging_Neil").gameObject;
+        Messaging_MCC = transform.Find("Messaging_Chat").gameObject;
+        //Messaging_Jane = transform.Find("Messaging_Chat").gameObject;
+        //Messaging_Neil = transform.Find("Messaging_Chat").gameObject;
 
         Navigation = transform.Find("Navigation").gameObject;
         Navigation_Crew = transform.Find("Navigation_Crew").gameObject;
@@ -148,6 +148,7 @@ public class WristScreenManager : MonoBehaviour
                 break;
         }
 
+        Debug.Log(pastScreenOpen);
         pastScreenOpen.SetActive(false);
         currentScreenOpen.SetActive(true);
     }
