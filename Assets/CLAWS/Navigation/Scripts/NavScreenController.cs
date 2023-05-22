@@ -95,8 +95,9 @@ public class NavScreenController : MonoBehaviour
 
     void Start()
     {
-        EventBus.Subscribe<ScrollEvent>(ScrollProperScreen);
+        //EventBus.Subscribe<ScrollEvent>(ScrollProperScreen);
         EventBus.Subscribe<CloseEvent>(CloseNavigation);
+        EventBus.Subscribe<ScrollEvent>(ScrollManager);
 
         roverObjectStartLocation = roverObject;
         titleLetter = "";
@@ -134,16 +135,46 @@ public class NavScreenController : MonoBehaviour
             CloseAll();
             
         }
+
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+    }
+
+    private void ScrollManager(ScrollEvent e)
+    {
+        if (e.direction == Direction.up) 
+        {
+            if (e.screen == Screens.Navigation_Mission)
+            {
+                ScrollUpMission();
+            }
+
+            if (e.screen == Screens.Navigation_Rover)
+            {
+                ScrollUp();
+            }
+        }
+        else if (e.direction == Direction.down)
+        {
+            if (e.screen == Screens.Navigation_Mission)
+            {
+                ScrollDownMission();
+            }
+
+            if (e.screen == Screens.Navigation_Rover)
+            {
+                ScrollDown();
+            }
+        }
     }
 
     public void CloseAll()
     {
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
         playerWithinDistance = false;
         currentScreenOpen = "";
         currentEndPosition = null;
         StartCoroutine(_CloseScreen());
         SetAllCullingToCamera();
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     IEnumerator _CloseScreen()
@@ -470,8 +501,9 @@ public class NavScreenController : MonoBehaviour
 
     int firstMessageM = 0; // Keeps track of the top option in our gridCollections
 
-    /*
-    public void ScrollDown()
+    
+    // Scrolls Rover Up
+    public void ScrollUp()
     {
         Debug.Log(roverButtons.Count);
         GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
@@ -492,10 +524,10 @@ public class NavScreenController : MonoBehaviour
 
 
     }
-    */
+    
 
-    /*
-    public void ScrollDownMission()
+    // Scrolls Mission Up
+    public void ScrollUpMission()
     {
         Debug.Log(missionButtons.Count);
         GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
@@ -517,10 +549,10 @@ public class NavScreenController : MonoBehaviour
 
 
     }
-    */
+    
 
-    /*
-    public void ScrollUp()
+    // Scroll Rover Down
+    public void ScrollDown()
     {
         GameObject roverButton = roverScreen.transform.Find("ButtonStuff").gameObject;
 
@@ -537,11 +569,33 @@ public class NavScreenController : MonoBehaviour
 
 
     }
-    */
+
+
+    // Scroll Down Mission
+    public void ScrollDownMission()
+    {
+        GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
+
+
+        int len = missionButtons.Count;
+        if (firstMessageM + 5 < len && firstMessageM >= 0)
+        {
+            Debug.Log("firstMessage: " + firstMessageM);
+            missionButtons[firstMessageM].SetActive(false);
+            missionButtons[firstMessageM + 5].SetActive(true);
+            firstMessageM++;
+            missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
+            StartCoroutine(updateCollection(missionButton));
+        }
+
+    }
+
 
 
     // ================== NEW SCROLL EVENT METHODS ==========================
     // Added the ability to respond to ScrollEvents to move the navigation lists
+
+    /*
     private void ScrollProperScreen(ScrollEvent e)
     {
         
@@ -688,7 +742,7 @@ public class NavScreenController : MonoBehaviour
     }
     
     // =======================================================================
-
+    */
 
 
     IEnumerator updateCollection(GameObject buttonType)
@@ -697,25 +751,8 @@ public class NavScreenController : MonoBehaviour
         buttonType.GetComponent<GridObjectCollection>().UpdateCollection();
     }
 
-    /*
-    public void ScrollUpMission()
-    {
-        GameObject missionButton = missionScreen.transform.Find("ButtonStuffMission").gameObject;
-
-
-        int len = missionButtons.Count;
-        if (firstMessageM + 5 < len && firstMessageM >= 0)
-        {
-            Debug.Log("firstMessage: " + firstMessageM);
-            missionButtons[firstMessageM].SetActive(false);
-            missionButtons[firstMessageM + 5].SetActive(true);
-            firstMessageM++;
-            missionButton.GetComponent<GridObjectCollection>().UpdateCollection();
-            StartCoroutine(updateCollection(missionButton));
-        }
-
-    }
-    */
+   
+    
 
     public void OpenGeoConfirmationScreenTest()
     {
@@ -958,6 +995,7 @@ public class NavScreenController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         waypointConfirmationScreen.SetActive(false);
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     public void CloseConfirmation()
@@ -1176,16 +1214,29 @@ public class NavScreenController : MonoBehaviour
 
     IEnumerator OpenRoverNavScreen()
     {
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
         yield return new WaitForSeconds(1f);
         roverNavScreen.SetActive(true);
         yield return new WaitForSeconds(6.9f);
-        roverNavScreen.SetActive(false);
-        roverSmallScreen.SetActive(true);
+
+        if (!recalled)
+        {
+            roverNavScreen.SetActive(false);
+            roverSmallScreen.SetActive(true);
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
+        }
+    }
+
+    IEnumerator RoverFromMenu()
+    {
+        yield return new WaitForSeconds(1f);
+        roverNavScreen.SetActive(true);
+        roverSmallScreen.SetActive(false);
     }
 
     public void OpenRoverNavScreenFromMenu()
     {
-        StartCoroutine(OpenRoverNavScreen());
+        StartCoroutine(RoverFromMenu());
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
 
     }
@@ -1250,7 +1301,6 @@ public class NavScreenController : MonoBehaviour
 
             //.GetComponent<TSSConnection>().SendRoverNavigateCommand((float)startLat, (float)startLong);
             telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverNavigateCommand((float)startLat, (float)startLong);
-            Debug.Log("Start ROver Navigation");
             
             _updateRoverObjectCoords();
             updateRoverLocation();
@@ -1336,12 +1386,14 @@ public class NavScreenController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         roverSmallScreen.SetActive(false);
         roverNavScreen.SetActive(true);
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Navigation_Rover_Confirm, LUNAState.center));
 
     }
 
     public void closeRoverConfirm ()
     {
         StartCoroutine(_closeRoverScreen());
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.center));
     }
 
     IEnumerator _closeRoverScreen()
