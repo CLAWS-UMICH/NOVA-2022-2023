@@ -1067,8 +1067,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coords:
-    latitude: 29.565099415469398
-    longitude: -95.08082370977012
+    latitude: 29.564551
+    longitude: -95.081023
 --- !u!1 &1994062287995809008
 GameObject:
   m_ObjectHideFlags: 0
