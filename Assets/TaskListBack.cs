@@ -16,6 +16,7 @@ public class TaskListBack : MonoBehaviour
         if (e.screen == Screens.TaskList_CurrentTask)
         {
             taskcollapse.Toggle();
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
         }
     }
 }

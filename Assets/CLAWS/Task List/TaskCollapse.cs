@@ -38,6 +38,15 @@ public class TaskCollapse : MonoBehaviour
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
     }
 
+    void Callback_forward()
+    {
+        if (e.screen == Screens.TaskList_CurrentTask)
+        {
+            taskcollapse.Toggle();
+            EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.TaskList, LUNAState.right));
+        }
+    }
+
     IEnumerator OpenChildren(GameObject Screen)
     {
         yield return new WaitForSeconds(1f);
