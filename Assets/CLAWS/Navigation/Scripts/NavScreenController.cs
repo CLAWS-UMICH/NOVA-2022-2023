@@ -671,14 +671,20 @@ public class NavScreenController : MonoBehaviour
     // Debug methods to simulate events getting sent
     public void RaiseScrollEventUp()
     {
+
+        // TODO fix please samuel
+
         Debug.Log("Scroll current screen up");
-       ScrollProperScreen(new ScrollEvent(StateMachineNOVA.CurrScreen, Direction.up));
+       // ScrollProperScreen(new ScrollEvent(StateMachineNOVA.CurrScreen, Direction.up));
     }
 
     public void RaiseScrollEventDown()
     {
+
+        // TODO fix please samuel
+
         Debug.Log("Scroll current screen down");
-       ScrollProperScreen(new ScrollEvent(StateMachineNOVA.CurrScreen, Direction.down));
+       // ScrollProperScreen(new ScrollEvent(StateMachineNOVA.CurrScreen, Direction.down));
     }
     
     // =======================================================================
