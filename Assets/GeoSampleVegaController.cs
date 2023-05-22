@@ -312,12 +312,6 @@ public class GeoSampleVegaController : MonoBehaviour
     [ContextMenu("Open")]
     public void open()
     {
-        if (currentFocus != "none")
-        {
-            //vega error sound
-            Debug.Log("cannot perform this command");
-            return;
-        }
         updateCurrentFocus("list");
         ListController.SetActive(true);
     }
