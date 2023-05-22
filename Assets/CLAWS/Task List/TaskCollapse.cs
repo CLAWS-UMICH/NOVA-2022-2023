@@ -7,6 +7,8 @@ public class TaskCollapse : MonoBehaviour
 {
     public GameObject expanded;
     public GameObject taskView;
+    public GameObject cb;
+    public GameObject line;
     public TaskListController controller;
 
     private void Start()
@@ -20,11 +22,25 @@ public class TaskCollapse : MonoBehaviour
         StartCoroutine(ToggleCoroutine());
     }
 
+
     IEnumerator ToggleCoroutine()
     {
         yield return new WaitForSeconds(1f);
         expanded.SetActive(!expanded.activeSelf);
         taskView.SetActive(!taskView.activeSelf);
         controller.refresh();
+    }
+
+    public void OpenTask(){
+        StartCoroutine(OpenChildren(expanded));
+        StartCoroutine(OpenChildren(cb));
+        StartCoroutine(OpenChildren(line));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
+    }
+
+    IEnumerator OpenChildren(GameObject Screen)
+    {
+        yield return new WaitForSeconds(1f);
+        Screen.SetActive(true);
     }
 }
