@@ -105,7 +105,7 @@ public class StateMachineNOVA : MonoBehaviour
         }
         else if (LUNA == LUNAState.left)
         {
-            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.Navigation, Direction.up));
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.Geosampling, Direction.up));
         }
 
     }
@@ -123,7 +123,7 @@ public class StateMachineNOVA : MonoBehaviour
         }
         else if (LUNA == LUNAState.left)
         {
-            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.Navigation, Direction.down));
+            EventBus.Publish<ScrollEvent>(new ScrollEvent(Screens.Geosampling, Direction.down));
         }
     }
     
