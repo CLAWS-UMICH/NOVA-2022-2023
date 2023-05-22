@@ -11,10 +11,13 @@ public class TaskCollapse : MonoBehaviour
     public GameObject line;
     public TaskListController controller;
 
+    public Screens state;
+
     private void Start()
     {
         taskView.SetActive(false);
         expanded.SetActive(true);
+        state = Screens.TaskList;
     }
 
     public void Toggle()
@@ -35,7 +38,21 @@ public class TaskCollapse : MonoBehaviour
         StartCoroutine(OpenChildren(expanded));
         StartCoroutine(OpenChildren(cb));
         StartCoroutine(OpenChildren(line));
-        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.TaskList, LUNAState.right));
+    }
+
+    public void forward()
+    {
+        Toggle();
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.TaskList_CurrentTask, LUNAState.right));
+        state = Screens.TaskList_CurrentTask;
+    }
+
+    public void backward()
+    {
+        Toggle();
+        EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.TaskList, LUNAState.right));
+        state = Screens.TaskList;
     }
 
     IEnumerator OpenChildren(GameObject Screen)

@@ -102,10 +102,10 @@ public class VEGACommandHandler : MonoBehaviour
             }
             else if(String.Equals(words[1],"messaging")){
                 if(String.Equals(words[2],"open")){
-                    messaging.SetActive(true);
+                    messaging.GetComponent<MessagingNewHandler>().OpenMessaging();
                 }
                 else if(String.Equals(words[2],"close")){
-                    messaging.SetActive(false);
+                    messaging.GetComponent<MessagingNewHandler>().CloseMessaging();
                 }
                 else if(String.Equals(words[2],"sender_open")){
                     string[] tmp = e.output.Split(':');
@@ -128,11 +128,11 @@ public class VEGACommandHandler : MonoBehaviour
             else if(String.Equals(words[1],"task_list")){
                 if(String.Equals(words[2],"open")){
                     //open task_list
-                    task_list.SetActive(true);
+                    task_list.GetComponent<TaskCollapse>().OpenTask();
                 }
                 else if(String.Equals(words[2],"close")){
                     //close task_list
-                    task_list.SetActive(false);
+                    task_list.GetComponent<TaskListController>().CloseTasks();
                 }
             }
             else if(String.Equals(words[1],"vitals")){

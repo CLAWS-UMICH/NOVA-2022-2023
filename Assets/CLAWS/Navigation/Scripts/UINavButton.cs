@@ -32,6 +32,7 @@ public class UINavButton : MonoBehaviour
 
     public void ButtonSelected()
     {
+        Debug.Log("test");
         lightBlueBorder.SetActive(true);
         navScreenController.turnOffPastButtonLightBlue();
         navScreenController.updateCurrentSelectedButton(lightBlueBorder, titleOfObject, letterOfObject);

@@ -207,6 +207,13 @@ public class BackEvent
     }
 }
 
+public class LUNARightEvent
+{
+    public LUNARightEvent()
+    {
+    }
+}
+
 public class ScreenChangedEvent 
 {
     public Screens screen; // Screens.Home, Screens.etc

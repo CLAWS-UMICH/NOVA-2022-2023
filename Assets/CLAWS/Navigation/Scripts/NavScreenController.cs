@@ -1184,6 +1184,7 @@ public class NavScreenController : MonoBehaviour
             {
                 Debug.Log(uiScriptButton.GetLetter());
                 uiScriptButton.ButtonSelected();
+                uiScriptButton.ButtonClicked();
                 break;
             }
         }
@@ -1382,15 +1383,18 @@ public class NavScreenController : MonoBehaviour
 
     public void RecallRover()
     {
-        recalled = true;
+        if (!recalled)
+        {
+            recalled = true;
 
-        // GIVE TO NASA
-        // Give this position to bring rover back to beginning
-        // roverObjectStartLocation.transform.position;
-        telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverRecallCommand();
+            // GIVE TO NASA
+            // Give this position to bring rover back to beginning
+            // roverObjectStartLocation.transform.position;
+            telemMan.GetComponent<TelemetryServerManager>().tss.SendRoverRecallCommand();
 
-        // Turn off 
-        StartCoroutine(_recallRover());
+            // Turn off 
+            StartCoroutine(_recallRover());
+        }
     }
 
     IEnumerator _recallRover()
