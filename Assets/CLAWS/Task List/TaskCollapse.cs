@@ -7,6 +7,8 @@ public class TaskCollapse : MonoBehaviour
 {
     public GameObject expanded;
     public GameObject taskView;
+    public GameObject cb;
+    public GameObject line;
     public TaskListController controller;
 
     private void Start()
@@ -31,6 +33,8 @@ public class TaskCollapse : MonoBehaviour
 
     public void OpenTask(){
         StartCoroutine(OpenChildren(expanded));
+        StartCoroutine(OpenChildren(cb));
+        StartCoroutine(OpenChildren(line));
         EventBus.Publish<ScreenChangedEvent>(new ScreenChangedEvent(Screens.Home, LUNAState.right));
     }
 
