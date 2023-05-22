@@ -25,6 +25,7 @@ public class GeoSampleVegaController : MonoBehaviour
     //Keep track of whats in focus
     // "list", "expand", "description", "gallery", "none",
     // gallery - "confirm", "camera"
+    [SerializeField]
     string currentFocus = "list";
     //Serialized Objects- ListController, ExpandedListController, DescriptionController, Gallery, NotOpen
 
@@ -237,17 +238,18 @@ public class GeoSampleVegaController : MonoBehaviour
                 updateCurrentFocus("list");
                 ListController.SetActive(true);
                 DescriptionController.SetActive(false);
+                return;
             }
             else {
                 updateCurrentFocus("expand");
                 ExpandedListController.SetActive(true);
                 DescriptionController.SetActive(false);
+                return;
             }
-            return;
         }
         if (currentFocus == "gallery") {
             updateCurrentFocus("description");
-            GalleryCameraView.SetActive(false);
+            GalleryController.SetActive(false);
             DescriptionController.SetActive(true);
             return;
         }
@@ -289,7 +291,7 @@ public class GeoSampleVegaController : MonoBehaviour
         }
         if (currentFocus == "gallery") {
             updateCurrentFocus("description");
-            GalleryCameraView.SetActive(false);
+            GalleryController.SetActive(false);
             DescriptionController.SetActive(true);
             return;
         }
@@ -450,5 +452,16 @@ public class GeoSampleVegaController : MonoBehaviour
         GalleryView.SetActive(true);
         GalleryCameraView.SetActive(false);
         GalleryConfirmationView.SetActive(false);
+    }
+    IEnumerator CloseChildren(GameObject child)
+    {
+        yield return new WaitForSeconds(1f);
+        child.SetActive(false);
+    }
+
+    IEnumerator OpenChildren(GameObject child)
+    {
+        yield return new WaitForSeconds(1f);
+        child.SetActive(true);
     }
 }

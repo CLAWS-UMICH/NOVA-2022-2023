@@ -47,7 +47,7 @@ public class StateMachineNOVA : MonoBehaviour
     // Start is called before the first frame update
     public LUNAFOVManager lunafov;
     public Screens CurrScreen = Screens.Home;
-    public LUNAState LUNA = LUNAState.center;
+    public static LUNAState LUNA = LUNAState.center;
 
     
     private void Start()
@@ -82,7 +82,6 @@ public class StateMachineNOVA : MonoBehaviour
     public void CloseScreen()
     {
         EventBus.Publish<CloseEvent>(new CloseEvent(CurrScreen));
-        CurrScreen = Screens.Home;
     }
 
     [ContextMenu("Back")]

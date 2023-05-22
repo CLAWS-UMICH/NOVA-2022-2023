@@ -87,245 +87,63 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Create danger waypoint
+    keyword: LUNA Turn on Lights
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Create geosample waypoint
+    keyword: LUNA Turn off Lights
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Create regular
+    keyword: LUNA Left
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Create mission waypoint
+    keyword: LUNA Right
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Display crew
+    keyword: LUNA Center
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Display geosampling
+    keyword: Set Title
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Display lander
-    keyCode: 0
+    keyword: Set Preset GPS
+    keyCode: 46
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Dispay mission
-    keyCode: 0
+    keyword: Egress Skip
+    keyCode: 27
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Display rover
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Egress next
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Egress skip
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Expand
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Eyegaze off
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Eyegaze on
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Hey vega
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Luna center
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Luna fix
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Luna follow
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Luna left
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Luna right
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Message jane
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Message mcc
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Message neil
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Minimize
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Negative
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: New chat
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open geosampling
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open messaging
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open navigation
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open pictures
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open sample 1
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open sample 2
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open sample 3
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open task list
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Open vitals
+    keyword: Start Egress Procedure
     keyCode: 0
     action:
       id: 0
@@ -339,252 +157,42 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Recall
+    keyword: Teleport North
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Recall rover
+    keyword: Teleport South
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Retake
+    keyword: Teleport East
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Retry
+    keyword: Teleport West
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Retry picture
+    keyword: Scroll Up
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Scroll down
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Scroll left
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Scroll right
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Scroll up
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select A
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select B
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select C
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select D
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select E
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select F
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select G
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select H
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select I
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select J
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Select K
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Set latitude
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Set longitude
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Set preset GPS
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Set title
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Show full list
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Snap photo
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Start backtracking
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Start egress procedure
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Start navigation
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Stop backtracking
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Teleport east
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Teleport north
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Teleport south
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Teleport west
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Test command
-    keyCode: 0
-    action:
-      id: 0
-      description: 
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Write description
+    keyword: Scroll Down
     keyCode: 0
     action:
       id: 0
