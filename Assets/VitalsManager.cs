@@ -76,7 +76,11 @@ public class VitalsManager : MonoBehaviour
     {
         if (e.screen != Screens.Vitals && e.luna == LUNAState.center)
         {
-            CloseVitals();
+            foreach (GameObject g in close_screens)
+            {
+                StartCoroutine(closeAfterDelay(g));
+            }
+            is_opened = false;
         }
     }
 

@@ -12844,7 +12844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Take Photo
+  m_text: Enable Camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e151e019bada8bb46b8a95eb43a6d081, type: 2}
   m_sharedMaterial: {fileID: 8513880238676638203, guid: e151e019bada8bb46b8a95eb43a6d081, type: 2}
@@ -25885,7 +25885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Take Picture
+  m_text: Snap Picture
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e151e019bada8bb46b8a95eb43a6d081, type: 2}
   m_sharedMaterial: {fileID: 8513880238676638203, guid: e151e019bada8bb46b8a95eb43a6d081, type: 2}
