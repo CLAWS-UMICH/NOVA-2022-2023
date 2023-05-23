@@ -11,6 +11,7 @@ public class VitalsManager : MonoBehaviour
     {
         EventBus.Subscribe<CloseEvent>(Callback_closeVitals);
         EventBus.Subscribe<BackEvent>(Callback_backVitals);
+        EventBus.Subscribe<ScreenChangedEvent>(Callback_screenchanged);
         is_opened = false;
     }
 
@@ -24,7 +25,6 @@ public class VitalsManager : MonoBehaviour
         {
             CloseVitals();
         }
-        is_opened = !is_opened;
     }
 
     public void OpenVitals()
@@ -34,6 +34,7 @@ public class VitalsManager : MonoBehaviour
         {
             g.SetActive(true);
         }
+        is_opened = true;
     }
 
     public void CloseVitals()
@@ -43,6 +44,7 @@ public class VitalsManager : MonoBehaviour
         {
             StartCoroutine(closeAfterDelay(g));
         }
+        is_opened = false;
     }
 
     void Callback_closeVitals(CloseEvent e)
@@ -66,6 +68,15 @@ public class VitalsManager : MonoBehaviour
             {
                 g.SetActive(false);
             }
+        }
+    }
+
+
+    void Callback_screenchanged(ScreenChangedEvent e)
+    {
+        if (e.screen != Screens.Vitals && e.luna == LUNAState.center)
+        {
+            CloseVitals();
         }
     }
 

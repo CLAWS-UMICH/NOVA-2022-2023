@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCustomProfile: 1
   startBehavior: 0
-  recognitionConfidenceLevel: 1
+  recognitionConfidenceLevel: 2
   speechCommands:
   - localizationKey: 
     keyword: Affirmative
@@ -24,7 +24,7 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Back
+    keyword: Go back
     keyCode: 0
     action:
       id: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Close
+    keyword: Close screen
     keyCode: 0
     action:
       id: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Dispay mission
+    keyword: Dispay mission screen
     keyCode: 0
     action:
       id: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: New chat
+    keyword: Send message
     keyCode: 0
     action:
       id: 0
@@ -402,77 +402,77 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select A
+    keyword: Select Alpha
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select B
+    keyword: Select Bravo
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select C
+    keyword: Select Charlie
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select D
+    keyword: Select Delta
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select E
+    keyword: Select Echo
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select F
+    keyword: Select Foxtrot
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select G
+    keyword: Select Golf
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select H
+    keyword: Select Hotel
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select I
+    keyword: Select India
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select J
+    keyword: Select Juliet
     keyCode: 0
     action:
       id: 0
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Select K
+    keyword: Select Kilo
     keyCode: 0
     action:
       id: 0
@@ -507,7 +507,7 @@ MonoBehaviour:
       description: 
       axisConstraint: 0
   - localizationKey: 
-    keyword: Show full list
+    keyword: See current task
     keyCode: 0
     action:
       id: 0

@@ -19,6 +19,7 @@ public class MessagingNewHandler : MonoBehaviour
     public GameObject MccContents;
     public GameObject MccGrid;
     public GameObject ScrollManager;
+    public GameObject Chat;
     private IEnumerator reply;
 
     void Start()
@@ -84,6 +85,7 @@ public class MessagingNewHandler : MonoBehaviour
         else if(MccScreen.activeSelf){
             MccGrid.GetComponent<ScrollManager>().recordMessage();
         }
+        Chat.SetActive(true);
     }
 
     public void Jane(){

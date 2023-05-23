@@ -17255,6 +17255,7 @@ MonoBehaviour:
   cb: {fileID: 0}
   line: {fileID: 0}
   controller: {fileID: 0}
+  state: 0
 --- !u!114 &7760152626192096826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17613,7 +17614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Take Photo
+  m_text: Enable Camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
   m_sharedMaterial: {fileID: 21202819797275496, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
