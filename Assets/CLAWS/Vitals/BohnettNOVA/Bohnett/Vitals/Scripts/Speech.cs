@@ -1,3 +1,11 @@
+// Conditional Compilation : no speech services supported through webGL
+
+#if UNITY_WEBGL
+public class Speech : MonoBehaviour
+{
+}
+
+#else
 using UnityEngine;
 using UnityEngine.Windows.Speech;
 //using Microsoft.MixedReality.OpenXR
@@ -34,3 +42,4 @@ public class Speech : MonoBehaviour
         Debug.Log("Real - time update: " +text);
     }
 }
+#endif

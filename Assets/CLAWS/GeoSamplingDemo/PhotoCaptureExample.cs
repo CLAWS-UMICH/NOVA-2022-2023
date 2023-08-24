@@ -1,3 +1,52 @@
+// Conditional Compilation : no photo services supported through webGL
+
+#if UNITY_WEBGL
+using UnityEngine;
+
+[System.Serializable]
+public class PhotoCaptureExample : MonoBehaviour
+{
+    public List<GameObject> outputQuads;
+    public string sampleName = "GeoSample";
+
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material defaultConfirmMaterial;
+    [SerializeField] private GameObject existingProfileView;
+    [SerializeField] private GameObject confirmationQuad;
+    [SerializeField] private GameObject cameraView;
+    
+    public void LoadPhotos()
+    {
+    }
+    public void TakePhoto()
+    {
+    }
+    public void ConfirmPhoto()
+    {
+    }
+    public void nextPage()
+    {
+    }
+    public void prevPage()
+    {
+    }
+
+    // keep these for webgl
+    public void ClosePanel(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
+    public void OpenPanel(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
+    public void CloseOpenView(GameObject panel)
+    {
+        panel.SetActive(false);
+        existingProfileView.SetActive(true);
+    }
+}
+#else
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -180,3 +229,4 @@ public class PhotoCaptureExample : MonoBehaviour
         existingProfileView.SetActive(true);
     }
 }
+#endif
