@@ -9,6 +9,9 @@ using TMPro;
 
 public class SpeechManager : MonoBehaviour
 {
+
+    public bool speech = false;
+
     void onClick()
     {
     }
