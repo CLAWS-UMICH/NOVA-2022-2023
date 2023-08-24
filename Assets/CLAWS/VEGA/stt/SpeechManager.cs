@@ -12,6 +12,10 @@ public class SpeechManager : MonoBehaviour
     void onClick()
     {
     }
+
+    public string GetMessage(){
+        return "STT not supported on WebGL";
+    }
 }
 #else
 using UnityEngine;
