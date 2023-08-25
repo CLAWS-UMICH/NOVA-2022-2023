@@ -98,13 +98,13 @@ public class MessageHandler: MonoBehaviour
         #endif
     }
 
+#if !UNITY_WEBGL
     private void OnMessage(MessageEventArgs e)
     {
-        #if !UNITY_WEBGL 
         Debug.Log(e.Data);
-        Simulation.User.AstronautMessaging.messageQueue.Enqueue(e.Data);
-        #endif
+        Simulation.User.AstronautMessaging.messageQueue.Enqueue(e.Data); 
     }
+#endif
 
     private void HandleMessage(string messageType, string message)
     {
