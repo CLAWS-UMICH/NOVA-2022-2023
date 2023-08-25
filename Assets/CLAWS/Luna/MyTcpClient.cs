@@ -1,3 +1,5 @@
+#if UNITY_WEBGL
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -5,7 +7,60 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-#if !UNITY_EDITOR && !UNITY_WEBGL
+public class MyTcpClient : MonoBehaviour
+{
+
+    //String variable that will be sent to the server
+    [SerializeField]
+    public string clientMessage;
+
+    public void Start()
+    {
+    }
+
+    public void Connect(string host, string port)
+    {
+    }
+
+    private void ConnectUWP(string host, string port)
+    {
+    }
+
+    private void ConnectUnity(string host, string port)
+    {
+    }
+
+    public void Update()
+    {
+    }
+
+    public void ExchangePackets()
+    {
+    }
+
+    public void StopExchange()
+    {
+    }
+
+    public void OnDestroy()
+    {
+    }
+
+    public void ButtonPressed() 
+    {
+    }
+}
+
+#else
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading;
+using UnityEngine;
+
+#if !UNITY_EDITOR
 using System.Threading.Tasks;
 #endif
 
@@ -16,11 +71,13 @@ public class MyTcpClient : MonoBehaviour
     [SerializeField]
     public string clientMessage;
 
-#if !UNITY_EDITOR && !UNITY_WEBGL
+#if !UNITY_EDITOR
     private bool _useUWP = true;
     private Windows.Networking.Sockets.StreamSocket socket;
     private Task exchangeTask;
-#else
+#endif
+
+#if UNITY_EDITOR
     private bool _useUWP = false;
     System.Net.Sockets.TcpClient client;
     System.Net.Sockets.NetworkStream stream;
@@ -49,13 +106,13 @@ public class MyTcpClient : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR || UNITY_WEBGL
+#if UNITY_EDITOR
     private void ConnectUWP(string host, string port)
 #else
     private async void ConnectUWP(string host, string port)
 #endif
     {
-#if UNITY_EDITOR || UNITY_WEBGL
+#if UNITY_EDITOR
         errorStatus = "UWP TCP client used in Unity!";
 #else
         try
@@ -83,7 +140,7 @@ public class MyTcpClient : MonoBehaviour
 
     private void ConnectUnity(string host, string port)
     {
-#if !UNITY_EDITOR && !UNITY_WEBGL
+#if !UNITY_EDITOR
         errorStatus = "Unity TCP client used in UWP!";
 #else
         try
@@ -149,7 +206,7 @@ public class MyTcpClient : MonoBehaviour
         Debug.Log("Stopped Exchange");
         exchangeStopRequested = true;
 
-#if UNITY_EDITOR || UNITY_WEBGL
+#if UNITY_EDITOR
         if (exchangeThread != null)
         {
             exchangeThread.Abort();
@@ -187,3 +244,4 @@ public class MyTcpClient : MonoBehaviour
         Debug.Log("Button Pressed");
     }
 }
+#endif
