@@ -8,12 +8,16 @@ using System.Collections.Concurrent;
 using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TMPro;
+
+#if UNITY_WEBGL
 using WebSocketSharp;
 using WebSocketSharp.Server;
-using TMPro;
+#endif
 
 public class TaskListWebsocket : MonoBehaviour
 {
+    #if UNITY_WEBGL
     public string address;
     public int port;
     private WebSocket connection;
@@ -76,4 +80,5 @@ public class TaskListWebsocket : MonoBehaviour
                 break;
         }
     }
+    #endif
 }

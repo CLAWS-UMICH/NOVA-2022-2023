@@ -4,24 +4,30 @@ using System.Collections.Concurrent;
 using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WebSocketSharp;
-using WebSocketSharp.Server;
 using TMPro;
 using System.Linq;
 using Microsoft.MixedReality.Toolkit.UI;
 using Microsoft.MixedReality.Toolkit.Utilities;
+
+#if !UNITY_WEBGL
+using WebSocketSharp;
+using WebSocketSharp.Server;
+#endif
 
 
 public class MessageHandler: MonoBehaviour
 {
     public ChatWindowInteractions chatWindow;
 
+    #if !UNITY_WEBGL 
     private WebSocket connection;
+    #endif
 
     public string self = "Patrick";
 
     private void Start()
     {
+        #if !UNITY_WEBGL 
         string url1 = "ws://127.0.0.1:4242";
         connection = new WebSocket(url1);
         // Set behavior for this websocket when message is recieved
@@ -33,20 +39,24 @@ public class MessageHandler: MonoBehaviour
         connection.Connect();
         connection.Send("{\"message_type\": \"registration\",\"username\": \"" + self + "\"}");
         Debug.Log("Connected to server");
+        #endif
     }
 
     // Continously checks if a new message has been recieved
     private void Update()
     {
+        #if !UNITY_WEBGL 
         while (Simulation.User.AstronautMessaging.messageQueue.TryDequeue(out string message))
         {
             JsonMessage readIn = JsonConvert.DeserializeObject<JsonMessage>(message);
             HandleMessage(readIn.message_type, message);
         }
+        #endif
     }
 
     public void SendDM(int messageTemplate, string chatID, List<string> recipientSet)
     {
+        #if !UNITY_WEBGL 
         recipientSet.Sort();
         string testmsg = "shitsfucked";
         //string content = "The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater)"
@@ -72,10 +82,12 @@ public class MessageHandler: MonoBehaviour
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
+        #endif
     }
 
     public void CreateGroupChat(string chatID, HashSet<string> recipientSet)
     {
+        #if !UNITY_WEBGL 
         GroupClass message = new GroupClass();
         message.message_type = "create_group";
         message.chatID = chatID;
@@ -83,16 +95,20 @@ public class MessageHandler: MonoBehaviour
         string jsonMessage = JsonConvert.SerializeObject(message, Formatting.Indented);
         connection.Send(jsonMessage);
         Debug.Log("Sent: " + message);
+        #endif
     }
 
     private void OnMessage(MessageEventArgs e)
     {
+        #if !UNITY_WEBGL 
         Debug.Log(e.Data);
         Simulation.User.AstronautMessaging.messageQueue.Enqueue(e.Data);
+        #endif
     }
 
     private void HandleMessage(string messageType, string message)
     {
+        #if !UNITY_WEBGL 
         switch (messageType)
         {
             case "dm":
@@ -109,6 +125,7 @@ public class MessageHandler: MonoBehaviour
                 this.chatWindow.CreateGroup(group);
                 break;
         }
+        #endif
     }
 
 }

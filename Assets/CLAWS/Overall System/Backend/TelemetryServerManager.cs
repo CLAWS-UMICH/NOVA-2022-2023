@@ -25,6 +25,12 @@ public class TelemetryServerManager : MonoBehaviour
         tss.Update();
     }
 
+    #if UNITY_WEBGL 
+    public void Connect()
+    {
+    }
+    
+    #else
     public async void Connect()
     {
         string team_name = "CLAWS";
@@ -142,7 +148,7 @@ public class TelemetryServerManager : MonoBehaviour
         };
 
         await connecting;
-
+        
     }
-
+    #endif
 }
