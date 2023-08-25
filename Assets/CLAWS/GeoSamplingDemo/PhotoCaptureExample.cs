@@ -2,6 +2,10 @@
 
 #if UNITY_WEBGL
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
 [System.Serializable]
 public class PhotoCaptureExample : MonoBehaviour

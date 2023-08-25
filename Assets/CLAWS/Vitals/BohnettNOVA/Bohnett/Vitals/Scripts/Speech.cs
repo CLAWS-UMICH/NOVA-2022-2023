@@ -1,6 +1,7 @@
 // Conditional Compilation : no speech services supported through webGL
 
 #if UNITY_WEBGL
+using UnityEngine;
 public class Speech : MonoBehaviour
 {
 }
