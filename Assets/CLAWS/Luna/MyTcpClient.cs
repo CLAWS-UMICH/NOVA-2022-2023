@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && !UNITY_WEBGL
 using System.Threading.Tasks;
 #endif
 
@@ -16,13 +16,11 @@ public class MyTcpClient : MonoBehaviour
     [SerializeField]
     public string clientMessage;
 
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && !UNITY_WEBGL
     private bool _useUWP = true;
     private Windows.Networking.Sockets.StreamSocket socket;
     private Task exchangeTask;
-#endif
-
-#if UNITY_EDITOR
+#else
     private bool _useUWP = false;
     System.Net.Sockets.TcpClient client;
     System.Net.Sockets.NetworkStream stream;
@@ -51,13 +49,13 @@ public class MyTcpClient : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBGL
     private void ConnectUWP(string host, string port)
 #else
     private async void ConnectUWP(string host, string port)
 #endif
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBGL
         errorStatus = "UWP TCP client used in Unity!";
 #else
         try
@@ -85,7 +83,7 @@ public class MyTcpClient : MonoBehaviour
 
     private void ConnectUnity(string host, string port)
     {
-#if !UNITY_EDITOR
+#if !UNITY_EDITOR && !UNITY_WEBGL
         errorStatus = "Unity TCP client used in UWP!";
 #else
         try
@@ -151,7 +149,7 @@ public class MyTcpClient : MonoBehaviour
         Debug.Log("Stopped Exchange");
         exchangeStopRequested = true;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_WEBGL
         if (exchangeThread != null)
         {
             exchangeThread.Abort();
