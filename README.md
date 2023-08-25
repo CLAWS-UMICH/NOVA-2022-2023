@@ -4,9 +4,7 @@
 
 See NOVA project on Web build: https://claws-umich.github.io/NOVA-2022-2023/
 
---
-By CLAWS, University of Michigan
-Learn more about CLAWS here: https://claws.engin.umich.edu/
+By CLAWS at University of Michigan. Learn more about CLAWS here: https://claws.engin.umich.edu/
 
 ### Hidden Voice Commands for Features
 
